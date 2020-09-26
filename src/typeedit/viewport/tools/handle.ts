@@ -71,17 +71,17 @@ export class HandleTool implements ITool {
 
                 // Pivot gets moved first
                 this.pivotHandle.move(
-                    v, e.movementX, e.movementY, this.pivotHandle
+                    v, e.movementX, e.movementY, this.pivotHandle, e
                 )
 
-                for (let handle of v.handles) {
+                for (let handle of this.handles) {
                     if (
                         handle.selected &&
                         handle !== this.pivotHandle &&
                         handle.type === this.pivotHandle.type
                     )
                         handle.move(
-                            v, e.movementX, e.movementY, this.pivotHandle
+                            v, e.movementX, e.movementY, this.pivotHandle, e
                         )
                 }
             }

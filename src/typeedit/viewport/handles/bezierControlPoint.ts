@@ -18,7 +18,8 @@ export class BezierControlPointHandle implements IDrawableHandle {
     }
 
     move(
-        v: Viewport, dx: number, dy: number, pivot: IDrawableHandle
+        v: Viewport, dx: number, dy: number, pivot: IDrawableHandle,
+        e?: MouseEvent
     ) {
         v.co.moveInClientDx(this.cpoint, dx, dy)
     }

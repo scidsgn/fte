@@ -15047,6 +15047,8 @@ var ViewportCoordinates = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierBasePointHandle", function() { return BezierBasePointHandle; });
+/* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
+
 var BezierBasePointHandle = /** @class */ (function () {
     function BezierBasePointHandle(point) {
         this.point = point;
@@ -15061,10 +15063,17 @@ var BezierBasePointHandle = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    BezierBasePointHandle.prototype.move = function (v, dx, dy, pivot) {
-        v.co.moveInClientDx(this.point.base, dx, dy);
-        v.co.moveInClientDx(this.point.before, dx, dy);
-        v.co.moveInClientDx(this.point.after, dx, dy);
+    BezierBasePointHandle.prototype.move = function (v, dx, dy, pivot, e) {
+        if (e && e.ctrlKey) {
+            v.co.moveInClientDx(this.point.after, dx, dy);
+            if (this.point.type === _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_0__["BezierPointType"].auto || e.altKey)
+                v.co.moveInClientDx(this.point.before, -dx, -dy);
+        }
+        else {
+            v.co.moveInClientDx(this.point.base, dx, dy);
+            v.co.moveInClientDx(this.point.before, dx, dy);
+            v.co.moveInClientDx(this.point.after, dx, dy);
+        }
     };
     BezierBasePointHandle.prototype.render = function (v, ctx) {
         ctx.fillStyle = "#00f";
@@ -15104,7 +15113,7 @@ var BezierControlPointHandle = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    BezierControlPointHandle.prototype.move = function (v, dx, dy, pivot) {
+    BezierControlPointHandle.prototype.move = function (v, dx, dy, pivot, e) {
         v.co.moveInClientDx(this.cpoint, dx, dy);
     };
     BezierControlPointHandle.prototype.render = function (v, ctx) {
@@ -15186,8 +15195,12 @@ var BezierPenTool = /** @class */ (function () {
             this.currentPoint.after.x = pos.x;
             this.currentPoint.after.y = pos.y;
             if (!e.altKey) {
+                this.currentPoint.type = _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_1__["BezierPointType"].auto;
                 this.currentPoint.before.x = 2 * this.currentPoint.base.x - pos.x;
                 this.currentPoint.before.y = 2 * this.currentPoint.base.y - pos.y;
+            }
+            else {
+                this.currentPoint.type = _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_1__["BezierPointType"].free;
             }
         }
         else if (e.type === "mouseup") {
@@ -15268,13 +15281,13 @@ var HandleTool = /** @class */ (function () {
                 if (!this.pivotHandle)
                     return;
                 // Pivot gets moved first
-                this.pivotHandle.move(v, e.movementX, e.movementY, this.pivotHandle);
-                for (var _i = 0, _a = v.handles; _i < _a.length; _i++) {
+                this.pivotHandle.move(v, e.movementX, e.movementY, this.pivotHandle, e);
+                for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
                     var handle = _a[_i];
                     if (handle.selected &&
                         handle !== this.pivotHandle &&
                         handle.type === this.pivotHandle.type)
-                        handle.move(v, e.movementX, e.movementY, this.pivotHandle);
+                        handle.move(v, e.movementX, e.movementY, this.pivotHandle, e);
                 }
             }
         }

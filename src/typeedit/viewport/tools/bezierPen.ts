@@ -1,5 +1,5 @@
 import { BezierCurve } from "../../geometry/bezier/curve"
-import { BezierPoint } from "../../geometry/bezier/point"
+import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Path } from "../../geometry/path"
 import { Point } from "../../geometry/point"
 import { BezierContext } from "../context/bezier"
@@ -69,8 +69,11 @@ export class BezierPenTool implements ITool {
             this.currentPoint.after.y = pos.y
 
             if (!e.altKey) {
+                this.currentPoint.type = BezierPointType.auto
                 this.currentPoint.before.x = 2 * this.currentPoint.base.x - pos.x
                 this.currentPoint.before.y = 2 * this.currentPoint.base.y - pos.y
+            } else {
+                this.currentPoint.type = BezierPointType.free
             }
         } else if (
             e.type === "mouseup"

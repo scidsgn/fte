@@ -2,27 +2,28 @@ import "./styles/app.scss"
 
 import { Font } from "opentype.js"
 import { Viewport } from "./viewport/viewport"
-import { Polygon } from "./geometry/polygon"
-import { Point } from "./geometry/point"
-import { BasicPointHandle } from "./viewport/handles/basicpoint"
-import { HandleTool } from "./viewport/tools/handle"
-import { BezierCurve } from "./geometry/bezier/curve"
-import { BezierPoint } from "./geometry/bezier/point"
-import { Path } from "./geometry/path"
-import { BezierBasePointHandle } from "./viewport/handles/bezierBasePoint"
-import { BezierControlPointHandle } from "./viewport/handles/bezierControlPoint"
-import { IDrawableHandle } from "./viewport/drawable"
 import { BezierPenTool } from "./viewport/tools/bezierPen"
+import { BezierContext } from "./viewport/context/bezier"
+import { HandleTool } from "./viewport/tools/handle"
 
 export default (font: Font) => {
-    const container = document.querySelector("main")
+    const container = document.querySelector("div.viewport")
 
+    const context = new BezierContext([])
     const viewport = new Viewport(
-        [], [],
-        new BezierPenTool()
+        context, [], null
     )
     container.appendChild(viewport.domCanvas)
     viewport.updateViewportSize()
+
+    viewport.setTool(new BezierPenTool())
+
+    document.querySelector("button[data-tool=handle]").addEventListener(
+        "click", () => viewport.setTool(new HandleTool())
+    )
+    document.querySelector("button[data-tool=pen]").addEventListener(
+        "click", () => viewport.setTool(new BezierPenTool())
+    )
 
     window.addEventListener("resize", () => {
         viewport.updateViewportSize()

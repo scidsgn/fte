@@ -14799,14 +14799,14 @@ __webpack_require__.r(__webpack_exports__);
     var container = document.querySelector("div.viewport");
     var fteFont = _font_font__WEBPACK_IMPORTED_MODULE_6__["Font"].fromOTFont(font);
     var _a = [
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("F")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("u")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("c")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("k")),
-    ], glyphF = _a[0], glyphu = _a[1], glyphc = _a[2], glyphk = _a[3];
-    fteFont.addGlyph(glyphF, glyphu, glyphc, glyphk);
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("S")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("C")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("i")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("!")),
+    ], glyph1 = _a[0], glyph2 = _a[1], glyph3 = _a[2], glyph4 = _a[3];
+    fteFont.addGlyph(glyph1, glyph2, glyph3, glyph4);
     console.log(font);
-    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]([glyphF, glyphu, glyphu, glyphc, glyphk], 1);
+    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]([glyph1, glyph2, glyph3, glyph4], 1);
     var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_1__["Viewport"](context, [], null);
     container.appendChild(viewport.domCanvas);
     viewport.updateViewportSize();
@@ -15216,6 +15216,7 @@ var GlyphContext = /** @class */ (function (_super) {
         currentOffset = 0;
     };
     GlyphContext.prototype.render = function (v, ctx) {
+        this.renderNonEditableGlyphs(ctx);
         // Glyph metric lines
         ctx.strokeStyle = "#3338";
         ctx.beginPath();
@@ -15251,7 +15252,6 @@ var GlyphContext = /** @class */ (function (_super) {
         ctx.strokeStyle = "#111";
         ctx.lineWidth = 1;
         ctx.stroke(workingPath);
-        this.renderNonEditableGlyphs(ctx);
     };
     return GlyphContext;
 }(_bezier__WEBPACK_IMPORTED_MODULE_2__["BezierContext"]));

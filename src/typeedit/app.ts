@@ -16,18 +16,18 @@ export default (font: OTFont) => {
     const fteFont = Font.fromOTFont(font)
 
     const [
-        glyphF, glyphu, glyphc, glyphk
+        glyph1, glyph2, glyph3, glyph4
     ] = [
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("F")),
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("u")),
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("c")),
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("k")),
+        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("S")),
+        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("C")),
+        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("i")),
+        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("!")),
     ]
-    fteFont.addGlyph(glyphF, glyphu, glyphc, glyphk)
+    fteFont.addGlyph(glyph1, glyph2, glyph3, glyph4)
     console.log(font)
 
     const context = new GlyphContext(
-        [glyphF, glyphu, glyphu, glyphc, glyphk], 1
+        [glyph1, glyph2, glyph3, glyph4], 1
     )
     const viewport = new Viewport(
         context, [], null

@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #eee; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main nav {\n    background: #ddd;\n    padding: 4px 4px 0px 4px;\n    display: flex;\n    justify-content: center; }\n    main nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 500;\n      padding: 4px 12px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main nav button.active {\n        background: #eee; }\n  main section {\n    flex-grow: 1; }\n\nsection.edit {\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: repeat(1, 1fr); }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB,EAAA;;AAGpB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,aAAa;IACb,uBAAuB,EAAA;IAhB/B;MAmBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA7BzB;QAgCgB,gBAAgB,EAAA;EAhChC;IAsCQ,YAAY,EAAA;;AAIpB;EACI,aAAa;EACb,+BAA+B;EAC/B,kCAAkC,EAAA;EAHtC;IAMQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAT9B;MAYY,uBAAuB;MAEvB,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAjB9B;QAoBgB,gBAAgB,EAAA;QApBhC;UAuBoB,iBAAiB,EAAA;MAvBrC;QA4BgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\r\n    background: #eee;\r\n}\r\n\r\nmain {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: #ddd;\r\n\r\n        padding: 4px 4px 0px 4px;\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 500;\r\n\r\n            padding: 4px 12px;\r\n            border: none;\r\n            border-bottom: none;\r\n            border-radius: 4px 4px 0px 0px;\r\n            outline: none;\r\n\r\n            &.active {\r\n                background: #eee;\r\n            }\r\n        }\r\n    }\r\n\r\n    section {\r\n        flex-grow: 1;\r\n    }\r\n}\r\n\r\nsection.edit {\r\n    display: grid;\r\n    grid-template-columns: auto 1fr;\r\n    grid-template-rows: repeat(1, 1fr);\r\n\r\n    div.tools {\r\n        padding: 2px;\r\n\r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 4px;\r\n            border-radius: 4px;\r\n\r\n            &.active {\r\n                background: #08f;\r\n\r\n                img {\r\n                    filter: invert(1);\r\n                }\r\n            }\r\n\r\n            img {\r\n                width: 24px;\r\n                height: 24px;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main nav {\n    background: #eee;\n    padding: 4px 4px 0px 4px;\n    display: flex;\n    justify-content: center; }\n    main nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 500;\n      padding: 4px 12px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    flex-grow: 1; }\n\nsection.edit {\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: repeat(1, 1fr); }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n  section.edit div.subactions {\n    position: absolute;\n    left: 50%;\n    top: 8px;\n    background: #fff;\n    padding: 2px;\n    border-radius: 6px;\n    box-shadow: 0px 2px 8px #0003;\n    transform: translate(-50%, 0); }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB,EAAA;;AAGpB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,aAAa;IACb,uBAAuB,EAAA;IAhB/B;MAmBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA7BzB;QAgCgB,gBAAgB,EAAA;EAhChC;IAsCQ,kBAAkB;IAElB,YAAY,EAAA;;AAIpB;EACI,aAAa;EACb,+BAA+B;EAC/B,kCAAkC,EAAA;EAHtC;IAMQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAT9B;MAYY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAnB9B;QAsBgB,gBAAgB,EAAA;MAtBhC;QA0BgB,gBAAgB,EAAA;MA1BhC;QA8BgB,gBAAgB,EAAA;QA9BhC;UAiCoB,iBAAiB,EAAA;MAjCrC;QAsCgB,WAAW;QACX,YAAY,EAAA;EAvC5B;IA6CQ,kBAAkB;IAClB,SAAS;IACT,QAAQ;IAER,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAElB,6BAA6B;IAE7B,6BAA6B,EAAA;IAxDrC;MA2DY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAlE9B;QAqEgB,gBAAgB,EAAA;MArEhC;QAyEgB,gBAAgB,EAAA;MAzEhC;QA6EgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\r\n    background: #fff;\r\n}\r\n\r\nmain {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: #eee;\r\n\r\n        padding: 4px 4px 0px 4px;\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 500;\r\n\r\n            padding: 4px 12px;\r\n            border: none;\r\n            border-bottom: none;\r\n            border-radius: 4px 4px 0px 0px;\r\n            outline: none;\r\n\r\n            &.active {\r\n                background: #fff;\r\n            }\r\n        }\r\n    }\r\n\r\n    section {\r\n        position: relative;\r\n\r\n        flex-grow: 1;\r\n    }\r\n}\r\n\r\nsection.edit {\r\n    display: grid;\r\n    grid-template-columns: auto 1fr;\r\n    grid-template-rows: repeat(1, 1fr);\r\n\r\n    div.tools {\r\n        padding: 2px;\r\n\r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 4px;\r\n            border-radius: 4px;\r\n\r\n            &:hover {\r\n                background: #eee;\r\n            }\r\n\r\n            &:active {\r\n                background: #ddd;\r\n            }\r\n\r\n            &.active {\r\n                background: #08f;\r\n\r\n                img {\r\n                    filter: invert(1);\r\n                }\r\n            }\r\n\r\n            img {\r\n                width: 24px;\r\n                height: 24px;\r\n            }\r\n        }\r\n    }\r\n\r\n    div.subactions { \r\n        position: absolute;\r\n        left: 50%;\r\n        top: 8px;\r\n\r\n        background: #fff;\r\n\r\n        padding: 2px;\r\n        border-radius: 6px;\r\n\r\n        box-shadow: 0px 2px 8px #0003;\r\n\r\n        transform: translate(-50%, 0);\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 4px;\r\n            border-radius: 4px;\r\n\r\n            &:hover {\r\n                background: #eee;\r\n            }\r\n\r\n            &:active {\r\n                background: #ddd;\r\n            }\r\n\r\n            img {\r\n                width: 24px;\r\n                height: 24px;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -14797,22 +14797,44 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (font) {
     var container = document.querySelector("div.viewport");
+    var subactionContainer = document.querySelector("div.subactions");
     var fteFont = _font_font__WEBPACK_IMPORTED_MODULE_6__["Font"].fromOTFont(font);
     var _a = [
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("S")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("C")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("t")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("h")),
         _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("i")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("!")),
-    ], glyph1 = _a[0], glyph2 = _a[1], glyph3 = _a[2], glyph4 = _a[3];
-    fteFont.addGlyph(glyph1, glyph2, glyph3, glyph4);
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("C")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("c")),
+    ], glyph1 = _a[0], glyph2 = _a[1], glyph3 = _a[2], glyph4 = _a[3], glyph5 = _a[4];
+    fteFont.addGlyph(glyph1, glyph2, glyph3, glyph4, glyph5);
     console.log(font);
-    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]([glyph1, glyph2, glyph3, glyph4], 1);
+    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]([glyph1, glyph2, glyph3, glyph4, glyph5], 2);
     var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_1__["Viewport"](context, [], null);
     container.appendChild(viewport.domCanvas);
     viewport.updateViewportSize();
     viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]());
-    document.querySelector("button[data-tool=handle]").addEventListener("click", function () { return viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]()); });
-    document.querySelector("button[data-tool=pen]").addEventListener("click", function () { return viewport.setTool(new _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_2__["BezierPenTool"]()); });
+    updateSubactions();
+    function updateSubactions() {
+        //subactionContainer
+        subactionContainer.innerHTML = "";
+        viewport.tool.subactions.forEach(function (subact) {
+            var button = document.createElement("button");
+            button.addEventListener("click", function () {
+                subact.handler();
+                viewport.render();
+            });
+            button.innerHTML = "\n                    <img src=\"res/icons/" + subact.icon + ".svg\">\n                ";
+            subactionContainer.appendChild(button);
+        });
+    }
+    document.querySelector("button[data-tool=handle]").addEventListener("click", function () {
+        viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]());
+        updateSubactions();
+    });
+    document.querySelector("button[data-tool=pen]").addEventListener("click", function () {
+        viewport.setTool(new _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_2__["BezierPenTool"]());
+        updateSubactions();
+    });
     window.addEventListener("resize", function () {
         viewport.updateViewportSize();
     });
@@ -15100,6 +15122,29 @@ module.exports = content.locals || {};
 
 /***/ }),
 
+/***/ "./src/typeedit/utils/lerp.ts":
+/*!************************************!*\
+  !*** ./src/typeedit/utils/lerp.ts ***!
+  \************************************/
+/*! exports provided: lerp, unlerp */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lerp", function() { return lerp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unlerp", function() { return unlerp; });
+function lerp(x, a, b) {
+    return a + x * (b - a);
+}
+function unlerp(X, a, b) {
+    if (a === b)
+        return 0;
+    return (X - a) / (b - a);
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/viewport/context/bezier.ts":
 /*!*************************************************!*\
   !*** ./src/typeedit/viewport/context/bezier.ts ***!
@@ -15244,7 +15289,7 @@ var GlyphContext = /** @class */ (function (_super) {
         // Glyph
         var workingPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.beziers);
         var finalPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.finalBeziers);
-        ctx.fillStyle = "#aaa";
+        ctx.fillStyle = "#999";
         ctx.fill(finalPath);
         ctx.strokeStyle = "#fff";
         ctx.lineWidth = 3;
@@ -15552,6 +15597,7 @@ var BezierPenTool = /** @class */ (function () {
         this.currentPoint = null;
         this.handles = [];
         this.supportsForeignHandles = false;
+        this.subactions = [];
     }
     BezierPenTool.prototype.handleMouseEvent = function (v, e, x, y) {
         if (!(v.context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_3__["BezierContext"]))
@@ -15618,18 +15664,129 @@ var BezierPenTool = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HandleTool", function() { return HandleTool; });
-/* harmony import */ var _context_bezier__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
-/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
-/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+/* harmony import */ var _utils_lerp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/lerp */ "./src/typeedit/utils/lerp.ts");
+/* harmony import */ var _context_bezier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
+/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
+/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+
 
 
 
 var HandleTool = /** @class */ (function () {
     function HandleTool() {
+        var _this = this;
         this.selecting = false;
         this.handles = [];
         this.supportsForeignHandles = true;
+        this.subactions = [
+            {
+                name: "Flip X",
+                icon: "flipx",
+                accelerator: "",
+                handler: function () {
+                    var selected = _this.handles.filter(function (h) { return h.selected; });
+                    var bbox = _this.getHandlesBBox(selected);
+                    selected.forEach(function (handle) {
+                        handle.position.x = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["unlerp"])(handle.position.x, bbox.left, bbox.right), bbox.left, bbox.right);
+                    });
+                }
+            },
+            {
+                name: "Flip Y",
+                icon: "flipy",
+                accelerator: "",
+                handler: function () {
+                    var selected = _this.handles.filter(function (h) { return h.selected; });
+                    var bbox = _this.getHandlesBBox(selected);
+                    selected.forEach(function (handle) {
+                        handle.position.y = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["unlerp"])(handle.position.y, bbox.top, bbox.bottom), bbox.top, bbox.bottom);
+                    });
+                }
+            },
+            {
+                name: "Align to left",
+                icon: "alignleft",
+                accelerator: "",
+                handler: function () {
+                    var selected = _this.handles.filter(function (h) { return h.selected; });
+                    var bbox = _this.getHandlesBBox(selected);
+                    selected.forEach(function (handle) {
+                        handle.position.x = bbox.left;
+                    });
+                }
+            },
+            {
+                name: "Align to right",
+                icon: "alignright",
+                accelerator: "",
+                handler: function () {
+                    var selected = _this.handles.filter(function (h) { return h.selected; });
+                    var bbox = _this.getHandlesBBox(selected);
+                    selected.forEach(function (handle) {
+                        handle.position.x = bbox.right;
+                    });
+                }
+            },
+            {
+                name: "Align to top",
+                icon: "aligntop",
+                accelerator: "",
+                handler: function () {
+                    var selected = _this.handles.filter(function (h) { return h.selected; });
+                    var bbox = _this.getHandlesBBox(selected);
+                    selected.forEach(function (handle) {
+                        handle.position.y = bbox.top;
+                    });
+                }
+            },
+            {
+                name: "Align to bottom",
+                icon: "alignbottom",
+                accelerator: "",
+                handler: function () {
+                    var selected = _this.handles.filter(function (h) { return h.selected; });
+                    var bbox = _this.getHandlesBBox(selected);
+                    selected.forEach(function (handle) {
+                        handle.position.y = bbox.bottom;
+                    });
+                }
+            },
+            {
+                name: "Align to center (horizontally)",
+                icon: "alignhcenter",
+                accelerator: "",
+                handler: function () {
+                    var selected = _this.handles.filter(function (h) { return h.selected; });
+                    var bbox = _this.getHandlesBBox(selected);
+                    selected.forEach(function (handle) {
+                        handle.position.y = (bbox.top + bbox.bottom) / 2;
+                    });
+                }
+            },
+            {
+                name: "Align to center (vertically)",
+                icon: "alignvcenter",
+                accelerator: "",
+                handler: function () {
+                    var selected = _this.handles.filter(function (h) { return h.selected; });
+                    var bbox = _this.getHandlesBBox(selected);
+                    selected.forEach(function (handle) {
+                        handle.position.x = (bbox.left + bbox.right) / 2;
+                    });
+                }
+            }
+        ];
     }
+    HandleTool.prototype.getHandlesBBox = function (handles) {
+        var xs = handles.map(function (h) { return h.position.x; });
+        var ys = handles.map(function (h) { return h.position.y; });
+        return {
+            left: Math.min.apply(Math, xs),
+            top: Math.min.apply(Math, ys),
+            right: Math.max.apply(Math, xs),
+            bottom: Math.max.apply(Math, ys)
+        };
+    };
     HandleTool.prototype.selectHandleBox = function () {
         var left = Math.min(this.selectionOrigin.x, this.selectionTarget.x);
         var right = Math.max(this.selectionOrigin.x, this.selectionTarget.x);
@@ -15695,11 +15852,11 @@ var HandleTool = /** @class */ (function () {
     };
     HandleTool.prototype.updateContext = function (context) {
         var _this = this;
-        if (!(context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_0__["BezierContext"]))
+        if (!(context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_1__["BezierContext"]))
             return;
         this.handles = [];
         context.beziers.forEach(function (bezier) {
-            bezier.points.forEach(function (p) { return _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_2__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_2__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_1__["BezierBasePointHandle"](p)); });
+            bezier.points.forEach(function (p) { return _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_3__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_3__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_2__["BezierBasePointHandle"](p)); });
         });
     };
     return HandleTool;

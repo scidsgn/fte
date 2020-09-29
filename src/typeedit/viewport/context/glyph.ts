@@ -119,7 +119,7 @@ export class GlyphContext extends BezierContext {
             this.glyph.finalBeziers
         )
 
-        ctx.fillStyle = "#aaa"
+        ctx.fillStyle = "#999"
         ctx.fill(finalPath)
         
         ctx.strokeStyle = "#fff"

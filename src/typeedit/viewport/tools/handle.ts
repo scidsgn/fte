@@ -1,11 +1,12 @@
 import { Point } from "../../geometry/point";
+import { lerp, unlerp } from "../../utils/lerp";
 import { BezierContext } from "../context/bezier";
 import { IContext } from "../context/context";
 import { IDrawableHandle } from "../drawable";
 import { BezierBasePointHandle } from "../handles/bezierBasePoint";
 import { BezierControlPointHandle } from "../handles/bezierControlPoint";
 import { Viewport } from "../viewport";
-import { ITool } from "./tool";
+import { ITool, ToolSubAction } from "./tool";
 
 export class HandleTool implements ITool {
     private selecting = false
@@ -16,6 +17,134 @@ export class HandleTool implements ITool {
 
     public handles: IDrawableHandle[] = []
     public supportsForeignHandles = true
+
+    public subactions: ToolSubAction[] = [
+        {
+            name: "Flip X",
+            icon: "flipx",
+            accelerator: "",
+            handler: () => {
+                const selected = this.handles.filter(h => h.selected)
+                const bbox = this.getHandlesBBox(selected)
+
+                selected.forEach(handle => {
+                    handle.position.x = lerp(
+                        1 - unlerp(handle.position.x, bbox.left, bbox.right),
+                        bbox.left, bbox.right
+                    )
+                })
+            }
+        },
+        {
+            name: "Flip Y",
+            icon: "flipy",
+            accelerator: "",
+            handler: () => {
+                const selected = this.handles.filter(h => h.selected)
+                const bbox = this.getHandlesBBox(selected)
+
+                selected.forEach(handle => {
+                    handle.position.y = lerp(
+                        1 - unlerp(handle.position.y, bbox.top, bbox.bottom),
+                        bbox.top, bbox.bottom
+                    )
+                })
+            }
+        },
+        {
+            name: "Align to left",
+            icon: "alignleft",
+            accelerator: "",
+            handler: () => {
+                const selected = this.handles.filter(h => h.selected)
+                const bbox = this.getHandlesBBox(selected)
+
+                selected.forEach(handle => {
+                    handle.position.x = bbox.left
+                })
+            }
+        },
+        {
+            name: "Align to right",
+            icon: "alignright",
+            accelerator: "",
+            handler: () => {
+                const selected = this.handles.filter(h => h.selected)
+                const bbox = this.getHandlesBBox(selected)
+
+                selected.forEach(handle => {
+                    handle.position.x = bbox.right
+                })
+            }
+        },
+        {
+            name: "Align to top",
+            icon: "aligntop",
+            accelerator: "",
+            handler: () => {
+                const selected = this.handles.filter(h => h.selected)
+                const bbox = this.getHandlesBBox(selected)
+
+                selected.forEach(handle => {
+                    handle.position.y = bbox.top
+                })
+            }
+        },
+        {
+            name: "Align to bottom",
+            icon: "alignbottom",
+            accelerator: "",
+            handler: () => {
+                const selected = this.handles.filter(h => h.selected)
+                const bbox = this.getHandlesBBox(selected)
+
+                selected.forEach(handle => {
+                    handle.position.y = bbox.bottom
+                })
+            }
+        },
+        {
+            name: "Align to center (horizontally)",
+            icon: "alignhcenter",
+            accelerator: "",
+            handler: () => {
+                const selected = this.handles.filter(h => h.selected)
+                const bbox = this.getHandlesBBox(selected)
+
+                selected.forEach(handle => {
+                    handle.position.y = (bbox.top + bbox.bottom) / 2
+                })
+            }
+        },
+        {
+            name: "Align to center (vertically)",
+            icon: "alignvcenter",
+            accelerator: "",
+            handler: () => {
+                const selected = this.handles.filter(h => h.selected)
+                const bbox = this.getHandlesBBox(selected)
+
+                selected.forEach(handle => {
+                    handle.position.x = (bbox.left + bbox.right) / 2
+                })
+            }
+        }
+    ]
+
+    private getHandlesBBox(handles: IDrawableHandle[]): {
+        left: number, top: number,
+        right: number, bottom: number
+    } {
+        const xs = handles.map(h => h.position.x)
+        const ys = handles.map(h => h.position.y)
+
+        return {
+            left: Math.min(...xs),
+            top: Math.min(...ys),
+            right: Math.max(...xs),
+            bottom: Math.max(...ys)
+        }
+    }
 
     private selectHandleBox() {
         const left = Math.min(

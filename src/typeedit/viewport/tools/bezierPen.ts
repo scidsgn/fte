@@ -8,7 +8,7 @@ import { IDrawableHandle } from "../drawable"
 import { BezierBasePointHandle } from "../handles/bezierBasePoint"
 import { BezierControlPointHandle } from "../handles/bezierControlPoint"
 import { Viewport } from "../viewport"
-import { ITool } from "./tool"
+import { ITool, ToolSubAction } from "./tool"
 
 export class BezierPenTool implements ITool {
     private currentBezier: BezierCurve = null
@@ -16,6 +16,8 @@ export class BezierPenTool implements ITool {
 
     public handles: IDrawableHandle[] = []
     public supportsForeignHandles = false
+
+    public subactions: ToolSubAction[] = []
 
     handleMouseEvent(v: Viewport, e: MouseEvent, x: number, y: number) {
         if (!(v.context instanceof BezierContext)) return

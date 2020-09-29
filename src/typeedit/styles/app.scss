@@ -1,5 +1,5 @@
 body {
-    background: #eee;
+    background: #fff;
 }
 
 main {
@@ -13,7 +13,7 @@ main {
     flex-direction: column;
 
     nav {
-        background: #ddd;
+        background: #eee;
 
         padding: 4px 4px 0px 4px;
 
@@ -34,12 +34,14 @@ main {
             outline: none;
 
             &.active {
-                background: #eee;
+                background: #fff;
             }
         }
     }
 
     section {
+        position: relative;
+
         flex-grow: 1;
     }
 }
@@ -58,10 +60,20 @@ section.edit {
         button {
             background: transparent;
 
+            font-size: 0;
+
             border: none;
             outline: none;
             padding: 4px;
             border-radius: 4px;
+
+            &:hover {
+                background: #eee;
+            }
+
+            &:active {
+                background: #ddd;
+            }
 
             &.active {
                 background: #08f;
@@ -69,6 +81,45 @@ section.edit {
                 img {
                     filter: invert(1);
                 }
+            }
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+
+    div.subactions { 
+        position: absolute;
+        left: 50%;
+        top: 8px;
+
+        background: #fff;
+
+        padding: 2px;
+        border-radius: 6px;
+
+        box-shadow: 0px 2px 8px #0003;
+
+        transform: translate(-50%, 0);
+
+        button {
+            background: transparent;
+
+            font-size: 0;
+
+            border: none;
+            outline: none;
+            padding: 4px;
+            border-radius: 4px;
+
+            &:hover {
+                background: #eee;
+            }
+
+            &:active {
+                background: #ddd;
             }
 
             img {

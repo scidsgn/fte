@@ -75,7 +75,7 @@ export class GlyphContext extends BezierContext {
     
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
         this.renderNonEditableGlyphs(ctx)
-        
+
         // Glyph metric lines
         ctx.strokeStyle = "#3338"
 
@@ -119,7 +119,7 @@ export class GlyphContext extends BezierContext {
             this.glyph.finalBeziers
         )
 
-        ctx.fillStyle = "#888"
+        ctx.fillStyle = "#aaa"
         ctx.fill(finalPath)
         
         ctx.strokeStyle = "#fff"

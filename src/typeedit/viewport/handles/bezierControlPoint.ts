@@ -33,7 +33,7 @@ export class BezierControlPointHandle implements IDrawableHandle {
             this.cpoint.x, this.cpoint.y
         )
 
-        ctx.strokeStyle = "#444"
+        ctx.strokeStyle = "#555"
         ctx.lineWidth = 1
         ctx.beginPath()
         ctx.moveTo(
@@ -43,7 +43,7 @@ export class BezierControlPointHandle implements IDrawableHandle {
         ctx.lineTo(0, 0)
         ctx.stroke()
 
-        ctx.fillStyle = this.selected ? "#111" : "#444"
+        ctx.fillStyle = this.selected ? "#111" : "#555"
         ctx.beginPath()
         ctx.arc(0, 0, 3, 0, 2 * Math.PI)
         ctx.fill()

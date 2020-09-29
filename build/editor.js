@@ -15522,13 +15522,13 @@ var FontMetricHandle = /** @class */ (function () {
         set: function (x) {
             switch (this.metric) {
                 case FontMetricHandleType.ascender:
-                    this.glyph.font.metrics.ascender = x;
+                    this.glyph.font.metrics.ascender = Math.min(x, 0);
                     break;
                 case FontMetricHandleType.descender:
-                    this.glyph.font.metrics.descender = x;
+                    this.glyph.font.metrics.descender = Math.max(x, 512);
                     break;
                 case FontMetricHandleType.xHeight:
-                    this.glyph.font.metrics.xHeight = x;
+                    this.glyph.font.metrics.xHeight = Math.max(Math.min(x, 512), 0);
                     break;
                 case FontMetricHandleType.leftBearing:
                     this.glyph.metrics.leftBearing = x;

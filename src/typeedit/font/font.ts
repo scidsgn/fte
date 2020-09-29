@@ -38,7 +38,7 @@ export class Font {
         )
     }
 
-    addGlyph(glyph: Glyph) {
-        this.glyphs.push(glyph)
+    addGlyph(...glyphs: Glyph[]) {
+        this.glyphs.push(...glyphs)
     }
 }

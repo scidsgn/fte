@@ -14798,11 +14798,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (font) {
     var container = document.querySelector("div.viewport");
     var fteFont = _font_font__WEBPACK_IMPORTED_MODULE_6__["Font"].fromOTFont(font);
-    var glyph = _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("å"));
-    fteFont.addGlyph(glyph);
+    var _a = [
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("F")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("u")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("c")),
+        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("k")),
+    ], glyphF = _a[0], glyphu = _a[1], glyphc = _a[2], glyphk = _a[3];
+    fteFont.addGlyph(glyphF, glyphu, glyphc, glyphk);
     console.log(font);
-    console.log(glyph);
-    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"](glyph);
+    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]([glyphF, glyphu, glyphu, glyphc, glyphk], 1);
     var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_1__["Viewport"](context, [], null);
     container.appendChild(viewport.domCanvas);
     viewport.updateViewportSize();
@@ -14845,8 +14849,13 @@ var Font = /** @class */ (function () {
             xHeight: (otfont.tables.os2.sCapHeight - otfont.tables.os2.sxHeight) * scaleFactor
         }, glyphs);
     };
-    Font.prototype.addGlyph = function (glyph) {
-        this.glyphs.push(glyph);
+    Font.prototype.addGlyph = function () {
+        var _a;
+        var glyphs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            glyphs[_i] = arguments[_i];
+        }
+        (_a = this.glyphs).push.apply(_a, glyphs);
     };
     return Font;
 }());
@@ -15153,18 +15162,59 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 var GlyphContext = /** @class */ (function (_super) {
     __extends(GlyphContext, _super);
-    function GlyphContext(glyph) {
-        var _this = _super.call(this, glyph.beziers) || this;
-        _this.glyph = glyph;
+    function GlyphContext(glyphs, currentIndex) {
+        var _this = _super.call(this, glyphs[currentIndex].beziers) || this;
+        _this.glyphs = glyphs;
+        _this.currentIndex = currentIndex;
         _this.handles = [
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].leftBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].rightBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].ascender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].descender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].xHeight)
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].leftBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].rightBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].ascender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].descender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].xHeight)
         ];
         return _this;
     }
+    Object.defineProperty(GlyphContext.prototype, "glyph", {
+        get: function () {
+            return this.glyphs[this.currentIndex];
+        },
+        enumerable: false,
+        configurable: true
+    });
+    GlyphContext.prototype.renderNonEditableGlyphs = function (ctx) {
+        var currentOffset = 0;
+        if (this.currentIndex < this.glyphs.length - 1) {
+            for (var i = this.currentIndex + 1; i < this.glyphs.length; i++) {
+                var prevGlyph = this.glyphs[i - 1];
+                var glyph = this.glyphs[i];
+                var offset = prevGlyph.metrics.rightBearing -
+                    glyph.metrics.leftBearing;
+                var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(glyph.finalBeziers);
+                ctx.fillStyle = "#ccc";
+                ctx.translate(offset, 0);
+                ctx.fill(path);
+                currentOffset += offset;
+            }
+        }
+        ctx.translate(-currentOffset, 0);
+        currentOffset = 0;
+        if (this.currentIndex > 0) {
+            for (var i = this.currentIndex - 1; i >= 0; i--) {
+                var nextGlyph = this.glyphs[i + 1];
+                var glyph = this.glyphs[i];
+                var offset = nextGlyph.metrics.leftBearing -
+                    glyph.metrics.rightBearing;
+                var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(glyph.finalBeziers);
+                ctx.fillStyle = "#ccc";
+                ctx.translate(offset, 0);
+                ctx.fill(path);
+                currentOffset += offset;
+            }
+        }
+        ctx.translate(-currentOffset, 0);
+        currentOffset = 0;
+    };
     GlyphContext.prototype.render = function (v, ctx) {
         // Glyph metric lines
         ctx.strokeStyle = "#3338";
@@ -15201,6 +15251,7 @@ var GlyphContext = /** @class */ (function (_super) {
         ctx.strokeStyle = "#111";
         ctx.lineWidth = 1;
         ctx.stroke(workingPath);
+        this.renderNonEditableGlyphs(ctx);
     };
     return GlyphContext;
 }(_bezier__WEBPACK_IMPORTED_MODULE_2__["BezierContext"]));
@@ -15763,9 +15814,6 @@ var Viewport = /** @class */ (function () {
         this.ctx.clearRect(0, 0, this.domCanvas.width, this.domCanvas.height);
         this.co.transformCanvas(this.ctx);
         this.context.render(this, this.ctx);
-        // for (let item of this.items) {
-        //     item.render(this, this.ctx)
-        // }
         if (this.tool && this.tool.supportsForeignHandles) {
             this.drawHandles(this.context.handles);
             this.drawHandles(this.handles);

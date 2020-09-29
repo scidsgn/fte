@@ -6,20 +6,76 @@ import { BezierContext } from "./bezier";
 
 export class GlyphContext extends BezierContext {
     constructor(
-        public glyph: Glyph
+        public glyphs: Glyph[],
+        public currentIndex: number
     ) {
-        super(glyph.beziers)
+        super(glyphs[currentIndex].beziers)
 
         this.handles = [
-            new FontMetricHandle(glyph, FontMetricHandleType.leftBearing),
-            new FontMetricHandle(glyph, FontMetricHandleType.rightBearing),
-            new FontMetricHandle(glyph, FontMetricHandleType.ascender),
-            new FontMetricHandle(glyph, FontMetricHandleType.descender),
-            new FontMetricHandle(glyph, FontMetricHandleType.xHeight)
+            new FontMetricHandle(this.glyph, FontMetricHandleType.leftBearing),
+            new FontMetricHandle(this.glyph, FontMetricHandleType.rightBearing),
+            new FontMetricHandle(this.glyph, FontMetricHandleType.ascender),
+            new FontMetricHandle(this.glyph, FontMetricHandleType.descender),
+            new FontMetricHandle(this.glyph, FontMetricHandleType.xHeight)
         ]
+    }
+
+    get glyph() {
+        return this.glyphs[this.currentIndex]
+    }
+
+    renderNonEditableGlyphs(ctx: CanvasRenderingContext2D) {
+        let currentOffset = 0
+
+        if (this.currentIndex < this.glyphs.length - 1) {
+            for (let i = this.currentIndex + 1; i < this.glyphs.length; i++) {
+                const prevGlyph = this.glyphs[i - 1]
+                const glyph = this.glyphs[i]
+
+                const offset = prevGlyph.metrics.rightBearing -
+                               glyph.metrics.leftBearing
+
+                const path = BezierCurve.getPath2D(
+                    glyph.finalBeziers
+                )
+                
+                ctx.fillStyle = "#ccc"
+                ctx.translate(offset, 0)
+                ctx.fill(path)
+
+                currentOffset += offset
+            }
+        }
+        ctx.translate(-currentOffset, 0)
+        currentOffset = 0
+
+        if (this.currentIndex > 0) {
+            for (let i = this.currentIndex - 1; i >= 0; i--) {
+                const nextGlyph = this.glyphs[i + 1]
+                const glyph = this.glyphs[i]
+
+                const offset = nextGlyph.metrics.leftBearing -
+                               glyph.metrics.rightBearing
+
+                const path = BezierCurve.getPath2D(
+                    glyph.finalBeziers
+                )
+                
+                ctx.fillStyle = "#ccc"
+                ctx.translate(offset, 0)
+                ctx.fill(path)
+
+                currentOffset += offset
+
+            }
+        }
+        ctx.translate(-currentOffset, 0)
+        currentOffset = 0
     }
     
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
+        this.renderNonEditableGlyphs(ctx)
+        
         // Glyph metric lines
         ctx.strokeStyle = "#3338"
 

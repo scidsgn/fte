@@ -133,9 +133,6 @@ export class Viewport {
         this.co.transformCanvas(this.ctx)
 
         this.context.render(this, this.ctx)
-        // for (let item of this.items) {
-        //     item.render(this, this.ctx)
-        // }
 
         if (this.tool && this.tool.supportsForeignHandles) {
             this.drawHandles(this.context.handles)

@@ -1,29 +1,33 @@
 import "./styles/app.scss"
 
-import { Font } from "opentype.js"
+import { Font as OTFont } from "opentype.js"
 import { Viewport } from "./viewport/viewport"
 import { BezierPenTool } from "./viewport/tools/bezierPen"
 import { BezierContext } from "./viewport/context/bezier"
 import { HandleTool } from "./viewport/tools/handle"
 import { generateCurvesFromOTGlyph } from "./geometry/bezier/curve"
+import { Glyph } from "./font/glyph"
+import { GlyphContext } from "./viewport/context/glyph"
+import { Font } from "./font/font"
 
-export default (font: Font) => {
+export default (font: OTFont) => {
     const container = document.querySelector("div.viewport")
 
-    const beziers = generateCurvesFromOTGlyph(
-        font, font.charToGlyph("S")
-    )
+    const fteFont = Font.fromOTFont(font)
 
-    console.log(beziers)
+    const glyph = Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("å"))
+    fteFont.addGlyph(glyph)
+    console.log(font)
+    console.log(glyph)
 
-    const context = new BezierContext(beziers)
+    const context = new GlyphContext(glyph)
     const viewport = new Viewport(
         context, [], null
     )
     container.appendChild(viewport.domCanvas)
     viewport.updateViewportSize()
 
-    viewport.setTool(new BezierPenTool())
+    viewport.setTool(new HandleTool())
 
     document.querySelector("button[data-tool=handle]").addEventListener(
         "click", () => viewport.setTool(new HandleTool())

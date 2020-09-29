@@ -15,6 +15,7 @@ export class HandleTool implements ITool {
     private pivotHandle: IDrawableHandle
 
     public handles: IDrawableHandle[] = []
+    public supportsForeignHandles = true
 
     private selectHandleBox() {
         const left = Math.min(
@@ -47,10 +48,10 @@ export class HandleTool implements ITool {
         if (
             e.type === "mousedown" && e.buttons & 1
         ) {
-            const handle = v.nearHandle(this.handles, pos.x, pos.y)
+            const handle = v.nearHandle(pos.x, pos.y)
             if (!handle) {
                 this.pivotHandle = null
-                v.selectHandles(this.handles, [])
+                v.selectHandles([])
 
                 this.selecting = true
                 this.selectionOrigin = pos
@@ -58,7 +59,7 @@ export class HandleTool implements ITool {
             } else {
                 this.pivotHandle = handle
                 if (!handle.selected) {
-                    v.selectHandles(this.handles, [handle])
+                    v.selectHandles([handle])
                 }
             }
         } else if (
@@ -71,7 +72,7 @@ export class HandleTool implements ITool {
 
                 // Pivot gets moved first
                 this.pivotHandle.move(
-                    v, e.movementX, e.movementY, this.pivotHandle, e
+                    v, pos, e.movementX, e.movementY, this.pivotHandle, e
                 )
 
                 for (let handle of this.handles) {
@@ -81,7 +82,7 @@ export class HandleTool implements ITool {
                         handle.type === this.pivotHandle.type
                     )
                         handle.move(
-                            v, e.movementX, e.movementY, this.pivotHandle, e
+                            v, pos, e.movementX, e.movementY, this.pivotHandle, e
                         )
                 }
             }

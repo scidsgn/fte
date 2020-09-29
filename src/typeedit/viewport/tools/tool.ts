@@ -4,6 +4,7 @@ import { Viewport } from "../viewport"
 
 export interface ITool {
     handles: IDrawableHandle[]
+    supportsForeignHandles: boolean
 
     handleMouseEvent: (
         v: Viewport, e: MouseEvent, x: number, y: number

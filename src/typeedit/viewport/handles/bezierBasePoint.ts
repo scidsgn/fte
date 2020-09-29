@@ -1,4 +1,5 @@
 import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
+import { Point } from "../../geometry/point"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
 
@@ -16,7 +17,8 @@ export class BezierBasePointHandle implements IDrawableHandle {
     }
 
     move(
-        v: Viewport, dx: number, dy: number, pivot: IDrawableHandle,
+        v: Viewport, pos: Point, dx: number, dy: number,
+        pivot: IDrawableHandle,
         e?: MouseEvent
     ) {
         if (e && e.ctrlKey) {
@@ -31,9 +33,9 @@ export class BezierBasePointHandle implements IDrawableHandle {
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = "#00f"
+        ctx.fillStyle = "#111"
         ctx.fillRect(-3, -3, 7, 7)
-        ctx.fillStyle = this.selected ? "#00f" : "#fff"
+        ctx.fillStyle = this.selected ? "#111" : "#fff"
         ctx.fillRect(-2, -2, 5, 5)
     }
 }

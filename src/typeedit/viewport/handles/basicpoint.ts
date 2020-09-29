@@ -16,7 +16,8 @@ export class BasicPointHandle implements IDrawableHandle {
     }
 
     move(
-        v: Viewport, dx: number, dy: number, pivot: IDrawableHandle,
+        v: Viewport, pos: Point, dx: number, dy: number,
+        pivot: IDrawableHandle,
         e?: MouseEvent
     ) {
         v.co.moveInClientDx(this.point, dx, dy)

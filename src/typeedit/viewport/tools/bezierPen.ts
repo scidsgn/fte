@@ -15,6 +15,7 @@ export class BezierPenTool implements ITool {
     private currentPoint: BezierPoint = null
 
     public handles: IDrawableHandle[] = []
+    public supportsForeignHandles = false
 
     handleMouseEvent(v: Viewport, e: MouseEvent, x: number, y: number) {
         if (!(v.context instanceof BezierContext)) return
@@ -34,7 +35,6 @@ export class BezierPenTool implements ITool {
             }
 
             const nearHandle = v.nearHandle(
-                this.handles,
                 pos.x, pos.y, "BezierBasePointHandle"
             )
             if (

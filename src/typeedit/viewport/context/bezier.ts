@@ -12,8 +12,11 @@ export class BezierContext implements IContext {
     ) {}
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
-        this.beziers.map(b => new Path(b)).forEach(
-            path => path.render(v, ctx)
-        )
+        const path = BezierCurve.getPath2D(this.beziers)
+
+        ctx.fillStyle = "#00f3"
+        ctx.fill(path)
+        ctx.strokeStyle = "#08f"
+        ctx.stroke(path)
     }
 }

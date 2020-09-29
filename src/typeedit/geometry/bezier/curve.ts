@@ -6,25 +6,27 @@ export class BezierCurve {
     public points: BezierPoint[] = []
 
     addPoint(point: BezierPoint) {
+        point.curve = this
         this.points.push(point)
     }
 
-    get path2D(): Path2D {
+    static getPath2D(beziers: BezierCurve[]) {
         const path = new Path2D()
 
-        for (let i = 0; i < this.points.length; i++) {
-            const p1 = this.points[i]
-            const p2 = this.points[(i + 1) % this.points.length]
-            if (i === 0)
-                path.moveTo(p1.base.x, p1.base.y)
-
-            path.bezierCurveTo(
-                p1.after.x, p1.after.y,
-                p2.before.x, p2.before.y,
-                p2.base.x, p2.base.y
-            )
+        for (let bezier of beziers) {
+            for (let i = 0; i < bezier.points.length; i++) {
+                const p1 = bezier.points[i]
+                const p2 = bezier.points[(i + 1) % bezier.points.length]
+                if (i === 0)
+                    path.moveTo(p1.base.x, p1.base.y)
+    
+                path.bezierCurveTo(
+                    p1.after.x, p1.after.y,
+                    p2.before.x, p2.before.y,
+                    p2.base.x, p2.base.y
+                )
+            }
         }
-        path.closePath()
 
         return path
     }
@@ -33,11 +35,11 @@ export class BezierCurve {
 function convertOTCoordinates(
     otfont: Font, x: number, y: number
 ): {x: number, y: number} {
-    const scaleFactor = 512 / otfont.ascender
+    const scaleFactor = 512 / otfont.tables.os2.sCapHeight
 
     return {
         x: x * scaleFactor,
-        y: (otfont.ascender - y) * scaleFactor // easier to work with
+        y: (otfont.tables.os2.sCapHeight - y) * scaleFactor // easier to work with
     }
 }
 

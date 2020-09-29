@@ -52,10 +52,14 @@ export class Viewport {
     }
 
     nearHandle(
-        handles: IDrawableHandle[],
         x: number, y: number,
         type?: string
     ): IDrawableHandle {
+        const handles = [
+            ...this.context.handles,
+            ...this.tool.handles
+        ]
+
         for (let i = handles.length - 1; i >= 0; i--) {
             const handle = handles[i]
 
@@ -75,8 +79,13 @@ export class Viewport {
     }
 
     selectHandles(
-        handles: IDrawableHandle[], select: IDrawableHandle[]
+        select: IDrawableHandle[]
     ) {
+        const handles = [
+            ...this.context.handles,
+            ...this.tool.handles
+        ]
+
         for (let handle of handles) {
             handle.selected = false
         }
@@ -128,8 +137,10 @@ export class Viewport {
         //     item.render(this, this.ctx)
         // }
 
-        this.drawHandles(this.context.handles)
-        this.drawHandles(this.handles)
+        if (this.tool && this.tool.supportsForeignHandles) {
+            this.drawHandles(this.context.handles)
+            this.drawHandles(this.handles)
+        }
         if (this.tool)
             this.drawHandles(this.tool.handles)
 

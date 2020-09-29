@@ -18,7 +18,8 @@ export class BezierControlPointHandle implements IDrawableHandle {
     }
 
     move(
-        v: Viewport, dx: number, dy: number, pivot: IDrawableHandle,
+        v: Viewport, pos: Point, dx: number, dy: number,
+        pivot: IDrawableHandle,
         e?: MouseEvent
     ) {
         v.co.moveInClientDx(this.cpoint, dx, dy)
@@ -32,7 +33,7 @@ export class BezierControlPointHandle implements IDrawableHandle {
             this.cpoint.x, this.cpoint.y
         )
 
-        ctx.strokeStyle = "#08f"
+        ctx.strokeStyle = "#444"
         ctx.lineWidth = 1
         ctx.beginPath()
         ctx.moveTo(
@@ -42,7 +43,7 @@ export class BezierControlPointHandle implements IDrawableHandle {
         ctx.lineTo(0, 0)
         ctx.stroke()
 
-        ctx.fillStyle = this.selected ? "#00f" : "#08f"
+        ctx.fillStyle = this.selected ? "#111" : "#444"
         ctx.beginPath()
         ctx.arc(0, 0, 3, 0, 2 * Math.PI)
         ctx.fill()

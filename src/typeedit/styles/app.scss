@@ -13,10 +13,12 @@ main {
     flex-direction: column;
 
     nav {
-        background: #ccc;
+        background: #ddd;
 
-        box-shadow: inset 0px -1px #aaa;
         padding: 4px 4px 0px 4px;
+
+        display: flex;
+        justify-content: center;
 
         button {
             background: transparent;
@@ -25,7 +27,7 @@ main {
             font-size: 11pt;
 
             padding: 4px 12px;
-            border: 1px solid #aaa;
+            border: none;
             border-bottom: none;
             border-radius: 4px 4px 0px 0px;
             outline: none;
@@ -47,7 +49,31 @@ section.edit {
     grid-template-rows: repeat(1, 1fr);
 
     div.tools {
+        padding: 2px;
+
         display: flex;
         flex-direction: column;
+
+        button {
+            background: transparent;
+
+            border: none;
+            outline: none;
+            padding: 4px;
+            border-radius: 4px;
+
+            &.active {
+                background: #08f;
+
+                img {
+                    filter: invert(1);
+                }
+            }
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
     }
 }

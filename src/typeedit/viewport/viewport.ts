@@ -24,7 +24,7 @@ export class Viewport {
 
         this.tool.handleMouseEvent(
             this, e,
-            e.clientX - box.left,e.clientY - box.top
+            e.clientX - box.left, e.clientY - box.top
         )
         this.render()
     }
@@ -44,6 +44,23 @@ export class Viewport {
         this.domCanvas.addEventListener("mousemove", (e) => {
             if (e.buttons & 4) { // Middle Button
                 this.co.translate(e.movementX, e.movementY)
+                this.render()
+            } else {
+                this.dispatchMouseEvent(e)
+            }
+        })
+
+        this.domCanvas.addEventListener("wheel", (e) => {
+            if (e.buttons & 4 || e.ctrlKey) { // Middle Button
+                const box = this.domCanvas.getBoundingClientRect()
+                const pos = this.co.clientToWorld(
+                    e.clientX - box.left, e.clientY - box.top
+                )
+
+                this.co.scale(
+                    1.2 ** Math.sign(-e.deltaY),
+                    pos.x, pos.y
+                )
                 this.render()
             } else {
                 this.dispatchMouseEvent(e)

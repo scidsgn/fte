@@ -78,6 +78,7 @@ export class GlyphContext extends BezierContext {
 
         // Glyph metric lines
         ctx.strokeStyle = "#3338"
+        ctx.lineWidth = 1 / v.co.scaleFactor
 
         ctx.beginPath()
 
@@ -88,7 +89,9 @@ export class GlyphContext extends BezierContext {
         ctx.lineTo(9999, 0)
         ctx.stroke()
 
-        ctx.setLineDash([10, 10])
+        ctx.setLineDash(
+            [10 / v.co.scaleFactor, 10 / v.co.scaleFactor]
+        )
 
         // x-height
         ctx.beginPath()
@@ -122,11 +125,12 @@ export class GlyphContext extends BezierContext {
         ctx.fillStyle = "#999"
         ctx.fill(finalPath)
         
+        ctx.setLineDash([])
         ctx.strokeStyle = "#fff"
-        ctx.lineWidth = 3
+        ctx.lineWidth = 3 / v.co.scaleFactor
         ctx.stroke(workingPath)
         ctx.strokeStyle = "#111"
-        ctx.lineWidth = 1
+        ctx.lineWidth = 1 / v.co.scaleFactor
         ctx.stroke(workingPath)
     }
 }

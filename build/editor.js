@@ -15264,13 +15264,14 @@ var GlyphContext = /** @class */ (function (_super) {
         this.renderNonEditableGlyphs(ctx);
         // Glyph metric lines
         ctx.strokeStyle = "#3338";
+        ctx.lineWidth = 1 / v.co.scaleFactor;
         ctx.beginPath();
         ctx.moveTo(-9999, 512); // 512 is the bottom - baseline
         ctx.lineTo(9999, 512);
         ctx.moveTo(-9999, 0); // 0 is the top - cap height
         ctx.lineTo(9999, 0);
         ctx.stroke();
-        ctx.setLineDash([10, 10]);
+        ctx.setLineDash([10 / v.co.scaleFactor, 10 / v.co.scaleFactor]);
         // x-height
         ctx.beginPath();
         ctx.moveTo(-9999, this.glyph.font.metrics.xHeight);
@@ -15291,11 +15292,12 @@ var GlyphContext = /** @class */ (function (_super) {
         var finalPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.finalBeziers);
         ctx.fillStyle = "#999";
         ctx.fill(finalPath);
+        ctx.setLineDash([]);
         ctx.strokeStyle = "#fff";
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 3 / v.co.scaleFactor;
         ctx.stroke(workingPath);
         ctx.strokeStyle = "#111";
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 1 / v.co.scaleFactor;
         ctx.stroke(workingPath);
     };
     return GlyphContext;
@@ -15319,25 +15321,33 @@ var ViewportCoordinates = /** @class */ (function () {
     function ViewportCoordinates() {
         this.dx = 0;
         this.dy = 0;
+        this.scaleFactor = 1;
     }
     // dx, dy in screen coordinates
     ViewportCoordinates.prototype.translate = function (dx, dy) {
         this.dx += dx;
         this.dy += dy;
     };
+    ViewportCoordinates.prototype.scale = function (factor, ox, oy) {
+        var newScale = this.scaleFactor * factor;
+        this.dx = this.dx + this.scaleFactor * ox - newScale * ox;
+        this.dy = this.dy + this.scaleFactor * oy - newScale * oy;
+        this.scaleFactor = newScale;
+    };
     ViewportCoordinates.prototype.transformCanvas = function (ctx) {
         ctx.translate(this.dx, this.dy);
+        ctx.scale(this.scaleFactor, this.scaleFactor);
     };
     ViewportCoordinates.prototype.clientToWorld = function (x, y) {
         return {
-            x: x - this.dx,
-            y: y - this.dy
+            x: (x - this.dx) / this.scaleFactor,
+            y: (y - this.dy) / this.scaleFactor
         };
     };
     ViewportCoordinates.prototype.worldToClient = function (x, y) {
         return {
-            x: x + this.dx,
-            y: y + this.dy
+            x: x * this.scaleFactor + this.dx,
+            y: y * this.scaleFactor + this.dy
         };
     };
     ViewportCoordinates.prototype.moveInClientDx = function (point, dx, dy) {
@@ -15553,11 +15563,12 @@ var FontMetricHandle = /** @class */ (function () {
         ctx.arc(0, 0, 5, 0, 2 * Math.PI);
         ctx.moveTo(0, 0);
         if (this.dir === FontMetricHandleDir.horz)
-            ctx.lineTo(20, 0);
+            ctx.lineTo(20 * v.co.scaleFactor, 0);
         else
-            ctx.lineTo(0, -20);
+            ctx.lineTo(0, -20 * v.co.scaleFactor);
         ctx.fillStyle = this.selected ? "#111" : "#444";
         ctx.strokeStyle = "#111";
+        ctx.lineWidth = 1;
         ctx.setLineDash([]);
         ctx.stroke();
         ctx.fill();
@@ -15915,6 +15926,17 @@ var Viewport = /** @class */ (function () {
         this.domCanvas.addEventListener("mousemove", function (e) {
             if (e.buttons & 4) { // Middle Button
                 _this.co.translate(e.movementX, e.movementY);
+                _this.render();
+            }
+            else {
+                _this.dispatchMouseEvent(e);
+            }
+        });
+        this.domCanvas.addEventListener("wheel", function (e) {
+            if (e.buttons & 4 || e.ctrlKey) { // Middle Button
+                var box = _this.domCanvas.getBoundingClientRect();
+                var pos = _this.co.clientToWorld(e.clientX - box.left, e.clientY - box.top);
+                _this.co.scale(Math.pow(1.2, Math.sign(-e.deltaY)), pos.x, pos.y);
                 _this.render();
             }
             else {

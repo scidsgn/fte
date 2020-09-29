@@ -94,12 +94,13 @@ export class FontMetricHandle implements IDrawableHandle {
         ctx.moveTo(0, 0)
 
         if (this.dir === FontMetricHandleDir.horz)
-            ctx.lineTo(20, 0)
+            ctx.lineTo(20 * v.co.scaleFactor, 0)
         else
-            ctx.lineTo(0, -20)
+            ctx.lineTo(0, -20 * v.co.scaleFactor)
 
         ctx.fillStyle = this.selected ? "#111" : "#444"
         ctx.strokeStyle = "#111"
+        ctx.lineWidth = 1
         ctx.setLineDash([])
         ctx.stroke()
         ctx.fill()

@@ -14786,6 +14786,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./viewport/tools/bezierPen */ "./src/typeedit/viewport/tools/bezierPen.ts");
 /* harmony import */ var _viewport_context_bezier__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./viewport/context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
 /* harmony import */ var _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./viewport/tools/handle */ "./src/typeedit/viewport/tools/handle.ts");
+/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
+
 
 
 
@@ -14793,7 +14795,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (font) {
     var container = document.querySelector("div.viewport");
-    var context = new _viewport_context_bezier__WEBPACK_IMPORTED_MODULE_3__["BezierContext"]([]);
+    var beziers = Object(_geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_5__["generateCurvesFromOTGlyph"])(font, font.charToGlyph("S"));
+    console.log(beziers);
+    var context = new _viewport_context_bezier__WEBPACK_IMPORTED_MODULE_3__["BezierContext"](beziers);
     var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_1__["Viewport"](context, [], null);
     container.appendChild(viewport.domCanvas);
     viewport.updateViewportSize();
@@ -14812,12 +14816,17 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ./src/typeedit/geometry/bezier/curve.ts ***!
   \***********************************************/
-/*! exports provided: BezierCurve */
+/*! exports provided: BezierCurve, generateCurvesFromOTGlyph */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierCurve", function() { return BezierCurve; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateCurvesFromOTGlyph", function() { return generateCurvesFromOTGlyph; });
+/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./point */ "./src/typeedit/geometry/bezier/point.ts");
+
+
 var BezierCurve = /** @class */ (function () {
     function BezierCurve() {
         this.points = [];
@@ -14844,6 +14853,68 @@ var BezierCurve = /** @class */ (function () {
     return BezierCurve;
 }());
 
+function convertOTCoordinates(otfont, x, y) {
+    var scaleFactor = 512 / otfont.ascender;
+    return {
+        x: x * scaleFactor,
+        y: (otfont.ascender - y) * scaleFactor // easier to work with
+    };
+}
+function generateCurvesFromOTGlyph(otfont, otglyph) {
+    var curves = [];
+    var curve = new BezierCurve();
+    var conv = function (x, y) { return convertOTCoordinates(otfont, x, y); };
+    ///@ts-ignore
+    otglyph.path.commands.forEach(function (cmd) {
+        switch (cmd.type) {
+            case "M": {
+                if (curve.points.length)
+                    curves.push(curve);
+                curve = new BezierCurve();
+                var coords = conv(cmd.x, cmd.y);
+                curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y)));
+                break;
+            }
+            case "L": {
+                var coords = conv(cmd.x, cmd.y);
+                curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y)));
+                break;
+            }
+            case "C": {
+                var c1coords = conv(cmd.x1, cmd.y1);
+                var c2coords = conv(cmd.x2, cmd.y2);
+                var coords = conv(cmd.x, cmd.y);
+                if (!curve.points.length)
+                    return; // WHO MALFORMED MY OTF
+                var prevPoint = curve.points[curve.points.length - 1];
+                prevPoint.after.x = c1coords.x;
+                prevPoint.after.y = c1coords.y;
+                curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](c2coords.x, c2coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y)));
+                break;
+            }
+            case "Z": {
+                if (curve.points.length) {
+                    if (curve.points.length > 1) {
+                        var first = curve.points[0];
+                        var last = curve.points[curve.points.length - 1];
+                        if (first.base.x === last.base.x &&
+                            first.base.y === last.base.y) {
+                            first.before.x = last.before.x;
+                            first.before.y = last.before.y;
+                            curve.points.splice(curve.points.length - 1, 1);
+                        }
+                    }
+                    curves.push(curve);
+                }
+                curve = new BezierCurve();
+                break;
+            }
+        }
+    });
+    if (curve.points.length)
+        curves.push(curve);
+    return curves;
+}
 
 
 /***/ }),
@@ -15395,7 +15466,6 @@ var Viewport = /** @class */ (function () {
     };
     Viewport.prototype.updateViewportSize = function () {
         var parent = this.domCanvas.parentElement;
-        console.log(parent);
         if (!parent)
             return;
         var rect = parent.getBoundingClientRect();

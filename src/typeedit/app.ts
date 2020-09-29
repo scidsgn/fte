@@ -5,11 +5,18 @@ import { Viewport } from "./viewport/viewport"
 import { BezierPenTool } from "./viewport/tools/bezierPen"
 import { BezierContext } from "./viewport/context/bezier"
 import { HandleTool } from "./viewport/tools/handle"
+import { generateCurvesFromOTGlyph } from "./geometry/bezier/curve"
 
 export default (font: Font) => {
     const container = document.querySelector("div.viewport")
 
-    const context = new BezierContext([])
+    const beziers = generateCurvesFromOTGlyph(
+        font, font.charToGlyph("S")
+    )
+
+    console.log(beziers)
+
+    const context = new BezierContext(beziers)
     const viewport = new Viewport(
         context, [], null
     )

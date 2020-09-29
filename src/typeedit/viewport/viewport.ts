@@ -92,7 +92,6 @@ export class Viewport {
 
     updateViewportSize() {
         const parent = this.domCanvas.parentElement
-        console.log(parent)
         if (!parent) return
 
         const rect = parent.getBoundingClientRect()

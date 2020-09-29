@@ -17,6 +17,7 @@ main {
 
         padding: 4px 4px 0px 4px;
 
+        box-shadow: inset 0px -2px 2px #00000005;
         display: flex;
         justify-content: center;
 
@@ -24,10 +25,10 @@ main {
             background: transparent;
 
             font-family: "Inter";
-            font-size: 10pt;
+            font-size: 11pt;
             font-weight: 500;
 
-            padding: 4px 12px;
+            padding: 6px 20px;
             border: none;
             border-bottom: none;
             border-radius: 4px 4px 0px 0px;

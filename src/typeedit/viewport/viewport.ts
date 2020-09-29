@@ -1,3 +1,5 @@
+import { throws } from "assert"
+import { IContext } from "./context/context"
 import { ViewportCoordinates } from "./coordinates"
 import { IDrawable, IDrawableHandle } from "./drawable"
 import { ITool } from "./tools/tool"
@@ -9,11 +11,22 @@ export class Viewport {
     public co = new ViewportCoordinates()
 
     constructor(
-        public items: IDrawable[],
+        public context: IContext,
         public handles: IDrawableHandle[],
         public tool: ITool
     ) {
         this.setupCanvasEvents()
+    }
+
+    dispatchMouseEvent(e: MouseEvent) {
+        const box = this.domCanvas.getBoundingClientRect()
+        if (!this.tool) return
+
+        this.tool.handleMouseEvent(
+            this, e,
+            e.clientX - box.left,e.clientY - box.top
+        )
+        this.render()
     }
 
     private setupCanvasEvents() {
@@ -21,13 +34,11 @@ export class Viewport {
         })
 
         this.domCanvas.addEventListener("mousedown", (e) => {
-            this.tool.handleMouseEvent(this, e)
-            this.render()
+            this.dispatchMouseEvent(e)
         })
 
         this.domCanvas.addEventListener("mouseup", (e) => {
-            this.tool.handleMouseEvent(this, e)
-            this.render()
+            this.dispatchMouseEvent(e)
         })
 
         this.domCanvas.addEventListener("mousemove", (e) => {
@@ -35,17 +46,19 @@ export class Viewport {
                 this.co.translate(e.movementX, e.movementY)
                 this.render()
             } else {
-                this.tool.handleMouseEvent(this, e)
-                this.render()
+                this.dispatchMouseEvent(e)
             }
         })
     }
 
     nearHandle(
+        handles: IDrawableHandle[],
         x: number, y: number,
         type?: string
     ): IDrawableHandle {
-        for (let handle of this.handles) {
+        for (let i = handles.length - 1; i >= 0; i--) {
+            const handle = handles[i]
+
             if (type && handle.type !== type)
                 continue
 
@@ -61,12 +74,14 @@ export class Viewport {
         return null
     }
 
-    selectHandles(handles: IDrawableHandle[]) {
-        for (let handle of this.handles) {
+    selectHandles(
+        handles: IDrawableHandle[], select: IDrawableHandle[]
+    ) {
+        for (let handle of handles) {
             handle.selected = false
         }
 
-        for (let handle of handles) {
+        for (let handle of select) {
             handle.selected = true
         }
     }
@@ -87,19 +102,8 @@ export class Viewport {
         this.render()
     }
 
-    render() {
-        this.ctx.resetTransform()
-        this.ctx.clearRect(
-            0, 0, this.domCanvas.width, this.domCanvas.height
-        )
-
-        this.co.transformCanvas(this.ctx)
-
-        for (let item of this.items) {
-            item.render(this, this.ctx)
-        }
-
-        for (let handle of this.handles) {
+    drawHandles(handles: IDrawableHandle[]) {
+        for (let handle of handles) {
             const clientPos = this.co.worldToClient(
                 handle.position.x, handle.position.y
             )
@@ -109,9 +113,35 @@ export class Viewport {
 
             handle.render(this, this.ctx)
         }
+    }
+
+    render() {
+        this.ctx.resetTransform()
+        this.ctx.clearRect(
+            0, 0, this.domCanvas.width, this.domCanvas.height
+        )
+
+        this.co.transformCanvas(this.ctx)
+
+        this.context.render(this, this.ctx)
+        // for (let item of this.items) {
+        //     item.render(this, this.ctx)
+        // }
+
+        this.drawHandles(this.context.handles)
+        this.drawHandles(this.handles)
+        if (this.tool)
+            this.drawHandles(this.tool.handles)
 
         this.ctx.resetTransform()
         this.co.transformCanvas(this.ctx)
-        this.tool.render(this, this.ctx)
+        if (this.tool)
+            this.tool.render(this, this.ctx)
+    }
+
+    setTool(tool: ITool) {
+        this.tool = tool
+        this.tool.updateContext(this.context)
+        this.render()
     }
 }

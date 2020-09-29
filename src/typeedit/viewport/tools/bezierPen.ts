@@ -1,7 +1,10 @@
 import { BezierCurve } from "../../geometry/bezier/curve"
-import { BezierPoint } from "../../geometry/bezier/point"
+import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Path } from "../../geometry/path"
 import { Point } from "../../geometry/point"
+import { BezierContext } from "../context/bezier"
+import { IContext } from "../context/context"
+import { IDrawableHandle } from "../drawable"
 import { BezierBasePointHandle } from "../handles/bezierBasePoint"
 import { BezierControlPointHandle } from "../handles/bezierControlPoint"
 import { Viewport } from "../viewport"
@@ -11,9 +14,13 @@ export class BezierPenTool implements ITool {
     private currentBezier: BezierCurve = null
     private currentPoint: BezierPoint = null
 
-    handleMouseEvent(v: Viewport, e: MouseEvent) {
+    public handles: IDrawableHandle[] = []
+
+    handleMouseEvent(v: Viewport, e: MouseEvent, x: number, y: number) {
+        if (!(v.context instanceof BezierContext)) return
+
         const pos = v.co.clientToWorld(
-            e.clientX, e.clientY
+            x, y
         )
 
         if (
@@ -21,12 +28,13 @@ export class BezierPenTool implements ITool {
         ) {
             if (!this.currentBezier) {
                 this.currentBezier = new BezierCurve()
-                v.items.push(
-                    new Path(this.currentBezier)
+                v.context.beziers.push(
+                    this.currentBezier
                 )
             }
 
             const nearHandle = v.nearHandle(
+                this.handles,
                 pos.x, pos.y, "BezierBasePointHandle"
             )
             if (
@@ -47,7 +55,7 @@ export class BezierPenTool implements ITool {
                 this.currentPoint = point
                 this.currentBezier.addPoint(point)
 
-                v.handles.push(
+                this.handles.push(
                     new BezierControlPointHandle(point, point.before),
                     new BezierControlPointHandle(point, point.after),
                     new BezierBasePointHandle(point)
@@ -61,19 +69,24 @@ export class BezierPenTool implements ITool {
             this.currentPoint.after.y = pos.y
 
             if (!e.altKey) {
+                this.currentPoint.type = BezierPointType.auto
                 this.currentPoint.before.x = 2 * this.currentPoint.base.x - pos.x
                 this.currentPoint.before.y = 2 * this.currentPoint.base.y - pos.y
+            } else {
+                this.currentPoint.type = BezierPointType.free
             }
         } else if (
             e.type === "mouseup"
         ) {
             this.currentPoint = null
             if (this.currentBezier === null) {
-                v.purgeHandles()
+                this.handles = []
             }
         }
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
     }
+
+    updateContext(context: IContext) {}
 }

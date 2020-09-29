@@ -12,5 +12,8 @@ export interface IDrawableHandle {
     type: string
 
     render: (v: Viewport, ctx: CanvasRenderingContext2D) => void
-    move: (v: Viewport, dx: number, dy: number, pivot: IDrawableHandle) => void
+    move: (
+        v: Viewport, dx: number, dy: number, pivot: IDrawableHandle,
+        e?: MouseEvent
+    ) => void
 }

@@ -2,13 +2,25 @@
 
 <html lang="en">
     <head>
-        <title>Document</title>
+        <title>FTE</title>
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <main>
+            <nav>
+                <button class="active">Edit</button>
+                <button>Refine</button>
+                <button>Export</button>
+            </nav>
+            <section class="edit">
+                <div class="tools">
+                    <button data-tool="handle">Handle</button>
+                    <button data-tool="pen">Pen</button>
+                </div>
+                <div class="viewport"></div>
+            </section>
         </main>
 
         <script src="editor.js"></script>

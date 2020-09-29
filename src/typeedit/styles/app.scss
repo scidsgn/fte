@@ -8,4 +8,46 @@ main {
     top: 0;
     right: 0;
     bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    nav {
+        background: #ccc;
+
+        box-shadow: inset 0px -1px #aaa;
+        padding: 4px 4px 0px 4px;
+
+        button {
+            background: transparent;
+
+            font-family: sans-serif;
+            font-size: 11pt;
+
+            padding: 4px 12px;
+            border: 1px solid #aaa;
+            border-bottom: none;
+            border-radius: 4px 4px 0px 0px;
+            outline: none;
+
+            &.active {
+                background: #eee;
+            }
+        }
+    }
+
+    section {
+        flex-grow: 1;
+    }
+}
+
+section.edit {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: repeat(1, 1fr);
+
+    div.tools {
+        display: flex;
+        flex-direction: column;
+    }
 }

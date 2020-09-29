@@ -1,5 +1,9 @@
 import { Point } from "../../geometry/point";
-import { IDrawable, IDrawableHandle } from "../drawable";
+import { BezierContext } from "../context/bezier";
+import { IContext } from "../context/context";
+import { IDrawableHandle } from "../drawable";
+import { BezierBasePointHandle } from "../handles/bezierBasePoint";
+import { BezierControlPointHandle } from "../handles/bezierControlPoint";
 import { Viewport } from "../viewport";
 import { ITool } from "./tool";
 
@@ -10,7 +14,9 @@ export class HandleTool implements ITool {
 
     private pivotHandle: IDrawableHandle
 
-    private selectHandleBox(v: Viewport) {
+    public handles: IDrawableHandle[] = []
+
+    private selectHandleBox() {
         const left = Math.min(
             this.selectionOrigin.x, this.selectionTarget.x
         )
@@ -24,7 +30,7 @@ export class HandleTool implements ITool {
             this.selectionOrigin.y, this.selectionTarget.y
         )
 
-        for (let handle of v.handles) {
+        for (let handle of this.handles) {
             const selected = handle.position.x >= left &&
                              handle.position.x < right &&
                              handle.position.y >= top &&
@@ -33,18 +39,18 @@ export class HandleTool implements ITool {
         }
     }
 
-    handleMouseEvent(v: Viewport, e: MouseEvent) {
+    handleMouseEvent(v: Viewport, e: MouseEvent, x: number, y: number) {
         const pos = v.co.clientToWorld(
-            e.clientX, e.clientY
+            x, y
         )
 
         if (
             e.type === "mousedown" && e.buttons & 1
         ) {
-            const handle = v.nearHandle(pos.x, pos.y)
+            const handle = v.nearHandle(this.handles, pos.x, pos.y)
             if (!handle) {
                 this.pivotHandle = null
-                v.selectHandles([])
+                v.selectHandles(this.handles, [])
 
                 this.selecting = true
                 this.selectionOrigin = pos
@@ -52,7 +58,7 @@ export class HandleTool implements ITool {
             } else {
                 this.pivotHandle = handle
                 if (!handle.selected) {
-                    v.selectHandles([handle])
+                    v.selectHandles(this.handles, [handle])
                 }
             }
         } else if (
@@ -65,17 +71,17 @@ export class HandleTool implements ITool {
 
                 // Pivot gets moved first
                 this.pivotHandle.move(
-                    v, e.movementX, e.movementY, this.pivotHandle
+                    v, e.movementX, e.movementY, this.pivotHandle, e
                 )
 
-                for (let handle of v.handles) {
+                for (let handle of this.handles) {
                     if (
                         handle.selected &&
                         handle !== this.pivotHandle &&
                         handle.type === this.pivotHandle.type
                     )
                         handle.move(
-                            v, e.movementX, e.movementY, this.pivotHandle
+                            v, e.movementX, e.movementY, this.pivotHandle, e
                         )
                 }
             }
@@ -83,7 +89,7 @@ export class HandleTool implements ITool {
             e.type === "mouseup"
         ) {
             if (this.selecting) {
-                this.selectHandleBox(v)
+                this.selectHandleBox()
                 this.selecting = false
             }
         }
@@ -99,5 +105,22 @@ export class HandleTool implements ITool {
                 this.selectionTarget.y - this.selectionOrigin.y
             )
         }
+    }
+
+    updateContext(context: IContext) {
+        if (!(context instanceof BezierContext)) return
+
+        this.handles = []
+        context.beziers.forEach(
+            bezier => {
+                bezier.points.forEach(
+                    p => this.handles.push(
+                        new BezierControlPointHandle(p, p.before),
+                        new BezierControlPointHandle(p, p.after),
+                        new BezierBasePointHandle(p)
+                    )
+                )
+            }
+        )
     }
 }

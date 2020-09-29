@@ -1,4 +1,4 @@
-import { BezierPoint } from "../../geometry/bezier/point"
+import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
 
@@ -16,11 +16,18 @@ export class BezierBasePointHandle implements IDrawableHandle {
     }
 
     move(
-        v: Viewport, dx: number, dy: number, pivot: IDrawableHandle
+        v: Viewport, dx: number, dy: number, pivot: IDrawableHandle,
+        e?: MouseEvent
     ) {
-        v.co.moveInClientDx(this.point.base, dx, dy)
-        v.co.moveInClientDx(this.point.before, dx, dy)
-        v.co.moveInClientDx(this.point.after, dx, dy)
+        if (e && e.ctrlKey) {
+            v.co.moveInClientDx(this.point.after, dx, dy)
+            if (this.point.type === BezierPointType.auto || e.altKey)
+                v.co.moveInClientDx(this.point.before, -dx, -dy)
+        } else {
+            v.co.moveInClientDx(this.point.base, dx, dy)
+            v.co.moveInClientDx(this.point.before, dx, dy)
+            v.co.moveInClientDx(this.point.after, dx, dy)
+        }
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

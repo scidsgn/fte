@@ -1,4 +1,4 @@
-import { BezierPoint } from "../../geometry/bezier/point"
+import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Point } from "../../geometry/point"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
@@ -22,7 +22,14 @@ export class BezierControlPointHandle implements IDrawableHandle {
         pivot: IDrawableHandle,
         e?: MouseEvent
     ) {
-        this.cpoint.move(dPos.x, dPos.y)
+        // let forceType = null
+        // if (
+        //     this.point.type !== BezierPointType.free &&
+        //     e.altKey
+        // )
+        //     forceType = BezierPointType.free
+
+        this.point.movePoint(this.cpoint, dPos)
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

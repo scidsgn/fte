@@ -14,4 +14,26 @@ export class BezierPoint {
         public after: Point,
         public type: BezierPointType = BezierPointType.auto
     ) {}
+
+    movePoint(point: Point, dPos: Point) {
+
+        if (point === this.base) {
+            this.base.move(dPos.x, dPos.y)
+            this.before.move(dPos.x, dPos.y)
+            this.after.move(dPos.x, dPos.y)
+        } else {
+            const otherPoint = point === this.before ?
+                               this.after : this.before
+            
+            point.move(dPos.x, dPos.y)
+
+            if (this.type === BezierPointType.auto) {
+                const otherRadius = otherPoint.distance(this.base)
+                const angle = point.angle(this.base)
+
+                otherPoint.x = otherRadius * Math.cos(angle + Math.PI) + this.base.x
+                otherPoint.y = otherRadius * Math.sin(angle + Math.PI) + this.base.y
+            }
+        }
+    }
 }

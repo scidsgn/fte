@@ -21,9 +21,7 @@ export class BezierBasePointHandle implements IDrawableHandle {
         pivot: IDrawableHandle,
         e?: MouseEvent
     ) {
-        this.point.base.move(dPos.x, dPos.y)
-        this.point.after.move(dPos.x, dPos.y)
-        this.point.before.move(dPos.x, dPos.y)
+        this.point.movePoint(this.point.base, dPos)
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

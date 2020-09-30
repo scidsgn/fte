@@ -15062,6 +15062,25 @@ var BezierPoint = /** @class */ (function () {
         this.type = type;
         this.curve = null;
     }
+    BezierPoint.prototype.movePoint = function (point, dPos) {
+        if (point === this.base) {
+            this.base.move(dPos.x, dPos.y);
+            this.before.move(dPos.x, dPos.y);
+            this.after.move(dPos.x, dPos.y);
+        }
+        else {
+            var otherPoint = point === this.before ?
+                this.after : this.before;
+            point.move(dPos.x, dPos.y);
+            if (this.type === BezierPointType.auto) {
+                var otherRadius = otherPoint.distance(this.base);
+                var angle = point.angle(this.base);
+                console.log(otherRadius);
+                otherPoint.x = otherRadius * Math.cos(angle + Math.PI) + this.base.x;
+                otherPoint.y = otherRadius * Math.sin(angle + Math.PI) + this.base.y;
+            }
+        }
+    };
     return BezierPoint;
 }());
 
@@ -15089,6 +15108,12 @@ var Point = /** @class */ (function () {
     Point.prototype.move = function (dx, dy) {
         this.x += dx;
         this.y += dy;
+    };
+    Point.prototype.distance = function (other) {
+        return Math.hypot(this.x - other.x, this.y - other.y);
+    };
+    Point.prototype.angle = function (origin) {
+        return Math.atan2(this.y - origin.y, this.x - origin.x);
     };
     Point.prototype.getDiff = function (last) {
         return new Point(this.x - last.x, this.y - last.y);
@@ -15396,9 +15421,7 @@ var BezierBasePointHandle = /** @class */ (function () {
         configurable: true
     });
     BezierBasePointHandle.prototype.move = function (v, pos, dPos, pivot, e) {
-        this.point.base.move(dPos.x, dPos.y);
-        this.point.after.move(dPos.x, dPos.y);
-        this.point.before.move(dPos.x, dPos.y);
+        this.point.movePoint(this.point.base, dPos);
     };
     BezierBasePointHandle.prototype.render = function (v, ctx) {
         ctx.fillStyle = "#111";
@@ -15439,7 +15462,13 @@ var BezierControlPointHandle = /** @class */ (function () {
         configurable: true
     });
     BezierControlPointHandle.prototype.move = function (v, pos, dPos, pivot, e) {
-        this.cpoint.move(dPos.x, dPos.y);
+        // let forceType = null
+        // if (
+        //     this.point.type !== BezierPointType.free &&
+        //     e.altKey
+        // )
+        //     forceType = BezierPointType.free
+        this.point.movePoint(this.cpoint, dPos);
     };
     BezierControlPointHandle.prototype.render = function (v, ctx) {
         var basePos = v.co.worldToClient(this.point.base.x, this.point.base.y);

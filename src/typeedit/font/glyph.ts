@@ -26,9 +26,6 @@ export class Glyph {
         const beziers = generateCurvesFromOTGlyph(otfont, otglyph)
 
         const glyphMetrics = otglyph.getMetrics()
-        console.log(glyphMetrics)
-
-        console.log(otglyph)
 
         return new Glyph(
             font,

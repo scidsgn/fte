@@ -3,13 +3,13 @@ import "./styles/app.scss"
 import { Font as OTFont } from "opentype.js"
 import { Viewport } from "./viewport/viewport"
 import { BezierPenTool } from "./viewport/tools/bezierPen"
-import { BezierContext } from "./viewport/context/bezier"
 import { HandleTool } from "./viewport/tools/handle"
-import { generateCurvesFromOTGlyph } from "./geometry/bezier/curve"
 import { Glyph } from "./font/glyph"
 import { GlyphContext } from "./viewport/context/glyph"
 import { Font } from "./font/font"
-import { ITool } from "./viewport/tools/tool"
+import { exportFont } from "./io/export"
+
+const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,! "
 
 export default (font: OTFont) => {
     const container = document.querySelector("div.viewport")
@@ -18,20 +18,16 @@ export default (font: OTFont) => {
 
     const fteFont = Font.fromOTFont(font)
 
-    const [
-        glyph1, glyph2, glyph3, glyph4, glyph5
-    ] = [
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("t")),
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("h")),
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("i")),
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("C")),
-        Glyph.fromOTGlyph(fteFont, font, font.charToGlyph("c")),
-    ]
-    fteFont.addGlyph(glyph1, glyph2, glyph3, glyph4, glyph5)
+    const glyphs = basicCharacterSet.split("").map(
+        chr => Glyph.fromOTGlyph(fteFont, font, font.charToGlyph(chr))
+    )
+    fteFont.addGlyph(...glyphs)
     console.log(font)
 
     const context = new GlyphContext(
-        [glyph1, glyph2, glyph3, glyph4, glyph5], 2
+        "Hi there!".split("").map(
+            chr => glyphs.find(g => g.codePoint === chr.codePointAt(0))
+        ), 5
     )
     const viewport = new Viewport(
         context, [], null
@@ -41,6 +37,8 @@ export default (font: OTFont) => {
 
     viewport.setTool(new HandleTool())
     updateSubactions()
+
+    exportFont(fteFont, "build/test/exported.otf")
 
     function updateSubactions() {
         //subactionContainer

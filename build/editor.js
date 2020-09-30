@@ -14788,6 +14788,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _font_glyph__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./font/glyph */ "./src/typeedit/font/glyph.ts");
 /* harmony import */ var _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./viewport/context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
 /* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./font/font */ "./src/typeedit/font/font.ts");
+/* harmony import */ var _io_export__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./io/export */ "./src/typeedit/io/export.ts");
 
 
 
@@ -14795,25 +14796,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,! ";
 /* harmony default export */ __webpack_exports__["default"] = (function (font) {
     var container = document.querySelector("div.viewport");
     var subactionContainer = document.querySelector("div.subactions");
     var fteFont = _font_font__WEBPACK_IMPORTED_MODULE_6__["Font"].fromOTFont(font);
-    var _a = [
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("t")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("h")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("i")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("C")),
-        _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph("c")),
-    ], glyph1 = _a[0], glyph2 = _a[1], glyph3 = _a[2], glyph4 = _a[3], glyph5 = _a[4];
-    fteFont.addGlyph(glyph1, glyph2, glyph3, glyph4, glyph5);
+    var glyphs = basicCharacterSet.split("").map(function (chr) { return _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph(chr)); });
+    fteFont.addGlyph.apply(fteFont, glyphs);
     console.log(font);
-    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]([glyph1, glyph2, glyph3, glyph4, glyph5], 2);
+    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]("Hi there!".split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 5);
     var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_1__["Viewport"](context, [], null);
     container.appendChild(viewport.domCanvas);
     viewport.updateViewportSize();
     viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]());
     updateSubactions();
+    Object(_io_export__WEBPACK_IMPORTED_MODULE_7__["exportFont"])(fteFont, "build/test/exported.otf");
     function updateSubactions() {
         //subactionContainer
         subactionContainer.innerHTML = "";
@@ -14912,8 +14910,6 @@ var Glyph = /** @class */ (function () {
         var scaleFactor = 512 / otfont.tables.os2.sCapHeight;
         var beziers = Object(_geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["generateCurvesFromOTGlyph"])(otfont, otglyph);
         var glyphMetrics = otglyph.getMetrics();
-        console.log(glyphMetrics);
-        console.log(otglyph);
         return new Glyph(font, otglyph.name, otglyph.unicode, {
             leftBearing: 0,
             rightBearing: (glyphMetrics.rightSideBearing + glyphMetrics.xMax) * scaleFactor
@@ -15070,7 +15066,6 @@ var BezierPoint = /** @class */ (function () {
     BezierPoint.prototype.determineType = function () {
         var radius1 = this.after.distance(this.base);
         var radius2 = this.before.distance(this.base);
-        console.log(radius1, radius2);
         if (radius1 < 0.0001 && radius2 < 0.0001) {
             this.type = BezierPointType.sharp;
             return;
@@ -15140,6 +15135,97 @@ var Point = /** @class */ (function () {
     return Point;
 }());
 
+
+
+/***/ }),
+
+/***/ "./src/typeedit/io/export.ts":
+/*!***********************************!*\
+  !*** ./src/typeedit/io/export.ts ***!
+  \***********************************/
+/*! exports provided: exportFont */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exportFont", function() { return exportFont; });
+/* harmony import */ var opentype_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! opentype.js */ "./node_modules/opentype.js/dist/opentype.module.js");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
+var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+
+
+function glyphToOTPath(glyph, targetCapHeight) {
+    if (targetCapHeight === void 0) { targetCapHeight = 1000; }
+    var path = new opentype_js__WEBPACK_IMPORTED_MODULE_0__["Path"]();
+    var scaleFactor = targetCapHeight / 512;
+    var conv = function (point) {
+        return {
+            x: (point.x - glyph.metrics.leftBearing) * scaleFactor,
+            y: (512 - point.y) * scaleFactor
+        };
+    };
+    for (var _i = 0, _a = glyph.finalBeziers; _i < _a.length; _i++) {
+        var bezier = _a[_i];
+        if (!bezier.points.length)
+            continue;
+        var first = conv(bezier.points[0].base);
+        path.moveTo(first.x, first.y);
+        for (var i = 0; i < bezier.points.length; i++) {
+            var pt = bezier.points[i];
+            var next = bezier.points[(i + 1) % bezier.points.length];
+            var c1 = conv(pt.after);
+            var c2 = conv(next.before);
+            var b = conv(next.base);
+            path.curveTo(c1.x, c1.y, c2.x, c2.y, b.x, b.y);
+        }
+        path.closePath();
+    }
+    return path;
+}
+function exportFont(font, targetFile) {
+    var notDef = new opentype_js__WEBPACK_IMPORTED_MODULE_0__["Glyph"]({
+        name: ".notdef",
+        unicode: 0,
+        advanceWidth: 650,
+        path: new opentype_js__WEBPACK_IMPORTED_MODULE_0__["Path"]()
+    });
+    var targetCapHeight = 2000;
+    var scaleFactor = targetCapHeight / 512;
+    console.log((font.metrics.descender - font.metrics.ascender) * scaleFactor);
+    var otfont = new opentype_js__WEBPACK_IMPORTED_MODULE_0__["Font"]({
+        familyName: font.info.name,
+        styleName: "Regular",
+        unitsPerEm: (font.metrics.descender - font.metrics.ascender) * scaleFactor,
+        ascender: (512 - font.metrics.ascender) * scaleFactor,
+        descender: (512 - font.metrics.descender) * scaleFactor,
+        glyphs: __spreadArrays(font.glyphs.map(function (g) { return new opentype_js__WEBPACK_IMPORTED_MODULE_0__["Glyph"]({
+            name: g.name,
+            unicode: g.codePoint,
+            advanceWidth: Math.round((g.metrics.rightBearing - g.metrics.leftBearing) * scaleFactor),
+            path: glyphToOTPath(g, targetCapHeight)
+        }); }), [
+            notDef
+        ]),
+        ///@ts-ignore
+        tables: {
+            version: 4,
+            achVendID: "SFTE",
+            sCapHeight: targetCapHeight,
+            sxHeight: (512 - font.metrics.xHeight) * scaleFactor,
+            sTypoAscender: (512 - font.metrics.ascender) * scaleFactor,
+            sTypoDescender: (512 - font.metrics.descender) * scaleFactor
+        }
+    });
+    var buf = Buffer.from(otfont.toArrayBuffer());
+    Object(fs__WEBPACK_IMPORTED_MODULE_1__["writeFileSync"])(targetFile, buf);
+}
 
 
 /***/ }),

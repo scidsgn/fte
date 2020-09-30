@@ -19,8 +19,6 @@ export class BezierPoint {
         const radius1 = this.after.distance(this.base)
         const radius2 = this.before.distance(this.base)
 
-        console.log(radius1, radius2)
-
         if (radius1 < 0.0001 && radius2 < 0.0001) {
             this.type = BezierPointType.sharp
             return

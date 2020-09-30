@@ -9,6 +9,7 @@ import { GlyphContext } from "./viewport/context/glyph"
 import { Font } from "./font/font"
 import { exportFont } from "./io/export"
 import { canRedo, canUndo, redo, undo } from "./undo/history"
+import { updateSubactions } from "./ui/toolbar"
 
 const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? "
 
@@ -38,8 +39,8 @@ export default (font: OTFont) => {
     viewport.updateViewportSize()
 
     viewport.setTool(new HandleTool())
-    updateSubactions()
-
+    updateSubactions(viewport, [viewport.tool.subactions])
+    
     exportFont(fteFont, "build/test/exported.otf")
 
     glyphsTextbox.addEventListener("input", () => updateViewport())
@@ -79,37 +80,16 @@ export default (font: OTFont) => {
         viewport.render()
     }
 
-    function updateSubactions() {
-        //subactionContainer
-        subactionContainer.innerHTML = ""
-
-        viewport.tool.subactions.forEach(
-            subact => {
-                const button = document.createElement("button")
-                button.addEventListener("click", () => {
-                    subact.handler()
-                    viewport.render()
-                })
-
-                button.innerHTML = `
-                    <img src="res/icons/${subact.icon}.svg">
-                `
-
-                subactionContainer.appendChild(button)
-            }
-        )
-    }
-
     document.querySelector("button[data-tool=handle]").addEventListener(
         "click", () => {
             viewport.setTool(new HandleTool())
-            updateSubactions()
+            updateSubactions(viewport, [viewport.tool.subactions])
         }
     )
     document.querySelector("button[data-tool=pen]").addEventListener(
         "click", () => {
             viewport.setTool(new BezierPenTool())
-            updateSubactions()
+            updateSubactions(viewport, [viewport.tool.subactions])
         }
     )
 

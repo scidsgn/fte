@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main nav {\n    background: #eee;\n    padding: 4px 4px 0px 4px;\n    box-shadow: inset 0px -2px 2px #00000005;\n    display: flex;\n    justify-content: center; }\n    main nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 11pt;\n      font-weight: 500;\n      padding: 6px 20px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    flex-grow: 1; }\n\nsection.edit {\n  position: relative;\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: 1fr auto; }\n  section.edit input.viewportText {\n    font-family: \"Inter\";\n    font-size: 24pt;\n    text-align: center;\n    border: none;\n    outline: none;\n    padding: 6px 20px; }\n  section.edit button.prevGlyph {\n    position: absolute;\n    left: 0;\n    top: 50%;\n    transform: translateY(-50%); }\n  section.edit button.nextGlyph {\n    position: absolute;\n    right: 0;\n    top: 50%;\n    transform: translateY(-50%); }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n  section.edit div.subactions {\n    position: absolute;\n    left: 50%;\n    top: 8px;\n    background: #fff;\n    padding: 2px;\n    border-radius: 6px;\n    box-shadow: 0px 2px 8px #0003;\n    transform: translate(-50%, 0); }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB,EAAA;;AAGpB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,wCAAwC;IACxC,aAAa;IACb,uBAAuB,EAAA;IAjB/B;MAoBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA9BzB;QAiCgB,gBAAgB,EAAA;EAjChC;IAuCQ,kBAAkB;IAElB,YAAY,EAAA;;AAIpB;EACI,kBAAkB;EAClB,aAAa;EACb,+BAA+B;EAC/B,4BAA4B,EAAA;EAJhC;IAOQ,oBAAoB;IACpB,eAAe;IACf,kBAAkB;IAElB,YAAY;IACZ,aAAa;IACb,iBAAiB,EAAA;EAbzB;IAiBQ,kBAAkB;IAClB,OAAO;IACP,QAAQ;IAER,2BAA2B,EAAA;EArBnC;IAyBQ,kBAAkB;IAClB,QAAQ;IACR,QAAQ;IAER,2BAA2B,EAAA;EA7BnC;IAiCQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IApC9B;MAuCY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MA9C9B;QAiDgB,gBAAgB,EAAA;MAjDhC;QAqDgB,gBAAgB,EAAA;MArDhC;QAyDgB,gBAAgB,EAAA;QAzDhC;UA4DoB,iBAAiB,EAAA;MA5DrC;QAiEgB,WAAW;QACX,YAAY,EAAA;EAlE5B;IAwEQ,kBAAkB;IAClB,SAAS;IACT,QAAQ;IAER,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAElB,6BAA6B;IAE7B,6BAA6B,EAAA;IAnFrC;MAsFY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MA7F9B;QAgGgB,gBAAgB,EAAA;MAhGhC;QAoGgB,gBAAgB,EAAA;MApGhC;QAwGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\n    background: #fff;\n}\n\nmain {\n    position: fixed;\n    left: 0;\n    top: 0;\n    right: 0;\n    bottom: 0;\n\n    display: flex;\n    flex-direction: column;\n\n    nav {\n        background: #eee;\n\n        padding: 4px 4px 0px 4px;\n\n        box-shadow: inset 0px -2px 2px #00000005;\n        display: flex;\n        justify-content: center;\n\n        button {\n            background: transparent;\n\n            font-family: \"Inter\";\n            font-size: 11pt;\n            font-weight: 500;\n\n            padding: 6px 20px;\n            border: none;\n            border-bottom: none;\n            border-radius: 4px 4px 0px 0px;\n            outline: none;\n\n            &.active {\n                background: #fff;\n            }\n        }\n    }\n\n    section {\n        position: relative;\n\n        flex-grow: 1;\n    }\n}\n\nsection.edit {\n    position: relative;\n    display: grid;\n    grid-template-columns: auto 1fr;\n    grid-template-rows: 1fr auto;\n\n    input.viewportText {\n        font-family: \"Inter\";\n        font-size: 24pt;\n        text-align: center;\n\n        border: none;\n        outline: none;\n        padding: 6px 20px;\n    }\n\n    button.prevGlyph {\n        position: absolute;\n        left: 0;\n        top: 50%;\n\n        transform: translateY(-50%);\n    }\n\n    button.nextGlyph {\n        position: absolute;\n        right: 0;\n        top: 50%;\n\n        transform: translateY(-50%);\n    }\n\n    div.tools {\n        padding: 2px;\n\n        display: flex;\n        flex-direction: column;\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            &.active {\n                background: #08f;\n\n                img {\n                    filter: invert(1);\n                }\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n\n    div.subactions { \n        position: absolute;\n        left: 50%;\n        top: 8px;\n\n        background: #fff;\n\n        padding: 2px;\n        border-radius: 6px;\n\n        box-shadow: 0px 2px 8px #0003;\n\n        transform: translate(-50%, 0);\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff;\n  font-family: \"Inter\"; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main > nav {\n    background: #eee;\n    padding: 4px 4px 0px 4px;\n    box-shadow: inset 0px -2px 2px #00000005;\n    display: flex;\n    justify-content: center; }\n    main > nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 11pt;\n      font-weight: 500;\n      padding: 6px 20px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main > nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    flex-grow: 1; }\n\nsection.edit {\n  position: relative;\n  display: grid;\n  grid-template-columns: auto 1fr auto;\n  grid-template-rows: 1fr auto; }\n  section.edit aside {\n    min-width: 200px;\n    width: 200px; }\n    section.edit aside nav {\n      display: flex; }\n      section.edit aside nav button {\n        background: transparent;\n        font-family: \"Inter\";\n        font-size: 11pt;\n        font-weight: 400;\n        padding: 6px 20px;\n        border: none;\n        border-bottom: none;\n        outline: none;\n        flex-grow: 1; }\n        section.edit aside nav button.active {\n          box-shadow: inset 0px -2px #333; }\n  section.edit input.viewportText {\n    font-family: \"Inter\";\n    font-size: 24pt;\n    text-align: center;\n    border: none;\n    outline: none;\n    padding: 6px 20px; }\n  section.edit button.prevGlyph {\n    position: absolute;\n    left: 0;\n    top: 50%;\n    transform: translateY(-50%); }\n  section.edit button.nextGlyph {\n    position: absolute;\n    right: 0;\n    top: 50%;\n    transform: translateY(-50%); }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n  section.edit div.subactions {\n    position: absolute;\n    left: 50%;\n    top: 8px;\n    background: #fff;\n    padding: 2px;\n    border-radius: 6px;\n    box-shadow: 0px 2px 8px #0003;\n    transform: translate(-50%, 0); }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB;EAEhB,oBAAoB,EAAA;;AAGxB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,wCAAwC;IACxC,aAAa;IACb,uBAAuB,EAAA;IAjB/B;MAoBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA9BzB;QAiCgB,gBAAgB,EAAA;EAjChC;IAuCQ,kBAAkB;IAElB,YAAY,EAAA;;AAIpB;EACI,kBAAkB;EAClB,aAAa;EACb,oCAAoC;EACpC,4BAA4B,EAAA;EAJhC;IAOQ,gBAAgB;IAChB,YAAY,EAAA;IARpB;MAWY,aAAa,EAAA;MAXzB;QAcgB,uBAAuB;QAEvB,oBAAoB;QACpB,eAAe;QACf,gBAAgB;QAEhB,iBAAiB;QACjB,YAAY;QACZ,mBAAmB;QACnB,aAAa;QAEb,YAAY,EAAA;QAzB5B;UA4BoB,+BAA+B,EAAA;EA5BnD;IAmCQ,oBAAoB;IACpB,eAAe;IACf,kBAAkB;IAElB,YAAY;IACZ,aAAa;IACb,iBAAiB,EAAA;EAzCzB;IA6CQ,kBAAkB;IAClB,OAAO;IACP,QAAQ;IAER,2BAA2B,EAAA;EAjDnC;IAqDQ,kBAAkB;IAClB,QAAQ;IACR,QAAQ;IAER,2BAA2B,EAAA;EAzDnC;IA6DQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAhE9B;MAmEY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MA1E9B;QA6EgB,gBAAgB,EAAA;MA7EhC;QAiFgB,gBAAgB,EAAA;MAjFhC;QAqFgB,gBAAgB,EAAA;QArFhC;UAwFoB,iBAAiB,EAAA;MAxFrC;QA6FgB,WAAW;QACX,YAAY,EAAA;EA9F5B;IAoGQ,kBAAkB;IAClB,SAAS;IACT,QAAQ;IAER,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAElB,6BAA6B;IAE7B,6BAA6B,EAAA;IA/GrC;MAkHY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAzH9B;QA4HgB,gBAAgB,EAAA;MA5HhC;QAgIgB,gBAAgB,EAAA;MAhIhC;QAoIgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\n    background: #fff;\n\n    font-family: \"Inter\";\n}\n\nmain {\n    position: fixed;\n    left: 0;\n    top: 0;\n    right: 0;\n    bottom: 0;\n\n    display: flex;\n    flex-direction: column;\n\n    & > nav {\n        background: #eee;\n\n        padding: 4px 4px 0px 4px;\n\n        box-shadow: inset 0px -2px 2px #00000005;\n        display: flex;\n        justify-content: center;\n\n        button {\n            background: transparent;\n\n            font-family: \"Inter\";\n            font-size: 11pt;\n            font-weight: 500;\n\n            padding: 6px 20px;\n            border: none;\n            border-bottom: none;\n            border-radius: 4px 4px 0px 0px;\n            outline: none;\n\n            &.active {\n                background: #fff;\n            }\n        }\n    }\n\n    section {\n        position: relative;\n\n        flex-grow: 1;\n    }\n}\n\nsection.edit {\n    position: relative;\n    display: grid;\n    grid-template-columns: auto 1fr auto;\n    grid-template-rows: 1fr auto;\n\n    aside {\n        min-width: 200px;\n        width: 200px;\n\n        nav {\n            display: flex;\n\n            button {\n                background: transparent;\n\n                font-family: \"Inter\";\n                font-size: 11pt;\n                font-weight: 400;\n\n                padding: 6px 20px;\n                border: none;\n                border-bottom: none;\n                outline: none;\n\n                flex-grow: 1;\n\n                &.active {\n                    box-shadow: inset 0px -2px #333;\n                }\n            }\n        }\n    }\n\n    input.viewportText {\n        font-family: \"Inter\";\n        font-size: 24pt;\n        text-align: center;\n\n        border: none;\n        outline: none;\n        padding: 6px 20px;\n    }\n\n    button.prevGlyph {\n        position: absolute;\n        left: 0;\n        top: 50%;\n\n        transform: translateY(-50%);\n    }\n\n    button.nextGlyph {\n        position: absolute;\n        right: 0;\n        top: 50%;\n\n        transform: translateY(-50%);\n    }\n\n    div.tools {\n        padding: 2px;\n\n        display: flex;\n        flex-direction: column;\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            &.active {\n                background: #08f;\n\n                img {\n                    filter: invert(1);\n                }\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n\n    div.subactions { \n        position: absolute;\n        left: 50%;\n        top: 8px;\n\n        background: #fff;\n\n        padding: 2px;\n        border-radius: 6px;\n\n        box-shadow: 0px 2px 8px #0003;\n\n        transform: translate(-50%, 0);\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -14790,6 +14790,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./font/font */ "./src/typeedit/font/font.ts");
 /* harmony import */ var _io_export__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./io/export */ "./src/typeedit/io/export.ts");
 /* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./undo/history */ "./src/typeedit/undo/history.ts");
+/* harmony import */ var _ui_toolbar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ui/toolbar */ "./src/typeedit/ui/toolbar.ts");
+
 
 
 
@@ -14813,7 +14815,7 @@ var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123
     container.appendChild(viewport.domCanvas);
     viewport.updateViewportSize();
     viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]());
-    updateSubactions();
+    Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_9__["updateSubactions"])(viewport, [viewport.tool.subactions]);
     Object(_io_export__WEBPACK_IMPORTED_MODULE_7__["exportFont"])(fteFont, "build/test/exported.otf");
     glyphsTextbox.addEventListener("input", function () { return updateViewport(); });
     document.querySelector("button.prevGlyph").addEventListener("click", function () {
@@ -14839,26 +14841,13 @@ var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123
         viewport.tool.updateContext(context);
         viewport.render();
     }
-    function updateSubactions() {
-        //subactionContainer
-        subactionContainer.innerHTML = "";
-        viewport.tool.subactions.forEach(function (subact) {
-            var button = document.createElement("button");
-            button.addEventListener("click", function () {
-                subact.handler();
-                viewport.render();
-            });
-            button.innerHTML = "\n                    <img src=\"res/icons/" + subact.icon + ".svg\">\n                ";
-            subactionContainer.appendChild(button);
-        });
-    }
     document.querySelector("button[data-tool=handle]").addEventListener("click", function () {
         viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]());
-        updateSubactions();
+        Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_9__["updateSubactions"])(viewport, [viewport.tool.subactions]);
     });
     document.querySelector("button[data-tool=pen]").addEventListener("click", function () {
         viewport.setTool(new _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_2__["BezierPenTool"]());
-        updateSubactions();
+        Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_9__["updateSubactions"])(viewport, [viewport.tool.subactions]);
     });
     window.addEventListener("resize", function () {
         viewport.updateViewportSize();
@@ -15298,6 +15287,42 @@ var update = api(content, options);
 
 
 module.exports = content.locals || {};
+
+/***/ }),
+
+/***/ "./src/typeedit/ui/toolbar.ts":
+/*!************************************!*\
+  !*** ./src/typeedit/ui/toolbar.ts ***!
+  \************************************/
+/*! exports provided: updateSubactions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSubactions", function() { return updateSubactions; });
+var subactionContainer = document.querySelector("div.subactions");
+function updateSubactions(viewport, subactionGroups) {
+    subactionContainer.innerHTML = "";
+    for (var _i = 0, subactionGroups_1 = subactionGroups; _i < subactionGroups_1.length; _i++) {
+        var group = subactionGroups_1[_i];
+        var subactionGroup = document.createElement("div");
+        var _loop_1 = function (subaction) {
+            var button = document.createElement("button");
+            button.addEventListener("click", function () {
+                subaction.handler();
+                viewport.render();
+            });
+            button.innerHTML = "\n                <img src=\"res/icons/" + subaction.icon + ".svg\">\n            ";
+            subactionGroup.appendChild(button);
+        };
+        for (var _a = 0, group_1 = group; _a < group_1.length; _a++) {
+            var subaction = group_1[_a];
+            _loop_1(subaction);
+        }
+        subactionContainer.appendChild(subactionGroup);
+    }
+}
+
 
 /***/ }),
 
@@ -16066,6 +16091,7 @@ var BezierPenTool = /** @class */ (function () {
         if (!(v.context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_3__["BezierContext"]))
             return;
         var pos = v.co.clientToWorld(x, y);
+        v.nudgePoint(pos);
         if (e.type === "mousedown" && e.buttons & 1) {
             if (!this.currentBezier) {
                 this.currentBezier = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"]();
@@ -16562,6 +16588,7 @@ var Viewport = /** @class */ (function () {
     Viewport.prototype.setTool = function (tool) {
         this.tool = tool;
         this.tool.updateContext(this.context);
+        this.disableAllGuides();
         this.render();
     };
     return Viewport;

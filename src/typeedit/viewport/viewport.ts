@@ -195,6 +195,7 @@ export class Viewport {
     setTool(tool: ITool) {
         this.tool = tool
         this.tool.updateContext(this.context)
+        this.disableAllGuides()
         this.render()
     }
 }

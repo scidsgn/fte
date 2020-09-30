@@ -1,5 +1,7 @@
 body {
     background: #fff;
+
+    font-family: "Inter";
 }
 
 main {
@@ -12,7 +14,7 @@ main {
     display: flex;
     flex-direction: column;
 
-    nav {
+    & > nav {
         background: #eee;
 
         padding: 4px 4px 0px 4px;
@@ -50,8 +52,36 @@ main {
 section.edit {
     position: relative;
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr auto;
+
+    aside {
+        min-width: 200px;
+        width: 200px;
+
+        nav {
+            display: flex;
+
+            button {
+                background: transparent;
+
+                font-family: "Inter";
+                font-size: 11pt;
+                font-weight: 400;
+
+                padding: 6px 20px;
+                border: none;
+                border-bottom: none;
+                outline: none;
+
+                flex-grow: 1;
+
+                &.active {
+                    box-shadow: inset 0px -2px #333;
+                }
+            }
+        }
+    }
 
     input.viewportText {
         font-family: "Inter";

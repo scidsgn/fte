@@ -26,6 +26,8 @@ export class BezierPenTool implements ITool {
             x, y
         )
 
+        v.nudgePoint(pos)
+
         if (
             e.type === "mousedown" && e.buttons & 1
         ) {

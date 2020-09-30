@@ -15388,10 +15388,12 @@ var undoContexts = [];
 var redoContexts = [];
 var undoContext = new _action__WEBPACK_IMPORTED_MODULE_0__["UndoContext"]();
 function finalizeUndoContext(name) {
-    undoContext.finalize(name);
-    undoContexts.push(undoContext);
-    if (redoContexts.length)
-        redoContexts = [];
+    if (undoContext.actions.length) {
+        undoContext.finalize(name);
+        undoContexts.push(undoContext);
+        if (redoContexts.length)
+            redoContexts = [];
+    }
     undoContext = new _action__WEBPACK_IMPORTED_MODULE_0__["UndoContext"]();
 }
 function canUndo() {

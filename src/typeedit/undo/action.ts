@@ -40,7 +40,7 @@ export class ValueChangeAction implements IUndoableAction {
 }
 
 export class UndoContext {
-    private actions: IUndoableAction[] = []
+    public actions: IUndoableAction[] = []
 
     public name: string = "Unknown"
 

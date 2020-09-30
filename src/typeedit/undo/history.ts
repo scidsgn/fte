@@ -6,12 +6,13 @@ let redoContexts: UndoContext[] = []
 export let undoContext = new UndoContext()
 
 export function finalizeUndoContext(name?: string) {
-    undoContext.finalize(name)
-    undoContexts.push(undoContext)
+    if (undoContext.actions.length) {
+        undoContext.finalize(name)
+        undoContexts.push(undoContext)
 
-    if (redoContexts.length)
-        redoContexts = []
-
+        if (redoContexts.length)
+            redoContexts = []
+    }
     undoContext = new UndoContext()
 }
 

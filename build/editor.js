@@ -14949,6 +14949,7 @@ __webpack_require__.r(__webpack_exports__);
 var BezierCurve = /** @class */ (function () {
     function BezierCurve() {
         this.points = [];
+        this.closed = true;
     }
     BezierCurve.prototype.addPoint = function (point) {
         point.curve = this;
@@ -14990,7 +14991,7 @@ function generateCurvesFromOTGlyph(otfont, otglyph) {
                     curves.push(curve);
                 curve = new BezierCurve();
                 var coords = conv(cmd.x, cmd.y);
-                curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y)));
+                curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), _point__WEBPACK_IMPORTED_MODULE_1__["BezierPointType"].free));
                 break;
             }
             case "L": {
@@ -15007,6 +15008,7 @@ function generateCurvesFromOTGlyph(otfont, otglyph) {
                 var prevPoint = curve.points[curve.points.length - 1];
                 prevPoint.after.x = c1coords.x;
                 prevPoint.after.y = c1coords.y;
+                prevPoint.determineType();
                 curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](c2coords.x, c2coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y)));
                 break;
             }
@@ -15015,6 +15017,7 @@ function generateCurvesFromOTGlyph(otfont, otglyph) {
                     if (curve.points.length > 1) {
                         var first = curve.points[0];
                         var last = curve.points[curve.points.length - 1];
+                        last.determineType();
                         if (first.base.x === last.base.x &&
                             first.base.y === last.base.y) {
                             first.before.x = last.before.x;
@@ -15062,6 +15065,12 @@ var BezierPoint = /** @class */ (function () {
         this.type = type;
         this.curve = null;
     }
+    BezierPoint.prototype.determineType = function () {
+        var angle1 = this.after.angle(this.base);
+        var angle2 = this.before.angle(this.base);
+        if (Math.abs(angle1 - angle2 - Math.PI) < 0.0001)
+            this.type = BezierPointType.auto;
+    };
     BezierPoint.prototype.movePoint = function (point, dPos) {
         if (point === this.base) {
             this.base.move(dPos.x, dPos.y);
@@ -15075,7 +15084,6 @@ var BezierPoint = /** @class */ (function () {
             if (this.type === BezierPointType.auto) {
                 var otherRadius = otherPoint.distance(this.base);
                 var angle = point.angle(this.base);
-                console.log(otherRadius);
                 otherPoint.x = otherRadius * Math.cos(angle + Math.PI) + this.base.x;
                 otherPoint.y = otherRadius * Math.sin(angle + Math.PI) + this.base.y;
             }

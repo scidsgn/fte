@@ -15,8 +15,15 @@ export class BezierPoint {
         public type: BezierPointType = BezierPointType.auto
     ) {}
 
-    movePoint(point: Point, dPos: Point) {
+    determineType() {
+        const angle1 = this.after.angle(this.base)
+        const angle2 = this.before.angle(this.base)
 
+        if (Math.abs(angle1 - angle2 - Math.PI) < 0.0001)
+            this.type = BezierPointType.auto
+    }
+
+    movePoint(point: Point, dPos: Point) {
         if (point === this.base) {
             this.base.move(dPos.x, dPos.y)
             this.before.move(dPos.x, dPos.y)

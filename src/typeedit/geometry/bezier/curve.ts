@@ -1,9 +1,10 @@
 import { Font, Glyph, Path, PathCommand } from "opentype.js";
 import { Point } from "../point";
-import { BezierPoint } from "./point";
+import { BezierPoint, BezierPointType } from "./point";
 
 export class BezierCurve {
     public points: BezierPoint[] = []
+    public closed = true
 
     addPoint(point: BezierPoint) {
         point.curve = this
@@ -68,7 +69,8 @@ export function generateCurvesFromOTGlyph(
                         new BezierPoint(
                             new Point(coords.x, coords.y),
                             new Point(coords.x, coords.y),
-                            new Point(coords.x, coords.y)
+                            new Point(coords.x, coords.y),
+                            BezierPointType.free
                         )
                     )
 
@@ -96,6 +98,8 @@ export function generateCurvesFromOTGlyph(
                     prevPoint.after.x = c1coords.x
                     prevPoint.after.y = c1coords.y
 
+                    prevPoint.determineType()
+
                     curve.addPoint(
                         new BezierPoint(
                             new Point(coords.x, coords.y),
@@ -111,6 +115,8 @@ export function generateCurvesFromOTGlyph(
                         if (curve.points.length > 1) {
                             const first = curve.points[0]
                             const last = curve.points[curve.points.length - 1]
+
+                            last.determineType()
 
                             if (
                                 first.base.x === last.base.x &&

@@ -14789,6 +14789,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./viewport/context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
 /* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./font/font */ "./src/typeedit/font/font.ts");
 /* harmony import */ var _io_export__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./io/export */ "./src/typeedit/io/export.ts");
+/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./undo/history */ "./src/typeedit/undo/history.ts");
+
 
 
 
@@ -14836,6 +14838,21 @@ var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123
     window.addEventListener("resize", function () {
         viewport.updateViewportSize();
     });
+    var g = window;
+    g.undo = function () {
+        if (!Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["canUndo"])())
+            return false;
+        Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["undo"])();
+        viewport.render();
+        return true;
+    };
+    g.redo = function () {
+        if (!Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["canRedo"])())
+            return false;
+        Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["redo"])();
+        viewport.render();
+        return true;
+    };
 });
 
 
@@ -15259,6 +15276,123 @@ module.exports = content.locals || {};
 
 /***/ }),
 
+/***/ "./src/typeedit/undo/action.ts":
+/*!*************************************!*\
+  !*** ./src/typeedit/undo/action.ts ***!
+  \*************************************/
+/*! exports provided: ValueChangeAction, UndoContext */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValueChangeAction", function() { return ValueChangeAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UndoContext", function() { return UndoContext; });
+var ValueChangeAction = /** @class */ (function () {
+    function ValueChangeAction(target, keys) {
+        this.target = target;
+        this.keys = keys;
+        this.beforeState = {};
+        this.afterState = {};
+        this.captureState(this.beforeState);
+    }
+    ValueChangeAction.prototype.captureState = function (stateTarget) {
+        var _this = this;
+        this.keys.forEach(function (key) { return stateTarget[key] = _this.target[key]; });
+    };
+    ValueChangeAction.prototype.undo = function () {
+        Object.assign(this.target, this.beforeState);
+    };
+    ValueChangeAction.prototype.redo = function () {
+        Object.assign(this.target, this.afterState);
+    };
+    ValueChangeAction.prototype.finalize = function () {
+        this.captureState(this.afterState);
+    };
+    return ValueChangeAction;
+}());
+
+var UndoContext = /** @class */ (function () {
+    function UndoContext() {
+        this.actions = [];
+        this.name = "Unknown";
+    }
+    UndoContext.prototype.addAction = function () {
+        var _a;
+        var actions = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            actions[_i] = arguments[_i];
+        }
+        (_a = this.actions).push.apply(_a, actions);
+    };
+    UndoContext.prototype.undo = function () {
+        this.actions.forEach(function (a) { return a.undo(); });
+    };
+    UndoContext.prototype.redo = function () {
+        this.actions.forEach(function (a) { return a.redo(); });
+    };
+    UndoContext.prototype.finalize = function (name) {
+        this.actions.forEach(function (a) { return a.finalize(); });
+        if (name)
+            this.name = name;
+    };
+    return UndoContext;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/typeedit/undo/history.ts":
+/*!**************************************!*\
+  !*** ./src/typeedit/undo/history.ts ***!
+  \**************************************/
+/*! exports provided: undoContext, finalizeUndoContext, canUndo, canRedo, undo, redo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undoContext", function() { return undoContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "finalizeUndoContext", function() { return finalizeUndoContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "canUndo", function() { return canUndo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "canRedo", function() { return canRedo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undo", function() { return undo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "redo", function() { return redo; });
+/* harmony import */ var _action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./action */ "./src/typeedit/undo/action.ts");
+
+var undoContexts = [];
+var redoContexts = [];
+var undoContext = new _action__WEBPACK_IMPORTED_MODULE_0__["UndoContext"]();
+function finalizeUndoContext(name) {
+    undoContext.finalize(name);
+    undoContexts.push(undoContext);
+    if (redoContexts.length)
+        redoContexts = [];
+    undoContext = new _action__WEBPACK_IMPORTED_MODULE_0__["UndoContext"]();
+}
+function canUndo() {
+    return undoContexts.length > 0;
+}
+function canRedo() {
+    return redoContexts.length > 0;
+}
+function undo() {
+    if (!canUndo())
+        return;
+    var ctx = undoContexts.pop();
+    redoContexts.unshift(ctx);
+    ctx.undo();
+}
+function redo() {
+    if (!canRedo())
+        return;
+    var ctx = redoContexts.shift();
+    undoContexts.push(ctx);
+    ctx.redo();
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/utils/lerp.ts":
 /*!************************************!*\
   !*** ./src/typeedit/utils/lerp.ts ***!
@@ -15605,6 +15739,8 @@ var VerticalGuide = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierBasePointHandle", function() { return BezierBasePointHandle; });
 /* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
+/* harmony import */ var _undo_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../undo/action */ "./src/typeedit/undo/action.ts");
+
 
 var BezierBasePointHandle = /** @class */ (function () {
     function BezierBasePointHandle(point) {
@@ -15622,6 +15758,9 @@ var BezierBasePointHandle = /** @class */ (function () {
     });
     BezierBasePointHandle.prototype.move = function (v, pos, dPos, pivot, e) {
         this.point.movePoint(this.point.base, dPos);
+    };
+    BezierBasePointHandle.prototype.prepareUndo = function (uc) {
+        uc.addAction(new _undo_action__WEBPACK_IMPORTED_MODULE_1__["ValueChangeAction"](this.point.base, ["x", "y"]), new _undo_action__WEBPACK_IMPORTED_MODULE_1__["ValueChangeAction"](this.point.before, ["x", "y"]), new _undo_action__WEBPACK_IMPORTED_MODULE_1__["ValueChangeAction"](this.point.after, ["x", "y"]));
     };
     BezierBasePointHandle.prototype.render = function (v, ctx) {
         var angle = this.point.after.angle(this.point.base);
@@ -15663,6 +15802,8 @@ var BezierBasePointHandle = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierControlPointHandle", function() { return BezierControlPointHandle; });
+/* harmony import */ var _undo_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../undo/action */ "./src/typeedit/undo/action.ts");
+
 var BezierControlPointHandle = /** @class */ (function () {
     function BezierControlPointHandle(point, cpoint) {
         this.point = point;
@@ -15686,6 +15827,9 @@ var BezierControlPointHandle = /** @class */ (function () {
         // )
         //     forceType = BezierPointType.free
         this.point.movePoint(this.cpoint, dPos);
+    };
+    BezierControlPointHandle.prototype.prepareUndo = function (uc) {
+        uc.addAction(new _undo_action__WEBPACK_IMPORTED_MODULE_0__["ValueChangeAction"](this.point.base, ["x", "y"]), new _undo_action__WEBPACK_IMPORTED_MODULE_0__["ValueChangeAction"](this.point.before, ["x", "y"]), new _undo_action__WEBPACK_IMPORTED_MODULE_0__["ValueChangeAction"](this.point.after, ["x", "y"]));
     };
     BezierControlPointHandle.prototype.render = function (v, ctx) {
         var basePos = v.co.worldToClient(this.point.base.x, this.point.base.y);
@@ -15720,6 +15864,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FontMetricHandleType", function() { return FontMetricHandleType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FontMetricHandle", function() { return FontMetricHandle; });
 /* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var _undo_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../undo/action */ "./src/typeedit/undo/action.ts");
+
 
 var FontMetricHandleType;
 (function (FontMetricHandleType) {
@@ -15746,6 +15892,28 @@ var FontMetricHandle = /** @class */ (function () {
             metric === FontMetricHandleType.rightBearing)
             this.dir = FontMetricHandleDir.vert;
     }
+    FontMetricHandle.prototype.prepareUndo = function (uc) {
+        var action = null;
+        switch (this.metric) {
+            case FontMetricHandleType.ascender:
+                action = new _undo_action__WEBPACK_IMPORTED_MODULE_1__["ValueChangeAction"](this.glyph.font.metrics, ["ascender"]);
+                break;
+            case FontMetricHandleType.descender:
+                action = new _undo_action__WEBPACK_IMPORTED_MODULE_1__["ValueChangeAction"](this.glyph.font.metrics, ["descender"]);
+                break;
+            case FontMetricHandleType.xHeight:
+                action = new _undo_action__WEBPACK_IMPORTED_MODULE_1__["ValueChangeAction"](this.glyph.font.metrics, ["xHeight"]);
+                break;
+            case FontMetricHandleType.leftBearing:
+                action = new _undo_action__WEBPACK_IMPORTED_MODULE_1__["ValueChangeAction"](this.glyph.metrics, ["leftBearing"]);
+                break;
+            case FontMetricHandleType.rightBearing:
+                action = new _undo_action__WEBPACK_IMPORTED_MODULE_1__["ValueChangeAction"](this.glyph.metrics, ["rightBearing"]);
+                break;
+        }
+        if (action)
+            uc.addAction(action);
+    };
     Object.defineProperty(FontMetricHandle.prototype, "value", {
         get: function () {
             switch (this.metric) {
@@ -15918,10 +16086,12 @@ var BezierPenTool = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HandleTool", function() { return HandleTool; });
-/* harmony import */ var _utils_lerp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/lerp */ "./src/typeedit/utils/lerp.ts");
-/* harmony import */ var _context_bezier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
-/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
-/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../undo/history */ "./src/typeedit/undo/history.ts");
+/* harmony import */ var _utils_lerp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/lerp */ "./src/typeedit/utils/lerp.ts");
+/* harmony import */ var _context_bezier__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
+/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
+/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+
 
 
 
@@ -15934,15 +16104,33 @@ var HandleTool = /** @class */ (function () {
         this.supportsForeignHandles = true;
         this.subactions = [
             {
+                name: "Undo",
+                icon: "rotateleft",
+                accelerator: "",
+                handler: function () {
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["undo"])();
+                }
+            },
+            {
+                name: "Redo",
+                icon: "rotateright",
+                accelerator: "",
+                handler: function () {
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["redo"])();
+                }
+            },
+            {
                 name: "Flip X",
                 icon: "flipx",
                 accelerator: "",
                 handler: function () {
                     var selected = _this.handles.filter(function (h) { return h.selected; });
                     var bbox = _this.getHandlesBBox(selected);
+                    _this.addHandlesToUndoContext(selected);
                     selected.forEach(function (handle) {
-                        handle.position.x = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["unlerp"])(handle.position.x, bbox.left, bbox.right), bbox.left, bbox.right);
+                        handle.position.x = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_1__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_1__["unlerp"])(handle.position.x, bbox.left, bbox.right), bbox.left, bbox.right);
                     });
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Flip X");
                 }
             },
             {
@@ -15952,9 +16140,11 @@ var HandleTool = /** @class */ (function () {
                 handler: function () {
                     var selected = _this.handles.filter(function (h) { return h.selected; });
                     var bbox = _this.getHandlesBBox(selected);
+                    _this.addHandlesToUndoContext(selected);
                     selected.forEach(function (handle) {
-                        handle.position.y = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["unlerp"])(handle.position.y, bbox.top, bbox.bottom), bbox.top, bbox.bottom);
+                        handle.position.y = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_1__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_1__["unlerp"])(handle.position.y, bbox.top, bbox.bottom), bbox.top, bbox.bottom);
                     });
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Flip Y");
                 }
             },
             {
@@ -15964,9 +16154,11 @@ var HandleTool = /** @class */ (function () {
                 handler: function () {
                     var selected = _this.handles.filter(function (h) { return h.selected; });
                     var bbox = _this.getHandlesBBox(selected);
+                    _this.addHandlesToUndoContext(selected);
                     selected.forEach(function (handle) {
                         handle.position.x = bbox.left;
                     });
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Align to left");
                 }
             },
             {
@@ -15976,9 +16168,11 @@ var HandleTool = /** @class */ (function () {
                 handler: function () {
                     var selected = _this.handles.filter(function (h) { return h.selected; });
                     var bbox = _this.getHandlesBBox(selected);
+                    _this.addHandlesToUndoContext(selected);
                     selected.forEach(function (handle) {
                         handle.position.x = bbox.right;
                     });
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Align to right");
                 }
             },
             {
@@ -15988,9 +16182,11 @@ var HandleTool = /** @class */ (function () {
                 handler: function () {
                     var selected = _this.handles.filter(function (h) { return h.selected; });
                     var bbox = _this.getHandlesBBox(selected);
+                    _this.addHandlesToUndoContext(selected);
                     selected.forEach(function (handle) {
                         handle.position.y = bbox.top;
                     });
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Align to top");
                 }
             },
             {
@@ -16000,25 +16196,29 @@ var HandleTool = /** @class */ (function () {
                 handler: function () {
                     var selected = _this.handles.filter(function (h) { return h.selected; });
                     var bbox = _this.getHandlesBBox(selected);
+                    _this.addHandlesToUndoContext(selected);
                     selected.forEach(function (handle) {
                         handle.position.y = bbox.bottom;
                     });
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Align to bottom");
                 }
             },
             {
-                name: "Align to center (horizontally)",
+                name: "Align to center",
                 icon: "alignhcenter",
                 accelerator: "",
                 handler: function () {
                     var selected = _this.handles.filter(function (h) { return h.selected; });
                     var bbox = _this.getHandlesBBox(selected);
+                    _this.addHandlesToUndoContext(selected);
                     selected.forEach(function (handle) {
                         handle.position.y = (bbox.top + bbox.bottom) / 2;
                     });
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Align to center");
                 }
             },
             {
-                name: "Align to center (vertically)",
+                name: "Align to middle",
                 icon: "alignvcenter",
                 accelerator: "",
                 handler: function () {
@@ -16027,10 +16227,18 @@ var HandleTool = /** @class */ (function () {
                     selected.forEach(function (handle) {
                         handle.position.x = (bbox.left + bbox.right) / 2;
                     });
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Align to middle");
                 }
             }
         ];
     }
+    HandleTool.prototype.addHandlesToUndoContext = function (handles) {
+        handles.forEach(function (handle) {
+            if (!("prepareUndo" in handle))
+                return;
+            handle.prepareUndo(_undo_history__WEBPACK_IMPORTED_MODULE_0__["undoContext"]);
+        });
+    };
     HandleTool.prototype.getHandlesBBox = function (handles) {
         var xs = handles.map(function (h) { return h.position.x; });
         var ys = handles.map(function (h) { return h.position.y; });
@@ -16071,6 +16279,7 @@ var HandleTool = /** @class */ (function () {
                 if (!handle.selected) {
                     v.selectHandles([handle]);
                 }
+                this.addHandlesToUndoContext(v.getSelectedHandles());
                 // First movement - snapping to the cursor
                 var dPos = pos.getDiff(this.pivotHandle.position);
                 this.pivotHandle.move(v, pos, dPos, this.pivotHandle, e);
@@ -16111,7 +16320,10 @@ var HandleTool = /** @class */ (function () {
                 this.selectHandleBox();
                 this.selecting = false;
             }
-            v.disableAllGuides();
+            else {
+                v.disableAllGuides();
+                Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Move points");
+            }
         }
     };
     HandleTool.prototype.render = function (v, ctx) {
@@ -16122,11 +16334,11 @@ var HandleTool = /** @class */ (function () {
     };
     HandleTool.prototype.updateContext = function (context) {
         var _this = this;
-        if (!(context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_1__["BezierContext"]))
+        if (!(context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_2__["BezierContext"]))
             return;
         this.handles = [];
         context.beziers.forEach(function (bezier) {
-            bezier.points.forEach(function (p) { return _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_3__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_3__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_2__["BezierBasePointHandle"](p)); });
+            bezier.points.forEach(function (p) { return _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_4__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_4__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_3__["BezierBasePointHandle"](p)); });
         });
     };
     return HandleTool;
@@ -16225,6 +16437,10 @@ var Viewport = /** @class */ (function () {
             var handle = select_1[_a];
             handle.selected = true;
         }
+    };
+    Viewport.prototype.getSelectedHandles = function () {
+        var handles = __spreadArrays(this.context.handles, this.tool.handles);
+        return handles.filter(function (h) { return h.selected; });
     };
     Viewport.prototype.purgeHandles = function () {
         this.handles = [];

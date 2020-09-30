@@ -1,4 +1,5 @@
 import { Point } from "../../geometry/point";
+import { finalizeUndoContext, redo, undo, undoContext } from "../../undo/history";
 import { lerp, unlerp } from "../../utils/lerp";
 import { BezierContext } from "../context/bezier";
 import { IContext } from "../context/context";
@@ -23,6 +24,22 @@ export class HandleTool implements ITool {
 
     public subactions: ToolSubAction[] = [
         {
+            name: "Undo",
+            icon: "rotateleft",
+            accelerator: "",
+            handler: () => {
+                undo()
+            }
+        },
+        {
+            name: "Redo",
+            icon: "rotateright",
+            accelerator: "",
+            handler: () => {
+                redo()
+            }
+        },
+        {
             name: "Flip X",
             icon: "flipx",
             accelerator: "",
@@ -30,12 +47,16 @@ export class HandleTool implements ITool {
                 const selected = this.handles.filter(h => h.selected)
                 const bbox = this.getHandlesBBox(selected)
 
+                this.addHandlesToUndoContext(selected)
+
                 selected.forEach(handle => {
                     handle.position.x = lerp(
                         1 - unlerp(handle.position.x, bbox.left, bbox.right),
                         bbox.left, bbox.right
                     )
                 })
+
+                finalizeUndoContext("Flip X")
             }
         },
         {
@@ -46,12 +67,16 @@ export class HandleTool implements ITool {
                 const selected = this.handles.filter(h => h.selected)
                 const bbox = this.getHandlesBBox(selected)
 
+                this.addHandlesToUndoContext(selected)
+
                 selected.forEach(handle => {
                     handle.position.y = lerp(
                         1 - unlerp(handle.position.y, bbox.top, bbox.bottom),
                         bbox.top, bbox.bottom
                     )
                 })
+
+                finalizeUndoContext("Flip Y")
             }
         },
         {
@@ -62,9 +87,13 @@ export class HandleTool implements ITool {
                 const selected = this.handles.filter(h => h.selected)
                 const bbox = this.getHandlesBBox(selected)
 
+                this.addHandlesToUndoContext(selected)
+
                 selected.forEach(handle => {
                     handle.position.x = bbox.left
                 })
+
+                finalizeUndoContext("Align to left")
             }
         },
         {
@@ -75,9 +104,13 @@ export class HandleTool implements ITool {
                 const selected = this.handles.filter(h => h.selected)
                 const bbox = this.getHandlesBBox(selected)
 
+                this.addHandlesToUndoContext(selected)
+
                 selected.forEach(handle => {
                     handle.position.x = bbox.right
                 })
+
+                finalizeUndoContext("Align to right")
             }
         },
         {
@@ -88,9 +121,13 @@ export class HandleTool implements ITool {
                 const selected = this.handles.filter(h => h.selected)
                 const bbox = this.getHandlesBBox(selected)
 
+                this.addHandlesToUndoContext(selected)
+
                 selected.forEach(handle => {
                     handle.position.y = bbox.top
                 })
+
+                finalizeUndoContext("Align to top")
             }
         },
         {
@@ -101,26 +138,34 @@ export class HandleTool implements ITool {
                 const selected = this.handles.filter(h => h.selected)
                 const bbox = this.getHandlesBBox(selected)
 
+                this.addHandlesToUndoContext(selected)
+
                 selected.forEach(handle => {
                     handle.position.y = bbox.bottom
                 })
+
+                finalizeUndoContext("Align to bottom")
             }
         },
         {
-            name: "Align to center (horizontally)",
+            name: "Align to center",
             icon: "alignhcenter",
             accelerator: "",
             handler: () => {
                 const selected = this.handles.filter(h => h.selected)
                 const bbox = this.getHandlesBBox(selected)
 
+                this.addHandlesToUndoContext(selected)
+
                 selected.forEach(handle => {
                     handle.position.y = (bbox.top + bbox.bottom) / 2
                 })
+
+                finalizeUndoContext("Align to center")
             }
         },
         {
-            name: "Align to center (vertically)",
+            name: "Align to middle",
             icon: "alignvcenter",
             accelerator: "",
             handler: () => {
@@ -130,9 +175,20 @@ export class HandleTool implements ITool {
                 selected.forEach(handle => {
                     handle.position.x = (bbox.left + bbox.right) / 2
                 })
+
+                finalizeUndoContext("Align to middle")
             }
         }
     ]
+
+    private addHandlesToUndoContext(handles: IDrawableHandle[]) {
+        handles.forEach(
+            handle => {
+                if (!("prepareUndo" in handle)) return
+                handle.prepareUndo(undoContext)
+            }
+        )
+    }
 
     private getHandlesBBox(handles: IDrawableHandle[]): {
         left: number, top: number,
@@ -194,6 +250,10 @@ export class HandleTool implements ITool {
                     v.selectHandles([handle])
                 }
 
+                this.addHandlesToUndoContext(
+                    v.getSelectedHandles()
+                )
+
                 // First movement - snapping to the cursor
                 const dPos = pos.getDiff(this.pivotHandle.position)
                 this.pivotHandle.move(
@@ -249,8 +309,10 @@ export class HandleTool implements ITool {
             if (this.selecting) {
                 this.selectHandleBox()
                 this.selecting = false
+            } else {
+                v.disableAllGuides()
+                finalizeUndoContext("Move points")
             }
-            v.disableAllGuides()
         }
     }
 

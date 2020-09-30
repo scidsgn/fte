@@ -1,5 +1,6 @@
 import { Glyph } from "../../font/glyph"
 import { Point } from "../../geometry/point"
+import { UndoContext, ValueChangeAction } from "../../undo/action"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
 
@@ -28,6 +29,31 @@ export class FontMetricHandle implements IDrawableHandle {
             metric === FontMetricHandleType.rightBearing
         )
             this.dir = FontMetricHandleDir.vert
+    }
+
+    prepareUndo(uc: UndoContext) {
+        let action = null
+
+        switch (this.metric) {
+            case FontMetricHandleType.ascender:
+                action = new ValueChangeAction(this.glyph.font.metrics, ["ascender"])
+                break
+            case FontMetricHandleType.descender:
+                action = new ValueChangeAction(this.glyph.font.metrics, ["descender"])
+                break
+            case FontMetricHandleType.xHeight:
+                action = new ValueChangeAction(this.glyph.font.metrics, ["xHeight"])
+                break
+            
+            case FontMetricHandleType.leftBearing:
+                action = new ValueChangeAction(this.glyph.metrics, ["leftBearing"])
+                break
+            case FontMetricHandleType.rightBearing:
+                action = new ValueChangeAction(this.glyph.metrics, ["rightBearing"])
+                break
+        }
+
+        if (action) uc.addAction(action)
     }
 
     private get value() {

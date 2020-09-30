@@ -113,6 +113,15 @@ export class Viewport {
         }
     }
 
+    getSelectedHandles() {
+        const handles = [
+            ...this.context.handles,
+            ...this.tool.handles
+        ]
+
+        return handles.filter(h => h.selected)
+    }
+
     purgeHandles() {
         this.handles = []
     }

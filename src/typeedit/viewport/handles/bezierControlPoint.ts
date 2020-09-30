@@ -1,5 +1,6 @@
 import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Point } from "../../geometry/point"
+import { UndoContext, ValueChangeAction } from "../../undo/action"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
 
@@ -30,6 +31,14 @@ export class BezierControlPointHandle implements IDrawableHandle {
         //     forceType = BezierPointType.free
 
         this.point.movePoint(this.cpoint, dPos)
+    }
+
+    prepareUndo(uc: UndoContext) {
+        uc.addAction(
+            new ValueChangeAction(this.point.base, ["x", "y"]),
+            new ValueChangeAction(this.point.before, ["x", "y"]),
+            new ValueChangeAction(this.point.after, ["x", "y"])
+        )
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

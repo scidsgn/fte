@@ -1,4 +1,5 @@
 import { Point } from "../geometry/point"
+import { UndoContext } from "../undo/action";
 import { Viewport } from "./viewport";
 
 export interface IDrawable {
@@ -18,4 +19,5 @@ export interface IDrawableHandle {
         pivot: IDrawableHandle,
         e?: MouseEvent
     ) => void
+    prepareUndo: (uc: UndoContext) => void
 }

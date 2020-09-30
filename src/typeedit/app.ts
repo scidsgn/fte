@@ -8,6 +8,7 @@ import { Glyph } from "./font/glyph"
 import { GlyphContext } from "./viewport/context/glyph"
 import { Font } from "./font/font"
 import { exportFont } from "./io/export"
+import { canRedo, canUndo, redo, undo } from "./undo/history"
 
 const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,! "
 
@@ -77,4 +78,21 @@ export default (font: OTFont) => {
     window.addEventListener("resize", () => {
         viewport.updateViewportSize()
     })
+
+    const g = window as any
+
+    g.undo = () => {
+        if (!canUndo()) return false
+
+        undo()
+        viewport.render()
+        return true
+    }
+    g.redo = () => {
+        if (!canRedo()) return false
+
+        redo()
+        viewport.render()
+        return true
+    }
 }

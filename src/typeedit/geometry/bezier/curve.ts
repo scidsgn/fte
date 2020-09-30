@@ -98,8 +98,6 @@ export function generateCurvesFromOTGlyph(
                     prevPoint.after.x = c1coords.x
                     prevPoint.after.y = c1coords.y
 
-                    prevPoint.determineType()
-
                     curve.addPoint(
                         new BezierPoint(
                             new Point(coords.x, coords.y),
@@ -112,11 +110,10 @@ export function generateCurvesFromOTGlyph(
                 }
                 case "Z": {
                     if (curve.points.length) {
-                        if (curve.points.length > 1) {
-                            const first = curve.points[0]
-                            const last = curve.points[curve.points.length - 1]
+                        const first = curve.points[0]
 
-                            last.determineType()
+                        if (curve.points.length > 1) {
+                            const last = curve.points[curve.points.length - 1]
 
                             if (
                                 first.base.x === last.base.x &&
@@ -129,6 +126,7 @@ export function generateCurvesFromOTGlyph(
                             }
                         }
 
+                        curve.points.forEach(p => p.determineType())
                         curves.push(curve)
                     }
                     
@@ -140,8 +138,10 @@ export function generateCurvesFromOTGlyph(
         }
     )
 
-    if (curve.points.length)
+    if (curve.points.length) {
+        curve.points.forEach(p => p.determineType())
         curves.push(curve)
+    }
 
     return curves
 }

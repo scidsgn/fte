@@ -2,7 +2,7 @@ import { Point } from "../point";
 import { BezierCurve } from "./curve";
 
 export enum BezierPointType {
-    free, auto
+    free, auto, sharp
 }
 
 export class BezierPoint {
@@ -16,10 +16,23 @@ export class BezierPoint {
     ) {}
 
     determineType() {
+        const radius1 = this.after.distance(this.base)
+        const radius2 = this.before.distance(this.base)
+
+        console.log(radius1, radius2)
+
+        if (radius1 < 0.0001 && radius2 < 0.0001) {
+            this.type = BezierPointType.sharp
+            return
+        }
+
         const angle1 = this.after.angle(this.base)
         const angle2 = this.before.angle(this.base)
 
-        if (Math.abs(angle1 - angle2 - Math.PI) < 0.0001)
+        const angleDiff = Math.abs(angle1 - angle2)
+        const piDiff = angleDiff / Math.PI
+
+        if (Math.abs(piDiff - Math.round(piDiff)) < 0.0001)
             this.type = BezierPointType.auto
     }
 

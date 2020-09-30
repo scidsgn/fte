@@ -15008,16 +15008,14 @@ function generateCurvesFromOTGlyph(otfont, otglyph) {
                 var prevPoint = curve.points[curve.points.length - 1];
                 prevPoint.after.x = c1coords.x;
                 prevPoint.after.y = c1coords.y;
-                prevPoint.determineType();
                 curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](c2coords.x, c2coords.y), new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](coords.x, coords.y)));
                 break;
             }
             case "Z": {
                 if (curve.points.length) {
+                    var first = curve.points[0];
                     if (curve.points.length > 1) {
-                        var first = curve.points[0];
                         var last = curve.points[curve.points.length - 1];
-                        last.determineType();
                         if (first.base.x === last.base.x &&
                             first.base.y === last.base.y) {
                             first.before.x = last.before.x;
@@ -15025,6 +15023,7 @@ function generateCurvesFromOTGlyph(otfont, otglyph) {
                             curve.points.splice(curve.points.length - 1, 1);
                         }
                     }
+                    curve.points.forEach(function (p) { return p.determineType(); });
                     curves.push(curve);
                 }
                 curve = new BezierCurve();
@@ -15032,8 +15031,10 @@ function generateCurvesFromOTGlyph(otfont, otglyph) {
             }
         }
     });
-    if (curve.points.length)
+    if (curve.points.length) {
+        curve.points.forEach(function (p) { return p.determineType(); });
         curves.push(curve);
+    }
     return curves;
 }
 
@@ -15055,6 +15056,7 @@ var BezierPointType;
 (function (BezierPointType) {
     BezierPointType[BezierPointType["free"] = 0] = "free";
     BezierPointType[BezierPointType["auto"] = 1] = "auto";
+    BezierPointType[BezierPointType["sharp"] = 2] = "sharp";
 })(BezierPointType || (BezierPointType = {}));
 var BezierPoint = /** @class */ (function () {
     function BezierPoint(base, before, after, type) {
@@ -15066,9 +15068,18 @@ var BezierPoint = /** @class */ (function () {
         this.curve = null;
     }
     BezierPoint.prototype.determineType = function () {
+        var radius1 = this.after.distance(this.base);
+        var radius2 = this.before.distance(this.base);
+        console.log(radius1, radius2);
+        if (radius1 < 0.0001 && radius2 < 0.0001) {
+            this.type = BezierPointType.sharp;
+            return;
+        }
         var angle1 = this.after.angle(this.base);
         var angle2 = this.before.angle(this.base);
-        if (Math.abs(angle1 - angle2 - Math.PI) < 0.0001)
+        var angleDiff = Math.abs(angle1 - angle2);
+        var piDiff = angleDiff / Math.PI;
+        if (Math.abs(piDiff - Math.round(piDiff)) < 0.0001)
             this.type = BezierPointType.auto;
     };
     BezierPoint.prototype.movePoint = function (point, dPos) {
@@ -15414,6 +15425,8 @@ var ViewportCoordinates = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierBasePointHandle", function() { return BezierBasePointHandle; });
+/* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
+
 var BezierBasePointHandle = /** @class */ (function () {
     function BezierBasePointHandle(point) {
         this.point = point;
@@ -15432,10 +15445,27 @@ var BezierBasePointHandle = /** @class */ (function () {
         this.point.movePoint(this.point.base, dPos);
     };
     BezierBasePointHandle.prototype.render = function (v, ctx) {
-        ctx.fillStyle = "#111";
-        ctx.fillRect(-3, -3, 7, 7);
+        var angle = this.point.after.angle(this.point.base);
+        ctx.beginPath();
+        switch (this.point.type) {
+            case _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_0__["BezierPointType"].auto:
+                ctx.moveTo(5 * Math.cos(angle), 5 * Math.sin(angle));
+                ctx.lineTo(5 * Math.cos(angle + Math.PI / 2), 5 * Math.sin(angle + Math.PI / 2));
+                ctx.lineTo(5 * Math.cos(angle + Math.PI), 5 * Math.sin(angle + Math.PI));
+                ctx.lineTo(5 * Math.cos(angle + 3 * Math.PI / 2), 5 * Math.sin(angle + 3 * Math.PI / 2));
+                break;
+            case _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_0__["BezierPointType"].sharp:
+                ctx.rect(-4, -4, 8, 8);
+                break;
+            default:
+                ctx.arc(0, 0, 5, 0, Math.PI * 2);
+        }
+        ctx.closePath();
         ctx.fillStyle = this.selected ? "#111" : "#fff";
-        ctx.fillRect(-2, -2, 5, 5);
+        ctx.strokeStyle = "#111";
+        ctx.lineWidth = 1;
+        ctx.fill();
+        ctx.stroke();
     };
     return BezierBasePointHandle;
 }());

@@ -13,6 +13,14 @@ export class GlyphContext extends BezierContext {
     ) {
         super(glyphs[currentIndex].beziers)
 
+        this.setupHandlesAndGuides()
+    }
+
+    get glyph() {
+        return this.glyphs[this.currentIndex]
+    }
+
+    setupHandlesAndGuides() {
         this.handles = [
             new FontMetricHandle(this.glyph, FontMetricHandleType.leftBearing),
             new FontMetricHandle(this.glyph, FontMetricHandleType.rightBearing),
@@ -32,8 +40,17 @@ export class GlyphContext extends BezierContext {
         ]
     }
 
-    get glyph() {
-        return this.glyphs[this.currentIndex]
+    setGlyphs(glyphs?: Glyph[], currentIndex?: number) {
+        if (glyphs)
+            this.glyphs = glyphs
+        
+        if (typeof currentIndex === "number")
+            this.currentIndex = currentIndex
+        else if (this.currentIndex >= this.glyphs.length)
+            this.currentIndex = this.glyphs.length - 1
+        
+        this.beziers = this.glyph.beziers
+        this.setupHandlesAndGuides()
     }
 
     renderNonEditableGlyphs(ctx: CanvasRenderingContext2D) {

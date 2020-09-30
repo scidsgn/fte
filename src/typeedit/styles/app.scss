@@ -48,9 +48,36 @@ main {
 }
 
 section.edit {
+    position: relative;
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: repeat(1, 1fr);
+    grid-template-rows: 1fr auto;
+
+    input.viewportText {
+        font-family: "Inter";
+        font-size: 24pt;
+        text-align: center;
+
+        border: none;
+        outline: none;
+        padding: 6px 20px;
+    }
+
+    button.prevGlyph {
+        position: absolute;
+        left: 0;
+        top: 50%;
+
+        transform: translateY(-50%);
+    }
+
+    button.nextGlyph {
+        position: absolute;
+        right: 0;
+        top: 50%;
+
+        transform: translateY(-50%);
+    }
 
     div.tools {
         padding: 2px;

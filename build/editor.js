@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main nav {\n    background: #eee;\n    padding: 4px 4px 0px 4px;\n    box-shadow: inset 0px -2px 2px #00000005;\n    display: flex;\n    justify-content: center; }\n    main nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 11pt;\n      font-weight: 500;\n      padding: 6px 20px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    flex-grow: 1; }\n\nsection.edit {\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: repeat(1, 1fr); }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n  section.edit div.subactions {\n    position: absolute;\n    left: 50%;\n    top: 8px;\n    background: #fff;\n    padding: 2px;\n    border-radius: 6px;\n    box-shadow: 0px 2px 8px #0003;\n    transform: translate(-50%, 0); }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB,EAAA;;AAGpB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,wCAAwC;IACxC,aAAa;IACb,uBAAuB,EAAA;IAjB/B;MAoBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA9BzB;QAiCgB,gBAAgB,EAAA;EAjChC;IAuCQ,kBAAkB;IAElB,YAAY,EAAA;;AAIpB;EACI,aAAa;EACb,+BAA+B;EAC/B,kCAAkC,EAAA;EAHtC;IAMQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAT9B;MAYY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAnB9B;QAsBgB,gBAAgB,EAAA;MAtBhC;QA0BgB,gBAAgB,EAAA;MA1BhC;QA8BgB,gBAAgB,EAAA;QA9BhC;UAiCoB,iBAAiB,EAAA;MAjCrC;QAsCgB,WAAW;QACX,YAAY,EAAA;EAvC5B;IA6CQ,kBAAkB;IAClB,SAAS;IACT,QAAQ;IAER,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAElB,6BAA6B;IAE7B,6BAA6B,EAAA;IAxDrC;MA2DY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAlE9B;QAqEgB,gBAAgB,EAAA;MArEhC;QAyEgB,gBAAgB,EAAA;MAzEhC;QA6EgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\n    background: #fff;\n}\n\nmain {\n    position: fixed;\n    left: 0;\n    top: 0;\n    right: 0;\n    bottom: 0;\n\n    display: flex;\n    flex-direction: column;\n\n    nav {\n        background: #eee;\n\n        padding: 4px 4px 0px 4px;\n\n        box-shadow: inset 0px -2px 2px #00000005;\n        display: flex;\n        justify-content: center;\n\n        button {\n            background: transparent;\n\n            font-family: \"Inter\";\n            font-size: 11pt;\n            font-weight: 500;\n\n            padding: 6px 20px;\n            border: none;\n            border-bottom: none;\n            border-radius: 4px 4px 0px 0px;\n            outline: none;\n\n            &.active {\n                background: #fff;\n            }\n        }\n    }\n\n    section {\n        position: relative;\n\n        flex-grow: 1;\n    }\n}\n\nsection.edit {\n    display: grid;\n    grid-template-columns: auto 1fr;\n    grid-template-rows: repeat(1, 1fr);\n\n    div.tools {\n        padding: 2px;\n\n        display: flex;\n        flex-direction: column;\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            &.active {\n                background: #08f;\n\n                img {\n                    filter: invert(1);\n                }\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n\n    div.subactions { \n        position: absolute;\n        left: 50%;\n        top: 8px;\n\n        background: #fff;\n\n        padding: 2px;\n        border-radius: 6px;\n\n        box-shadow: 0px 2px 8px #0003;\n\n        transform: translate(-50%, 0);\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main nav {\n    background: #eee;\n    padding: 4px 4px 0px 4px;\n    box-shadow: inset 0px -2px 2px #00000005;\n    display: flex;\n    justify-content: center; }\n    main nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 11pt;\n      font-weight: 500;\n      padding: 6px 20px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    flex-grow: 1; }\n\nsection.edit {\n  position: relative;\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: 1fr auto; }\n  section.edit input.viewportText {\n    font-family: \"Inter\";\n    font-size: 24pt;\n    text-align: center;\n    border: none;\n    outline: none;\n    padding: 6px 20px; }\n  section.edit button.prevGlyph {\n    position: absolute;\n    left: 0;\n    top: 50%;\n    transform: translateY(-50%); }\n  section.edit button.nextGlyph {\n    position: absolute;\n    right: 0;\n    top: 50%;\n    transform: translateY(-50%); }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n  section.edit div.subactions {\n    position: absolute;\n    left: 50%;\n    top: 8px;\n    background: #fff;\n    padding: 2px;\n    border-radius: 6px;\n    box-shadow: 0px 2px 8px #0003;\n    transform: translate(-50%, 0); }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB,EAAA;;AAGpB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,wCAAwC;IACxC,aAAa;IACb,uBAAuB,EAAA;IAjB/B;MAoBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA9BzB;QAiCgB,gBAAgB,EAAA;EAjChC;IAuCQ,kBAAkB;IAElB,YAAY,EAAA;;AAIpB;EACI,kBAAkB;EAClB,aAAa;EACb,+BAA+B;EAC/B,4BAA4B,EAAA;EAJhC;IAOQ,oBAAoB;IACpB,eAAe;IACf,kBAAkB;IAElB,YAAY;IACZ,aAAa;IACb,iBAAiB,EAAA;EAbzB;IAiBQ,kBAAkB;IAClB,OAAO;IACP,QAAQ;IAER,2BAA2B,EAAA;EArBnC;IAyBQ,kBAAkB;IAClB,QAAQ;IACR,QAAQ;IAER,2BAA2B,EAAA;EA7BnC;IAiCQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IApC9B;MAuCY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MA9C9B;QAiDgB,gBAAgB,EAAA;MAjDhC;QAqDgB,gBAAgB,EAAA;MArDhC;QAyDgB,gBAAgB,EAAA;QAzDhC;UA4DoB,iBAAiB,EAAA;MA5DrC;QAiEgB,WAAW;QACX,YAAY,EAAA;EAlE5B;IAwEQ,kBAAkB;IAClB,SAAS;IACT,QAAQ;IAER,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAElB,6BAA6B;IAE7B,6BAA6B,EAAA;IAnFrC;MAsFY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MA7F9B;QAgGgB,gBAAgB,EAAA;MAhGhC;QAoGgB,gBAAgB,EAAA;MApGhC;QAwGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\n    background: #fff;\n}\n\nmain {\n    position: fixed;\n    left: 0;\n    top: 0;\n    right: 0;\n    bottom: 0;\n\n    display: flex;\n    flex-direction: column;\n\n    nav {\n        background: #eee;\n\n        padding: 4px 4px 0px 4px;\n\n        box-shadow: inset 0px -2px 2px #00000005;\n        display: flex;\n        justify-content: center;\n\n        button {\n            background: transparent;\n\n            font-family: \"Inter\";\n            font-size: 11pt;\n            font-weight: 500;\n\n            padding: 6px 20px;\n            border: none;\n            border-bottom: none;\n            border-radius: 4px 4px 0px 0px;\n            outline: none;\n\n            &.active {\n                background: #fff;\n            }\n        }\n    }\n\n    section {\n        position: relative;\n\n        flex-grow: 1;\n    }\n}\n\nsection.edit {\n    position: relative;\n    display: grid;\n    grid-template-columns: auto 1fr;\n    grid-template-rows: 1fr auto;\n\n    input.viewportText {\n        font-family: \"Inter\";\n        font-size: 24pt;\n        text-align: center;\n\n        border: none;\n        outline: none;\n        padding: 6px 20px;\n    }\n\n    button.prevGlyph {\n        position: absolute;\n        left: 0;\n        top: 50%;\n\n        transform: translateY(-50%);\n    }\n\n    button.nextGlyph {\n        position: absolute;\n        right: 0;\n        top: 50%;\n\n        transform: translateY(-50%);\n    }\n\n    div.tools {\n        padding: 2px;\n\n        display: flex;\n        flex-direction: column;\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            &.active {\n                background: #08f;\n\n                img {\n                    filter: invert(1);\n                }\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n\n    div.subactions { \n        position: absolute;\n        left: 50%;\n        top: 8px;\n\n        background: #fff;\n\n        padding: 2px;\n        border-radius: 6px;\n\n        box-shadow: 0px 2px 8px #0003;\n\n        transform: translate(-50%, 0);\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -14799,21 +14799,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,! ";
+var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? ";
 /* harmony default export */ __webpack_exports__["default"] = (function (font) {
     var container = document.querySelector("div.viewport");
+    var glyphsTextbox = document.querySelector("input.viewportText");
     var subactionContainer = document.querySelector("div.subactions");
     var fteFont = _font_font__WEBPACK_IMPORTED_MODULE_6__["Font"].fromOTFont(font);
     var glyphs = basicCharacterSet.split("").map(function (chr) { return _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph(chr)); });
     fteFont.addGlyph.apply(fteFont, glyphs);
     console.log(font);
-    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]("Hi there!".split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 5);
+    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]("ABC".split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 0);
     var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_1__["Viewport"](context, [], null);
     container.appendChild(viewport.domCanvas);
     viewport.updateViewportSize();
     viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]());
     updateSubactions();
     Object(_io_export__WEBPACK_IMPORTED_MODULE_7__["exportFont"])(fteFont, "build/test/exported.otf");
+    glyphsTextbox.addEventListener("input", function () { return updateViewport(); });
+    document.querySelector("button.prevGlyph").addEventListener("click", function () {
+        context.setGlyphs(null, context.currentIndex === 0 ?
+            context.glyphs.length - 1 :
+            context.currentIndex - 1);
+        viewport.tool.updateContext(context);
+        viewport.render();
+    });
+    document.querySelector("button.nextGlyph").addEventListener("click", function () {
+        context.setGlyphs(null, context.currentIndex === context.glyphs.length - 1 ?
+            0 :
+            context.currentIndex + 1);
+        viewport.tool.updateContext(context);
+        viewport.render();
+    });
+    function updateViewport() {
+        var text = glyphsTextbox.value;
+        if (!text.length)
+            return;
+        var textGlyphs = text.split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }).filter(function (g) { return g; });
+        context.setGlyphs(textGlyphs);
+        viewport.tool.updateContext(context);
+        viewport.render();
+    }
     function updateSubactions() {
         //subactionContainer
         subactionContainer.innerHTML = "";
@@ -15479,22 +15504,7 @@ var GlyphContext = /** @class */ (function (_super) {
         var _this = _super.call(this, glyphs[currentIndex].beziers) || this;
         _this.glyphs = glyphs;
         _this.currentIndex = currentIndex;
-        _this.handles = [
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].leftBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].rightBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].ascender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].descender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].xHeight)
-        ];
-        _this.guides = [
-            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](0),
-            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](512),
-            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.ascender; }),
-            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.descender; }),
-            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.xHeight; }),
-            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["VerticalGuide"](function () { return _this.glyph.metrics.leftBearing; }),
-            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["VerticalGuide"](function () { return _this.glyph.metrics.rightBearing; })
-        ];
+        _this.setupHandlesAndGuides();
         return _this;
     }
     Object.defineProperty(GlyphContext.prototype, "glyph", {
@@ -15504,6 +15514,35 @@ var GlyphContext = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    GlyphContext.prototype.setupHandlesAndGuides = function () {
+        var _this = this;
+        this.handles = [
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].leftBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].rightBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].ascender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].descender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].xHeight)
+        ];
+        this.guides = [
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](0),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](512),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.ascender; }),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.descender; }),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.xHeight; }),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["VerticalGuide"](function () { return _this.glyph.metrics.leftBearing; }),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["VerticalGuide"](function () { return _this.glyph.metrics.rightBearing; })
+        ];
+    };
+    GlyphContext.prototype.setGlyphs = function (glyphs, currentIndex) {
+        if (glyphs)
+            this.glyphs = glyphs;
+        if (typeof currentIndex === "number")
+            this.currentIndex = currentIndex;
+        else if (this.currentIndex >= this.glyphs.length)
+            this.currentIndex = this.glyphs.length - 1;
+        this.beziers = this.glyph.beziers;
+        this.setupHandlesAndGuides();
+    };
     GlyphContext.prototype.renderNonEditableGlyphs = function (ctx) {
         var currentOffset = 0;
         if (this.currentIndex < this.glyphs.length - 1) {

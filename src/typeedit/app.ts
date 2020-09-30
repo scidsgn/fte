@@ -10,10 +10,11 @@ import { Font } from "./font/font"
 import { exportFont } from "./io/export"
 import { canRedo, canUndo, redo, undo } from "./undo/history"
 
-const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,! "
+const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? "
 
 export default (font: OTFont) => {
     const container = document.querySelector("div.viewport")
+    const glyphsTextbox = document.querySelector("input.viewportText") as HTMLInputElement
 
     const subactionContainer = document.querySelector("div.subactions")
 
@@ -26,9 +27,9 @@ export default (font: OTFont) => {
     console.log(font)
 
     const context = new GlyphContext(
-        "Hi there!".split("").map(
+        "ABC".split("").map(
             chr => glyphs.find(g => g.codePoint === chr.codePointAt(0))
-        ), 5
+        ), 0
     )
     const viewport = new Viewport(
         context, [], null
@@ -40,6 +41,43 @@ export default (font: OTFont) => {
     updateSubactions()
 
     exportFont(fteFont, "build/test/exported.otf")
+
+    glyphsTextbox.addEventListener("input", () => updateViewport())
+    document.querySelector("button.prevGlyph").addEventListener(
+        "click", () => {
+            context.setGlyphs(
+                null, context.currentIndex === 0 ?
+                      context.glyphs.length - 1 :
+                      context.currentIndex - 1
+            )
+            viewport.tool.updateContext(context)
+            viewport.render()
+        }
+    )
+    document.querySelector("button.nextGlyph").addEventListener(
+        "click", () => {
+            context.setGlyphs(
+                null, context.currentIndex === context.glyphs.length - 1 ?
+                      0 :
+                      context.currentIndex + 1
+            )
+            viewport.tool.updateContext(context)
+            viewport.render()
+        }
+    )
+
+    function updateViewport() {
+        const text = glyphsTextbox.value
+        if (!text.length) return
+
+        const textGlyphs = text.split("").map(
+            chr => glyphs.find(g => g.codePoint === chr.codePointAt(0))
+        ).filter(g => g)
+
+        context.setGlyphs(textGlyphs)
+        viewport.tool.updateContext(context)
+        viewport.render()
+    }
 
     function updateSubactions() {
         //subactionContainer

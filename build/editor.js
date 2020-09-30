@@ -16263,8 +16263,20 @@ var HandleTool = /** @class */ (function () {
             handle.selected = selected;
         }
     };
+    HandleTool.prototype.restrictAngles = function (pos, e) {
+        var dx = Math.abs(pos.x - this.moveStartPoint.x);
+        var dy = Math.abs(pos.y - this.moveStartPoint.y);
+        if (e.shiftKey) {
+            if (dx > dy)
+                pos.y = this.moveStartPoint.y;
+            else
+                pos.x = this.moveStartPoint.x;
+        }
+    };
     HandleTool.prototype.handleMouseEvent = function (v, e, x, y) {
         var pos = v.co.clientToWorld(x, y);
+        if (this.moveStartPoint)
+            this.restrictAngles(pos, e);
         if (e.type === "mousedown" && e.buttons & 1) {
             var handle = v.nearHandle(pos.x, pos.y);
             if (!handle) {
@@ -16281,15 +16293,20 @@ var HandleTool = /** @class */ (function () {
                 }
                 this.addHandlesToUndoContext(v.getSelectedHandles());
                 // First movement - snapping to the cursor
-                var dPos = pos.getDiff(this.pivotHandle.position);
-                this.pivotHandle.move(v, pos, dPos, this.pivotHandle, e);
-                for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
-                    var handle_1 = _a[_i];
-                    if (handle_1.selected &&
-                        handle_1 !== this.pivotHandle &&
-                        handle_1.type === this.pivotHandle.type)
-                        handle_1.move(v, pos, dPos, this.pivotHandle, e);
-                }
+                // const dPos = pos.getDiff(this.pivotHandle.position)
+                // this.pivotHandle.move(
+                //     v, pos, dPos, this.pivotHandle, e
+                // )
+                // for (let handle of this.handles) {
+                //     if (
+                //         handle.selected &&
+                //         handle !== this.pivotHandle &&
+                //         handle.type === this.pivotHandle.type
+                //     )
+                //         handle.move(
+                //             v, pos, dPos, this.pivotHandle, e
+                //         )
+                // }
                 this.moveStartPoint = pos;
                 this.moveLastPoint = pos;
             }
@@ -16301,13 +16318,20 @@ var HandleTool = /** @class */ (function () {
             else {
                 if (!this.pivotHandle)
                     return;
+                var rawX = pos.x, rawY = pos.y;
                 v.nudgePoint(pos);
+                var inPointDiff = this.moveLastPoint.getDiff(this.pivotHandle.position);
                 var dPos = pos.getDiff(this.moveLastPoint);
                 this.moveLastPoint = pos;
+                if (rawX !== pos.x || rawY !== pos.y) {
+                    // Center on cursor when snapping happens
+                    pos.x -= inPointDiff.x;
+                    pos.y -= inPointDiff.y;
+                }
                 // Pivot gets moved first
                 this.pivotHandle.move(v, pos, dPos, this.pivotHandle, e);
-                for (var _b = 0, _c = this.handles; _b < _c.length; _b++) {
-                    var handle = _c[_b];
+                for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
+                    var handle = _a[_i];
                     if (handle.selected &&
                         handle !== this.pivotHandle &&
                         handle.type === this.pivotHandle.type)
@@ -16322,8 +16346,10 @@ var HandleTool = /** @class */ (function () {
             }
             else {
                 v.disableAllGuides();
-                Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Move points");
+                if (v.getSelectedHandles().length)
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["finalizeUndoContext"])("Move points");
             }
+            this.moveStartPoint = null;
         }
     };
     HandleTool.prototype.render = function (v, ctx) {

@@ -228,10 +228,24 @@ export class HandleTool implements ITool {
         }
     }
 
+    restrictAngles(pos: Point, e: MouseEvent) {
+        const dx = Math.abs(pos.x - this.moveStartPoint.x)
+        const dy = Math.abs(pos.y - this.moveStartPoint.y)
+
+        if (e.shiftKey) {
+            if (dx > dy)
+                pos.y = this.moveStartPoint.y
+            else
+                pos.x = this.moveStartPoint.x
+        }
+    }
+
     handleMouseEvent(v: Viewport, e: MouseEvent, x: number, y: number) {
         const pos = v.co.clientToWorld(
             x, y
         )
+
+        if (this.moveStartPoint) this.restrictAngles(pos, e)
 
         if (
             e.type === "mousedown" && e.buttons & 1
@@ -255,21 +269,21 @@ export class HandleTool implements ITool {
                 )
 
                 // First movement - snapping to the cursor
-                const dPos = pos.getDiff(this.pivotHandle.position)
-                this.pivotHandle.move(
-                    v, pos, dPos, this.pivotHandle, e
-                )
+                // const dPos = pos.getDiff(this.pivotHandle.position)
+                // this.pivotHandle.move(
+                //     v, pos, dPos, this.pivotHandle, e
+                // )
 
-                for (let handle of this.handles) {
-                    if (
-                        handle.selected &&
-                        handle !== this.pivotHandle &&
-                        handle.type === this.pivotHandle.type
-                    )
-                        handle.move(
-                            v, pos, dPos, this.pivotHandle, e
-                        )
-                }
+                // for (let handle of this.handles) {
+                //     if (
+                //         handle.selected &&
+                //         handle !== this.pivotHandle &&
+                //         handle.type === this.pivotHandle.type
+                //     )
+                //         handle.move(
+                //             v, pos, dPos, this.pivotHandle, e
+                //         )
+                // }
 
                 this.moveStartPoint = pos
                 this.moveLastPoint = pos
@@ -282,10 +296,21 @@ export class HandleTool implements ITool {
             } else {
                 if (!this.pivotHandle) return
 
+                const rawX = pos.x, rawY = pos.y
                 v.nudgePoint(pos)
+
+                const inPointDiff = this.moveLastPoint.getDiff(
+                    this.pivotHandle.position
+                )
 
                 const dPos = pos.getDiff(this.moveLastPoint)
                 this.moveLastPoint = pos
+
+                if (rawX !== pos.x || rawY !== pos.y) {
+                    // Center on cursor when snapping happens
+                    pos.x -= inPointDiff.x
+                    pos.y -= inPointDiff.y
+                }
 
                 // Pivot gets moved first
                 this.pivotHandle.move(
@@ -311,8 +336,12 @@ export class HandleTool implements ITool {
                 this.selecting = false
             } else {
                 v.disableAllGuides()
-                finalizeUndoContext("Move points")
+
+                if (v.getSelectedHandles().length)
+                    finalizeUndoContext("Move points")
             }
+
+            this.moveStartPoint = null
         }
     }
 

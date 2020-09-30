@@ -194,6 +194,23 @@ export class HandleTool implements ITool {
                     v.selectHandles([handle])
                 }
 
+                // First movement - snapping to the cursor
+                const dPos = pos.getDiff(this.pivotHandle.position)
+                this.pivotHandle.move(
+                    v, pos, dPos, this.pivotHandle, e
+                )
+
+                for (let handle of this.handles) {
+                    if (
+                        handle.selected &&
+                        handle !== this.pivotHandle &&
+                        handle.type === this.pivotHandle.type
+                    )
+                        handle.move(
+                            v, pos, dPos, this.pivotHandle, e
+                        )
+                }
+
                 this.moveStartPoint = pos
                 this.moveLastPoint = pos
             }
@@ -204,6 +221,8 @@ export class HandleTool implements ITool {
                 this.selectionTarget = pos
             } else {
                 if (!this.pivotHandle) return
+
+                v.nudgePoint(pos)
 
                 const dPos = pos.getDiff(this.moveLastPoint)
                 this.moveLastPoint = pos
@@ -231,6 +250,7 @@ export class HandleTool implements ITool {
                 this.selectHandleBox()
                 this.selecting = false
             }
+            v.disableAllGuides()
         }
     }
 

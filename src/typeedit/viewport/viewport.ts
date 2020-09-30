@@ -1,4 +1,5 @@
 import { throws } from "assert"
+import { Point } from "../geometry/point"
 import { IContext } from "./context/context"
 import { ViewportCoordinates } from "./coordinates"
 import { IDrawable, IDrawableHandle } from "./drawable"
@@ -141,6 +142,18 @@ export class Viewport {
         }
     }
 
+    nudgePoint(pos: Point) {
+        this.context.guides.forEach(
+            g => g.nudge(this, pos)
+        )
+    }
+
+    disableAllGuides() {
+        this.context.guides.forEach(
+            g => g.active = false
+        )
+    }
+
     render() {
         this.ctx.resetTransform()
         this.ctx.clearRect(
@@ -150,13 +163,19 @@ export class Viewport {
         this.co.transformCanvas(this.ctx)
 
         this.context.render(this, this.ctx)
+        this.context.guides.forEach(
+            guide => {
+                if (guide.active) guide.render(this, this.ctx)
+            }
+        )
 
         if (this.tool && this.tool.supportsForeignHandles) {
             this.drawHandles(this.context.handles)
             this.drawHandles(this.handles)
         }
-        if (this.tool)
+        if (this.tool) {
             this.drawHandles(this.tool.handles)
+        }
 
         this.ctx.resetTransform()
         this.co.transformCanvas(this.ctx)

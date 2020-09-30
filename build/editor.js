@@ -15206,19 +15206,14 @@ function unlerp(X, a, b) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierContext", function() { return BezierContext; });
-/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
-
 var BezierContext = /** @class */ (function () {
     function BezierContext(beziers) {
         this.beziers = beziers;
         this.handles = [];
+        this.guides = [];
     }
     BezierContext.prototype.render = function (v, ctx) {
-        var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.beziers);
-        ctx.fillStyle = "#00f3";
-        ctx.fill(path);
-        ctx.strokeStyle = "#08f";
-        ctx.stroke(path);
+        // Nothing tbh
     };
     return BezierContext;
 }());
@@ -15238,8 +15233,9 @@ var BezierContext = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlyphContext", function() { return GlyphContext; });
 /* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
-/* harmony import */ var _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../handles/fontMetric */ "./src/typeedit/viewport/handles/fontMetric.ts");
-/* harmony import */ var _bezier__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bezier */ "./src/typeedit/viewport/context/bezier.ts");
+/* harmony import */ var _guides_guide__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../guides/guide */ "./src/typeedit/viewport/guides/guide.ts");
+/* harmony import */ var _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../handles/fontMetric */ "./src/typeedit/viewport/handles/fontMetric.ts");
+/* harmony import */ var _bezier__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bezier */ "./src/typeedit/viewport/context/bezier.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -15256,6 +15252,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
 var GlyphContext = /** @class */ (function (_super) {
     __extends(GlyphContext, _super);
     function GlyphContext(glyphs, currentIndex) {
@@ -15263,11 +15260,20 @@ var GlyphContext = /** @class */ (function (_super) {
         _this.glyphs = glyphs;
         _this.currentIndex = currentIndex;
         _this.handles = [
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].leftBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].rightBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].ascender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].descender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_1__["FontMetricHandleType"].xHeight)
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].leftBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].rightBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].ascender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].descender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](_this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].xHeight)
+        ];
+        _this.guides = [
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](0),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](512),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.ascender; }),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.descender; }),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](function () { return _this.glyph.font.metrics.xHeight; }),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["VerticalGuide"](function () { return _this.glyph.metrics.leftBearing; }),
+            new _guides_guide__WEBPACK_IMPORTED_MODULE_1__["VerticalGuide"](function () { return _this.glyph.metrics.rightBearing; })
         ];
         return _this;
     }
@@ -15352,7 +15358,7 @@ var GlyphContext = /** @class */ (function (_super) {
         ctx.stroke(workingPath);
     };
     return GlyphContext;
-}(_bezier__WEBPACK_IMPORTED_MODULE_2__["BezierContext"]));
+}(_bezier__WEBPACK_IMPORTED_MODULE_3__["BezierContext"]));
 
 
 
@@ -15409,6 +15415,93 @@ var ViewportCoordinates = /** @class */ (function () {
         point.y = y;
     };
     return ViewportCoordinates;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/typeedit/viewport/guides/guide.ts":
+/*!***********************************************!*\
+  !*** ./src/typeedit/viewport/guides/guide.ts ***!
+  \***********************************************/
+/*! exports provided: HorizontalGuide, VerticalGuide */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HorizontalGuide", function() { return HorizontalGuide; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VerticalGuide", function() { return VerticalGuide; });
+var HorizontalGuide = /** @class */ (function () {
+    function HorizontalGuide(valueHandler) {
+        this.valueHandler = valueHandler;
+        this.active = false;
+    }
+    Object.defineProperty(HorizontalGuide.prototype, "value", {
+        get: function () {
+            if (this.valueHandler instanceof Function)
+                return this.valueHandler();
+            return this.valueHandler;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    HorizontalGuide.prototype.nudge = function (v, pos) {
+        var clientPos = v.co.worldToClient(pos.x, pos.y);
+        var clientTarget = v.co.worldToClient(pos.x, this.value);
+        if (Math.abs(clientPos.y - clientTarget.y) < 8) {
+            pos.y = this.value;
+            this.active = true;
+        }
+        else {
+            this.active = false;
+        }
+    };
+    HorizontalGuide.prototype.render = function (v, ctx) {
+        ctx.strokeStyle = "#f0f";
+        ctx.lineWidth = 1 / v.co.scaleFactor;
+        ctx.beginPath();
+        ctx.moveTo(-9999, this.value);
+        ctx.lineTo(9999, this.value);
+        ctx.stroke();
+    };
+    return HorizontalGuide;
+}());
+
+var VerticalGuide = /** @class */ (function () {
+    function VerticalGuide(valueHandler) {
+        this.valueHandler = valueHandler;
+        this.active = false;
+    }
+    Object.defineProperty(VerticalGuide.prototype, "value", {
+        get: function () {
+            if (this.valueHandler instanceof Function)
+                return this.valueHandler();
+            return this.valueHandler;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    VerticalGuide.prototype.nudge = function (v, pos) {
+        var clientPos = v.co.worldToClient(pos.x, pos.y);
+        var clientTarget = v.co.worldToClient(this.value, pos.y);
+        if (Math.abs(clientPos.x - clientTarget.x) < 8) {
+            pos.x = this.value;
+            this.active = true;
+        }
+        else {
+            this.active = false;
+        }
+    };
+    VerticalGuide.prototype.render = function (v, ctx) {
+        ctx.strokeStyle = "#f0f";
+        ctx.lineWidth = 1 / v.co.scaleFactor;
+        ctx.beginPath();
+        ctx.moveTo(this.value, -9999);
+        ctx.lineTo(this.value, 9999);
+        ctx.stroke();
+    };
+    return VerticalGuide;
 }());
 
 
@@ -15892,6 +15985,16 @@ var HandleTool = /** @class */ (function () {
                 if (!handle.selected) {
                     v.selectHandles([handle]);
                 }
+                // First movement - snapping to the cursor
+                var dPos = pos.getDiff(this.pivotHandle.position);
+                this.pivotHandle.move(v, pos, dPos, this.pivotHandle, e);
+                for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
+                    var handle_1 = _a[_i];
+                    if (handle_1.selected &&
+                        handle_1 !== this.pivotHandle &&
+                        handle_1.type === this.pivotHandle.type)
+                        handle_1.move(v, pos, dPos, this.pivotHandle, e);
+                }
                 this.moveStartPoint = pos;
                 this.moveLastPoint = pos;
             }
@@ -15903,12 +16006,13 @@ var HandleTool = /** @class */ (function () {
             else {
                 if (!this.pivotHandle)
                     return;
+                v.nudgePoint(pos);
                 var dPos = pos.getDiff(this.moveLastPoint);
                 this.moveLastPoint = pos;
                 // Pivot gets moved first
                 this.pivotHandle.move(v, pos, dPos, this.pivotHandle, e);
-                for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
-                    var handle = _a[_i];
+                for (var _b = 0, _c = this.handles; _b < _c.length; _b++) {
+                    var handle = _c[_b];
                     if (handle.selected &&
                         handle !== this.pivotHandle &&
                         handle.type === this.pivotHandle.type)
@@ -15921,6 +16025,7 @@ var HandleTool = /** @class */ (function () {
                 this.selectHandleBox();
                 this.selecting = false;
             }
+            v.disableAllGuides();
         }
     };
     HandleTool.prototype.render = function (v, ctx) {
@@ -16056,17 +16161,30 @@ var Viewport = /** @class */ (function () {
             handle.render(this, this.ctx);
         }
     };
+    Viewport.prototype.nudgePoint = function (pos) {
+        var _this = this;
+        this.context.guides.forEach(function (g) { return g.nudge(_this, pos); });
+    };
+    Viewport.prototype.disableAllGuides = function () {
+        this.context.guides.forEach(function (g) { return g.active = false; });
+    };
     Viewport.prototype.render = function () {
+        var _this = this;
         this.ctx.resetTransform();
         this.ctx.clearRect(0, 0, this.domCanvas.width, this.domCanvas.height);
         this.co.transformCanvas(this.ctx);
         this.context.render(this, this.ctx);
+        this.context.guides.forEach(function (guide) {
+            if (guide.active)
+                guide.render(_this, _this.ctx);
+        });
         if (this.tool && this.tool.supportsForeignHandles) {
             this.drawHandles(this.context.handles);
             this.drawHandles(this.handles);
         }
-        if (this.tool)
+        if (this.tool) {
             this.drawHandles(this.tool.handles);
+        }
         this.ctx.resetTransform();
         this.co.transformCanvas(this.ctx);
         if (this.tool)

@@ -77,7 +77,7 @@ export class FontMetricHandle implements IDrawableHandle {
     }
 
     move(
-        v: Viewport, pos: Point, dx: number, dy: number,
+        v: Viewport, pos: Point, dPos: Point,
         pivot: IDrawableHandle,
         e?: MouseEvent
     ) {

@@ -18,6 +18,9 @@ export class HandleTool implements ITool {
     public handles: IDrawableHandle[] = []
     public supportsForeignHandles = true
 
+    private moveStartPoint: Point
+    private moveLastPoint: Point
+
     public subactions: ToolSubAction[] = [
         {
             name: "Flip X",
@@ -190,6 +193,9 @@ export class HandleTool implements ITool {
                 if (!handle.selected) {
                     v.selectHandles([handle])
                 }
+
+                this.moveStartPoint = pos
+                this.moveLastPoint = pos
             }
         } else if (
             e.type === "mousemove" && e.buttons & 1
@@ -199,9 +205,12 @@ export class HandleTool implements ITool {
             } else {
                 if (!this.pivotHandle) return
 
+                const dPos = pos.getDiff(this.moveLastPoint)
+                this.moveLastPoint = pos
+
                 // Pivot gets moved first
                 this.pivotHandle.move(
-                    v, pos, e.movementX, e.movementY, this.pivotHandle, e
+                    v, pos, dPos, this.pivotHandle, e
                 )
 
                 for (let handle of this.handles) {
@@ -211,7 +220,7 @@ export class HandleTool implements ITool {
                         handle.type === this.pivotHandle.type
                     )
                         handle.move(
-                            v, pos, e.movementX, e.movementY, this.pivotHandle, e
+                            v, pos, dPos, this.pivotHandle, e
                         )
                 }
             }

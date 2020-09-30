@@ -25,11 +25,11 @@ export class ViewportCoordinates {
         ctx.scale(this.scaleFactor, this.scaleFactor)
     }
 
-    clientToWorld(x: number, y: number) {
-        return {
-            x: (x - this.dx) / this.scaleFactor,
-            y: (y - this.dy) / this.scaleFactor
-        }
+    clientToWorld(x: number, y: number): Point {
+        return new Point(
+            (x - this.dx) / this.scaleFactor,
+            (y - this.dy) / this.scaleFactor
+        )
     }
 
     worldToClient(x: number, y: number) {

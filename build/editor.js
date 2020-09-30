@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main nav {\n    background: #eee;\n    padding: 4px 4px 0px 4px;\n    box-shadow: inset 0px -2px 2px #00000005;\n    display: flex;\n    justify-content: center; }\n    main nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 11pt;\n      font-weight: 500;\n      padding: 6px 20px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    flex-grow: 1; }\n\nsection.edit {\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: repeat(1, 1fr); }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n  section.edit div.subactions {\n    position: absolute;\n    left: 50%;\n    top: 8px;\n    background: #fff;\n    padding: 2px;\n    border-radius: 6px;\n    box-shadow: 0px 2px 8px #0003;\n    transform: translate(-50%, 0); }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB,EAAA;;AAGpB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,wCAAwC;IACxC,aAAa;IACb,uBAAuB,EAAA;IAjB/B;MAoBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA9BzB;QAiCgB,gBAAgB,EAAA;EAjChC;IAuCQ,kBAAkB;IAElB,YAAY,EAAA;;AAIpB;EACI,aAAa;EACb,+BAA+B;EAC/B,kCAAkC,EAAA;EAHtC;IAMQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAT9B;MAYY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAnB9B;QAsBgB,gBAAgB,EAAA;MAtBhC;QA0BgB,gBAAgB,EAAA;MA1BhC;QA8BgB,gBAAgB,EAAA;QA9BhC;UAiCoB,iBAAiB,EAAA;MAjCrC;QAsCgB,WAAW;QACX,YAAY,EAAA;EAvC5B;IA6CQ,kBAAkB;IAClB,SAAS;IACT,QAAQ;IAER,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAElB,6BAA6B;IAE7B,6BAA6B,EAAA;IAxDrC;MA2DY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAlE9B;QAqEgB,gBAAgB,EAAA;MArEhC;QAyEgB,gBAAgB,EAAA;MAzEhC;QA6EgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\r\n    background: #fff;\r\n}\r\n\r\nmain {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: #eee;\r\n\r\n        padding: 4px 4px 0px 4px;\r\n\r\n        box-shadow: inset 0px -2px 2px #00000005;\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 11pt;\r\n            font-weight: 500;\r\n\r\n            padding: 6px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            border-radius: 4px 4px 0px 0px;\r\n            outline: none;\r\n\r\n            &.active {\r\n                background: #fff;\r\n            }\r\n        }\r\n    }\r\n\r\n    section {\r\n        position: relative;\r\n\r\n        flex-grow: 1;\r\n    }\r\n}\r\n\r\nsection.edit {\r\n    display: grid;\r\n    grid-template-columns: auto 1fr;\r\n    grid-template-rows: repeat(1, 1fr);\r\n\r\n    div.tools {\r\n        padding: 2px;\r\n\r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 4px;\r\n            border-radius: 4px;\r\n\r\n            &:hover {\r\n                background: #eee;\r\n            }\r\n\r\n            &:active {\r\n                background: #ddd;\r\n            }\r\n\r\n            &.active {\r\n                background: #08f;\r\n\r\n                img {\r\n                    filter: invert(1);\r\n                }\r\n            }\r\n\r\n            img {\r\n                width: 24px;\r\n                height: 24px;\r\n            }\r\n        }\r\n    }\r\n\r\n    div.subactions { \r\n        position: absolute;\r\n        left: 50%;\r\n        top: 8px;\r\n\r\n        background: #fff;\r\n\r\n        padding: 2px;\r\n        border-radius: 6px;\r\n\r\n        box-shadow: 0px 2px 8px #0003;\r\n\r\n        transform: translate(-50%, 0);\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 4px;\r\n            border-radius: 4px;\r\n\r\n            &:hover {\r\n                background: #eee;\r\n            }\r\n\r\n            &:active {\r\n                background: #ddd;\r\n            }\r\n\r\n            img {\r\n                width: 24px;\r\n                height: 24px;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main nav {\n    background: #eee;\n    padding: 4px 4px 0px 4px;\n    box-shadow: inset 0px -2px 2px #00000005;\n    display: flex;\n    justify-content: center; }\n    main nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 11pt;\n      font-weight: 500;\n      padding: 6px 20px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    flex-grow: 1; }\n\nsection.edit {\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: repeat(1, 1fr); }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n  section.edit div.subactions {\n    position: absolute;\n    left: 50%;\n    top: 8px;\n    background: #fff;\n    padding: 2px;\n    border-radius: 6px;\n    box-shadow: 0px 2px 8px #0003;\n    transform: translate(-50%, 0); }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB,EAAA;;AAGpB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,wCAAwC;IACxC,aAAa;IACb,uBAAuB,EAAA;IAjB/B;MAoBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA9BzB;QAiCgB,gBAAgB,EAAA;EAjChC;IAuCQ,kBAAkB;IAElB,YAAY,EAAA;;AAIpB;EACI,aAAa;EACb,+BAA+B;EAC/B,kCAAkC,EAAA;EAHtC;IAMQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAT9B;MAYY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAnB9B;QAsBgB,gBAAgB,EAAA;MAtBhC;QA0BgB,gBAAgB,EAAA;MA1BhC;QA8BgB,gBAAgB,EAAA;QA9BhC;UAiCoB,iBAAiB,EAAA;MAjCrC;QAsCgB,WAAW;QACX,YAAY,EAAA;EAvC5B;IA6CQ,kBAAkB;IAClB,SAAS;IACT,QAAQ;IAER,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAElB,6BAA6B;IAE7B,6BAA6B,EAAA;IAxDrC;MA2DY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAlE9B;QAqEgB,gBAAgB,EAAA;MArEhC;QAyEgB,gBAAgB,EAAA;MAzEhC;QA6EgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\n    background: #fff;\n}\n\nmain {\n    position: fixed;\n    left: 0;\n    top: 0;\n    right: 0;\n    bottom: 0;\n\n    display: flex;\n    flex-direction: column;\n\n    nav {\n        background: #eee;\n\n        padding: 4px 4px 0px 4px;\n\n        box-shadow: inset 0px -2px 2px #00000005;\n        display: flex;\n        justify-content: center;\n\n        button {\n            background: transparent;\n\n            font-family: \"Inter\";\n            font-size: 11pt;\n            font-weight: 500;\n\n            padding: 6px 20px;\n            border: none;\n            border-bottom: none;\n            border-radius: 4px 4px 0px 0px;\n            outline: none;\n\n            &.active {\n                background: #fff;\n            }\n        }\n    }\n\n    section {\n        position: relative;\n\n        flex-grow: 1;\n    }\n}\n\nsection.edit {\n    display: grid;\n    grid-template-columns: auto 1fr;\n    grid-template-rows: repeat(1, 1fr);\n\n    div.tools {\n        padding: 2px;\n\n        display: flex;\n        flex-direction: column;\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            &.active {\n                background: #08f;\n\n                img {\n                    filter: invert(1);\n                }\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n\n    div.subactions { \n        position: absolute;\n        left: 50%;\n        top: 8px;\n\n        background: #fff;\n\n        padding: 2px;\n        border-radius: 6px;\n\n        box-shadow: 0px 2px 8px #0003;\n\n        transform: translate(-50%, 0);\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 4px;\n            border-radius: 4px;\n\n            &:hover {\n                background: #eee;\n            }\n\n            &:active {\n                background: #ddd;\n            }\n\n            img {\n                width: 24px;\n                height: 24px;\n            }\n        }\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -15086,6 +15086,13 @@ var Point = /** @class */ (function () {
         this.x = x;
         this.y = y;
     }
+    Point.prototype.move = function (dx, dy) {
+        this.x += dx;
+        this.y += dy;
+    };
+    Point.prototype.getDiff = function (last) {
+        return new Point(this.x - last.x, this.y - last.y);
+    };
     return Point;
 }());
 
@@ -15317,6 +15324,8 @@ var GlyphContext = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewportCoordinates", function() { return ViewportCoordinates; });
+/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../geometry/point */ "./src/typeedit/geometry/point.ts");
+
 var ViewportCoordinates = /** @class */ (function () {
     function ViewportCoordinates() {
         this.dx = 0;
@@ -15339,10 +15348,7 @@ var ViewportCoordinates = /** @class */ (function () {
         ctx.scale(this.scaleFactor, this.scaleFactor);
     };
     ViewportCoordinates.prototype.clientToWorld = function (x, y) {
-        return {
-            x: (x - this.dx) / this.scaleFactor,
-            y: (y - this.dy) / this.scaleFactor
-        };
+        return new _geometry_point__WEBPACK_IMPORTED_MODULE_0__["Point"]((x - this.dx) / this.scaleFactor, (y - this.dy) / this.scaleFactor);
     };
     ViewportCoordinates.prototype.worldToClient = function (x, y) {
         return {
@@ -15375,8 +15381,6 @@ var ViewportCoordinates = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierBasePointHandle", function() { return BezierBasePointHandle; });
-/* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
-
 var BezierBasePointHandle = /** @class */ (function () {
     function BezierBasePointHandle(point) {
         this.point = point;
@@ -15391,17 +15395,10 @@ var BezierBasePointHandle = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    BezierBasePointHandle.prototype.move = function (v, pos, dx, dy, pivot, e) {
-        if (e && e.ctrlKey) {
-            v.co.moveInClientDx(this.point.after, dx, dy);
-            if (this.point.type === _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_0__["BezierPointType"].auto || e.altKey)
-                v.co.moveInClientDx(this.point.before, -dx, -dy);
-        }
-        else {
-            v.co.moveInClientDx(this.point.base, dx, dy);
-            v.co.moveInClientDx(this.point.before, dx, dy);
-            v.co.moveInClientDx(this.point.after, dx, dy);
-        }
+    BezierBasePointHandle.prototype.move = function (v, pos, dPos, pivot, e) {
+        this.point.base.move(dPos.x, dPos.y);
+        this.point.after.move(dPos.x, dPos.y);
+        this.point.before.move(dPos.x, dPos.y);
     };
     BezierBasePointHandle.prototype.render = function (v, ctx) {
         ctx.fillStyle = "#111";
@@ -15441,8 +15438,8 @@ var BezierControlPointHandle = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    BezierControlPointHandle.prototype.move = function (v, pos, dx, dy, pivot, e) {
-        v.co.moveInClientDx(this.cpoint, dx, dy);
+    BezierControlPointHandle.prototype.move = function (v, pos, dPos, pivot, e) {
+        this.cpoint.move(dPos.x, dPos.y);
     };
     BezierControlPointHandle.prototype.render = function (v, ctx) {
         var basePos = v.co.worldToClient(this.point.base.x, this.point.base.y);
@@ -15550,7 +15547,7 @@ var FontMetricHandle = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    FontMetricHandle.prototype.move = function (v, pos, dx, dy, pivot, e) {
+    FontMetricHandle.prototype.move = function (v, pos, dPos, pivot, e) {
         if (this.dir === FontMetricHandleDir.horz) {
             this.value = pos.y;
         }
@@ -15828,6 +15825,8 @@ var HandleTool = /** @class */ (function () {
                 if (!handle.selected) {
                     v.selectHandles([handle]);
                 }
+                this.moveStartPoint = pos;
+                this.moveLastPoint = pos;
             }
         }
         else if (e.type === "mousemove" && e.buttons & 1) {
@@ -15837,14 +15836,16 @@ var HandleTool = /** @class */ (function () {
             else {
                 if (!this.pivotHandle)
                     return;
+                var dPos = pos.getDiff(this.moveLastPoint);
+                this.moveLastPoint = pos;
                 // Pivot gets moved first
-                this.pivotHandle.move(v, pos, e.movementX, e.movementY, this.pivotHandle, e);
+                this.pivotHandle.move(v, pos, dPos, this.pivotHandle, e);
                 for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
                     var handle = _a[_i];
                     if (handle.selected &&
                         handle !== this.pivotHandle &&
                         handle.type === this.pivotHandle.type)
-                        handle.move(v, pos, e.movementX, e.movementY, this.pivotHandle, e);
+                        handle.move(v, pos, dPos, this.pivotHandle, e);
                 }
             }
         }
@@ -15951,7 +15952,7 @@ var Viewport = /** @class */ (function () {
             if (type && handle.type !== type)
                 continue;
             var dist = Math.hypot(handle.position.x - x, handle.position.y - y);
-            if (dist < handle.hitRadius)
+            if (dist < handle.hitRadius / this.co.scaleFactor)
                 return handle;
         }
         return null;

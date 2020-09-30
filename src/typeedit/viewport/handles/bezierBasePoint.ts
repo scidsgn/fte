@@ -17,19 +17,13 @@ export class BezierBasePointHandle implements IDrawableHandle {
     }
 
     move(
-        v: Viewport, pos: Point, dx: number, dy: number,
+        v: Viewport, pos: Point, dPos: Point,
         pivot: IDrawableHandle,
         e?: MouseEvent
     ) {
-        if (e && e.ctrlKey) {
-            v.co.moveInClientDx(this.point.after, dx, dy)
-            if (this.point.type === BezierPointType.auto || e.altKey)
-                v.co.moveInClientDx(this.point.before, -dx, -dy)
-        } else {
-            v.co.moveInClientDx(this.point.base, dx, dy)
-            v.co.moveInClientDx(this.point.before, dx, dy)
-            v.co.moveInClientDx(this.point.after, dx, dy)
-        }
+        this.point.base.move(dPos.x, dPos.y)
+        this.point.after.move(dPos.x, dPos.y)
+        this.point.before.move(dPos.x, dPos.y)
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

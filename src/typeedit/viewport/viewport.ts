@@ -88,7 +88,7 @@ export class Viewport {
                 handle.position.y - y
             )
 
-            if (dist < handle.hitRadius)
+            if (dist < handle.hitRadius / this.co.scaleFactor)
                 return handle
         }
 

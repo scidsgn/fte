@@ -1,11 +1,12 @@
-import { Point } from "../point";
-import { BezierCurve } from "./curve";
+import { EventEmitter } from "events"
+import { Point } from "../point"
+import { BezierCurve } from "./curve"
 
 export enum BezierPointType {
     free, auto, sharp
 }
 
-export class BezierPoint {
+export class BezierPoint extends EventEmitter {
     public curve: BezierCurve = null
 
     constructor(
@@ -13,7 +14,13 @@ export class BezierPoint {
         public before: Point,
         public after: Point,
         public type: BezierPointType = BezierPointType.auto
-    ) {}
+    ) {
+        super()
+        
+        this.on("modified", () => {
+            if (this.curve) this.curve.emit("modified")
+        })
+    }
 
     determineType() {
         const radius1 = this.after.distance(this.base)
@@ -53,5 +60,7 @@ export class BezierPoint {
                 otherPoint.y = otherRadius * Math.sin(angle + Math.PI) + this.base.y
             }
         }
+
+        this.curve.emit("modified")
     }
 }

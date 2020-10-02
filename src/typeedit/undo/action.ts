@@ -1,3 +1,4 @@
+import { EventEmitter } from "events"
 import { stat } from "fs"
 
 export interface IUndoableAction {
@@ -28,10 +29,14 @@ export class ValueChangeAction implements IUndoableAction {
 
     undo() {
         Object.assign(this.target, this.beforeState)
+        if (this.target instanceof EventEmitter)
+            this.target.emit("modified")
     }
 
     redo() {
         Object.assign(this.target, this.afterState)
+        if (this.target instanceof EventEmitter)
+            this.target.emit("modified")
     }
 
     finalize() {

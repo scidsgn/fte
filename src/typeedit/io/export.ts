@@ -59,7 +59,7 @@ export function exportFont(font: Font, targetFile: string) {
 
     const targetCapHeight = 2000
     const scaleFactor = targetCapHeight / 512
-    console.log((font.metrics.descender - font.metrics.ascender) * scaleFactor)
+    
     const otfont = new OTFont({
         familyName: font.info.name,
         styleName: "Regular",

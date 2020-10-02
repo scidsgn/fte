@@ -1,5 +1,6 @@
 import { Glyph } from "./glyph"
 import { Font as OTFont, Glyph as OTGlyph } from "opentype.js"
+import { EventEmitter } from "events"
 
 export type FontMetrics = {
     ascender: number,
@@ -12,12 +13,14 @@ export type FontInfo = {
     author: string
 }
 
-export class Font {
+export class Font extends EventEmitter {
     constructor(
         public info: FontInfo,
         public metrics: FontMetrics,
         public glyphs: Glyph[]
-    ) {}
+    ) {
+        super()
+    }
 
     static fromOTFont(otfont: OTFont) {
         const glyphs: Glyph[] = [] // For now, don't want to import the entirety of Inter just yet

@@ -10,6 +10,7 @@ import { Font } from "./font/font"
 import { exportFont } from "./io/export"
 import { canRedo, canUndo, redo, undo } from "./undo/history"
 import { updateSubactions } from "./ui/toolbar"
+import { prepareGlyphList } from "./ui/glyphList"
 
 const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? "
 
@@ -41,6 +42,8 @@ export default (font: OTFont) => {
     viewport.setTool(new HandleTool())
     updateSubactions(viewport, [viewport.tool.subactions])
     
+    prepareGlyphList(fteFont)
+
     exportFont(fteFont, "build/test/exported.otf")
 
     glyphsTextbox.addEventListener("input", () => updateViewport())

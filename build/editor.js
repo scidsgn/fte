@@ -15732,7 +15732,7 @@ var GlyphContext = /** @class */ (function (_super) {
                 var offset = prevGlyph.metrics.rightBearing -
                     glyph.metrics.leftBearing;
                 var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(glyph.finalBeziers);
-                ctx.fillStyle = "#ccc";
+                ctx.fillStyle = "#000";
                 ctx.translate(offset, 0);
                 ctx.fill(path);
                 currentOffset += offset;
@@ -15747,7 +15747,7 @@ var GlyphContext = /** @class */ (function (_super) {
                 var offset = nextGlyph.metrics.leftBearing -
                     glyph.metrics.rightBearing;
                 var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(glyph.finalBeziers);
-                ctx.fillStyle = "#ccc";
+                ctx.fillStyle = "#000";
                 ctx.translate(offset, 0);
                 ctx.fill(path);
                 currentOffset += offset;
@@ -15786,13 +15786,13 @@ var GlyphContext = /** @class */ (function (_super) {
         // Glyph
         var workingPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.beziers);
         var finalPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.finalBeziers);
-        ctx.fillStyle = "#999";
+        ctx.fillStyle = "#888";
         ctx.fill(finalPath);
         ctx.setLineDash([]);
         ctx.strokeStyle = "#fff";
-        ctx.lineWidth = 3 / v.co.scaleFactor;
+        ctx.lineWidth = 4 / v.co.scaleFactor;
         ctx.stroke(workingPath);
-        ctx.strokeStyle = "#111";
+        ctx.strokeStyle = "#000";
         ctx.lineWidth = 1 / v.co.scaleFactor;
         ctx.stroke(workingPath);
     };

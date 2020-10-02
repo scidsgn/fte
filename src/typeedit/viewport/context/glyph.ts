@@ -68,7 +68,7 @@ export class GlyphContext extends BezierContext {
                     glyph.finalBeziers
                 )
                 
-                ctx.fillStyle = "#ccc"
+                ctx.fillStyle = "#000"
                 ctx.translate(offset, 0)
                 ctx.fill(path)
 
@@ -90,7 +90,7 @@ export class GlyphContext extends BezierContext {
                     glyph.finalBeziers
                 )
                 
-                ctx.fillStyle = "#ccc"
+                ctx.fillStyle = "#000"
                 ctx.translate(offset, 0)
                 ctx.fill(path)
 
@@ -151,14 +151,14 @@ export class GlyphContext extends BezierContext {
             this.glyph.finalBeziers
         )
 
-        ctx.fillStyle = "#999"
+        ctx.fillStyle = "#888"
         ctx.fill(finalPath)
         
         ctx.setLineDash([])
         ctx.strokeStyle = "#fff"
-        ctx.lineWidth = 3 / v.co.scaleFactor
+        ctx.lineWidth = 4 / v.co.scaleFactor
         ctx.stroke(workingPath)
-        ctx.strokeStyle = "#111"
+        ctx.strokeStyle = "#000"
         ctx.lineWidth = 1 / v.co.scaleFactor
         ctx.stroke(workingPath)
     }

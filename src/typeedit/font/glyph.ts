@@ -29,6 +29,12 @@ export class Glyph extends EventEmitter {
         })
     }
 
+    get comparableCodePoint() {
+        if (this.name === ".notdef") return -2
+        if (this.name === ".null") return -1
+        return this.codePoint ?? Infinity
+    }
+
     static fromOTGlyph(font: Font, otfont: OTFont, otglyph: OTGlyph) {
         const scaleFactor = 512 / otfont.tables.os2.sCapHeight
         const beziers = generateCurvesFromOTGlyph(otfont, otglyph)

@@ -34,7 +34,7 @@ export function prepareGlyphList(font: Font) {
     glyphListContainer.innerHTML = ""
 
     font.glyphs.sort(
-        (g1, g2) => g1.codePoint - g2.codePoint
+        (g1, g2) => g1.comparableCodePoint - g2.comparableCodePoint
     ).forEach(
         glyph => {
             const glyphDiv = document.createElement("div")

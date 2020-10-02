@@ -14782,15 +14782,15 @@ Object(opentype_js__WEBPACK_IMPORTED_MODULE_0__["load"])("test/Inter-Regular.otf
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_app_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/app.scss */ "./src/typeedit/styles/app.scss");
 /* harmony import */ var _styles_app_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_app_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _viewport_viewport__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./viewport/viewport */ "./src/typeedit/viewport/viewport.ts");
-/* harmony import */ var _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./viewport/tools/bezierPen */ "./src/typeedit/viewport/tools/bezierPen.ts");
-/* harmony import */ var _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./viewport/tools/handle */ "./src/typeedit/viewport/tools/handle.ts");
-/* harmony import */ var _font_glyph__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./font/glyph */ "./src/typeedit/font/glyph.ts");
-/* harmony import */ var _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./viewport/context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
-/* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./font/font */ "./src/typeedit/font/font.ts");
-/* harmony import */ var _io_export__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./io/export */ "./src/typeedit/io/export.ts");
-/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./undo/history */ "./src/typeedit/undo/history.ts");
-/* harmony import */ var _ui_toolbar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ui/toolbar */ "./src/typeedit/ui/toolbar.ts");
+/* harmony import */ var _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./viewport/tools/bezierPen */ "./src/typeedit/viewport/tools/bezierPen.ts");
+/* harmony import */ var _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./viewport/tools/handle */ "./src/typeedit/viewport/tools/handle.ts");
+/* harmony import */ var _font_glyph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./font/glyph */ "./src/typeedit/font/glyph.ts");
+/* harmony import */ var _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./viewport/context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
+/* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./font/font */ "./src/typeedit/font/font.ts");
+/* harmony import */ var _io_export__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./io/export */ "./src/typeedit/io/export.ts");
+/* harmony import */ var _ui_toolbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ui/toolbar */ "./src/typeedit/ui/toolbar.ts");
+/* harmony import */ var _ui_viewport__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ui/viewport */ "./src/typeedit/ui/viewport.ts");
+/* harmony import */ var _ui_glyphBar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ui/glyphBar */ "./src/typeedit/ui/glyphBar.ts");
 
 
 
@@ -14803,70 +14803,23 @@ __webpack_require__.r(__webpack_exports__);
 
 var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? ";
 /* harmony default export */ __webpack_exports__["default"] = (function (font) {
-    var container = document.querySelector("div.viewport");
-    var glyphsTextbox = document.querySelector("input.viewportText");
-    var subactionContainer = document.querySelector("div.subactions");
-    var fteFont = _font_font__WEBPACK_IMPORTED_MODULE_6__["Font"].fromOTFont(font);
-    var glyphs = basicCharacterSet.split("").map(function (chr) { return _font_glyph__WEBPACK_IMPORTED_MODULE_4__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph(chr)); });
+    var fteFont = _font_font__WEBPACK_IMPORTED_MODULE_5__["Font"].fromOTFont(font);
+    var glyphs = basicCharacterSet.split("").map(function (chr) { return _font_glyph__WEBPACK_IMPORTED_MODULE_3__["Glyph"].fromOTGlyph(fteFont, font, font.charToGlyph(chr)); });
     fteFont.addGlyph.apply(fteFont, glyphs);
-    console.log(font);
-    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]("ABC".split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 0);
-    var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_1__["Viewport"](context, [], null);
-    container.appendChild(viewport.domCanvas);
-    viewport.updateViewportSize();
-    viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]());
-    Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_9__["updateSubactions"])(viewport, [viewport.tool.subactions]);
-    Object(_io_export__WEBPACK_IMPORTED_MODULE_7__["exportFont"])(fteFont, "build/test/exported.otf");
-    glyphsTextbox.addEventListener("input", function () { return updateViewport(); });
-    document.querySelector("button.prevGlyph").addEventListener("click", function () {
-        context.setGlyphs(null, context.currentIndex === 0 ?
-            context.glyphs.length - 1 :
-            context.currentIndex - 1);
-        viewport.tool.updateContext(context);
-        viewport.render();
-    });
-    document.querySelector("button.nextGlyph").addEventListener("click", function () {
-        context.setGlyphs(null, context.currentIndex === context.glyphs.length - 1 ?
-            0 :
-            context.currentIndex + 1);
-        viewport.tool.updateContext(context);
-        viewport.render();
-    });
-    function updateViewport() {
-        var text = glyphsTextbox.value;
-        if (!text.length)
-            return;
-        var textGlyphs = text.split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }).filter(function (g) { return g; });
-        context.setGlyphs(textGlyphs);
-        viewport.tool.updateContext(context);
-        viewport.render();
-    }
+    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_4__["GlyphContext"]("ABC".split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 0);
+    var viewport = Object(_ui_viewport__WEBPACK_IMPORTED_MODULE_8__["setupViewport"])(context);
+    viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__["HandleTool"]());
+    Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_7__["updateSubactions"])(viewport, [viewport.tool.subactions]);
+    Object(_ui_glyphBar__WEBPACK_IMPORTED_MODULE_9__["prepareGlyphBar"])(viewport);
+    Object(_io_export__WEBPACK_IMPORTED_MODULE_6__["exportFont"])(fteFont, "build/test/exported.otf");
     document.querySelector("button[data-tool=handle]").addEventListener("click", function () {
-        viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_3__["HandleTool"]());
-        Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_9__["updateSubactions"])(viewport, [viewport.tool.subactions]);
+        viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__["HandleTool"]());
+        Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_7__["updateSubactions"])(viewport, [viewport.tool.subactions]);
     });
     document.querySelector("button[data-tool=pen]").addEventListener("click", function () {
-        viewport.setTool(new _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_2__["BezierPenTool"]());
-        Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_9__["updateSubactions"])(viewport, [viewport.tool.subactions]);
+        viewport.setTool(new _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_1__["BezierPenTool"]());
+        Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_7__["updateSubactions"])(viewport, [viewport.tool.subactions]);
     });
-    window.addEventListener("resize", function () {
-        viewport.updateViewportSize();
-    });
-    var g = window;
-    g.undo = function () {
-        if (!Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["canUndo"])())
-            return false;
-        Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["undo"])();
-        viewport.render();
-        return true;
-    };
-    g.redo = function () {
-        if (!Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["canRedo"])())
-            return false;
-        Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["redo"])();
-        viewport.render();
-        return true;
-    };
 });
 
 
@@ -15290,6 +15243,58 @@ module.exports = content.locals || {};
 
 /***/ }),
 
+/***/ "./src/typeedit/ui/glyphBar.ts":
+/*!*************************************!*\
+  !*** ./src/typeedit/ui/glyphBar.ts ***!
+  \*************************************/
+/*! exports provided: prepareGlyphBar, getGlyphBarValue */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prepareGlyphBar", function() { return prepareGlyphBar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getGlyphBarValue", function() { return getGlyphBarValue; });
+/* harmony import */ var _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../viewport/context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
+
+var glyphBar = document.querySelector("input.viewportText");
+function prepareGlyphBar(viewport) {
+    glyphBar.addEventListener("input", function () {
+        if (!(viewport.context instanceof _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_0__["GlyphContext"]))
+            return;
+        var text = glyphBar.value;
+        if (!text.length)
+            return;
+        var glyphs = viewport.context.glyph.font.glyphs;
+        var textGlyphs = text.split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }).filter(function (g) { return g; });
+        viewport.context.setGlyphs(textGlyphs);
+        viewport.tool.updateContext(viewport.context);
+        viewport.render();
+    });
+    document.querySelector("button.prevGlyph").addEventListener("click", function () {
+        if (!(viewport.context instanceof _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_0__["GlyphContext"]))
+            return;
+        viewport.context.setGlyphs(null, viewport.context.currentIndex === 0 ?
+            viewport.context.glyphs.length - 1 :
+            viewport.context.currentIndex - 1);
+        viewport.tool.updateContext(viewport.context);
+        viewport.render();
+    });
+    document.querySelector("button.nextGlyph").addEventListener("click", function () {
+        if (!(viewport.context instanceof _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_0__["GlyphContext"]))
+            return;
+        viewport.context.setGlyphs(null, viewport.context.currentIndex === viewport.context.glyphs.length - 1 ?
+            0 :
+            viewport.context.currentIndex + 1);
+        viewport.tool.updateContext(viewport.context);
+        viewport.render();
+    });
+}
+function getGlyphBarValue() {
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/ui/toolbar.ts":
 /*!************************************!*\
   !*** ./src/typeedit/ui/toolbar.ts ***!
@@ -15321,6 +15326,32 @@ function updateSubactions(viewport, subactionGroups) {
         }
         subactionContainer.appendChild(subactionGroup);
     }
+}
+
+
+/***/ }),
+
+/***/ "./src/typeedit/ui/viewport.ts":
+/*!*************************************!*\
+  !*** ./src/typeedit/ui/viewport.ts ***!
+  \*************************************/
+/*! exports provided: setupViewport */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setupViewport", function() { return setupViewport; });
+/* harmony import */ var _viewport_viewport__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../viewport/viewport */ "./src/typeedit/viewport/viewport.ts");
+
+function setupViewport(context) {
+    var container = document.querySelector("div.viewport");
+    var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_0__["Viewport"](context, [], null);
+    container.appendChild(viewport.domCanvas);
+    viewport.updateViewportSize();
+    window.addEventListener("resize", function () {
+        viewport.updateViewportSize();
+    });
+    return viewport;
 }
 
 

@@ -150,7 +150,7 @@ section.edit {
         }
     }
 
-    input.viewportText {
+    div.glyphBar {
         font-family: "Inter";
         font-size: 24pt;
         text-align: center;
@@ -158,6 +158,23 @@ section.edit {
         border: none;
         outline: none;
         padding: 6px 20px;
+
+        div.ntglyph {
+            height: 1em;
+            box-sizing: border-box;
+
+            background: #eee;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin: 0px 1px;
+
+            display: inline-flex;
+            align-items: center;
+
+            span {            
+                font-size: 16pt;
+            }
+        }
     }
 
     div.glyphSwitchButtons {

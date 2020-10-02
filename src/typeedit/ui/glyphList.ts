@@ -53,9 +53,7 @@ export function prepareGlyphList(font: Font) {
             glyphListContainer.appendChild(glyphDiv)
 
             glyphDiv.addEventListener("dblclick", () => {
-                appendCharacter(
-                    String.fromCodePoint(glyph.codePoint)
-                )
+                appendCharacter(glyph)
             })
 
             drawGlyphPreview(glyph)

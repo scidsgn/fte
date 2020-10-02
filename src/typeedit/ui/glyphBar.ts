@@ -3,6 +3,11 @@ import { Viewport } from "../viewport/viewport"
 
 const glyphBar = document.querySelector("input.viewportText") as HTMLInputElement
 
+export function appendCharacter(chr: string) {
+    glyphBar.value += chr
+    glyphBar.dispatchEvent(new InputEvent("input"))
+}
+
 export function prepareGlyphBar(viewport: Viewport) {
     glyphBar.addEventListener("input", () => {
         if (!(viewport.context instanceof GlyphContext)) return

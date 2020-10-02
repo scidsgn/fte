@@ -97,15 +97,18 @@ export class Viewport {
     }
 
     selectHandles(
-        select: IDrawableHandle[]
+        select: IDrawableHandle[],
+        exclusive = true
     ) {
         const handles = [
             ...this.context.handles,
             ...this.tool.handles
         ]
 
-        for (let handle of handles) {
-            handle.selected = false
+        if (exclusive) {
+            for (let handle of handles) {
+                handle.selected = false
+            }
         }
 
         for (let handle of select) {

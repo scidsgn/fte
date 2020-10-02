@@ -205,7 +205,7 @@ export class HandleTool implements ITool {
         }
     }
 
-    private selectHandleBox() {
+    private selectHandleBox(exclusive = true) {
         const left = Math.min(
             this.selectionOrigin.x, this.selectionTarget.x
         )
@@ -224,7 +224,11 @@ export class HandleTool implements ITool {
                              handle.position.x < right &&
                              handle.position.y >= top &&
                              handle.position.y < bottom
-            handle.selected = selected
+
+            if (exclusive)
+                handle.selected = selected
+            else
+                handle.selected = selected || handle.selected
         }
     }
 
@@ -253,7 +257,7 @@ export class HandleTool implements ITool {
             const handle = v.nearHandle(pos.x, pos.y)
             if (!handle) {
                 this.pivotHandle = null
-                v.selectHandles([])
+                v.selectHandles([], !e.shiftKey)
 
                 this.selecting = true
                 this.selectionOrigin = pos
@@ -261,7 +265,7 @@ export class HandleTool implements ITool {
             } else {
                 this.pivotHandle = handle
                 if (!handle.selected) {
-                    v.selectHandles([handle])
+                    v.selectHandles([handle], !e.shiftKey)
                 }
 
                 this.addHandlesToUndoContext(
@@ -332,7 +336,7 @@ export class HandleTool implements ITool {
             e.type === "mouseup"
         ) {
             if (this.selecting) {
-                this.selectHandleBox()
+                this.selectHandleBox(!e.shiftKey)
                 this.selecting = false
             } else {
                 v.disableAllGuides()

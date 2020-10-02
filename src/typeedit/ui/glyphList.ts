@@ -1,6 +1,7 @@
 import { Font } from "../font/font"
 import { Glyph } from "../font/glyph"
 import { BezierCurve } from "../geometry/bezier/curve"
+import { appendCharacter } from "./glyphBar"
 
 const glyphListContainer = document.querySelector("div.glyphList")
 
@@ -32,7 +33,9 @@ function drawGlyphPreview(glyph: Glyph) {
 export function prepareGlyphList(font: Font) {
     glyphListContainer.innerHTML = ""
 
-    font.glyphs.forEach(
+    font.glyphs.sort(
+        (g1, g2) => g1.codePoint - g2.codePoint
+    ).forEach(
         glyph => {
             const glyphDiv = document.createElement("div")
             glyphDiv.className = "glyph"
@@ -48,6 +51,12 @@ export function prepareGlyphList(font: Font) {
             glyphDiv.appendChild(glyphCanvas)
 
             glyphListContainer.appendChild(glyphDiv)
+
+            glyphDiv.addEventListener("dblclick", () => {
+                appendCharacter(
+                    String.fromCodePoint(glyph.codePoint)
+                )
+            })
 
             drawGlyphPreview(glyph)
         }

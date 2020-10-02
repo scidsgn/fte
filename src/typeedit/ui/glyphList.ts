@@ -7,7 +7,7 @@ const glyphListContainer = document.querySelector("div.glyphList")
 
 function drawGlyphPreview(glyph: Glyph) {
     const canvas: HTMLCanvasElement = glyphListContainer.querySelector(
-        `div[data-name=${glyph.name}] canvas`
+        `div[data-name="${glyph.name}"] canvas`
     )
     if (!canvas) return
 

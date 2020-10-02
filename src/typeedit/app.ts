@@ -16,13 +16,19 @@ import { prepareGlyphList } from "./ui/glyphList"
 
 const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? "
 
-export default (font: OTFont) => {
-    const fteFont = Font.fromOTFont(font)
+export default (otfont: OTFont) => {
+    const font = Font.fromOTFont(otfont)
 
-    const glyphs = basicCharacterSet.split("").map(
-        chr => Glyph.fromOTGlyph(fteFont, font, font.charToGlyph(chr))
-    )
-    fteFont.addGlyph(...glyphs)
+    const glyphs: Glyph[] = []
+    for (let i = 0; i < otfont.glyphs.length; i++) {
+        glyphs.push(
+            Glyph.fromOTGlyph(
+                font, otfont,
+                otfont.glyphs.get(i)
+            )
+        )
+    }
+    font.addGlyph(...glyphs)
 
     const context = new GlyphContext(
         "ABC".split("").map(
@@ -33,13 +39,11 @@ export default (font: OTFont) => {
     viewport.setTool(new HandleTool())
     updateSubactions(viewport, [viewport.tool.subactions])
     
-    prepareGlyphList(fteFont)
-
-    exportFont(fteFont, "build/test/exported.otf")
+    prepareGlyphList(font)
 
     prepareGlyphBar(viewport)
 
-    exportFont(fteFont, "build/test/exported.otf")
+    // exportFont(font, "build/test/exported.otf")
 
     document.querySelector("button[data-tool=handle]").addEventListener(
         "click", () => {

@@ -70,6 +70,8 @@ section.edit {
     aside {
         min-width: 320px;
         width: 320px;
+
+        border-left: 1px solid #ddd;
         
         display: flex;
         flex-direction: column;
@@ -105,18 +107,29 @@ section.edit {
         }
 
         div.glyphList {
+            background: #eee;
+
             display: grid;
             grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
 
             div.glyph {
+                max-width: 75px;
+
+                background: #fff;
+
                 display: flex;
                 flex-direction: column;
 
                 label {
                     font-size: 10pt;
                     text-align: center;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                     
                     padding: 2px;
+
+                    overflow: hidden;
                 }
 
                 canvas {
@@ -143,6 +156,7 @@ section.edit {
         top: 50%;
 
         transform: translateY(-50%);
+        z-index: 10;
     }
 
     button.nextGlyph {
@@ -151,6 +165,7 @@ section.edit {
         top: 50%;
 
         transform: translateY(-50%);
+        z-index: 10;
     }
 
     div.tools {
@@ -205,6 +220,7 @@ section.edit {
         box-shadow: 0px 2px 8px #0003;
 
         transform: translate(-50%, 0);
+        z-index: 10;
 
         button {
             background: transparent;

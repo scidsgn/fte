@@ -11,6 +11,8 @@ export function updateSubactions(viewport: Viewport, subactionGroups: ToolSubAct
 
         for (const subaction of group) {
             const button = document.createElement("button")
+            button.title = subaction.name
+
             button.addEventListener("click", () => {
                 subaction.handler()
                 viewport.render()

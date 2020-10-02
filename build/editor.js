@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff;\n  font-family: \"Inter\";\n  user-select: none; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column; }\n  main > nav {\n    background: #eee;\n    padding: 4px 4px 0px 4px;\n    box-shadow: inset 0px -2px 2px #00000005;\n    display: flex;\n    justify-content: center; }\n    main > nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 11pt;\n      font-weight: 500;\n      padding: 6px 20px;\n      border: none;\n      border-bottom: none;\n      border-radius: 4px 4px 0px 0px;\n      outline: none; }\n      main > nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    flex-grow: 1; }\n\nsection.edit {\n  position: relative;\n  display: grid;\n  grid-template-columns: auto 1fr auto;\n  grid-template-rows: 1fr auto; }\n  section.edit div.viewport {\n    position: relative; }\n    section.edit div.viewport canvas {\n      position: absolute;\n      left: 0;\n      top: 0; }\n  section.edit aside {\n    min-width: 320px;\n    width: 320px;\n    border-left: 1px solid #ddd;\n    display: flex;\n    flex-direction: column; }\n    section.edit aside nav {\n      display: flex; }\n      section.edit aside nav button {\n        background: transparent;\n        font-family: \"Inter\";\n        font-size: 11pt;\n        font-weight: 400;\n        padding: 6px 20px;\n        border: none;\n        border-bottom: none;\n        outline: none;\n        flex-grow: 1; }\n        section.edit aside nav button.active {\n          box-shadow: inset 0px -2px #333; }\n    section.edit aside div.listContainer {\n      height: 0;\n      flex-grow: 1;\n      overflow-y: scroll; }\n    section.edit aside div.glyphList {\n      background: #eee;\n      display: grid;\n      grid-template-columns: repeat(4, 1fr);\n      gap: 1px; }\n      section.edit aside div.glyphList div.glyph {\n        max-width: 75px;\n        background: #fff;\n        display: flex;\n        flex-direction: column; }\n        section.edit aside div.glyphList div.glyph label {\n          font-size: 10pt;\n          text-align: center;\n          white-space: nowrap;\n          text-overflow: ellipsis;\n          padding: 2px;\n          overflow: hidden; }\n        section.edit aside div.glyphList div.glyph canvas {\n          width: 100%;\n          height: auto; }\n  section.edit input.viewportText {\n    font-family: \"Inter\";\n    font-size: 24pt;\n    text-align: center;\n    border: none;\n    outline: none;\n    padding: 6px 20px; }\n  section.edit button.prevGlyph {\n    position: absolute;\n    left: 0;\n    top: 50%;\n    transform: translateY(-50%);\n    z-index: 10; }\n  section.edit button.nextGlyph {\n    position: absolute;\n    right: 0;\n    top: 50%;\n    transform: translateY(-50%);\n    z-index: 10; }\n  section.edit div.tools {\n    padding: 2px;\n    display: flex;\n    flex-direction: column; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #08f; }\n        section.edit div.tools button.active img {\n          filter: invert(1); }\n      section.edit div.tools button img {\n        width: 24px;\n        height: 24px; }\n  section.edit div.subactions {\n    position: absolute;\n    left: 50%;\n    top: 8px;\n    background: #fff;\n    padding: 2px;\n    border-radius: 6px;\n    box-shadow: 0px 2px 8px #0003;\n    transform: translate(-50%, 0);\n    z-index: 10; }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px;\n      border-radius: 4px; }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 24px;\n        height: 24px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB;EAEhB,oBAAoB;EAEpB,iBAAiB,EAAA;;AAGrB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,aAAa;EACb,sBAAsB,EAAA;EAR1B;IAWQ,gBAAgB;IAEhB,wBAAwB;IAExB,wCAAwC;IACxC,aAAa;IACb,uBAAuB,EAAA;IAjB/B;MAoBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MA9BzB;QAiCgB,gBAAgB,EAAA;EAjChC;IAuCQ,kBAAkB;IAElB,YAAY,EAAA;;AAIpB;EACI,kBAAkB;EAClB,aAAa;EACb,oCAAoC;EACpC,4BAA4B,EAAA;EAJhC;IAOQ,kBAAkB,EAAA;IAP1B;MAUY,kBAAkB;MAClB,OAAO;MACP,MAAM,EAAA;EAZlB;IAiBQ,gBAAgB;IAChB,YAAY;IAEZ,2BAA2B;IAE3B,aAAa;IACb,sBAAsB,EAAA;IAvB9B;MA0BY,aAAa,EAAA;MA1BzB;QA6BgB,uBAAuB;QAEvB,oBAAoB;QACpB,eAAe;QACf,gBAAgB;QAEhB,iBAAiB;QACjB,YAAY;QACZ,mBAAmB;QACnB,aAAa;QAEb,YAAY,EAAA;QAxC5B;UA2CoB,+BAA+B,EAAA;IA3CnD;MAiDY,SAAS;MAET,YAAY;MACZ,kBAAkB,EAAA;IApD9B;MAwDY,gBAAgB;MAEhB,aAAa;MACb,qCAAqC;MACrC,QAAQ,EAAA;MA5DpB;QA+DgB,eAAe;QAEf,gBAAgB;QAEhB,aAAa;QACb,sBAAsB,EAAA;QApEtC;UAuEoB,eAAe;UACf,kBAAkB;UAClB,mBAAmB;UACnB,uBAAuB;UAEvB,YAAY;UAEZ,gBAAgB,EAAA;QA9EpC;UAkFoB,WAAW;UACX,YAAY,EAAA;EAnFhC;IA0FQ,oBAAoB;IACpB,eAAe;IACf,kBAAkB;IAElB,YAAY;IACZ,aAAa;IACb,iBAAiB,EAAA;EAhGzB;IAoGQ,kBAAkB;IAClB,OAAO;IACP,QAAQ;IAER,2BAA2B;IAC3B,WAAW,EAAA;EAzGnB;IA6GQ,kBAAkB;IAClB,QAAQ;IACR,QAAQ;IAER,2BAA2B;IAC3B,WAAW,EAAA;EAlHnB;IAsHQ,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAzH9B;MA4HY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAnI9B;QAsIgB,gBAAgB,EAAA;MAtIhC;QA0IgB,gBAAgB,EAAA;MA1IhC;QA8IgB,gBAAgB,EAAA;QA9IhC;UAiJoB,iBAAiB,EAAA;MAjJrC;QAsJgB,WAAW;QACX,YAAY,EAAA;EAvJ5B;IA6JQ,kBAAkB;IAClB,SAAS;IACT,QAAQ;IAER,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAElB,6BAA6B;IAE7B,6BAA6B;IAC7B,WAAW,EAAA;IAzKnB;MA4KY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,YAAY;MACZ,kBAAkB,EAAA;MAnL9B;QAsLgB,gBAAgB,EAAA;MAtLhC;QA0LgB,gBAAgB,EAAA;MA1LhC;QA8LgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\r\n    background: #fff;\r\n\r\n    font-family: \"Inter\";\r\n\r\n    user-select: none;\r\n}\r\n\r\nmain {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    & > nav {\r\n        background: #eee;\r\n\r\n        padding: 4px 4px 0px 4px;\r\n\r\n        box-shadow: inset 0px -2px 2px #00000005;\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 11pt;\r\n            font-weight: 500;\r\n\r\n            padding: 6px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            border-radius: 4px 4px 0px 0px;\r\n            outline: none;\r\n\r\n            &.active {\r\n                background: #fff;\r\n            }\r\n        }\r\n    }\r\n\r\n    section {\r\n        position: relative;\r\n\r\n        flex-grow: 1;\r\n    }\r\n}\r\n\r\nsection.edit {\r\n    position: relative;\r\n    display: grid;\r\n    grid-template-columns: auto 1fr auto;\r\n    grid-template-rows: 1fr auto;\r\n\r\n    div.viewport {\r\n        position: relative;\r\n\r\n        canvas {\r\n            position: absolute;\r\n            left: 0;\r\n            top: 0;\r\n        }\r\n    }\r\n\r\n    aside {\r\n        min-width: 320px;\r\n        width: 320px;\r\n\r\n        border-left: 1px solid #ddd;\r\n        \r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        nav {\r\n            display: flex;\r\n\r\n            button {\r\n                background: transparent;\r\n\r\n                font-family: \"Inter\";\r\n                font-size: 11pt;\r\n                font-weight: 400;\r\n\r\n                padding: 6px 20px;\r\n                border: none;\r\n                border-bottom: none;\r\n                outline: none;\r\n\r\n                flex-grow: 1;\r\n\r\n                &.active {\r\n                    box-shadow: inset 0px -2px #333;\r\n                }\r\n            }\r\n        }\r\n\r\n        div.listContainer {\r\n            height: 0; // WTF???\r\n\r\n            flex-grow: 1;\r\n            overflow-y: scroll;\r\n        }\r\n\r\n        div.glyphList {\r\n            background: #eee;\r\n\r\n            display: grid;\r\n            grid-template-columns: repeat(4, 1fr);\r\n            gap: 1px;\r\n\r\n            div.glyph {\r\n                max-width: 75px;\r\n\r\n                background: #fff;\r\n\r\n                display: flex;\r\n                flex-direction: column;\r\n\r\n                label {\r\n                    font-size: 10pt;\r\n                    text-align: center;\r\n                    white-space: nowrap;\r\n                    text-overflow: ellipsis;\r\n                    \r\n                    padding: 2px;\r\n\r\n                    overflow: hidden;\r\n                }\r\n\r\n                canvas {\r\n                    width: 100%;\r\n                    height: auto;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    input.viewportText {\r\n        font-family: \"Inter\";\r\n        font-size: 24pt;\r\n        text-align: center;\r\n\r\n        border: none;\r\n        outline: none;\r\n        padding: 6px 20px;\r\n    }\r\n\r\n    button.prevGlyph {\r\n        position: absolute;\r\n        left: 0;\r\n        top: 50%;\r\n\r\n        transform: translateY(-50%);\r\n        z-index: 10;\r\n    }\r\n\r\n    button.nextGlyph {\r\n        position: absolute;\r\n        right: 0;\r\n        top: 50%;\r\n\r\n        transform: translateY(-50%);\r\n        z-index: 10;\r\n    }\r\n\r\n    div.tools {\r\n        padding: 2px;\r\n\r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 4px;\r\n            border-radius: 4px;\r\n\r\n            &:hover {\r\n                background: #eee;\r\n            }\r\n\r\n            &:active {\r\n                background: #ddd;\r\n            }\r\n\r\n            &.active {\r\n                background: #08f;\r\n\r\n                img {\r\n                    filter: invert(1);\r\n                }\r\n            }\r\n\r\n            img {\r\n                width: 24px;\r\n                height: 24px;\r\n            }\r\n        }\r\n    }\r\n\r\n    div.subactions { \r\n        position: absolute;\r\n        left: 50%;\r\n        top: 8px;\r\n\r\n        background: #fff;\r\n\r\n        padding: 2px;\r\n        border-radius: 6px;\r\n\r\n        box-shadow: 0px 2px 8px #0003;\r\n\r\n        transform: translate(-50%, 0);\r\n        z-index: 10;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 4px;\r\n            border-radius: 4px;\r\n\r\n            &:hover {\r\n                background: #eee;\r\n            }\r\n\r\n            &:active {\r\n                background: #ddd;\r\n            }\r\n\r\n            img {\r\n                width: 24px;\r\n                height: 24px;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "body {\n  background: #fff;\n  font-family: \"Inter\";\n  user-select: none; }\n\nmain {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background: #eee;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start; }\n  main > nav {\n    width: calc(100vw - 283px);\n    padding: 2px 0px 0px 0px;\n    box-shadow: inset 0px -2px 2px #00000005;\n    display: flex;\n    justify-content: center; }\n    main > nav button {\n      background: transparent;\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 500;\n      padding: 6px 20px;\n      border: none;\n      border-bottom: none;\n      border-radius: 2px 2px 0px 0px;\n      outline: none; }\n      main > nav button.active {\n        background: #fff; }\n  main section {\n    position: relative;\n    background: #fff;\n    width: 100vw;\n    flex-grow: 1; }\n\nsection.edit {\n  position: relative;\n  display: grid;\n  grid-template-columns: auto 1fr auto;\n  grid-template-rows: 1fr auto; }\n  section.edit div.viewport {\n    position: relative; }\n    section.edit div.viewport canvas {\n      position: absolute;\n      left: 0;\n      top: 0; }\n  section.edit aside {\n    min-width: 320px;\n    width: 320px;\n    border-left: 1px solid #ddd;\n    display: flex;\n    flex-direction: column; }\n    section.edit aside nav {\n      display: flex; }\n      section.edit aside nav button {\n        background: transparent;\n        font-family: \"Inter\";\n        font-size: 10pt;\n        font-weight: 400;\n        padding: 6px 20px;\n        border: none;\n        border-bottom: none;\n        outline: none;\n        flex-grow: 1; }\n        section.edit aside nav button.active {\n          box-shadow: inset 0px -2px #333; }\n    section.edit aside div.listContainer {\n      height: 0;\n      flex-grow: 1;\n      overflow-y: scroll; }\n    section.edit aside div.glyphList {\n      background: #eee;\n      display: grid;\n      grid-template-columns: repeat(4, 1fr);\n      gap: 1px; }\n      section.edit aside div.glyphList div.glyph {\n        max-width: 75px;\n        background: #fff;\n        display: flex;\n        flex-direction: column; }\n        section.edit aside div.glyphList div.glyph label {\n          font-size: 10pt;\n          text-align: center;\n          white-space: nowrap;\n          text-overflow: ellipsis;\n          padding: 2px;\n          overflow: hidden; }\n        section.edit aside div.glyphList div.glyph canvas {\n          width: 100%;\n          height: auto; }\n  section.edit input.viewportText {\n    font-family: \"Inter\";\n    font-size: 24pt;\n    text-align: center;\n    border: none;\n    outline: none;\n    padding: 6px 20px; }\n  section.edit button.prevGlyph {\n    position: absolute;\n    left: 0;\n    top: 50%;\n    transform: translateY(-50%);\n    z-index: 10; }\n  section.edit button.nextGlyph {\n    position: absolute;\n    right: 0;\n    top: 50%;\n    transform: translateY(-50%);\n    z-index: 10; }\n  section.edit div.tools {\n    padding: 8px 2px;\n    display: flex;\n    flex-direction: column;\n    border-right: 1px solid #ddd; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 6px 8px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: #eee; }\n      section.edit div.tools button:active {\n        background: #ddd; }\n      section.edit div.tools button.active {\n        background: #eee;\n        box-shadow: inset 0px 0px 0px 1px #bbb; }\n      section.edit div.tools button img {\n        width: 16px;\n        height: 16px; }\n  section.edit div.subactionsBar {\n    position: absolute;\n    left: 0;\n    right: 0;\n    top: 8px;\n    display: flex;\n    justify-content: center; }\n  section.edit div.subactions {\n    background: #fff;\n    padding: 2px;\n    border-radius: 4px;\n    border: 1px solid #bbb;\n    box-shadow: 0px 2px 4px #0001;\n    display: flex;\n    z-index: 10; }\n    section.edit div.subactions > div:not(:last-child) {\n      border-right: 1px solid #ddd;\n      padding: 0px 2px 0px 0px; }\n    section.edit div.subactions > div:not(:first-child) {\n      padding: 0px 0px 0px 2px; }\n    section.edit div.subactions button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 4px 6px;\n      border-radius: 2px; }\n      section.edit div.subactions button:disabled img {\n        filter: grayscale(1) opacity(0.5); }\n      section.edit div.subactions button:hover {\n        background: #eee; }\n      section.edit div.subactions button:active {\n        background: #ddd; }\n      section.edit div.subactions button img {\n        width: 16px;\n        height: 16px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,gBAAgB;EAEhB,oBAAoB;EAEpB,iBAAiB,EAAA;;AAGrB;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EAET,gBAAgB;EAEhB,aAAa;EACb,sBAAsB;EACtB,uBAAuB,EAAA;EAX3B;IAcQ,0BAA0B;IAE1B,wBAAwB;IAExB,wCAAwC;IACxC,aAAa;IACb,uBAAuB,EAAA;IApB/B;MAuBY,uBAAuB;MAEvB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,aAAa,EAAA;MAjCzB;QAoCgB,gBAAgB,EAAA;EApChC;IA0CQ,kBAAkB;IAElB,gBAAgB;IAEhB,YAAY;IAEZ,YAAY,EAAA;;AAIpB;EACI,kBAAkB;EAClB,aAAa;EACb,oCAAoC;EACpC,4BAA4B,EAAA;EAJhC;IAOQ,kBAAkB,EAAA;IAP1B;MAUY,kBAAkB;MAClB,OAAO;MACP,MAAM,EAAA;EAZlB;IAiBQ,gBAAgB;IAChB,YAAY;IAEZ,2BAA2B;IAE3B,aAAa;IACb,sBAAsB,EAAA;IAvB9B;MA0BY,aAAa,EAAA;MA1BzB;QA6BgB,uBAAuB;QAEvB,oBAAoB;QACpB,eAAe;QACf,gBAAgB;QAEhB,iBAAiB;QACjB,YAAY;QACZ,mBAAmB;QACnB,aAAa;QAEb,YAAY,EAAA;QAxC5B;UA2CoB,+BAA+B,EAAA;IA3CnD;MAiDY,SAAS;MAET,YAAY;MACZ,kBAAkB,EAAA;IApD9B;MAwDY,gBAAgB;MAEhB,aAAa;MACb,qCAAqC;MACrC,QAAQ,EAAA;MA5DpB;QA+DgB,eAAe;QAEf,gBAAgB;QAEhB,aAAa;QACb,sBAAsB,EAAA;QApEtC;UAuEoB,eAAe;UACf,kBAAkB;UAClB,mBAAmB;UACnB,uBAAuB;UAEvB,YAAY;UAEZ,gBAAgB,EAAA;QA9EpC;UAkFoB,WAAW;UACX,YAAY,EAAA;EAnFhC;IA0FQ,oBAAoB;IACpB,eAAe;IACf,kBAAkB;IAElB,YAAY;IACZ,aAAa;IACb,iBAAiB,EAAA;EAhGzB;IAoGQ,kBAAkB;IAClB,OAAO;IACP,QAAQ;IAER,2BAA2B;IAC3B,WAAW,EAAA;EAzGnB;IA6GQ,kBAAkB;IAClB,QAAQ;IACR,QAAQ;IAER,2BAA2B;IAC3B,WAAW,EAAA;EAlHnB;IAsHQ,gBAAgB;IAEhB,aAAa;IACb,sBAAsB;IAEtB,4BAA4B,EAAA;IA3HpC;MA8HY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,gBAAgB;MAChB,kBAAkB,EAAA;MArI9B;QAwIgB,gBAAgB,EAAA;MAxIhC;QA4IgB,gBAAgB,EAAA;MA5IhC;QAgJgB,gBAAgB;QAChB,sCAAsC,EAAA;MAjJtD;QAqJgB,WAAW;QACX,YAAY,EAAA;EAtJ5B;IA4JQ,kBAAkB;IAClB,OAAO;IACP,QAAQ;IACR,QAAQ;IAER,aAAa;IACb,uBAAuB,EAAA;EAlK/B;IAsKQ,gBAAgB;IAEhB,YAAY;IACZ,kBAAkB;IAClB,sBAAsB;IAEtB,6BAA6B;IAE7B,aAAa;IACb,WAAW,EAAA;IA/KnB;MAkLY,4BAA4B;MAC5B,wBAAwB,EAAA;IAnLpC;MAuLY,wBAAwB,EAAA;IAvLpC;MA2LY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,gBAAgB;MAChB,kBAAkB,EAAA;MAlM9B;QAqMgB,iCAAiC,EAAA;MArMjD;QAyMgB,gBAAgB,EAAA;MAzMhC;QA6MgB,gBAAgB,EAAA;MA7MhC;QAiNgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["body {\r\n    background: #fff;\r\n\r\n    font-family: \"Inter\";\r\n\r\n    user-select: none;\r\n}\r\n\r\nmain {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n\r\n    background: #eee;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n\r\n    & > nav {\r\n        width: calc(100vw - 283px);\r\n\r\n        padding: 2px 0px 0px 0px;\r\n\r\n        box-shadow: inset 0px -2px 2px #00000005;\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 500;\r\n\r\n            padding: 6px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            border-radius: 2px 2px 0px 0px;\r\n            outline: none;\r\n\r\n            &.active {\r\n                background: #fff;\r\n            }\r\n        }\r\n    }\r\n\r\n    section {\r\n        position: relative;\r\n\r\n        background: #fff;\r\n\r\n        width: 100vw;\r\n\r\n        flex-grow: 1;\r\n    }\r\n}\r\n\r\nsection.edit {\r\n    position: relative;\r\n    display: grid;\r\n    grid-template-columns: auto 1fr auto;\r\n    grid-template-rows: 1fr auto;\r\n\r\n    div.viewport {\r\n        position: relative;\r\n\r\n        canvas {\r\n            position: absolute;\r\n            left: 0;\r\n            top: 0;\r\n        }\r\n    }\r\n\r\n    aside {\r\n        min-width: 320px;\r\n        width: 320px;\r\n\r\n        border-left: 1px solid #ddd;\r\n        \r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        nav {\r\n            display: flex;\r\n\r\n            button {\r\n                background: transparent;\r\n\r\n                font-family: \"Inter\";\r\n                font-size: 10pt;\r\n                font-weight: 400;\r\n\r\n                padding: 6px 20px;\r\n                border: none;\r\n                border-bottom: none;\r\n                outline: none;\r\n\r\n                flex-grow: 1;\r\n\r\n                &.active {\r\n                    box-shadow: inset 0px -2px #333;\r\n                }\r\n            }\r\n        }\r\n\r\n        div.listContainer {\r\n            height: 0; // WTF???\r\n\r\n            flex-grow: 1;\r\n            overflow-y: scroll;\r\n        }\r\n\r\n        div.glyphList {\r\n            background: #eee;\r\n\r\n            display: grid;\r\n            grid-template-columns: repeat(4, 1fr);\r\n            gap: 1px;\r\n\r\n            div.glyph {\r\n                max-width: 75px;\r\n\r\n                background: #fff;\r\n\r\n                display: flex;\r\n                flex-direction: column;\r\n\r\n                label {\r\n                    font-size: 10pt;\r\n                    text-align: center;\r\n                    white-space: nowrap;\r\n                    text-overflow: ellipsis;\r\n                    \r\n                    padding: 2px;\r\n\r\n                    overflow: hidden;\r\n                }\r\n\r\n                canvas {\r\n                    width: 100%;\r\n                    height: auto;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    input.viewportText {\r\n        font-family: \"Inter\";\r\n        font-size: 24pt;\r\n        text-align: center;\r\n\r\n        border: none;\r\n        outline: none;\r\n        padding: 6px 20px;\r\n    }\r\n\r\n    button.prevGlyph {\r\n        position: absolute;\r\n        left: 0;\r\n        top: 50%;\r\n\r\n        transform: translateY(-50%);\r\n        z-index: 10;\r\n    }\r\n\r\n    button.nextGlyph {\r\n        position: absolute;\r\n        right: 0;\r\n        top: 50%;\r\n\r\n        transform: translateY(-50%);\r\n        z-index: 10;\r\n    }\r\n\r\n    div.tools {\r\n        padding: 8px 2px;\r\n\r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        border-right: 1px solid #ddd;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 6px 8px;\r\n            border-radius: 4px;\r\n\r\n            &:hover {\r\n                background: #eee;\r\n            }\r\n\r\n            &:active {\r\n                background: #ddd;\r\n            }\r\n\r\n            &.active {\r\n                background: #eee;\r\n                box-shadow: inset 0px 0px 0px 1px #bbb;\r\n            }\r\n\r\n            img {\r\n                width: 16px;\r\n                height: 16px;\r\n            }\r\n        }\r\n    }\r\n\r\n    div.subactionsBar {\r\n        position: absolute;\r\n        left: 0;\r\n        right: 0;\r\n        top: 8px;\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n    }\r\n\r\n    div.subactions {\r\n        background: #fff;\r\n\r\n        padding: 2px;\r\n        border-radius: 4px;\r\n        border: 1px solid #bbb;\r\n\r\n        box-shadow: 0px 2px 4px #0001;\r\n\r\n        display: flex;\r\n        z-index: 10;\r\n\r\n        & > div:not(:last-child) {\r\n            border-right: 1px solid #ddd;\r\n            padding: 0px 2px 0px 0px;\r\n        }\r\n\r\n        & > div:not(:first-child) {\r\n            padding: 0px 0px 0px 2px;\r\n        }\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 4px 6px;\r\n            border-radius: 2px;\r\n            \r\n            &:disabled img {\r\n                filter: grayscale(1) opacity(0.5);\r\n            }\r\n\r\n            &:hover {\r\n                background: #eee;\r\n            }\r\n\r\n            &:active {\r\n                background: #ddd;\r\n            }\r\n\r\n            img {\r\n                width: 16px;\r\n                height: 16px;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -14787,10 +14787,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _font_glyph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./font/glyph */ "./src/typeedit/font/glyph.ts");
 /* harmony import */ var _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./viewport/context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
 /* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./font/font */ "./src/typeedit/font/font.ts");
-/* harmony import */ var _ui_toolbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ui/toolbar */ "./src/typeedit/ui/toolbar.ts");
+/* harmony import */ var _ui_actionbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ui/actionbar */ "./src/typeedit/ui/actionbar.ts");
 /* harmony import */ var _ui_viewport__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ui/viewport */ "./src/typeedit/ui/viewport.ts");
 /* harmony import */ var _ui_glyphBar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ui/glyphBar */ "./src/typeedit/ui/glyphBar.ts");
 /* harmony import */ var _ui_glyphList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ui/glyphList */ "./src/typeedit/ui/glyphList.ts");
+/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./undo/history */ "./src/typeedit/undo/history.ts");
+
 
 
 
@@ -14802,6 +14804,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? ";
+var globalSubActions = [
+    {
+        name: "Undo",
+        icon: "undo",
+        accelerator: "",
+        handler: function () {
+            Object(_undo_history__WEBPACK_IMPORTED_MODULE_10__["undo"])();
+        }
+    },
+    {
+        name: "Redo",
+        icon: "redo",
+        accelerator: "",
+        handler: function () {
+            Object(_undo_history__WEBPACK_IMPORTED_MODULE_10__["redo"])();
+        }
+    },
+];
 /* harmony default export */ __webpack_exports__["default"] = (function (otfont) {
     var font = _font_font__WEBPACK_IMPORTED_MODULE_5__["Font"].fromOTFont(otfont);
     var glyphs = [];
@@ -14812,17 +14832,17 @@ var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123
     var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_4__["GlyphContext"]("ABC".split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 0);
     var viewport = Object(_ui_viewport__WEBPACK_IMPORTED_MODULE_7__["setupViewport"])(context);
     viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__["HandleTool"]());
-    Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [viewport.tool.subactions]);
+    Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [globalSubActions, viewport.tool.subactions]);
     Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_9__["prepareGlyphList"])(font);
     Object(_ui_glyphBar__WEBPACK_IMPORTED_MODULE_8__["prepareGlyphBar"])(viewport);
     // exportFont(font, "build/test/exported.otf")
     document.querySelector("button[data-tool=handle]").addEventListener("click", function () {
         viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__["HandleTool"]());
-        Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [viewport.tool.subactions]);
+        Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [globalSubActions, viewport.tool.subactions]);
     });
     document.querySelector("button[data-tool=pen]").addEventListener("click", function () {
         viewport.setTool(new _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_1__["BezierPenTool"]());
-        Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [viewport.tool.subactions]);
+        Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [globalSubActions, viewport.tool.subactions]);
     });
 });
 
@@ -15259,6 +15279,43 @@ module.exports = content.locals || {};
 
 /***/ }),
 
+/***/ "./src/typeedit/ui/actionbar.ts":
+/*!**************************************!*\
+  !*** ./src/typeedit/ui/actionbar.ts ***!
+  \**************************************/
+/*! exports provided: updateSubactions */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSubactions", function() { return updateSubactions; });
+var subactionContainer = document.querySelector("div.subactions");
+function updateSubactions(viewport, subactionGroups) {
+    subactionContainer.innerHTML = "";
+    for (var _i = 0, subactionGroups_1 = subactionGroups; _i < subactionGroups_1.length; _i++) {
+        var group = subactionGroups_1[_i];
+        var subactionGroup = document.createElement("div");
+        var _loop_1 = function (subaction) {
+            var button = document.createElement("button");
+            button.title = subaction.name;
+            button.addEventListener("click", function () {
+                subaction.handler();
+                viewport.render();
+            });
+            button.innerHTML = "\n                <img src=\"res/icons/" + subaction.icon + ".svg\">\n            ";
+            subactionGroup.appendChild(button);
+        };
+        for (var _a = 0, group_1 = group; _a < group_1.length; _a++) {
+            var subaction = group_1[_a];
+            _loop_1(subaction);
+        }
+        subactionContainer.appendChild(subactionGroup);
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/ui/glyphBar.ts":
 /*!*************************************!*\
   !*** ./src/typeedit/ui/glyphBar.ts ***!
@@ -15347,9 +15404,7 @@ function drawGlyphPreview(glyph) {
 }
 function prepareGlyphList(font) {
     glyphListContainer.innerHTML = "";
-    var sortedGlyphs = font.glyphs.sort(function (g1, g2) { return g1.comparableCodePoint - g2.comparableCodePoint; });
-    console.log(sortedGlyphs);
-    sortedGlyphs.forEach(function (glyph) {
+    font.glyphs.sort(function (g1, g2) { return g1.comparableCodePoint - g2.comparableCodePoint; }).forEach(function (glyph) {
         var glyphDiv = document.createElement("div");
         glyphDiv.className = "glyph";
         glyphDiv.setAttribute("data-name", glyph.name);
@@ -15369,42 +15424,6 @@ function prepareGlyphList(font) {
     font.on("glyphModified", function (glyph) {
         drawGlyphPreview(glyph);
     });
-}
-
-
-/***/ }),
-
-/***/ "./src/typeedit/ui/toolbar.ts":
-/*!************************************!*\
-  !*** ./src/typeedit/ui/toolbar.ts ***!
-  \************************************/
-/*! exports provided: updateSubactions */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSubactions", function() { return updateSubactions; });
-var subactionContainer = document.querySelector("div.subactions");
-function updateSubactions(viewport, subactionGroups) {
-    subactionContainer.innerHTML = "";
-    for (var _i = 0, subactionGroups_1 = subactionGroups; _i < subactionGroups_1.length; _i++) {
-        var group = subactionGroups_1[_i];
-        var subactionGroup = document.createElement("div");
-        var _loop_1 = function (subaction) {
-            var button = document.createElement("button");
-            button.addEventListener("click", function () {
-                subaction.handler();
-                viewport.render();
-            });
-            button.innerHTML = "\n                <img src=\"res/icons/" + subaction.icon + ".svg\">\n            ";
-            subactionGroup.appendChild(button);
-        };
-        for (var _a = 0, group_1 = group; _a < group_1.length; _a++) {
-            var subaction = group_1[_a];
-            _loop_1(subaction);
-        }
-        subactionContainer.appendChild(subactionGroup);
-    }
 }
 
 
@@ -16293,22 +16312,6 @@ var HandleTool = /** @class */ (function () {
         this.handles = [];
         this.supportsForeignHandles = true;
         this.subactions = [
-            {
-                name: "Undo",
-                icon: "rotateleft",
-                accelerator: "",
-                handler: function () {
-                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["undo"])();
-                }
-            },
-            {
-                name: "Redo",
-                icon: "rotateright",
-                accelerator: "",
-                handler: function () {
-                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_0__["redo"])();
-                }
-            },
             {
                 name: "Flip X",
                 icon: "flipx",

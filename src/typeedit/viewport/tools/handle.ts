@@ -24,22 +24,6 @@ export class HandleTool implements ITool {
 
     public subactions: ToolSubAction[] = [
         {
-            name: "Undo",
-            icon: "rotateleft",
-            accelerator: "",
-            handler: () => {
-                undo()
-            }
-        },
-        {
-            name: "Redo",
-            icon: "rotateright",
-            accelerator: "",
-            handler: () => {
-                redo()
-            }
-        },
-        {
             name: "Flip X",
             icon: "flipx",
             accelerator: "",

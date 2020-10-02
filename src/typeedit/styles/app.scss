@@ -13,13 +13,16 @@ main {
     right: 0;
     bottom: 0;
 
+    background: #f6f6f6;
+
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 
     & > nav {
-        background: #eee;
+        width: calc(100vw - 283px);
 
-        padding: 4px 4px 0px 4px;
+        padding: 2px 0px 0px 0px;
 
         box-shadow: inset 0px -2px 2px #00000005;
         display: flex;
@@ -29,13 +32,13 @@ main {
             background: transparent;
 
             font-family: "Inter";
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: 500;
 
             padding: 6px 20px;
             border: none;
             border-bottom: none;
-            border-radius: 4px 4px 0px 0px;
+            border-radius: 2px 2px 0px 0px;
             outline: none;
 
             &.active {
@@ -46,6 +49,10 @@ main {
 
     section {
         position: relative;
+
+        background: #fff;
+
+        width: 100vw;
 
         flex-grow: 1;
     }
@@ -83,7 +90,7 @@ section.edit {
                 background: transparent;
 
                 font-family: "Inter";
-                font-size: 11pt;
+                font-size: 10pt;
                 font-weight: 400;
 
                 padding: 6px 20px;
@@ -169,10 +176,12 @@ section.edit {
     }
 
     div.tools {
-        padding: 2px;
+        padding: 8px 2px;
 
         display: flex;
         flex-direction: column;
+
+        border-right: 1px solid #ddd;
 
         button {
             background: transparent;
@@ -181,7 +190,7 @@ section.edit {
 
             border: none;
             outline: none;
-            padding: 4px;
+            padding: 6px 8px;
             border-radius: 4px;
 
             &:hover {
@@ -193,34 +202,47 @@ section.edit {
             }
 
             &.active {
-                background: #08f;
-
-                img {
-                    filter: invert(1);
-                }
+                background: #eee;
+                box-shadow: inset 0px 0px 0px 1px #bbb;
             }
 
             img {
-                width: 24px;
-                height: 24px;
+                width: 16px;
+                height: 16px;
             }
         }
     }
 
-    div.subactions { 
+    div.subactionsBar {
         position: absolute;
-        left: 50%;
+        left: 0;
+        right: 0;
         top: 8px;
 
+        display: flex;
+        justify-content: center;
+    }
+
+    div.subactions {
         background: #fff;
 
         padding: 2px;
-        border-radius: 6px;
+        border-radius: 4px;
+        border: 1px solid #bbb;
 
-        box-shadow: 0px 2px 8px #0003;
+        box-shadow: 0px 2px 4px #0001;
 
-        transform: translate(-50%, 0);
+        display: flex;
         z-index: 10;
+
+        & > div:not(:last-child) {
+            border-right: 1px solid #ddd;
+            padding: 0px 2px 0px 0px;
+        }
+
+        & > div:not(:first-child) {
+            padding: 0px 0px 0px 2px;
+        }
 
         button {
             background: transparent;
@@ -229,8 +251,12 @@ section.edit {
 
             border: none;
             outline: none;
-            padding: 4px;
-            border-radius: 4px;
+            padding: 4px 6px;
+            border-radius: 2px;
+            
+            &:disabled img {
+                filter: grayscale(1) opacity(0.5);
+            }
 
             &:hover {
                 background: #eee;
@@ -241,8 +267,8 @@ section.edit {
             }
 
             img {
-                width: 24px;
-                height: 24px;
+                width: 16px;
+                height: 16px;
             }
         }
     }

@@ -12,6 +12,7 @@ import { canRedo, canUndo, redo, undo } from "./undo/history"
 import { updateSubactions } from "./ui/toolbar"
 import { setupViewport } from "./ui/viewport"
 import { prepareGlyphBar } from "./ui/glyphBar"
+import { prepareGlyphList } from "./ui/glyphList"
 
 const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? "
 
@@ -31,6 +32,10 @@ export default (font: OTFont) => {
     const viewport = setupViewport(context)
     viewport.setTool(new HandleTool())
     updateSubactions(viewport, [viewport.tool.subactions])
+    
+    prepareGlyphList(fteFont)
+
+    exportFont(fteFont, "build/test/exported.otf")
 
     prepareGlyphBar(viewport)
 

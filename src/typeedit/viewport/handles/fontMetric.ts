@@ -93,6 +93,8 @@ export class FontMetricHandle implements IDrawableHandle {
                 this.glyph.metrics.rightBearing = x
                 break
         }
+
+        this.glyph.emit("modified")
     }
 
     get position() {

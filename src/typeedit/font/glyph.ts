@@ -1,3 +1,4 @@
+import { EventEmitter } from "events"
 import { Font as OTFont, Glyph as OTGlyph } from "opentype.js"
 import { BezierCurve, generateCurvesFromOTGlyph } from "../geometry/bezier/curve"
 import { IDrawable } from "../viewport/drawable"
@@ -8,7 +9,7 @@ export type GlyphMetrics = {
     rightBearing: number
 }
 
-export class Glyph {
+export class Glyph extends EventEmitter {
     public finalBeziers: BezierCurve[] = []
 
     constructor(
@@ -18,7 +19,14 @@ export class Glyph {
         public metrics: GlyphMetrics,
         public beziers: BezierCurve[]
     ) {
+        super()
+        
+        this.beziers.forEach(b => b.glyph = this)
         this.finalBeziers = beziers // for now
+
+        this.on("modified", () => {
+            this.font.emit("glyphModified", this)
+        })
     }
 
     static fromOTGlyph(font: Font, otfont: OTFont, otglyph: OTGlyph) {

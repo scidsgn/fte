@@ -1,9 +1,11 @@
+import { Glyph } from "../../font/glyph"
 import { BezierCurve } from "../../geometry/bezier/curve"
 import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Path } from "../../geometry/path"
 import { Point } from "../../geometry/point"
 import { BezierContext } from "../context/bezier"
 import { IContext } from "../context/context"
+import { GlyphContext } from "../context/glyph"
 import { IDrawableHandle } from "../drawable"
 import { BezierBasePointHandle } from "../handles/bezierBasePoint"
 import { BezierControlPointHandle } from "../handles/bezierControlPoint"
@@ -25,6 +27,9 @@ export class BezierPenTool implements ITool {
         const pos = v.co.clientToWorld(
             x, y
         )
+        let glyph: Glyph = null
+        if (v.context instanceof GlyphContext)
+            glyph = v.context.glyph
 
         v.nudgePoint(pos)
 
@@ -32,7 +37,7 @@ export class BezierPenTool implements ITool {
             e.type === "mousedown" && e.buttons & 1
         ) {
             if (!this.currentBezier) {
-                this.currentBezier = new BezierCurve()
+                this.currentBezier = new BezierCurve(glyph)
                 v.context.beziers.push(
                     this.currentBezier
                 )

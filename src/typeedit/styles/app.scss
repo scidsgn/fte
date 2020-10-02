@@ -55,9 +55,22 @@ section.edit {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr auto;
 
+    div.viewport {
+        position: relative;
+
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
     aside {
-        min-width: 200px;
-        width: 200px;
+        min-width: 320px;
+        width: 320px;
+        
+        display: flex;
+        flex-direction: column;
 
         nav {
             display: flex;
@@ -78,6 +91,35 @@ section.edit {
 
                 &.active {
                     box-shadow: inset 0px -2px #333;
+                }
+            }
+        }
+
+        div.listContainer {
+            height: 0; // WTF???
+
+            flex-grow: 1;
+            overflow-y: scroll;
+        }
+
+        div.glyphList {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            div.glyph {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    font-size: 10pt;
+                    text-align: center;
+                    
+                    padding: 2px;
+                }
+
+                canvas {
+                    width: 100%;
+                    height: auto;
                 }
             }
         }

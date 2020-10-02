@@ -1,14 +1,27 @@
-import { Font, Glyph, Path, PathCommand } from "opentype.js";
-import { Point } from "../point";
-import { BezierPoint, BezierPointType } from "./point";
+import { EventEmitter } from "events"
+import { Font, Glyph as OTGlyph, Path, PathCommand } from "opentype.js"
+import { Glyph } from "../../font/glyph"
+import { Point } from "../point"
+import { BezierPoint, BezierPointType } from "./point"
 
-export class BezierCurve {
+export class BezierCurve extends EventEmitter {
     public points: BezierPoint[] = []
     public closed = true
+
+    constructor(
+        public glyph?: Glyph
+    ) {
+        super()
+
+        this.on("modified", () => {
+            if (this.glyph) this.glyph.emit("modified")
+        })
+    }
 
     addPoint(point: BezierPoint) {
         point.curve = this
         this.points.push(point)
+        this.emit("modified")
     }
 
     static getPath2D(beziers: BezierCurve[]) {
@@ -45,7 +58,7 @@ function convertOTCoordinates(
 }
 
 export function generateCurvesFromOTGlyph(
-    otfont: Font, otglyph: Glyph
+    otfont: Font, otglyph: OTGlyph
 ): BezierCurve[] {
     const curves: BezierCurve[] = []
     let curve = new BezierCurve()

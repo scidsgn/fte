@@ -22,10 +22,10 @@ function drawGlyphPreview(glyph: Glyph) {
 
     const width = (
         glyph.metrics.rightBearing - glyph.metrics.leftBearing
-    )
+    ) * 50 / 512
 
+    ctx.translate((90 - width) / 2, 20)
     ctx.scale(50 / 512, 50 / 512)
-    ctx.translate((512 - width) / 2, 204)
     ctx.fillStyle = "#000"
     ctx.fill(path)
 }

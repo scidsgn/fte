@@ -37,12 +37,17 @@ export class HorizontalGuide implements IGuide {
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
+        const clientPos = v.co.worldToClient(
+            0, this.value
+        )
+        clientPos.y = Math.round(clientPos.y) + 0.5
+
         ctx.strokeStyle = "#f0f"
         ctx.lineWidth = 1 / v.co.scaleFactor
 
         ctx.beginPath()
-        ctx.moveTo(-9999, this.value)
-        ctx.lineTo(9999, this.value)
+        ctx.moveTo(-9999, clientPos.y)
+        ctx.lineTo(9999, clientPos.y)
         ctx.stroke()
     }
 }
@@ -76,12 +81,17 @@ export class VerticalGuide implements IGuide {
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
+        const clientPos = v.co.worldToClient(
+            this.value, 0
+        )
+        clientPos.x = Math.round(clientPos.x) + 0.5
+
         ctx.strokeStyle = "#f0f"
         ctx.lineWidth = 1 / v.co.scaleFactor
 
         ctx.beginPath()
-        ctx.moveTo(this.value, -9999)
-        ctx.lineTo(this.value, 9999)
+        ctx.moveTo(clientPos.x, -9999)
+        ctx.lineTo(clientPos.y, 9999)
         ctx.stroke()
     }
 }

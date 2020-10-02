@@ -15897,11 +15897,13 @@ var HorizontalGuide = /** @class */ (function () {
         }
     };
     HorizontalGuide.prototype.render = function (v, ctx) {
+        var clientPos = v.co.worldToClient(0, this.value);
+        clientPos.y = Math.round(clientPos.y) + 0.5;
         ctx.strokeStyle = "#f0f";
         ctx.lineWidth = 1 / v.co.scaleFactor;
         ctx.beginPath();
-        ctx.moveTo(-9999, this.value);
-        ctx.lineTo(9999, this.value);
+        ctx.moveTo(-9999, clientPos.y);
+        ctx.lineTo(9999, clientPos.y);
         ctx.stroke();
     };
     return HorizontalGuide;
@@ -15933,11 +15935,13 @@ var VerticalGuide = /** @class */ (function () {
         }
     };
     VerticalGuide.prototype.render = function (v, ctx) {
+        var clientPos = v.co.worldToClient(this.value, 0);
+        clientPos.x = Math.round(clientPos.x) + 0.5;
         ctx.strokeStyle = "#f0f";
         ctx.lineWidth = 1 / v.co.scaleFactor;
         ctx.beginPath();
-        ctx.moveTo(this.value, -9999);
-        ctx.lineTo(this.value, 9999);
+        ctx.moveTo(clientPos.x, -9999);
+        ctx.lineTo(clientPos.y, 9999);
         ctx.stroke();
     };
     return VerticalGuide;
@@ -16702,7 +16706,7 @@ var Viewport = /** @class */ (function () {
             var handle = handles_2[_i];
             var clientPos = this.co.worldToClient(handle.position.x, handle.position.y);
             this.ctx.resetTransform();
-            this.ctx.translate(clientPos.x, clientPos.y);
+            this.ctx.translate(Math.round(clientPos.x) + 0.5, Math.round(clientPos.y) + 0.5);
             handle.render(this, this.ctx);
         }
     };
@@ -16719,6 +16723,7 @@ var Viewport = /** @class */ (function () {
         this.ctx.clearRect(0, 0, this.domCanvas.width, this.domCanvas.height);
         this.co.transformCanvas(this.ctx);
         this.context.render(this, this.ctx);
+        this.ctx.resetTransform();
         this.context.guides.forEach(function (guide) {
             if (guide.active)
                 guide.render(_this, _this.ctx);

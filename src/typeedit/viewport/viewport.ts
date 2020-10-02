@@ -148,7 +148,10 @@ export class Viewport {
             )
 
             this.ctx.resetTransform()
-            this.ctx.translate(clientPos.x, clientPos.y)
+            this.ctx.translate(
+                Math.round(clientPos.x) + 0.5,
+                Math.round(clientPos.y) + 0.5
+            )
 
             handle.render(this, this.ctx)
         }
@@ -175,6 +178,8 @@ export class Viewport {
         this.co.transformCanvas(this.ctx)
 
         this.context.render(this, this.ctx)
+
+        this.ctx.resetTransform()
         this.context.guides.forEach(
             guide => {
                 if (guide.active) guide.render(this, this.ctx)

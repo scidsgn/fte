@@ -55,6 +55,16 @@ section.edit {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr auto;
 
+    div.viewport {
+        position: relative;
+        
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
     aside {
         min-width: 200px;
         width: 200px;

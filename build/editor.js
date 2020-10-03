@@ -15523,7 +15523,6 @@ function setupViewport(context) {
     var container = document.querySelector("div.viewport");
     var viewport = new _viewport_viewport__WEBPACK_IMPORTED_MODULE_0__["Viewport"](context, [], null);
     container.appendChild(viewport.domCanvas);
-    viewport.updateViewportSize();
     window.addEventListener("resize", function () {
         viewport.updateViewportSize();
     });
@@ -15720,9 +15719,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlyphContext", function() { return GlyphContext; });
 /* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
 /* harmony import */ var _guides_line__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../guides/line */ "./src/typeedit/viewport/guides/line.ts");
-/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../guides/point */ "./src/typeedit/viewport/guides/point.ts");
-/* harmony import */ var _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../handles/fontMetric */ "./src/typeedit/viewport/handles/fontMetric.ts");
-/* harmony import */ var _bezier__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./bezier */ "./src/typeedit/viewport/context/bezier.ts");
+/* harmony import */ var _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../handles/fontMetric */ "./src/typeedit/viewport/handles/fontMetric.ts");
+/* harmony import */ var _bezier__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bezier */ "./src/typeedit/viewport/context/bezier.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -15736,7 +15734,6 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-
 
 
 
@@ -15760,11 +15757,11 @@ var GlyphContext = /** @class */ (function (_super) {
     GlyphContext.prototype.setupHandlesAndGuides = function () {
         var _this = this;
         this.handles = [
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandleType"].leftBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandleType"].rightBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandleType"].ascender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandleType"].descender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_3__["FontMetricHandleType"].xHeight)
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].leftBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].rightBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].ascender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].descender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_2__["FontMetricHandleType"].xHeight)
         ];
         this.guides = [
             new _guides_line__WEBPACK_IMPORTED_MODULE_1__["HorizontalGuide"](0),
@@ -15775,13 +15772,13 @@ var GlyphContext = /** @class */ (function (_super) {
             new _guides_line__WEBPACK_IMPORTED_MODULE_1__["VerticalGuide"](function () { return _this.glyph.metrics.leftBearing; }, this.handles[0]),
             new _guides_line__WEBPACK_IMPORTED_MODULE_1__["VerticalGuide"](function () { return _this.glyph.metrics.rightBearing; }, this.handles[1])
         ];
-        for (var _i = 0, _a = this.beziers; _i < _a.length; _i++) {
-            var bezier = _a[_i];
-            for (var _b = 0, _c = bezier.points; _b < _c.length; _b++) {
-                var point = _c[_b];
-                this.guides.push(new _guides_point__WEBPACK_IMPORTED_MODULE_2__["PointGuide"](point.base));
-            }
-        }
+        // for (let bezier of this.beziers) {
+        //     for (let point of bezier.points) {
+        //         this.guides.push(
+        //             new PointGuide(point.base)
+        //         )
+        //     }
+        // }
     };
     GlyphContext.prototype.setGlyphs = function (glyphs, currentIndex) {
         if (glyphs)
@@ -15867,7 +15864,7 @@ var GlyphContext = /** @class */ (function (_super) {
         ctx.stroke(workingPath);
     };
     return GlyphContext;
-}(_bezier__WEBPACK_IMPORTED_MODULE_4__["BezierContext"]));
+}(_bezier__WEBPACK_IMPORTED_MODULE_3__["BezierContext"]));
 
 
 
@@ -16035,12 +16032,26 @@ var VerticalGuide = /** @class */ (function () {
 /*!***********************************************!*\
   !*** ./src/typeedit/viewport/guides/point.ts ***!
   \***********************************************/
-/*! exports provided: PointGuide */
+/*! exports provided: PointGuide, HandleGuide */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointGuide", function() { return PointGuide; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HandleGuide", function() { return HandleGuide; });
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var PointGuide = /** @class */ (function () {
     function PointGuide(source) {
         this.source = source;
@@ -16080,6 +16091,22 @@ var PointGuide = /** @class */ (function () {
     };
     return PointGuide;
 }());
+
+var HandleGuide = /** @class */ (function (_super) {
+    __extends(HandleGuide, _super);
+    function HandleGuide(handle) {
+        var _this = _super.call(this, handle.position) || this;
+        _this.handle = handle;
+        return _this;
+    }
+    HandleGuide.prototype.nudge = function (v, pos, obj) {
+        if (this.handle.selected ||
+            this.handle === obj)
+            return;
+        _super.prototype.nudge.call(this, v, pos, obj);
+    };
+    return HandleGuide;
+}(PointGuide));
 
 
 
@@ -16364,8 +16391,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
 /* harmony import */ var _context_bezier__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
 /* harmony import */ var _context_glyph__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
-/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
-/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../guides/point */ "./src/typeedit/viewport/guides/point.ts");
+/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
+/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+
 
 
 
@@ -16381,6 +16410,7 @@ var BezierPenTool = /** @class */ (function () {
         this.currentBezier = null;
         this.currentPoint = null;
         this.handles = [];
+        this.guides = [];
         this.supportsForeignHandles = false;
         this.subactions = [];
     }
@@ -16399,7 +16429,7 @@ var BezierPenTool = /** @class */ (function () {
             }
             var nearHandle = v.nearHandle(pos.x, pos.y, "BezierBasePointHandle");
             if (nearHandle &&
-                nearHandle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_5__["BezierBasePointHandle"] &&
+                nearHandle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_6__["BezierBasePointHandle"] &&
                 nearHandle.position === this.currentBezier.points[0].base) {
                 // Forget the curve, but allow last adjustments
                 this.currentPoint = this.currentBezier.points[0];
@@ -16410,7 +16440,7 @@ var BezierPenTool = /** @class */ (function () {
                 var point = new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](pos.x, pos.y), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](pos.x, pos.y), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](pos.x, pos.y));
                 this.currentPoint = point;
                 this.currentBezier.addPoint(point);
-                this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_6__["BezierControlPointHandle"](point, point.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_6__["BezierControlPointHandle"](point, point.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_5__["BezierBasePointHandle"](point));
+                this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_7__["BezierControlPointHandle"](point, point.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_7__["BezierControlPointHandle"](point, point.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_6__["BezierBasePointHandle"](point));
             }
         }
         else if (e.type === "mousemove" && e.buttons & 1 &&
@@ -16435,7 +16465,18 @@ var BezierPenTool = /** @class */ (function () {
     };
     BezierPenTool.prototype.render = function (v, ctx) {
     };
-    BezierPenTool.prototype.updateContext = function (context) { };
+    BezierPenTool.prototype.updateContext = function (context) {
+        if (!(context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_3__["BezierContext"]))
+            return;
+        this.guides = [];
+        for (var _i = 0, _a = context.beziers; _i < _a.length; _i++) {
+            var bezier = _a[_i];
+            for (var _b = 0, _c = bezier.points; _b < _c.length; _b++) {
+                var point = _c[_b];
+                this.guides.push(new _guides_point__WEBPACK_IMPORTED_MODULE_5__["PointGuide"](point.base));
+            }
+        }
+    };
     return BezierPenTool;
 }());
 
@@ -16456,8 +16497,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../undo/history */ "./src/typeedit/undo/history.ts");
 /* harmony import */ var _utils_lerp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/lerp */ "./src/typeedit/utils/lerp.ts");
 /* harmony import */ var _context_bezier__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
-/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
-/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../guides/point */ "./src/typeedit/viewport/guides/point.ts");
+/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
+/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+
 
 
 
@@ -16471,6 +16514,7 @@ var HandleTool = /** @class */ (function () {
         this.accelerator = "A";
         this.selecting = false;
         this.handles = [];
+        this.guides = [];
         this.supportsForeignHandles = true;
         this.subactions = [
             {
@@ -16722,8 +16766,9 @@ var HandleTool = /** @class */ (function () {
             return;
         this.handles = [];
         context.beziers.forEach(function (bezier) {
-            bezier.points.forEach(function (p) { return _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_4__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_4__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_3__["BezierBasePointHandle"](p)); });
+            bezier.points.forEach(function (p) { return _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_5__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_5__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_4__["BezierBasePointHandle"](p)); });
         });
+        this.guides = this.handles.filter(function (h) { return h instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_4__["BezierBasePointHandle"]; }).map(function (h) { return new _guides_point__WEBPACK_IMPORTED_MODULE_3__["HandleGuide"](h); });
     };
     return HandleTool;
 }());
@@ -16855,9 +16900,11 @@ var Viewport = /** @class */ (function () {
     Viewport.prototype.nudgePoint = function (pos, obj) {
         var _this = this;
         this.context.guides.forEach(function (g) { return g.nudge(_this, pos, obj); });
+        this.tool.guides.forEach(function (g) { return g.nudge(_this, pos, obj); });
     };
     Viewport.prototype.disableAllGuides = function () {
         this.context.guides.forEach(function (g) { return g.active = false; });
+        this.tool.guides.forEach(function (g) { return g.active = false; });
     };
     Viewport.prototype.render = function () {
         var _this = this;
@@ -16867,6 +16914,10 @@ var Viewport = /** @class */ (function () {
         this.context.render(this, this.ctx);
         this.ctx.resetTransform();
         this.context.guides.forEach(function (guide) {
+            if (guide.active)
+                guide.render(_this, _this.ctx);
+        });
+        this.tool.guides.forEach(function (guide) {
             if (guide.active)
                 guide.render(_this, _this.ctx);
         });

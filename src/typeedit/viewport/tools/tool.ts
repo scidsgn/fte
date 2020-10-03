@@ -1,5 +1,6 @@
 import { IContext } from "../context/context"
 import { IDrawableHandle } from "../drawable"
+import { IGuide } from "../guides/guide"
 import { Viewport } from "../viewport"
 
 export type ToolSubAction = {
@@ -15,6 +16,7 @@ export interface ITool {
     accelerator: string
     
     handles: IDrawableHandle[]
+    guides: IGuide[]
     supportsForeignHandles: boolean
 
     subactions: ToolSubAction[]

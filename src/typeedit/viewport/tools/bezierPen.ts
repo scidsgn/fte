@@ -7,6 +7,8 @@ import { BezierContext } from "../context/bezier"
 import { IContext } from "../context/context"
 import { GlyphContext } from "../context/glyph"
 import { IDrawableHandle } from "../drawable"
+import { IGuide } from "../guides/guide"
+import { PointGuide } from "../guides/point"
 import { BezierBasePointHandle } from "../handles/bezierBasePoint"
 import { BezierControlPointHandle } from "../handles/bezierControlPoint"
 import { Viewport } from "../viewport"
@@ -21,6 +23,7 @@ export class BezierPenTool implements ITool {
     private currentPoint: BezierPoint = null
 
     public handles: IDrawableHandle[] = []
+    public guides: IGuide[] = []
     public supportsForeignHandles = false
 
     public subactions: ToolSubAction[] = []
@@ -101,5 +104,17 @@ export class BezierPenTool implements ITool {
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
     }
 
-    updateContext(context: IContext) {}
+    updateContext(context: IContext) {
+        if (!(context instanceof BezierContext)) return
+
+        this.guides = []
+        
+        for (let bezier of context.beziers) {
+            for (let point of bezier.points) {
+                this.guides.push(
+                    new PointGuide(point.base)
+                )
+            }
+        }
+    }
 }

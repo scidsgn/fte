@@ -60,3 +60,19 @@ export class PointGuide implements IGuide {
         ctx.stroke()
     }
 }
+
+export class HandleGuide extends PointGuide {
+    constructor(
+        public handle: IDrawableHandle
+    ) {
+        super(handle.position)
+    }
+
+    nudge(v: Viewport, pos: Point, obj?: any) {
+        if (
+            this.handle.selected ||
+            this.handle === obj
+        ) return
+        super.nudge(v, pos, obj)
+    }
+}

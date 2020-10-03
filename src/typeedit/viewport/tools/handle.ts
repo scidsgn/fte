@@ -4,6 +4,8 @@ import { lerp, unlerp } from "../../utils/lerp";
 import { BezierContext } from "../context/bezier";
 import { IContext } from "../context/context";
 import { IDrawableHandle } from "../drawable";
+import { IGuide } from "../guides/guide";
+import { HandleGuide } from "../guides/point";
 import { BezierBasePointHandle } from "../handles/bezierBasePoint";
 import { BezierControlPointHandle } from "../handles/bezierControlPoint";
 import { Viewport } from "../viewport";
@@ -21,6 +23,7 @@ export class HandleTool implements ITool {
     private pivotHandle: IDrawableHandle
 
     public handles: IDrawableHandle[] = []
+    public guides: IGuide[] = []
     public supportsForeignHandles = true
 
     private moveStartPoint: Point
@@ -259,6 +262,7 @@ export class HandleTool implements ITool {
                 this.addHandlesToUndoContext(
                     v.getSelectedHandles()
                 )
+                
 
                 // First movement - snapping to the cursor
                 // const dPos = pos.getDiff(this.pivotHandle.position)
@@ -363,6 +367,12 @@ export class HandleTool implements ITool {
                     )
                 )
             }
+        )
+
+        this.guides = this.handles.filter(
+            h => h instanceof BezierBasePointHandle
+        ).map(
+            h => new HandleGuide(h)
         )
     }
 }

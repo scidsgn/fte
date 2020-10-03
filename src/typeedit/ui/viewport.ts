@@ -9,7 +9,6 @@ export function setupViewport(context: IContext) {
     )
     
     container.appendChild(viewport.domCanvas)
-    viewport.updateViewportSize()
     
     window.addEventListener("resize", () => {
         viewport.updateViewportSize()

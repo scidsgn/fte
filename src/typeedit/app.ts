@@ -100,17 +100,4 @@ export default (otfont: OTFont) => {
             }
         }
     })
-
-    document.querySelector("button[data-tool=handle]").addEventListener(
-        "click", () => {
-            viewport.setTool(new HandleTool())
-            updateSubactions(viewport, [globalSubActions, viewport.tool.subactions])
-        }
-    )
-    document.querySelector("button[data-tool=pen]").addEventListener(
-        "click", () => {
-            viewport.setTool(new BezierPenTool())
-            updateSubactions(viewport, [globalSubActions, viewport.tool.subactions])
-        }
-    )
 }

@@ -39,13 +39,13 @@ export class GlyphContext extends BezierContext {
             new VerticalGuide(() => this.glyph.metrics.rightBearing, this.handles[1])
         ]
 
-        for (let bezier of this.beziers) {
-            for (let point of bezier.points) {
-                this.guides.push(
-                    new PointGuide(point.base)
-                )
-            }
-        }
+        // for (let bezier of this.beziers) {
+        //     for (let point of bezier.points) {
+        //         this.guides.push(
+        //             new PointGuide(point.base)
+        //         )
+        //     }
+        // }
     }
 
     setGlyphs(glyphs?: Glyph[], currentIndex?: number) {

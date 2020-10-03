@@ -165,10 +165,16 @@ export class Viewport {
         this.context.guides.forEach(
             g => g.nudge(this, pos, obj)
         )
+        this.tool.guides.forEach(
+            g => g.nudge(this, pos, obj)
+        )
     }
 
     disableAllGuides() {
         this.context.guides.forEach(
+            g => g.active = false
+        )
+        this.tool.guides.forEach(
             g => g.active = false
         )
     }
@@ -185,6 +191,11 @@ export class Viewport {
 
         this.ctx.resetTransform()
         this.context.guides.forEach(
+            guide => {
+                if (guide.active) guide.render(this, this.ctx)
+            }
+        )
+        this.tool.guides.forEach(
             guide => {
                 if (guide.active) guide.render(this, this.ctx)
             }

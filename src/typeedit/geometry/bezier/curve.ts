@@ -22,6 +22,7 @@ export class BezierCurve extends EventEmitter {
         point.curve = this
         this.points.push(point)
         this.emit("modified")
+        this.emit("newPoint", point)
     }
 
     static getPath2D(beziers: BezierCurve[]) {

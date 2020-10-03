@@ -20,7 +20,7 @@ const globalSubActions: ToolSubAction[] = [
     {
         name: "Undo",
         icon: "undo",
-        accelerator: "",
+        accelerator: "^KeyZ",
         handler: () => {
             undo()
         }
@@ -28,7 +28,7 @@ const globalSubActions: ToolSubAction[] = [
     {
         name: "Redo",
         icon: "redo",
-        accelerator: "",
+        accelerator: "^+KeyZ",
         handler: () => {
             redo()
         }
@@ -82,6 +82,24 @@ export default (otfont: OTFont) => {
     viewport.updateViewportSize()
 
     // exportFont(font, "build/test/exported.otf")
+
+    window.addEventListener("keyup", (e) => {
+        if (document.activeElement !== document.body) return // for now
+
+        let accelString = e.code
+        if (e.shiftKey) accelString = "+" + accelString
+        if (e.ctrlKey) accelString = "^" + accelString
+
+        for (let action of [
+            globalSubActions, viewport.tool.subactions
+        ].flat()) {
+            if (action.accelerator === accelString) {
+                action.handler()
+                viewport.render()
+                return
+            }
+        }
+    })
 
     document.querySelector("button[data-tool=handle]").addEventListener(
         "click", () => {

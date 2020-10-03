@@ -14810,7 +14810,7 @@ var globalSubActions = [
     {
         name: "Undo",
         icon: "undo",
-        accelerator: "",
+        accelerator: "^KeyZ",
         handler: function () {
             Object(_undo_history__WEBPACK_IMPORTED_MODULE_10__["undo"])();
         }
@@ -14818,7 +14818,7 @@ var globalSubActions = [
     {
         name: "Redo",
         icon: "redo",
-        accelerator: "",
+        accelerator: "^+KeyZ",
         handler: function () {
             Object(_undo_history__WEBPACK_IMPORTED_MODULE_10__["redo"])();
         }
@@ -14847,6 +14847,25 @@ var globalTools = [
     Object(_ui_glyphBar__WEBPACK_IMPORTED_MODULE_8__["prepareGlyphBar"])(viewport);
     viewport.updateViewportSize();
     // exportFont(font, "build/test/exported.otf")
+    window.addEventListener("keyup", function (e) {
+        if (document.activeElement !== document.body)
+            return; // for now
+        var accelString = e.code;
+        if (e.shiftKey)
+            accelString = "+" + accelString;
+        if (e.ctrlKey)
+            accelString = "^" + accelString;
+        for (var _i = 0, _a = [
+            globalSubActions, viewport.tool.subactions
+        ].flat(); _i < _a.length; _i++) {
+            var action = _a[_i];
+            if (action.accelerator === accelString) {
+                action.handler();
+                viewport.render();
+                return;
+            }
+        }
+    });
     document.querySelector("button[data-tool=handle]").addEventListener("click", function () {
         viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__["HandleTool"]());
         Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [globalSubActions, viewport.tool.subactions]);

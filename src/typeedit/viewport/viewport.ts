@@ -64,11 +64,16 @@ export class Viewport {
                 )
                 this.render()
             } else {
-                this.co.translate(
-                    -e.deltaX, -e.deltaY
-                )
+                if (e.shiftKey && !e.deltaX) {
+                    this.co.translate(
+                        -e.deltaY, 0
+                    )
+                } else {
+                    this.co.translate(
+                        -e.deltaX, -e.deltaY
+                    )
+                }
                 this.render()
-                // this.dispatchMouseEvent(e)
             }
         })
     }

@@ -14866,14 +14866,6 @@ var globalTools = [
             }
         }
     });
-    document.querySelector("button[data-tool=handle]").addEventListener("click", function () {
-        viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__["HandleTool"]());
-        Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [globalSubActions, viewport.tool.subactions]);
-    });
-    document.querySelector("button[data-tool=pen]").addEventListener("click", function () {
-        viewport.setTool(new _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_1__["BezierPenTool"]());
-        Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [globalSubActions, viewport.tool.subactions]);
-    });
 });
 
 
@@ -16840,9 +16832,13 @@ var Viewport = /** @class */ (function () {
                 _this.render();
             }
             else {
-                _this.co.translate(-e.deltaX, -e.deltaY);
+                if (e.shiftKey && !e.deltaX) {
+                    _this.co.translate(-e.deltaY, 0);
+                }
+                else {
+                    _this.co.translate(-e.deltaX, -e.deltaY);
+                }
                 _this.render();
-                // this.dispatchMouseEvent(e)
             }
         });
     };

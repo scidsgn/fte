@@ -1,7 +1,6 @@
 import { Glyph } from "../../font/glyph"
 import { BezierCurve } from "../../geometry/bezier/curve"
 import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
-import { Path } from "../../geometry/path"
 import { Point } from "../../geometry/point"
 import { BezierContext } from "../context/bezier"
 import { IContext } from "../context/context"

@@ -64,7 +64,11 @@ export class Viewport {
                 )
                 this.render()
             } else {
-                this.dispatchMouseEvent(e)
+                this.co.translate(
+                    -e.deltaX, -e.deltaY
+                )
+                this.render()
+                // this.dispatchMouseEvent(e)
             }
         })
     }
@@ -157,9 +161,9 @@ export class Viewport {
         }
     }
 
-    nudgePoint(pos: Point) {
+    nudgePoint(pos: Point, obj?: any) {
         this.context.guides.forEach(
-            g => g.nudge(this, pos)
+            g => g.nudge(this, pos, obj)
         )
     }
 

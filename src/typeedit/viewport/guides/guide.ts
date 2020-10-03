@@ -3,8 +3,9 @@ import { Viewport } from "../viewport";
 
 export interface IGuide {
     active: boolean
+    source?: any
 
-    nudge: (v: Viewport, pos: Point) => void
+    nudge: (v: Viewport, pos: Point, obj?: any) => void
     render: (v: Viewport, ctx: CanvasRenderingContext2D) => void
 }
 
@@ -12,7 +13,8 @@ export class HorizontalGuide implements IGuide {
     public active = false
 
     constructor(
-        private valueHandler: number | (() => number)
+        private valueHandler: number | (() => number),
+        public source?: any
     ) {}
 
     get value() {
@@ -22,7 +24,12 @@ export class HorizontalGuide implements IGuide {
         return this.valueHandler
     }
 
-    nudge(v: Viewport, pos: Point) {
+    nudge(v: Viewport, pos: Point, obj?: any) {
+        if (obj && this.source && obj === this.source) {
+            this.active = false
+            return
+        }
+
         const clientPos = v.co.worldToClient(pos.x, pos.y)
         const clientTarget = v.co.worldToClient(pos.x, this.value)
 
@@ -56,7 +63,8 @@ export class VerticalGuide implements IGuide {
     public active = false
 
     constructor(
-        private valueHandler: number | (() => number)
+        private valueHandler: number | (() => number),
+        public source?: any
     ) {}
 
     get value() {
@@ -66,7 +74,12 @@ export class VerticalGuide implements IGuide {
         return this.valueHandler
     }
 
-    nudge(v: Viewport, pos: Point) {
+    nudge(v: Viewport, pos: Point, obj?: any) {
+        if (obj && this.source && obj === this.source) {
+            this.active = false
+            return
+        }
+
         const clientPos = v.co.worldToClient(pos.x, pos.y)
         const clientTarget = v.co.worldToClient(this.value, pos.y)
 
@@ -91,7 +104,7 @@ export class VerticalGuide implements IGuide {
 
         ctx.beginPath()
         ctx.moveTo(clientPos.x, -9999)
-        ctx.lineTo(clientPos.y, 9999)
+        ctx.lineTo(clientPos.x, 9999)
         ctx.stroke()
     }
 }

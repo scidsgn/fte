@@ -10,6 +10,10 @@ export type ToolSubAction = {
 }
 
 export interface ITool {
+    name: string
+    icon: string
+    accelerator: string
+    
     handles: IDrawableHandle[]
     supportsForeignHandles: boolean
 

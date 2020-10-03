@@ -10,8 +10,9 @@ import { updateSubactions } from "./ui/actionbar"
 import { setupViewport } from "./ui/viewport"
 import { prepareGlyphBar } from "./ui/glyphBar"
 import { prepareGlyphList } from "./ui/glyphList"
-import { ToolSubAction } from "./viewport/tools/tool"
+import { ITool, ToolSubAction } from "./viewport/tools/tool"
 import { undo, redo, canUndo, canRedo } from "./undo/history"
+import { prepareToolbar } from "./ui/toolbar"
 
 const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? "
 
@@ -32,6 +33,11 @@ const globalSubActions: ToolSubAction[] = [
             redo()
         }
     },
+]
+
+const globalTools = [
+    new HandleTool(),
+    new BezierPenTool()
 ]
 
 export default (otfont: OTFont) => {
@@ -57,9 +63,23 @@ export default (otfont: OTFont) => {
     viewport.setTool(new HandleTool())
     updateSubactions(viewport, [globalSubActions, viewport.tool.subactions])
     
+    prepareToolbar(
+        globalTools,
+        globalTools[0],
+        (tool: ITool) => {
+            viewport.setTool(tool)
+            updateSubactions(
+                viewport,
+                [globalSubActions, tool.subactions]
+            )
+        }
+    )
+
     prepareGlyphList(font)
 
     prepareGlyphBar(viewport)
+
+    viewport.updateViewportSize()
 
     // exportFont(font, "build/test/exported.otf")
 

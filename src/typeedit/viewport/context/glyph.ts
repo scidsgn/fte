@@ -32,11 +32,11 @@ export class GlyphContext extends BezierContext {
         this.guides = [
             new HorizontalGuide(0),
             new HorizontalGuide(512),
-            new HorizontalGuide(() => this.glyph.font.metrics.ascender),
-            new HorizontalGuide(() => this.glyph.font.metrics.descender),
-            new HorizontalGuide(() => this.glyph.font.metrics.xHeight),
-            new VerticalGuide(() => this.glyph.metrics.leftBearing),
-            new VerticalGuide(() => this.glyph.metrics.rightBearing)
+            new HorizontalGuide(() => this.glyph.font.metrics.ascender, this.handles[2]),
+            new HorizontalGuide(() => this.glyph.font.metrics.descender, this.handles[3]),
+            new HorizontalGuide(() => this.glyph.font.metrics.xHeight, this.handles[4]),
+            new VerticalGuide(() => this.glyph.metrics.leftBearing, this.handles[0]),
+            new VerticalGuide(() => this.glyph.metrics.rightBearing, this.handles[1])
         ]
     }
 

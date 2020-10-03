@@ -13,6 +13,10 @@ import { Viewport } from "../viewport"
 import { ITool, ToolSubAction } from "./tool"
 
 export class BezierPenTool implements ITool {
+    public name = "Pen"
+    public icon = "beziertool"
+    public accelerator = "P"
+
     private currentBezier: BezierCurve = null
     private currentPoint: BezierPoint = null
 

@@ -10,6 +10,10 @@ import { Viewport } from "../viewport";
 import { ITool, ToolSubAction } from "./tool";
 
 export class HandleTool implements ITool {
+    public name = "Curve edit"
+    public icon = "handletool"
+    public accelerator = "A"
+
     private selecting = false
     private selectionOrigin: Point
     private selectionTarget: Point
@@ -285,7 +289,7 @@ export class HandleTool implements ITool {
                 if (!this.pivotHandle) return
 
                 const rawX = pos.x, rawY = pos.y
-                v.nudgePoint(pos)
+                v.nudgePoint(pos, this.pivotHandle)
 
                 const inPointDiff = this.moveLastPoint.getDiff(
                     this.pivotHandle.position

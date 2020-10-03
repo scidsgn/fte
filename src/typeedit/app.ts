@@ -3,18 +3,15 @@ import "./styles/app.scss"
 import { Font as OTFont } from "opentype.js"
 import { BezierPenTool } from "./viewport/tools/bezierPen"
 import { HandleTool } from "./viewport/tools/handle"
-import { Glyph } from "./font/glyph"
 import { GlyphContext } from "./viewport/context/glyph"
-import { Font } from "./font/font"
 import { updateSubactions } from "./ui/actionbar"
 import { setupViewport } from "./ui/viewport"
 import { prepareGlyphBar } from "./ui/glyphBar"
 import { prepareGlyphList } from "./ui/glyphList"
 import { ITool, ToolSubAction } from "./viewport/tools/tool"
-import { undo, redo, canUndo, canRedo } from "./undo/history"
+import { undo, redo } from "./undo/history"
 import { prepareToolbar } from "./ui/toolbar"
-
-const basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? "
+import { importFont } from "./io/import"
 
 const globalSubActions: ToolSubAction[] = [
     {
@@ -41,24 +38,14 @@ const globalTools = [
 ]
 
 export default (otfont: OTFont) => {
-    const font = Font.fromOTFont(otfont)
-
-    const glyphs: Glyph[] = []
-    for (let i = 0; i < otfont.glyphs.length; i++) {
-        glyphs.push(
-            Glyph.fromOTGlyph(
-                font, otfont,
-                otfont.glyphs.get(i)
-            )
-        )
-    }
-    font.addGlyph(...glyphs)
+    const font = importFont(otfont)
 
     const context = new GlyphContext(
         "ABC".split("").map(
-            chr => glyphs.find(g => g.codePoint === chr.codePointAt(0))
+            chr => font.glyphs.find(g => g.codePoint === chr.codePointAt(0))
         ), 0
     )
+
     const viewport = setupViewport(context)
     viewport.setTool(new HandleTool())
     updateSubactions(viewport, [globalSubActions, viewport.tool.subactions])
@@ -80,8 +67,6 @@ export default (otfont: OTFont) => {
     prepareGlyphBar(viewport)
 
     viewport.updateViewportSize()
-
-    // exportFont(font, "build/test/exported.otf")
 
     window.addEventListener("keyup", (e) => {
         if (document.activeElement !== document.body) return // for now

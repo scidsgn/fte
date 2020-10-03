@@ -1,6 +1,7 @@
 import { EventEmitter } from "events"
 import { Font as OTFont, Glyph as OTGlyph } from "opentype.js"
-import { BezierCurve, generateCurvesFromOTGlyph } from "../geometry/bezier/curve"
+import { BezierCurve } from "../geometry/bezier/curve"
+import { generateCurvesFromOTGlyph } from "../io/import"
 import { IDrawable } from "../viewport/drawable"
 import { Font } from "./font"
 

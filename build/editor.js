@@ -14784,15 +14784,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_app_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_app_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./viewport/tools/bezierPen */ "./src/typeedit/viewport/tools/bezierPen.ts");
 /* harmony import */ var _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./viewport/tools/handle */ "./src/typeedit/viewport/tools/handle.ts");
-/* harmony import */ var _font_glyph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./font/glyph */ "./src/typeedit/font/glyph.ts");
-/* harmony import */ var _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./viewport/context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
-/* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./font/font */ "./src/typeedit/font/font.ts");
-/* harmony import */ var _ui_actionbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ui/actionbar */ "./src/typeedit/ui/actionbar.ts");
-/* harmony import */ var _ui_viewport__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ui/viewport */ "./src/typeedit/ui/viewport.ts");
-/* harmony import */ var _ui_glyphBar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ui/glyphBar */ "./src/typeedit/ui/glyphBar.ts");
-/* harmony import */ var _ui_glyphList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ui/glyphList */ "./src/typeedit/ui/glyphList.ts");
-/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./undo/history */ "./src/typeedit/undo/history.ts");
-/* harmony import */ var _ui_toolbar__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ui/toolbar */ "./src/typeedit/ui/toolbar.ts");
+/* harmony import */ var _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./viewport/context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
+/* harmony import */ var _ui_actionbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ui/actionbar */ "./src/typeedit/ui/actionbar.ts");
+/* harmony import */ var _ui_viewport__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ui/viewport */ "./src/typeedit/ui/viewport.ts");
+/* harmony import */ var _ui_glyphBar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ui/glyphBar */ "./src/typeedit/ui/glyphBar.ts");
+/* harmony import */ var _ui_glyphList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ui/glyphList */ "./src/typeedit/ui/glyphList.ts");
+/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./undo/history */ "./src/typeedit/undo/history.ts");
+/* harmony import */ var _ui_toolbar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ui/toolbar */ "./src/typeedit/ui/toolbar.ts");
+/* harmony import */ var _io_import__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./io/import */ "./src/typeedit/io/import.ts");
 
 
 
@@ -14804,15 +14803,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var basicCharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!? ";
 var globalSubActions = [
     {
         name: "Undo",
         icon: "undo",
         accelerator: "^KeyZ",
         handler: function () {
-            Object(_undo_history__WEBPACK_IMPORTED_MODULE_10__["undo"])();
+            Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["undo"])();
         }
     },
     {
@@ -14820,7 +14817,7 @@ var globalSubActions = [
         icon: "redo",
         accelerator: "^+KeyZ",
         handler: function () {
-            Object(_undo_history__WEBPACK_IMPORTED_MODULE_10__["redo"])();
+            Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["redo"])();
         }
     },
 ];
@@ -14829,24 +14826,18 @@ var globalTools = [
     new _viewport_tools_bezierPen__WEBPACK_IMPORTED_MODULE_1__["BezierPenTool"]()
 ];
 /* harmony default export */ __webpack_exports__["default"] = (function (otfont) {
-    var font = _font_font__WEBPACK_IMPORTED_MODULE_5__["Font"].fromOTFont(otfont);
-    var glyphs = [];
-    for (var i = 0; i < otfont.glyphs.length; i++) {
-        glyphs.push(_font_glyph__WEBPACK_IMPORTED_MODULE_3__["Glyph"].fromOTGlyph(font, otfont, otfont.glyphs.get(i)));
-    }
-    font.addGlyph.apply(font, glyphs);
-    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_4__["GlyphContext"]("ABC".split("").map(function (chr) { return glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 0);
-    var viewport = Object(_ui_viewport__WEBPACK_IMPORTED_MODULE_7__["setupViewport"])(context);
+    var font = Object(_io_import__WEBPACK_IMPORTED_MODULE_10__["importFont"])(otfont);
+    var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_3__["GlyphContext"]("ABC".split("").map(function (chr) { return font.glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 0);
+    var viewport = Object(_ui_viewport__WEBPACK_IMPORTED_MODULE_5__["setupViewport"])(context);
     viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_2__["HandleTool"]());
-    Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [globalSubActions, viewport.tool.subactions]);
-    Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_11__["prepareToolbar"])(globalTools, globalTools[0], function (tool) {
+    Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_4__["updateSubactions"])(viewport, [globalSubActions, viewport.tool.subactions]);
+    Object(_ui_toolbar__WEBPACK_IMPORTED_MODULE_9__["prepareToolbar"])(globalTools, globalTools[0], function (tool) {
         viewport.setTool(tool);
-        Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_6__["updateSubactions"])(viewport, [globalSubActions, tool.subactions]);
+        Object(_ui_actionbar__WEBPACK_IMPORTED_MODULE_4__["updateSubactions"])(viewport, [globalSubActions, tool.subactions]);
     });
-    Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_9__["prepareGlyphList"])(font);
-    Object(_ui_glyphBar__WEBPACK_IMPORTED_MODULE_8__["prepareGlyphBar"])(viewport);
+    Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_7__["prepareGlyphList"])(font);
+    Object(_ui_glyphBar__WEBPACK_IMPORTED_MODULE_6__["prepareGlyphBar"])(viewport);
     viewport.updateViewportSize();
-    // exportFont(font, "build/test/exported.otf")
     window.addEventListener("keyup", function (e) {
         if (document.activeElement !== document.body)
             return; // for now
@@ -14945,7 +14936,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Glyph", function() { return Glyph; });
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "events");
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
+/* harmony import */ var _io_import__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../io/import */ "./src/typeedit/io/import.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14992,7 +14983,7 @@ var Glyph = /** @class */ (function (_super) {
     });
     Glyph.fromOTGlyph = function (font, otfont, otglyph) {
         var scaleFactor = 512 / otfont.tables.os2.sCapHeight;
-        var beziers = Object(_geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__["generateCurvesFromOTGlyph"])(otfont, otglyph);
+        var beziers = Object(_io_import__WEBPACK_IMPORTED_MODULE_1__["generateCurvesFromOTGlyph"])(otfont, otglyph);
         var glyphMetrics = otglyph.getMetrics();
         return new Glyph(font, otglyph.name, otglyph.unicode, {
             leftBearing: 0,
@@ -15015,17 +15006,14 @@ var Glyph = /** @class */ (function (_super) {
 /*!***********************************************!*\
   !*** ./src/typeedit/geometry/bezier/curve.ts ***!
   \***********************************************/
-/*! exports provided: BezierCurve, generateCurvesFromOTGlyph */
+/*! exports provided: BezierCurve */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierCurve", function() { return BezierCurve; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateCurvesFromOTGlyph", function() { return generateCurvesFromOTGlyph; });
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "events");
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../point */ "./src/typeedit/geometry/point.ts");
-/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./point */ "./src/typeedit/geometry/bezier/point.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -15039,8 +15027,6 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-
-
 
 var BezierCurve = /** @class */ (function (_super) {
     __extends(BezierCurve, _super);
@@ -15078,71 +15064,6 @@ var BezierCurve = /** @class */ (function (_super) {
     return BezierCurve;
 }(events__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]));
 
-function convertOTCoordinates(otfont, x, y) {
-    var scaleFactor = 512 / otfont.tables.os2.sCapHeight;
-    return {
-        x: x * scaleFactor,
-        y: (otfont.tables.os2.sCapHeight - y) * scaleFactor // easier to work with
-    };
-}
-function generateCurvesFromOTGlyph(otfont, otglyph) {
-    var curves = [];
-    var curve = new BezierCurve();
-    var conv = function (x, y) { return convertOTCoordinates(otfont, x, y); };
-    ///@ts-ignore
-    otglyph.path.commands.forEach(function (cmd) {
-        switch (cmd.type) {
-            case "M": {
-                if (curve.points.length)
-                    curves.push(curve);
-                curve = new BezierCurve();
-                var coords = conv(cmd.x, cmd.y);
-                curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_2__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](coords.x, coords.y), _point__WEBPACK_IMPORTED_MODULE_2__["BezierPointType"].free));
-                break;
-            }
-            case "L": {
-                var coords = conv(cmd.x, cmd.y);
-                curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_2__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](coords.x, coords.y)));
-                break;
-            }
-            case "C": {
-                var c1coords = conv(cmd.x1, cmd.y1);
-                var c2coords = conv(cmd.x2, cmd.y2);
-                var coords = conv(cmd.x, cmd.y);
-                if (!curve.points.length)
-                    return; // WHO MALFORMED MY OTF
-                var prevPoint = curve.points[curve.points.length - 1];
-                prevPoint.after.x = c1coords.x;
-                prevPoint.after.y = c1coords.y;
-                curve.addPoint(new _point__WEBPACK_IMPORTED_MODULE_2__["BezierPoint"](new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](coords.x, coords.y), new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](c2coords.x, c2coords.y), new _point__WEBPACK_IMPORTED_MODULE_1__["Point"](coords.x, coords.y)));
-                break;
-            }
-            case "Z": {
-                if (curve.points.length) {
-                    var first = curve.points[0];
-                    if (curve.points.length > 1) {
-                        var last = curve.points[curve.points.length - 1];
-                        if (first.base.x === last.base.x &&
-                            first.base.y === last.base.y) {
-                            first.before.x = last.before.x;
-                            first.before.y = last.before.y;
-                            curve.points.splice(curve.points.length - 1, 1);
-                        }
-                    }
-                    curve.points.forEach(function (p) { return p.determineType(); });
-                    curves.push(curve);
-                }
-                curve = new BezierCurve();
-                break;
-            }
-        }
-    });
-    if (curve.points.length) {
-        curve.points.forEach(function (p) { return p.determineType(); });
-        curves.push(curve);
-    }
-    return curves;
-}
 
 
 /***/ }),
@@ -15269,6 +15190,105 @@ var Point = /** @class */ (function () {
     return Point;
 }());
 
+
+
+/***/ }),
+
+/***/ "./src/typeedit/io/import.ts":
+/*!***********************************!*\
+  !*** ./src/typeedit/io/import.ts ***!
+  \***********************************/
+/*! exports provided: generateCurvesFromOTGlyph, importFont */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateCurvesFromOTGlyph", function() { return generateCurvesFromOTGlyph; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "importFont", function() { return importFont; });
+/* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../font/font */ "./src/typeedit/font/font.ts");
+/* harmony import */ var _font_glyph__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../font/glyph */ "./src/typeedit/font/glyph.ts");
+/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
+/* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
+/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../geometry/point */ "./src/typeedit/geometry/point.ts");
+
+
+
+
+
+function convertOTCoordinates(otfont, x, y) {
+    var scaleFactor = 512 / otfont.tables.os2.sCapHeight;
+    return {
+        x: x * scaleFactor,
+        y: (otfont.tables.os2.sCapHeight - y) * scaleFactor // easier to work with
+    };
+}
+function generateCurvesFromOTGlyph(otfont, otglyph) {
+    var curves = [];
+    var curve = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_2__["BezierCurve"]();
+    var conv = function (x, y) { return convertOTCoordinates(otfont, x, y); };
+    ///@ts-ignore
+    otglyph.path.commands.forEach(function (cmd) {
+        switch (cmd.type) {
+            case "M": {
+                if (curve.points.length)
+                    curves.push(curve);
+                curve = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_2__["BezierCurve"]();
+                var coords = conv(cmd.x, cmd.y);
+                curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_3__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](coords.x, coords.y), new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](coords.x, coords.y), new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](coords.x, coords.y), _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_3__["BezierPointType"].free));
+                break;
+            }
+            case "L": {
+                var coords = conv(cmd.x, cmd.y);
+                curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_3__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](coords.x, coords.y), new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](coords.x, coords.y), new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](coords.x, coords.y)));
+                break;
+            }
+            case "C": {
+                var c1coords = conv(cmd.x1, cmd.y1);
+                var c2coords = conv(cmd.x2, cmd.y2);
+                var coords = conv(cmd.x, cmd.y);
+                if (!curve.points.length)
+                    return; // WHO MALFORMED MY OTF
+                var prevPoint = curve.points[curve.points.length - 1];
+                prevPoint.after.x = c1coords.x;
+                prevPoint.after.y = c1coords.y;
+                curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_3__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](coords.x, coords.y), new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](c2coords.x, c2coords.y), new _geometry_point__WEBPACK_IMPORTED_MODULE_4__["Point"](coords.x, coords.y)));
+                break;
+            }
+            case "Z": {
+                if (curve.points.length) {
+                    var first = curve.points[0];
+                    if (curve.points.length > 1) {
+                        var last = curve.points[curve.points.length - 1];
+                        if (first.base.x === last.base.x &&
+                            first.base.y === last.base.y) {
+                            first.before.x = last.before.x;
+                            first.before.y = last.before.y;
+                            curve.points.splice(curve.points.length - 1, 1);
+                        }
+                    }
+                    curve.points.forEach(function (p) { return p.determineType(); });
+                    curves.push(curve);
+                }
+                curve = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_2__["BezierCurve"]();
+                break;
+            }
+        }
+    });
+    if (curve.points.length) {
+        curve.points.forEach(function (p) { return p.determineType(); });
+        curves.push(curve);
+    }
+    return curves;
+}
+function importFont(otfont) {
+    var font = _font_font__WEBPACK_IMPORTED_MODULE_0__["Font"].fromOTFont(otfont);
+    var glyphs = [];
+    for (var i = 0; i < otfont.glyphs.length; i++) {
+        glyphs.push(_font_glyph__WEBPACK_IMPORTED_MODULE_1__["Glyph"].fromOTGlyph(font, otfont, otfont.glyphs.get(i)));
+    }
+    font.addGlyph.apply(font, glyphs);
+    return font;
+}
 
 
 /***/ }),

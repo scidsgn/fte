@@ -81,6 +81,17 @@ export class BezierPenTool implements ITool {
             ) {
                 // Forget the curve, but allow last adjustments
                 this.finalAdjustmentStage = true
+                undoContext.addAction(
+                    new ValueChangeAction(
+                        this.currentPoint.base, ["x", "y"]
+                    ),
+                    new ValueChangeAction(
+                        this.currentPoint.before, ["x", "y"]
+                    ),
+                    new ValueChangeAction(
+                        this.currentPoint.after, ["x", "y"]
+                    )
+                )
             } else {
                 // Add a point
                 const point = new BezierPoint(
@@ -94,15 +105,6 @@ export class BezierPenTool implements ITool {
                         this.currentBezier.points,
                         point,
                         this.currentBezier.points.length - 1
-                    ),
-                    new ValueChangeAction(
-                        point.base, ["x", "y"]
-                    ),
-                    new ValueChangeAction(
-                        point.before, ["x", "y"]
-                    ),
-                    new ValueChangeAction(
-                        point.after, ["x", "y"]
                     )
                 )
 

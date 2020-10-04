@@ -1,6 +1,7 @@
 import { Glyph } from "../../font/glyph"
 import { Point } from "../../geometry/point"
-import { UndoContext, ValueChangeAction } from "../../undo/action"
+import { UndoContext } from "../../undo/context"
+import { ValueChangeAction } from "../../undo/actions/value"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
 

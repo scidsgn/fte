@@ -1,15 +1,10 @@
 import { EventEmitter } from "events"
-import { stat } from "fs"
-
-export interface IUndoableAction {
-    undo: () => void
-    redo: () => void
-    finalize: () => void
-}
+import { IUndoableAction } from "./action"
 
 type VCAObjectState = {
     [key: string]: any
 }
+
 export class ValueChangeAction implements IUndoableAction {
     private beforeState: VCAObjectState = {}
     private afterState: VCAObjectState = {}
@@ -41,28 +36,5 @@ export class ValueChangeAction implements IUndoableAction {
 
     finalize() {
         this.captureState(this.afterState)
-    }
-}
-
-export class UndoContext {
-    public actions: IUndoableAction[] = []
-
-    public name: string = "Unknown"
-
-    addAction(...actions: IUndoableAction[]) {
-        this.actions.push(...actions)
-    }
-
-    undo() {
-        this.actions.forEach(a => a.undo())
-    }
-
-    redo() {
-        this.actions.forEach(a => a.redo())
-    }
-
-    finalize(name?: string) {
-        this.actions.forEach(a => a.finalize())
-        if (name) this.name = name
     }
 }

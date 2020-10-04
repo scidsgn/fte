@@ -1,6 +1,7 @@
 import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Point } from "../../geometry/point"
-import { UndoContext, ValueChangeAction } from "../../undo/action"
+import { UndoContext } from "../../undo/context"
+import { ValueChangeAction } from "../../undo/actions/value"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
 

@@ -1,6 +1,6 @@
 import { Point } from "../geometry/point"
-import { UndoContext } from "../undo/action";
-import { Viewport } from "./viewport";
+import { UndoContext } from "../undo/context"
+import { Viewport } from "./viewport"
 
 export interface IDrawable {
     render: (v: Viewport, ctx: CanvasRenderingContext2D) => void

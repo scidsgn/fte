@@ -1,4 +1,4 @@
-import { UndoContext } from "./action"
+import { UndoContext } from "./context"
 
 let undoContexts: UndoContext[] = []
 let redoContexts: UndoContext[] = []

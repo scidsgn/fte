@@ -2,6 +2,9 @@ import { Glyph } from "../../font/glyph"
 import { BezierCurve } from "../../geometry/bezier/curve"
 import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Point } from "../../geometry/point"
+import { ArrayAddAction } from "../../undo/actions/array"
+import { ValueChangeAction } from "../../undo/actions/value"
+import { finalizeUndoContext, undoContext } from "../../undo/history"
 import { BezierContext } from "../context/bezier"
 import { IContext } from "../context/context"
 import { GlyphContext } from "../context/glyph"
@@ -19,13 +22,24 @@ export class BezierPenTool implements ITool {
     public accelerator = "P"
 
     private currentBezier: BezierCurve = null
-    private currentPoint: BezierPoint = null
+    private finalAdjustmentStage = false
 
     public handles: IDrawableHandle[] = []
     public guides: IGuide[] = []
     public supportsForeignHandles = false
 
     public subactions: ToolSubAction[] = []
+
+    get currentPoint(): BezierPoint {
+        if (!this.currentBezier) return null
+
+        if (this.finalAdjustmentStage)
+            return this.currentBezier.points[0]
+
+        return this.currentBezier.points[
+            this.currentBezier.points.length - 1
+        ]
+    }
 
     handleMouseEvent(v: Viewport, e: MouseEvent, x: number, y: number) {
         if (!(v.context instanceof BezierContext)) return
@@ -44,8 +58,16 @@ export class BezierPenTool implements ITool {
         ) {
             if (!this.currentBezier) {
                 this.currentBezier = new BezierCurve(glyph)
-                v.context.beziers.push(
+                const length = v.context.beziers.push(
                     this.currentBezier
+                )
+
+                undoContext.addAction(
+                    new ArrayAddAction(
+                        v.context.beziers,
+                        this.currentBezier,
+                        length - 1
+                    )
                 )
             }
 
@@ -58,8 +80,7 @@ export class BezierPenTool implements ITool {
                 nearHandle.position === this.currentBezier.points[0].base
             ) {
                 // Forget the curve, but allow last adjustments
-                this.currentPoint = this.currentBezier.points[0]
-                this.currentBezier = null
+                this.finalAdjustmentStage = true
             } else {
                 // Add a point
                 const point = new BezierPoint(
@@ -67,13 +88,45 @@ export class BezierPenTool implements ITool {
                     new Point(pos.x, pos.y),
                     new Point(pos.x, pos.y)
                 )
-                this.currentPoint = point
                 this.currentBezier.addPoint(point)
+                undoContext.addAction(
+                    new ArrayAddAction(
+                        this.currentBezier.points,
+                        point,
+                        this.currentBezier.points.length - 1
+                    ),
+                    new ValueChangeAction(
+                        point.base, ["x", "y"]
+                    ),
+                    new ValueChangeAction(
+                        point.before, ["x", "y"]
+                    ),
+                    new ValueChangeAction(
+                        point.after, ["x", "y"]
+                    )
+                )
 
-                this.handles.push(
+                const length = this.handles.push(
                     new BezierControlPointHandle(point, point.before),
                     new BezierControlPointHandle(point, point.after),
                     new BezierBasePointHandle(point)
+                )
+                undoContext.addAction(
+                    new ArrayAddAction(
+                        this.handles,
+                        this.handles[length - 3],
+                        length - 3
+                    ),
+                    new ArrayAddAction(
+                        this.handles,
+                        this.handles[length - 2],
+                        length - 2
+                    ),
+                    new ArrayAddAction(
+                        this.handles,
+                        this.handles[length - 1],
+                        length - 1
+                    )
                 )
             }
         } else if (
@@ -93,10 +146,17 @@ export class BezierPenTool implements ITool {
         } else if (
             e.type === "mouseup"
         ) {
-            this.currentPoint = null
-            if (this.currentBezier === null) {
+            if (this.finalAdjustmentStage) {
                 this.handles = []
+                this.currentBezier = null
+
+                finalizeUndoContext("Close curve")
+            } else if (this.currentBezier.points.length === 1) {
+                finalizeUndoContext("Create curve")
+            } else {
+                finalizeUndoContext("Add point")
             }
+            this.finalAdjustmentStage = false
         }
     }
 

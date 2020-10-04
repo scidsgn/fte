@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(1,0,0,1,-72,-26)">
-        <g id="rotateleft" transform="matrix(1,0,0,1,72,26)">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-54,-18)">
+        <g id="rotateleft" transform="matrix(0.666667,0,0,0.666667,54,18)">
             <rect x="0" y="0" width="24" height="24" style="fill:none;"/>
-            <g transform="matrix(-0.8,0,0,0.8,61,-18.4)">
-                <rect x="50" y="38" width="10" height="10"/>
-                <path d="M60,35.5C61.381,35.5 62.5,36.619 62.5,38L62.5,48C62.5,49.381 61.381,50.5 60,50.5L50,50.5C48.619,50.5 47.5,49.381 47.5,48L47.5,38C47.5,36.619 48.619,35.5 50,35.5L60,35.5ZM60,38L50,38L50,48L60,48L60,38Z"/>
+            <g transform="matrix(-1.5,0,0,1.5,96,-39)">
+                <rect x="49" y="33" width="6" height="6" style="fill:rgb(138,146,217);"/>
+                <path d="M55,32C55.552,32 56,32.448 56,33L56,39C56,39.552 55.552,40 55,40L49,40C48.448,40 48,39.552 48,39L48,33C48,32.448 48.448,32 49,32L55,32ZM55,33L49,33L49,39L55,39L55,33Z" style="fill:rgb(53,41,214);"/>
             </g>
-            <g transform="matrix(-1,0,0,1,71,-28)">
-                <path d="M56,32L60,32C63.314,32 66,34.686 66,38L66,42" style="fill:none;stroke:black;stroke-width:2px;"/>
+            <g transform="matrix(-1.5,0,0,1.5,96,-37.5)">
+                <path d="M57.5,33.5L60.5,36.5L63.5,33.5" style="fill:none;stroke:rgb(20,20,20);stroke-width:1px;"/>
             </g>
-            <g transform="matrix(-1,0,0,1,71,-28)">
-                <path d="M70,40L66,44L62,40" style="fill:none;stroke:black;stroke-width:2px;"/>
+            <g transform="matrix(-1.5,0,0,1.5,96,-39)">
+                <path d="M60.5,37.5L60.5,33.5C60.5,30.739 58.261,28.5 55.5,28.5L51.5,28.5" style="fill:none;stroke:rgb(20,20,20);stroke-width:1px;"/>
             </g>
         </g>
     </g>

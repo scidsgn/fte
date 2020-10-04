@@ -10,7 +10,7 @@ export class BezierBasePointHandle implements IDrawableHandle {
     public type = "BezierBasePointHandle"
     
     constructor(
-        private point: BezierPoint
+        public point: BezierPoint
     ) {}
 
     get position() {

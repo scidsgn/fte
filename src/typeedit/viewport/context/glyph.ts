@@ -1,5 +1,6 @@
 import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
+import { CurveGuide } from "../guides/curve";
 import { HorizontalGuide, VerticalGuide } from "../guides/line";
 import { PointGuide } from "../guides/point";
 import { FontMetricHandle, FontMetricHandleType } from "../handles/fontMetric";
@@ -38,6 +39,12 @@ export class GlyphContext extends BezierContext {
             new VerticalGuide(() => this.glyph.metrics.leftBearing, this.handles[0]),
             new VerticalGuide(() => this.glyph.metrics.rightBearing, this.handles[1])
         ]
+
+        this.beziers.forEach(
+            b => this.guides.push(
+                new CurveGuide(b)
+            )
+        )
 
         // for (let bezier of this.beziers) {
         //     for (let point of bezier.points) {

@@ -194,18 +194,22 @@ export class Viewport {
 
         this.context.render(this, this.ctx)
 
-        this.ctx.resetTransform()
-        this.context.guides.forEach(
+        Array(
+            ...this.context.guides,
+            ...this.tool.guides
+        ).forEach(
             guide => {
-                if (guide.active) guide.render(this, this.ctx)
-            }
-        )
-        this.tool.guides.forEach(
-            guide => {
-                if (guide.active) guide.render(this, this.ctx)
+                if (guide.active) {
+                    this.ctx.resetTransform()
+                    if (guide.worldRender)
+                        this.co.transformCanvas(this.ctx)
+                        
+                    guide.render(this, this.ctx)
+                }
             }
         )
 
+        this.ctx.resetTransform()
         if (this.tool && this.tool.supportsForeignHandles) {
             this.drawHandles(this.context.handles)
             this.drawHandles(this.handles)

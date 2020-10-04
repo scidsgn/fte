@@ -1,8 +1,7 @@
 import { EventEmitter } from "events"
-import { Font, Glyph as OTGlyph, Path, PathCommand } from "opentype.js"
 import { Glyph } from "../../font/glyph"
-import { Point } from "../point"
-import { BezierPoint, BezierPointType } from "./point"
+import { BezierPoint } from "./point"
+import paper from "paper"
 
 export class BezierCurve extends EventEmitter {
     public points: BezierPoint[] = []
@@ -42,6 +41,35 @@ export class BezierCurve extends EventEmitter {
                 )
             }
         }
+
+        return path
+    }
+
+    getPaperPath(): paper.Path {
+        const path = new paper.Path()
+        if (!this.points.length) return path
+        
+        const first = this.points[0].base
+        path.moveTo(new paper.Point(first.x, first.y))
+
+        for (let i = 0; i < this.points.length; i++) {
+            const pt = this.points[i]
+            const next = this.points[
+                (i + 1) % this.points.length
+            ]
+
+            const c1 = pt.after
+            const c2 = next.before
+            const b = next.base
+
+            path.cubicCurveTo(
+                new paper.Point(c1.x, c1.y),
+                new paper.Point(c2.x, c2.y),
+                new paper.Point(b.x, b.y)
+            )
+        }
+
+        path.closePath()
 
         return path
     }

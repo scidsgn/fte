@@ -19,7 +19,7 @@ export interface ITool {
     guides: IGuide[]
     supportsForeignHandles: boolean
 
-    subactions: ToolSubAction[]
+    subactions: ToolSubAction[][]
 
     handleMouseEvent: (
         v: Viewport, e: MouseEvent, x: number, y: number

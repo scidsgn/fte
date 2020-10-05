@@ -28,7 +28,7 @@ export class BezierPenTool implements ITool {
     public guides: IGuide[] = []
     public supportsForeignHandles = false
 
-    public subactions: ToolSubAction[] = []
+    public subactions: ToolSubAction[][] = []
 
     get currentPoint(): BezierPoint {
         if (!this.currentBezier) return null

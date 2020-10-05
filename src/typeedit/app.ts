@@ -48,7 +48,7 @@ export default (otfont: OTFont) => {
 
     const viewport = setupViewport(context)
     viewport.setTool(new HandleTool())
-    updateSubactions(viewport, [globalSubActions, viewport.tool.subactions])
+    updateSubactions(viewport, [globalSubActions, ...viewport.tool.subactions])
     
     prepareToolbar(
         globalTools,
@@ -57,7 +57,7 @@ export default (otfont: OTFont) => {
             viewport.setTool(tool)
             updateSubactions(
                 viewport,
-                [globalSubActions, tool.subactions]
+                [globalSubActions, ...tool.subactions]
             )
         }
     )
@@ -76,7 +76,7 @@ export default (otfont: OTFont) => {
         if (e.ctrlKey) accelString = "^" + accelString
 
         for (let action of [
-            globalSubActions, viewport.tool.subactions
+            globalSubActions, ...viewport.tool.subactions
         ].flat()) {
             if (action.accelerator === accelString) {
                 action.handler()

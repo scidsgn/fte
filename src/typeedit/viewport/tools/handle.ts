@@ -1,3 +1,4 @@
+import { BezierCurve } from "../../geometry/bezier/curve";
 import { Point } from "../../geometry/point";
 import { finalizeUndoContext, redo, undo, undoContext } from "../../undo/history";
 import { lerp, unlerp } from "../../utils/lerp";
@@ -29,7 +30,7 @@ export class HandleTool implements ITool {
     private moveStartPoint: Point
     private moveLastPoint: Point
 
-    public subactions: ToolSubAction[] = [
+    public subactions: ToolSubAction[][] = [[
         {
             name: "Flip X",
             icon: "flipx",
@@ -69,7 +70,8 @@ export class HandleTool implements ITool {
 
                 finalizeUndoContext("Flip Y")
             }
-        },
+        }
+    ],[
         {
             name: "Align to left",
             icon: "alignleft",
@@ -170,7 +172,7 @@ export class HandleTool implements ITool {
                 finalizeUndoContext("Align to middle")
             }
         }
-    ]
+    ]]
 
     private addHandlesToUndoContext(handles: IDrawableHandle[]) {
         handles.forEach(
@@ -221,6 +223,23 @@ export class HandleTool implements ITool {
             else
                 handle.selected = selected || handle.selected
         }
+    }
+
+    private getSelectedCurves(): BezierCurve[] {
+        const curves: BezierCurve[] = []
+        
+        for (let handle of this.handles) {
+            if (
+                !handle.selected ||
+                !(handle instanceof BezierBasePointHandle)
+            )
+                return
+            
+            if (!curves.includes(handle.point.curve))
+                curves.push(handle.point.curve)
+        }
+
+        return curves
     }
 
     restrictAngles(pos: Point, e: MouseEvent) {

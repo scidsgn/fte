@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-36,-90)">
+        <g id="curvesel" transform="matrix(0.666667,0,0,0.666667,36,90)">
+            <rect x="0" y="0" width="24" height="24" style="fill:none;"/>
+            <g transform="matrix(1.5,0,0,1.5,-54,-133.5)">
+                <path d="M38.035,96.738C37.429,98.967 37.431,100.465 37.962,101.417C38.349,102.113 38.996,102.608 39.997,102.879C41.11,103.179 42.769,103.193 45.084,102.996C48.039,102.746 49.943,101.119 50.623,99.207C51.324,97.238 50.777,94.894 48.614,93.211C44.326,89.874 39.036,93.055 38.035,96.738ZM39,97C39.852,93.867 44.352,91.161 48,94C51.525,96.744 49.958,101.58 45,102C39.005,102.508 37.726,101.686 39,97Z" style="fill:rgb(189,189,189);"/>
+            </g>
+            <g transform="matrix(1.5,0,0,1.5,0,-136.5)">
+                <rect x="1" y="102" width="3" height="3" style="fill:rgb(230,239,63);"/>
+                <path d="M5,102C5,101.448 4.552,101 4,101L1,101C0.448,101 0,101.448 0,102L0,105C0,105.552 0.448,106 1,106L4,106C4.552,106 5,105.552 5,105L5,102ZM4,102L1,102L1,105L4,105L4,102Z" style="fill:rgb(227,135,18);"/>
+            </g>
+            <g transform="matrix(1.5,0,0,1.5,7.5,-150)">
+                <rect x="1" y="102" width="3" height="3" style="fill:rgb(230,239,63);"/>
+                <path d="M5,102C5,101.448 4.552,101 4,101L1,101C0.448,101 0,101.448 0,102L0,105C0,105.552 0.448,106 1,106L4,106C4.552,106 5,105.552 5,105L5,102ZM4,102L1,102L1,105L4,105L4,102Z" style="fill:rgb(227,135,18);"/>
+            </g>
+            <g transform="matrix(1.5,0,0,1.5,16.5,-138)">
+                <rect x="1" y="102" width="3" height="3" style="fill:rgb(230,239,63);"/>
+                <path d="M5,102C5,101.448 4.552,101 4,101L1,101C0.448,101 -0,101.448 0,102L0,105C0,105.552 0.448,106 1,106L4,106C4.552,106 5,105.552 5,105L5,102ZM4,102L1,102L1,105L4,105L4,102Z" style="fill:rgb(227,135,18);"/>
+            </g>
+        </g>
+    </g>
+</svg>

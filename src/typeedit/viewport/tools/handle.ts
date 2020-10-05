@@ -30,149 +30,192 @@ export class HandleTool implements ITool {
     private moveStartPoint: Point
     private moveLastPoint: Point
 
-    public subactions: ToolSubAction[][] = [[
-        {
-            name: "Flip X",
-            icon: "flipx",
-            accelerator: "",
-            handler: () => {
-                const selected = this.handles.filter(h => h.selected)
-                const bbox = this.getHandlesBBox(selected)
-
-                this.addHandlesToUndoContext(selected)
-
-                selected.forEach(handle => {
-                    handle.position.x = lerp(
-                        1 - unlerp(handle.position.x, bbox.left, bbox.right),
-                        bbox.left, bbox.right
+    public subactions: ToolSubAction[][] = [
+        [
+            {
+                name: "Select all",
+                icon: "allsel",
+                accelerator: "^KeyA",
+                handler: () => {
+                    this.handles.forEach(
+                        handle => handle.selected = true
                     )
-                })
-
-                finalizeUndoContext("Flip X")
-            }
-        },
-        {
-            name: "Flip Y",
-            icon: "flipy",
-            accelerator: "",
-            handler: () => {
-                const selected = this.handles.filter(h => h.selected)
-                const bbox = this.getHandlesBBox(selected)
-
-                this.addHandlesToUndoContext(selected)
-
-                selected.forEach(handle => {
-                    handle.position.y = lerp(
-                        1 - unlerp(handle.position.y, bbox.top, bbox.bottom),
-                        bbox.top, bbox.bottom
+                }
+            },
+            {
+                name: "Invert selection",
+                icon: "invertsel",
+                accelerator: "^KeyD",
+                handler: () => {
+                    this.handles.forEach(
+                        handle => handle.selected = !handle.selected
                     )
-                })
+                }
+            },
+            {
+                name: "Select connected",
+                icon: "curvesel",
+                accelerator: "^KeyL",
+                handler: () => {
+                    const curves = this.getSelectedCurves()
 
-                finalizeUndoContext("Flip Y")
+                    for (let bezier of curves) {
+                        for (let point of bezier.points) {
+                            const handle = this.handles.find(
+                                h => h instanceof BezierBasePointHandle &&
+                                     h.point === point
+                            )
+                            if (handle) handle.selected = true
+                        }
+                    }
+                }
             }
-        }
-    ],[
-        {
-            name: "Align to left",
-            icon: "alignleft",
-            accelerator: "",
-            handler: () => {
-                const selected = this.handles.filter(h => h.selected)
-                const bbox = this.getHandlesBBox(selected)
+        ],
+        [
+            {
+                name: "Flip X",
+                icon: "flipx",
+                accelerator: "",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const bbox = this.getHandlesBBox(selected)
 
-                this.addHandlesToUndoContext(selected)
+                    this.addHandlesToUndoContext(selected)
 
-                selected.forEach(handle => {
-                    handle.position.x = bbox.left
-                })
+                    selected.forEach(handle => {
+                        handle.position.x = lerp(
+                            1 - unlerp(handle.position.x, bbox.left, bbox.right),
+                            bbox.left, bbox.right
+                        )
+                    })
 
-                finalizeUndoContext("Align to left")
+                    finalizeUndoContext("Flip X")
+                }
+            },
+            {
+                name: "Flip Y",
+                icon: "flipy",
+                accelerator: "",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const bbox = this.getHandlesBBox(selected)
+
+                    this.addHandlesToUndoContext(selected)
+
+                    selected.forEach(handle => {
+                        handle.position.y = lerp(
+                            1 - unlerp(handle.position.y, bbox.top, bbox.bottom),
+                            bbox.top, bbox.bottom
+                        )
+                    })
+
+                    finalizeUndoContext("Flip Y")
+                }
             }
-        },
-        {
-            name: "Align to right",
-            icon: "alignright",
-            accelerator: "",
-            handler: () => {
-                const selected = this.handles.filter(h => h.selected)
-                const bbox = this.getHandlesBBox(selected)
+        ],
+        [
+            {
+                name: "Align to left",
+                icon: "alignleft",
+                accelerator: "",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const bbox = this.getHandlesBBox(selected)
 
-                this.addHandlesToUndoContext(selected)
+                    this.addHandlesToUndoContext(selected)
 
-                selected.forEach(handle => {
-                    handle.position.x = bbox.right
-                })
+                    selected.forEach(handle => {
+                        handle.position.x = bbox.left
+                    })
 
-                finalizeUndoContext("Align to right")
+                    finalizeUndoContext("Align to left")
+                }
+            },
+            {
+                name: "Align to right",
+                icon: "alignright",
+                accelerator: "",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const bbox = this.getHandlesBBox(selected)
+
+                    this.addHandlesToUndoContext(selected)
+
+                    selected.forEach(handle => {
+                        handle.position.x = bbox.right
+                    })
+
+                    finalizeUndoContext("Align to right")
+                }
+            },
+            {
+                name: "Align to top",
+                icon: "aligntop",
+                accelerator: "",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const bbox = this.getHandlesBBox(selected)
+
+                    this.addHandlesToUndoContext(selected)
+
+                    selected.forEach(handle => {
+                        handle.position.y = bbox.top
+                    })
+
+                    finalizeUndoContext("Align to top")
+                }
+            },
+            {
+                name: "Align to bottom",
+                icon: "alignbottom",
+                accelerator: "",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const bbox = this.getHandlesBBox(selected)
+
+                    this.addHandlesToUndoContext(selected)
+
+                    selected.forEach(handle => {
+                        handle.position.y = bbox.bottom
+                    })
+
+                    finalizeUndoContext("Align to bottom")
+                }
+            },
+            {
+                name: "Align to center",
+                icon: "alignhcenter",
+                accelerator: "",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const bbox = this.getHandlesBBox(selected)
+
+                    this.addHandlesToUndoContext(selected)
+
+                    selected.forEach(handle => {
+                        handle.position.y = (bbox.top + bbox.bottom) / 2
+                    })
+
+                    finalizeUndoContext("Align to center")
+                }
+            },
+            {
+                name: "Align to middle",
+                icon: "alignvcenter",
+                accelerator: "",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const bbox = this.getHandlesBBox(selected)
+
+                    selected.forEach(handle => {
+                        handle.position.x = (bbox.left + bbox.right) / 2
+                    })
+
+                    finalizeUndoContext("Align to middle")
+                }
             }
-        },
-        {
-            name: "Align to top",
-            icon: "aligntop",
-            accelerator: "",
-            handler: () => {
-                const selected = this.handles.filter(h => h.selected)
-                const bbox = this.getHandlesBBox(selected)
-
-                this.addHandlesToUndoContext(selected)
-
-                selected.forEach(handle => {
-                    handle.position.y = bbox.top
-                })
-
-                finalizeUndoContext("Align to top")
-            }
-        },
-        {
-            name: "Align to bottom",
-            icon: "alignbottom",
-            accelerator: "",
-            handler: () => {
-                const selected = this.handles.filter(h => h.selected)
-                const bbox = this.getHandlesBBox(selected)
-
-                this.addHandlesToUndoContext(selected)
-
-                selected.forEach(handle => {
-                    handle.position.y = bbox.bottom
-                })
-
-                finalizeUndoContext("Align to bottom")
-            }
-        },
-        {
-            name: "Align to center",
-            icon: "alignhcenter",
-            accelerator: "",
-            handler: () => {
-                const selected = this.handles.filter(h => h.selected)
-                const bbox = this.getHandlesBBox(selected)
-
-                this.addHandlesToUndoContext(selected)
-
-                selected.forEach(handle => {
-                    handle.position.y = (bbox.top + bbox.bottom) / 2
-                })
-
-                finalizeUndoContext("Align to center")
-            }
-        },
-        {
-            name: "Align to middle",
-            icon: "alignvcenter",
-            accelerator: "",
-            handler: () => {
-                const selected = this.handles.filter(h => h.selected)
-                const bbox = this.getHandlesBBox(selected)
-
-                selected.forEach(handle => {
-                    handle.position.x = (bbox.left + bbox.right) / 2
-                })
-
-                finalizeUndoContext("Align to middle")
-            }
-        }
-    ]]
+        ]
+    ]
 
     private addHandlesToUndoContext(handles: IDrawableHandle[]) {
         handles.forEach(
@@ -233,7 +276,7 @@ export class HandleTool implements ITool {
                 !handle.selected ||
                 !(handle instanceof BezierBasePointHandle)
             )
-                return
+                continue
             
             if (!curves.includes(handle.point.curve))
                 curves.push(handle.point.curve)

@@ -11,11 +11,15 @@ export class UndoContext {
     }
 
     undo() {
-        this.actions.forEach(a => a.undo())
+        for (let i = this.actions.length - 1; i >= 0; i--) {
+            this.actions[i].undo()
+        }
     }
 
     redo() {
-        this.actions.forEach(a => a.redo())
+        for (let i = 0; i < this.actions.length; i++) {
+            this.actions[i].redo()
+        }
     }
 
     finalize(name?: string) {

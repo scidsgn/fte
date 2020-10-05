@@ -11,7 +11,7 @@ export class BezierControlPointHandle implements IDrawableHandle {
     public type = "BezierControlPointHandle"
     
     constructor(
-        private point: BezierPoint,
+        public point: BezierPoint,
         private cpoint: Point
     ) {}
 

@@ -1,5 +1,6 @@
 import { BezierCurve } from "../../geometry/bezier/curve";
 import { Point } from "../../geometry/point";
+import { ArrayRemoveAction } from "../../undo/actions/array";
 import { finalizeUndoContext, redo, undo, undoContext } from "../../undo/history";
 import { lerp, unlerp } from "../../utils/lerp";
 import { BezierContext } from "../context/bezier";
@@ -31,6 +32,65 @@ export class HandleTool implements ITool {
     private moveLastPoint: Point
 
     public subactions: ToolSubAction[][] = [
+        [
+            {
+                name: "Delete",
+                icon: "delete",
+                accelerator: "Delete",
+                handler: () => {
+                    const selected = this.handles.filter(h => h.selected)
+                    const curves = this.getSelectedCurves()
+
+                    selected.forEach(
+                        handle => {
+                            if (!(handle instanceof BezierBasePointHandle))
+                                return
+                            
+                            const point = handle.point
+                            const index = point.curve.points.indexOf(point)
+
+                            point.curve.points.splice(index, 1)
+
+                            const cpHandles = this.handles.filter(
+                                h => h instanceof BezierControlPointHandle &&
+                                     h.point === point
+                            ) // length always = 2
+
+                            const hIndex = this.handles.indexOf(handle)
+                            this.handles.splice(hIndex, 1)
+
+                            const cpIndex0 = this.handles.indexOf(cpHandles[0])
+                            this.handles.splice(cpIndex0, 1)
+
+                            const cpIndex1 = this.handles.indexOf(cpHandles[1])
+                            this.handles.splice(cpIndex1, 1)
+
+                            
+                            undoContext.addAction(
+                                new ArrayRemoveAction(
+                                    point.curve.points, point,
+                                    index
+                                ),
+                                new ArrayRemoveAction(
+                                    this.handles, handle,
+                                    hIndex
+                                ),
+                                new ArrayRemoveAction(
+                                    this.handles, cpHandles[0],
+                                    cpIndex0
+                                ),
+                                new ArrayRemoveAction(
+                                    this.handles, cpHandles[1],
+                                    cpIndex1
+                                )
+                            )
+                        }
+                    )
+
+                    finalizeUndoContext("Delete points")
+                }
+            }
+        ],
         [
             {
                 name: "Select all",

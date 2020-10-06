@@ -234,7 +234,7 @@ section.edit {
 
             border: none;
             outline: none;
-            padding: 6px 8px;
+            padding: 7px 8px;
             border-radius: 4px;
 
             &:hover {
@@ -259,12 +259,12 @@ section.edit {
 
     div.subactionsBar {
         position: absolute;
-        left: 0;
-        right: 0;
+        left: 8px;
+        right: 8px;
         top: 8px;
 
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     div.subactions {

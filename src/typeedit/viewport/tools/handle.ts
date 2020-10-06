@@ -6,6 +6,7 @@ import { lerp, unlerp } from "../../utils/lerp";
 import { BezierContext } from "../context/bezier";
 import { IContext } from "../context/context";
 import { IDrawableHandle } from "../drawable";
+import { CurveGuide } from "../guides/curve";
 import { IGuide } from "../guides/guide";
 import { HandleGuide } from "../guides/point";
 import { BezierBasePointHandle } from "../handles/bezierBasePoint";
@@ -95,6 +96,46 @@ export class HandleTool implements ITool {
         ],
         [
             {
+                name: "Select all",
+                icon: "allsel",
+                accelerator: "^KeyA",
+                handler: () => {
+                    this.handles.forEach(
+                        handle => handle.selected = true
+                    )
+                }
+            },
+            {
+                name: "Invert selection",
+                icon: "invertsel",
+                accelerator: "^KeyD",
+                handler: () => {
+                    this.handles.forEach(
+                        handle => handle.selected = !handle.selected
+                    )
+                }
+            },
+            {
+                name: "Select connected",
+                icon: "curvesel",
+                accelerator: "^KeyL",
+                handler: () => {
+                    const curves = this.getSelectedCurves()
+
+                    for (let bezier of curves) {
+                        for (let point of bezier.points) {
+                            const handle = this.handles.find(
+                                h => h instanceof BezierBasePointHandle &&
+                                     h.point === point
+                            )
+                            if (handle) handle.selected = true
+                        }
+                    }
+                }
+            }
+        ],
+        [
+            {
                 name: "Union",
                 icon: "union",
                 accelerator: "",
@@ -148,46 +189,6 @@ export class HandleTool implements ITool {
                     )
 
                     finalizeUndoContext("Exclusion")
-                }
-            }
-        ],
-        [
-            {
-                name: "Select all",
-                icon: "allsel",
-                accelerator: "^KeyA",
-                handler: () => {
-                    this.handles.forEach(
-                        handle => handle.selected = true
-                    )
-                }
-            },
-            {
-                name: "Invert selection",
-                icon: "invertsel",
-                accelerator: "^KeyD",
-                handler: () => {
-                    this.handles.forEach(
-                        handle => handle.selected = !handle.selected
-                    )
-                }
-            },
-            {
-                name: "Select connected",
-                icon: "curvesel",
-                accelerator: "^KeyL",
-                handler: () => {
-                    const curves = this.getSelectedCurves()
-
-                    for (let bezier of curves) {
-                        for (let point of bezier.points) {
-                            const handle = this.handles.find(
-                                h => h instanceof BezierBasePointHandle &&
-                                     h.point === point
-                            )
-                            if (handle) handle.selected = true
-                        }
-                    }
                 }
             }
         ],
@@ -369,6 +370,49 @@ export class HandleTool implements ITool {
                     )
                 )
 
+                const gIdx = this.guides.length
+                const guide = new CurveGuide(c)
+                
+                this.guides.push(guide)
+                undoContext.addAction(
+                    new ArrayAddAction(
+                        this.guides, guide, gIdx
+                    )
+                )
+
+                c.points.forEach(
+                    p => {
+                        const index = this.handles.length
+
+                        this.handles.push(
+                            new BezierControlPointHandle(
+                                p, p.before
+                            ),
+                            new BezierControlPointHandle(
+                                p, p.after
+                            ),
+                            new BezierBasePointHandle(
+                                p
+                            )
+                        )
+
+                        undoContext.addAction(
+                            new ArrayAddAction(
+                                this.handles, this.handles[index],
+                                index
+                            ),
+                            new ArrayAddAction(
+                                this.handles, this.handles[index + 1],
+                                index + 1
+                            ),
+                            new ArrayAddAction(
+                                this.handles, this.handles[index + 2],
+                                index + 2
+                            )
+                        )
+                    }
+                )
+
                 maxIdx++
             }
         )
@@ -377,10 +421,41 @@ export class HandleTool implements ITool {
             c => {
                 const index = this.beziers.indexOf(c)
                 this.beziers.splice(index, 1)
+
                 undoContext.addAction(
                     new ArrayRemoveAction(
                         this.beziers, c, index
                     )
+                )
+
+                const gIdx = this.guides.findIndex(
+                    g => g instanceof CurveGuide &&
+                         g.source === c
+                )
+                this.guides.splice(gIdx, 1)
+
+                undoContext.addAction(
+                    new ArrayRemoveAction(
+                        this.guides, this.guides[gIdx],
+                        gIdx
+                    )
+                )
+
+                this.handles.filter(
+                    h => (h instanceof BezierBasePointHandle ||
+                         h instanceof BezierControlPointHandle) &&
+                         h.point.curve === c
+                ).forEach(
+                    h => {
+                        const index = this.handles.indexOf(h)
+                        this.handles.splice(index, 1)
+
+                        undoContext.addAction(
+                            new ArrayRemoveAction(
+                                this.handles, h, index
+                            )
+                        )
+                    }
                 )
             }
        )

@@ -2,6 +2,7 @@ import { EventEmitter } from "events"
 import { Glyph } from "../../font/glyph"
 import { BezierPoint } from "./point"
 import paper from "paper"
+import { Point } from "../point"
 
 export class BezierCurve extends EventEmitter {
     public points: BezierPoint[] = []
@@ -72,6 +73,43 @@ export class BezierCurve extends EventEmitter {
         path.closePath()
 
         return path
+    }
+    
+    static fromPaperPath(path: paper.Path): BezierCurve {
+        const curve = new BezierCurve()
+
+        path.segments.forEach(
+            seg => curve.addPoint(
+                new BezierPoint(
+                    new Point(seg.point.x, seg.point.y),
+                    new Point(
+                        seg.point.x + seg.handleIn.x,
+                        seg.point.y + seg.handleIn.y
+                    ),
+                    new Point(
+                        seg.point.x + seg.handleOut.x,
+                        seg.point.y + seg.handleOut.y
+                    )
+                )
+            )
+        )
+
+        return curve
+    }
+
+    static fromPaperPathItem(item: paper.PathItem): BezierCurve[] {
+        if (item instanceof paper.Path)
+            return [BezierCurve.fromPaperPath(item)]
+        else if (item instanceof paper.CompoundPath)
+            return item.children.map(
+                ch => {
+                    if (ch instanceof paper.Path)
+                        return BezierCurve.fromPaperPath(ch)
+                    return null
+                }
+            ).filter(c => c)
+        
+        return []
     }
 }
 

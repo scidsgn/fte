@@ -99,166 +99,55 @@ export class HandleTool implements ITool {
                 icon: "union",
                 accelerator: "",
                 handler: () => {
-                    const curves = this.getSelectedCurves()
-                    if (!curves.length) return
-
-                    const paperPaths = curves.map(
-                        c => c.getPaperPath()
-                    )
-                    let out: paper.PathItem = paperPaths[0]
-
-                    let maxIdx = Math.max(
-                        ...curves.map(c => this.beziers.indexOf(c))
-                    ) + 1
-
-                    for (let i = 1; i < paperPaths.length; i++) {
-                        out = out.unite(
-                            paperPaths[i], {
-                                insert: false
-                            }
-                        )
-                    }
-
-                    const newCurves = BezierCurve.fromPaperPathItem(out)
-
-                    newCurves.forEach(
-                        c => {
-                            this.beziers.splice(maxIdx, 0, c)
-                            undoContext.addAction(
-                                new ArrayAddAction(
-                                    this.beziers, c, maxIdx
-                                )
-                            )
-
-                            maxIdx++
-                        }
-                    )
-
-                    curves.forEach(
-                        c => {
-                            const index = this.beziers.indexOf(c)
-                            this.beziers.splice(index, 1)
-                            undoContext.addAction(
-                                new ArrayRemoveAction(
-                                    this.beziers, c, index
-                                )
-                            )
-                        }
+                    this.performCSGOperation(
+                        (out, item) => out.unite(item, {
+                            insert: false
+                        })
                     )
 
                     finalizeUndoContext("Union")
                 }
             },
-
             {
                 name: "Difference",
                 icon: "difference",
                 accelerator: "",
                 handler: () => {
-                    const curves = this.getSelectedCurves()
-                    if (!curves.length) return
-
-                    const paperPaths = curves.map(
-                        c => c.getPaperPath()
-                    )
-                    let out: paper.PathItem = paperPaths[0]
-
-                    let maxIdx = Math.max(
-                        ...curves.map(c => this.beziers.indexOf(c))
-                    ) + 1
-
-                    for (let i = 1; i < paperPaths.length; i++) {
-                        out = out.subtract(
-                            paperPaths[i], {
-                                insert: false
-                            }
-                        )
-                    }
-
-                    const newCurves = BezierCurve.fromPaperPathItem(out)
-
-                    newCurves.forEach(
-                        c => {
-                            this.beziers.splice(maxIdx, 0, c)
-                            undoContext.addAction(
-                                new ArrayAddAction(
-                                    this.beziers, c, maxIdx
-                                )
-                            )
-
-                            maxIdx++
-                        }
-                    )
-
-                    curves.forEach(
-                        c => {
-                            const index = this.beziers.indexOf(c)
-                            this.beziers.splice(index, 1)
-                            undoContext.addAction(
-                                new ArrayRemoveAction(
-                                    this.beziers, c, index
-                                )
-                            )
-                        }
+                    this.performCSGOperation(
+                        (out, item) => out.subtract(item, {
+                            insert: false
+                        })
                     )
 
                     finalizeUndoContext("Difference")
                 }
             },
-
             {
                 name: "Intersection",
                 icon: "intersection",
                 accelerator: "",
                 handler: () => {
-                    const curves = this.getSelectedCurves()
-                    if (!curves.length) return
-
-                    const paperPaths = curves.map(
-                        c => c.getPaperPath()
-                    )
-                    let out: paper.PathItem = paperPaths[0]
-
-                    let maxIdx = Math.max(
-                        ...curves.map(c => this.beziers.indexOf(c))
-                    ) + 1
-
-                    for (let i = 1; i < paperPaths.length; i++) {
-                        out = out.intersect(
-                            paperPaths[i], {
-                                insert: false
-                            }
-                        )
-                    }
-
-                    const newCurves = BezierCurve.fromPaperPathItem(out)
-
-                    newCurves.forEach(
-                        c => {
-                            this.beziers.splice(maxIdx, 0, c)
-                            undoContext.addAction(
-                                new ArrayAddAction(
-                                    this.beziers, c, maxIdx
-                                )
-                            )
-
-                            maxIdx++
-                        }
+                    this.performCSGOperation(
+                        (out, item) => out.intersect(item, {
+                            insert: false
+                        })
                     )
 
-                    curves.forEach(
-                        c => {
-                            const index = this.beziers.indexOf(c)
-                            this.beziers.splice(index, 1)
-                            undoContext.addAction(
-                                new ArrayRemoveAction(
-                                    this.beziers, c, index
-                                )
-                            )
-                        }
+                    finalizeUndoContext("Intersection")
+                }
+            },
+            {
+                name: "Exclusion",
+                icon: "xor",
+                accelerator: "",
+                handler: () => {
+                    this.performCSGOperation(
+                        (out, item) => out.exclude(item, {
+                            insert: false
+                        })
                     )
 
-                    finalizeUndoContext("Union")
+                    finalizeUndoContext("Exclusion")
                 }
             }
         ],
@@ -447,6 +336,55 @@ export class HandleTool implements ITool {
             }
         ]
     ]
+
+    private performCSGOperation(
+        operation: (
+            out: paper.PathItem, current: paper.PathItem
+        ) => paper.PathItem
+    ) {
+        const curves = this.getSelectedCurves()
+        if (!curves.length) return
+
+        const paperPaths = curves.map(
+            c => c.getPaperPath()
+        )
+        let out: paper.PathItem = paperPaths[0]
+
+        let maxIdx = Math.max(
+            ...curves.map(c => this.beziers.indexOf(c))
+        ) + 1
+
+        for (let i = 1; i < paperPaths.length; i++) {
+            out = operation(out, paperPaths[i])
+        }
+
+        const newCurves = BezierCurve.fromPaperPathItem(out)
+
+        newCurves.forEach(
+            c => {
+                this.beziers.splice(maxIdx, 0, c)
+                undoContext.addAction(
+                    new ArrayAddAction(
+                        this.beziers, c, maxIdx
+                    )
+                )
+
+                maxIdx++
+            }
+        )
+
+        curves.forEach(
+            c => {
+                const index = this.beziers.indexOf(c)
+                this.beziers.splice(index, 1)
+                undoContext.addAction(
+                    new ArrayRemoveAction(
+                        this.beziers, c, index
+                    )
+                )
+            }
+       )
+    }
 
     private addHandlesToUndoContext(handles: IDrawableHandle[]) {
         handles.forEach(

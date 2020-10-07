@@ -25,6 +25,29 @@ export class BezierCurve extends EventEmitter {
         this.emit("newPoint", point)
     }
 
+    // see: https://www.element84.com/blog/determining-the-winding-of-a-polygon-given-as-a-set-of-ordered-points
+    get clockwise() {
+        let sum = 0
+
+        for (let i = 0; i < this.points.length; i++) {
+            const point = this.points[i].base
+            const next = this.points[
+                (i + 1) % this.points.length
+            ].base
+
+            sum += (next.x - point.x) * (next.y - point.y)
+        }
+
+        return sum < 0 // inverted Y axis!
+    }
+
+    reverse() {
+        this.points.forEach(
+            p => p.reverse()
+        )
+        this.points = this.points.reverse()
+    }
+
     static getPath2D(beziers: BezierCurve[]) {
         const path = new Path2D()
 

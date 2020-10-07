@@ -346,76 +346,88 @@ export class HandleTool implements ITool {
         const curves = this.getSelectedCurves()
         if (!curves.length) return
 
+        const targetWinding = curves[0].clockwise
+        console.log(this.beziers.map(b => b.clockwise))
+        console.log(curves.map(b => b.clockwise))
+
         const paperPaths = curves.map(
             c => c.getPaperPath()
         )
         let out: paper.PathItem = paperPaths[0]
 
-        let maxIdx = Math.max(
+        let insertIdx = Math.min(
             ...curves.map(c => this.beziers.indexOf(c))
-        ) + 1
+        )
 
         for (let i = 1; i < paperPaths.length; i++) {
             out = operation(out, paperPaths[i])
         }
 
         const newCurves = BezierCurve.fromPaperPathItem(out)
+        if (newCurves.length) {
+            const referenceWinding = newCurves[0].clockwise
 
-        newCurves.forEach(
-            c => {
-                this.beziers.splice(maxIdx, 0, c)
-                undoContext.addAction(
-                    new ArrayAddAction(
-                        this.beziers, c, maxIdx
-                    )
-                )
+            console.log(targetWinding, referenceWinding)
 
-                const gIdx = this.guides.length
-                const guide = new CurveGuide(c)
-                
-                this.guides.push(guide)
-                undoContext.addAction(
-                    new ArrayAddAction(
-                        this.guides, guide, gIdx
-                    )
-                )
+            newCurves.forEach(
+                c => {
+                    if (referenceWinding !== targetWinding)
+                        c.reverse()
 
-                c.points.forEach(
-                    p => {
-                        const index = this.handles.length
-
-                        this.handles.push(
-                            new BezierControlPointHandle(
-                                p, p.before
-                            ),
-                            new BezierControlPointHandle(
-                                p, p.after
-                            ),
-                            new BezierBasePointHandle(
-                                p
-                            )
+                    this.beziers.splice(insertIdx, 0, c)
+                    undoContext.addAction(
+                        new ArrayAddAction(
+                            this.beziers, c, insertIdx
                         )
+                    )
 
-                        undoContext.addAction(
-                            new ArrayAddAction(
-                                this.handles, this.handles[index],
-                                index
-                            ),
-                            new ArrayAddAction(
-                                this.handles, this.handles[index + 1],
-                                index + 1
-                            ),
-                            new ArrayAddAction(
-                                this.handles, this.handles[index + 2],
-                                index + 2
-                            )
+                    const gIdx = this.guides.length
+                    const guide = new CurveGuide(c)
+                    
+                    this.guides.push(guide)
+                    undoContext.addAction(
+                        new ArrayAddAction(
+                            this.guides, guide, gIdx
                         )
-                    }
-                )
+                    )
 
-                maxIdx++
-            }
-        )
+                    c.points.forEach(
+                        p => {
+                            const index = this.handles.length
+
+                            this.handles.push(
+                                new BezierControlPointHandle(
+                                    p, p.before
+                                ),
+                                new BezierControlPointHandle(
+                                    p, p.after
+                                ),
+                                new BezierBasePointHandle(
+                                    p
+                                )
+                            )
+
+                            undoContext.addAction(
+                                new ArrayAddAction(
+                                    this.handles, this.handles[index],
+                                    index
+                                ),
+                                new ArrayAddAction(
+                                    this.handles, this.handles[index + 1],
+                                    index + 1
+                                ),
+                                new ArrayAddAction(
+                                    this.handles, this.handles[index + 2],
+                                    index + 2
+                                )
+                            )
+                        }
+                    )
+
+                    insertIdx++
+                }
+            )
+        }
 
         curves.forEach(
             c => {
@@ -458,7 +470,9 @@ export class HandleTool implements ITool {
                     }
                 )
             }
-       )
+        )
+
+        console.log(this.beziers.map(b => b.clockwise))
     }
 
     private addHandlesToUndoContext(handles: IDrawableHandle[]) {

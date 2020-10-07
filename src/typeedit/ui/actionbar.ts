@@ -1,3 +1,4 @@
+import { accelStringToUserFriendly } from "../utils/accelerator";
 import { ToolSubAction } from "../viewport/tools/tool";
 import { Viewport } from "../viewport/viewport";
 
@@ -11,7 +12,11 @@ export function updateSubactions(viewport: Viewport, subactionGroups: ToolSubAct
 
         for (const subaction of group) {
             const button = document.createElement("button")
-            button.title = subaction.name
+            button.title = `${subaction.name}${
+                subaction.accelerator ? ` (${
+                    accelStringToUserFriendly(subaction.accelerator)
+                })` : ""
+            }`
 
             button.addEventListener("click", () => {
                 subaction.handler()

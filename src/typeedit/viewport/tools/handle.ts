@@ -106,9 +106,19 @@ export class HandleTool implements ITool {
                 }
             },
             {
+                name: "Deselect all",
+                icon: "removesel",
+                accelerator: "^KeyD",
+                handler: () => {
+                    this.handles.forEach(
+                        handle => handle.selected = false
+                    )
+                }
+            },
+            {
                 name: "Invert selection",
                 icon: "invertsel",
-                accelerator: "^KeyD",
+                accelerator: "^KeyI",
                 handler: () => {
                     this.handles.forEach(
                         handle => handle.selected = !handle.selected
@@ -327,6 +337,8 @@ export class HandleTool implements ITool {
                 handler: () => {
                     const selected = this.handles.filter(h => h.selected)
                     const bbox = this.getHandlesBBox(selected)
+
+                    this.addHandlesToUndoContext(selected)
 
                     selected.forEach(handle => {
                         handle.position.x = (bbox.left + bbox.right) / 2

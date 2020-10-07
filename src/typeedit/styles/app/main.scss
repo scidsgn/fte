@@ -1,0 +1,51 @@
+main {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    background: #f6f6f6;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    & > nav {
+        width: calc(100vw - 283px);
+
+        padding: 2px 0px 0px 0px;
+
+        box-shadow: inset 0px -2px 2px #00000005;
+        display: flex;
+        justify-content: center;
+
+        button {
+            background: transparent;
+
+            font-family: "Inter";
+            font-size: 10pt;
+            font-weight: 500;
+
+            padding: 6px 20px;
+            border: none;
+            border-bottom: none;
+            border-radius: 2px 2px 0px 0px;
+            outline: none;
+
+            &.active {
+                background: #fff;
+            }
+        }
+    }
+
+    section {
+        position: relative;
+
+        background: #fff;
+
+        width: 100vw;
+
+        flex-grow: 1;
+    }
+}

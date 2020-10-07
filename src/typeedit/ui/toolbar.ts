@@ -6,6 +6,7 @@ export function prepareToolbar(
     callback: (t: ITool) => void
 ) {
     const toolbar = document.querySelector("div.tools")
+    toolbar.innerHTML = ""
 
     tools.forEach(
         tool => {

@@ -1,0 +1,26 @@
+article.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    div {        
+        margin: 24px;
+
+        h1 {
+            font-size: 36pt;
+
+            margin: 0;
+
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 11pt;
+            font-weight: 400;
+
+            margin: 0;
+
+            text-align: center;
+        }
+    }
+}

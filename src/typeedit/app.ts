@@ -1,5 +1,3 @@
-import "./styles/app.scss"
-
 import { Font as OTFont } from "opentype.js"
 import { BezierPenTool } from "./viewport/tools/bezierPen"
 import { HandleTool } from "./viewport/tools/handle"

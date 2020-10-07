@@ -40,10 +40,6 @@ recentFiles.forEach(
     }
 )
 
-document.querySelector("button.openDT").addEventListener(
-    "click", () => remote.getCurrentWebContents().openDevTools()
-)
-
 document.querySelector("button.openFile").addEventListener(
     "click", () => {
         remote.dialog.showOpenDialog(

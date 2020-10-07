@@ -4,20 +4,25 @@
     <g transform="matrix(1,0,0,1,-72,-36)">
         <g id="delete" transform="matrix(0.666667,0,0,0.666667,72,36)">
             <rect x="0" y="0" width="24" height="24" style="fill:none;"/>
-            <g transform="matrix(1.65,0,0,1.5,-120,-54.75)">
-                <path d="M75,39L85,39" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.95px;"/>
-            </g>
-            <g transform="matrix(1.875,0,0,1.5,-138,-54.75)">
-                <path d="M78,39L78,37L82,37L82,39" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.88px;"/>
-            </g>
-            <g transform="matrix(2.25,0,0,1.43478,-168,-50.6413)">
-                <path d="M77,40L77,51.5L83,51.5L83,40" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.79px;"/>
-            </g>
-            <g transform="matrix(1.5,0,0,1.5,-108.75,-54)">
-                <path d="M79,40.5L79,51.5" style="fill:none;stroke:rgb(20,20,20);stroke-width:1px;"/>
-            </g>
-            <g transform="matrix(1.5,0,0,1.5,-104.25,-54)">
-                <path d="M79,40.5L79,51.5" style="fill:none;stroke:rgb(20,20,20);stroke-width:1px;"/>
+            <clipPath id="_clip1">
+                <rect x="0" y="0" width="24" height="24"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g transform="matrix(1.65,0,0,1.5,-120,-54.75)">
+                    <path d="M75,39L85,39" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.95px;"/>
+                </g>
+                <g transform="matrix(1.875,0,0,1.5,-138,-54.75)">
+                    <path d="M78,39L78,37L82,37L82,39" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.88px;"/>
+                </g>
+                <g transform="matrix(2.25,0,0,1.43478,-168,-50.6413)">
+                    <path d="M77,40L77,49.409C77,49.964 77.14,50.495 77.391,50.888C77.641,51.28 77.98,51.5 78.333,51.5C79.326,51.5 80.674,51.5 81.667,51.5C82.02,51.5 82.359,51.28 82.609,50.888C82.86,50.495 83,49.964 83,49.409C83,46.093 83,40 83,40" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.79px;"/>
+                </g>
+                <g transform="matrix(1.5,0,0,1.5,-108.75,-54)">
+                    <path d="M79,40.5L79,51.5" style="fill:none;stroke:rgb(20,20,20);stroke-width:1px;"/>
+                </g>
+                <g transform="matrix(1.5,0,0,1.5,-104.25,-54)">
+                    <path d="M79,40.5L79,51.5" style="fill:none;stroke:rgb(20,20,20);stroke-width:1px;"/>
+                </g>
             </g>
         </g>
     </g>

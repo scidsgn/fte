@@ -1,4 +1,3 @@
-import { Font as OTFont } from "opentype.js"
 import { BezierPenTool } from "./viewport/tools/bezierPen"
 import { HandleTool } from "./viewport/tools/handle"
 import { GlyphContext } from "./viewport/context/glyph"
@@ -9,7 +8,7 @@ import { prepareGlyphList } from "./ui/glyphList"
 import { ITool, ToolSubAction } from "./viewport/tools/tool"
 import { undo, redo } from "./undo/history"
 import { prepareToolbar } from "./ui/toolbar"
-import { importFont } from "./io/import"
+import { Font } from "./font/font"
 
 const globalSubActions: ToolSubAction[] = [
     {
@@ -35,8 +34,7 @@ const globalTools = [
     new BezierPenTool()
 ]
 
-export default (otfont: OTFont) => {
-    const font = importFont(otfont)
+export default (font: Font) => {
     document.title = `${font.info.fontFamily} - FTE`
 
     const context = new GlyphContext(

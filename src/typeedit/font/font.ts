@@ -27,11 +27,89 @@ export type FontInfo = {
 
 export class Font extends EventEmitter {
     constructor(
-        public info: FontInfo,
+        public info: Partial<FontInfo>,
         public metrics: FontMetrics,
         public glyphs: Glyph[]
     ) {
         super()
+
+        this.info = Object.assign(
+            {
+                copyright: "",
+                description: "",
+                designer: "",
+                designerURL: "",
+                fontFamily: "",
+                fontSubfamily: "",
+                fullName: "",
+                license: "",
+                licenseURL: "",
+                manufacturer: "",
+                manufacturerURL: "",
+                postScriptName: "",
+                uniqueID: "",
+                version: ""
+            }, this.info
+        )
+    }
+
+    static createBlank() {
+        // Just the base Latin alphanumeric for now
+        const baseCharacterSet = " 0123456789-=_+!@#$%^&*(){}[]\\\/,.<>?;':\"~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        const specialNames: {
+            [key: string]: string
+        } = {
+            " ": "space",
+            "'": "quote",
+            "\"": "dblquote",
+            "!": "exclam",
+            "@": "at",
+            "#": "hash",
+            "$": "dollar",
+            "%": "percent",
+            "^": "caret",
+            "&": "ampersand",
+            "*": "asterisk"
+        }
+
+        const font = new Font(
+            {
+                fontFamily: "New font",
+                fontSubfamily: "Regular"
+            },
+            {
+                ascender: -96,
+                descender: 512 + 96,
+                xHeight: 196
+            },
+            []
+        )
+        font.addGlyph(
+            new Glyph(
+                font, ".notdef", null,
+                {
+                    leftBearing: 0,
+                    rightBearing: 320
+                },
+                []
+            ),
+            ...baseCharacterSet.split("").map(
+                char => {
+                    const name = (char in specialNames) ? specialNames[char] : char
+
+                    return new Glyph(
+                        font, name, char.codePointAt(0),
+                        {
+                            leftBearing: 0,
+                            rightBearing: 320
+                        },
+                        []
+                    )
+                }
+            )
+        )
+
+        return font
     }
 
     static fromOTFont(otfont: OTFont) {

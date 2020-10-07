@@ -9,6 +9,8 @@ import app from "./typeedit/app"
 import paper from "paper"
 import { remote } from "electron"
 import { basename } from "path"
+import { importFont } from "./typeedit/io/import"
+import { Font } from "./typeedit/font/font"
 
 console.log(remote)
 
@@ -31,12 +33,21 @@ recentFiles.forEach(
                     const welcome = document.querySelector("article.welcome") as HTMLDivElement
                     welcome.style.display = "none"
                     
-                    app(f)
+                    app(importFont(f))
                 })
             }
         )
 
         document.querySelector("div.recentFiles").appendChild(btn)
+    }
+)
+
+document.querySelector("button.newFont").addEventListener(
+    "click", () => {
+        const welcome = document.querySelector("article.welcome") as HTMLDivElement
+        welcome.style.display = "none"
+
+        app(Font.createBlank())
     }
 )
 
@@ -64,7 +75,7 @@ document.querySelector("button.openFile").addEventListener(
                     const welcome = document.querySelector("article.welcome") as HTMLDivElement
                     welcome.style.display = "none"
 
-                    app(font)
+                    app(importFont(font))
 
                     recentFiles.unshift(result.filePaths[0])
                     localStorage.setItem("recentFiles", JSON.stringify(recentFiles))

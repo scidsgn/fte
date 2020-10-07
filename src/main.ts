@@ -8,6 +8,7 @@ app.on("window-all-closed", () => {
 app.on("ready", () => {
     const win = new BrowserWindow(
         {
+            title: "FTE",
             width: 1280,
             height: 720,
             webPreferences: {

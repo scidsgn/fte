@@ -65,7 +65,7 @@ export class GridGuide implements IGuide {
             ctx.lineTo(9999, Math.round(client.y) + 0.5)
         }
         
-        ctx.strokeStyle = "#eee"
+        ctx.strokeStyle = "#3332"
         ctx.lineWidth = 1
         ctx.stroke()
         

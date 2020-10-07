@@ -194,13 +194,15 @@ export class Viewport {
             0, 0, this.domCanvas.width, this.domCanvas.height
         )
 
-        this.context.grids.forEach(
-            g => g.render(this, this.ctx)
-        )
-
         this.co.transformCanvas(this.ctx)
 
         this.context.render(this, this.ctx)
+        
+        this.ctx.resetTransform()
+        
+        this.context.grids.forEach(
+            g => g.render(this, this.ctx)
+        )
 
         Array(
             ...this.context.guides,
@@ -217,7 +219,6 @@ export class Viewport {
             }
         )
 
-        this.ctx.resetTransform()
         if (this.tool && this.tool.supportsForeignHandles) {
             this.drawHandles(this.context.handles)
             this.drawHandles(this.handles)

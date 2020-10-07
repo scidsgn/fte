@@ -3,6 +3,7 @@ import { Point } from "../geometry/point"
 import { IContext } from "./context/context"
 import { ViewportCoordinates } from "./coordinates"
 import { IDrawable, IDrawableHandle } from "./drawable"
+import { GridGuide } from "./guides/grid"
 import { ITool } from "./tools/tool"
 
 export class Viewport {
@@ -167,6 +168,9 @@ export class Viewport {
     }
 
     nudgePoint(pos: Point, obj?: any) {
+        this.context.grids.forEach(
+            g => g.nudge(this, pos, obj)
+        )
         this.context.guides.forEach(
             g => g.nudge(this, pos, obj)
         )
@@ -190,6 +194,10 @@ export class Viewport {
             0, 0, this.domCanvas.width, this.domCanvas.height
         )
 
+        this.context.grids.forEach(
+            g => g.render(this, this.ctx)
+        )
+
         this.co.transformCanvas(this.ctx)
 
         this.context.render(this, this.ctx)
@@ -199,7 +207,7 @@ export class Viewport {
             ...this.tool.guides
         ).forEach(
             guide => {
-                if (guide.active) {
+                if (guide.active || guide instanceof GridGuide) {
                     this.ctx.resetTransform()
                     if (guide.worldRender)
                         this.co.transformCanvas(this.ctx)

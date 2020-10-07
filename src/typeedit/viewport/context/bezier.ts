@@ -7,6 +7,7 @@ import { IContext } from "./context";
 export class BezierContext implements IContext {
     public handles: IDrawableHandle[] = []
     public guides: IGuide[] = []
+    public grids: IGuide[] = []
 
     constructor(
         public beziers: BezierCurve[]

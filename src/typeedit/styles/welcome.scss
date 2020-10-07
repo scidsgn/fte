@@ -8,6 +8,12 @@ article.welcome {
 
         margin: 60px;
 
+        div.buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+        }
+
         h1 {
             font-size: 40pt;
             line-height: 1;

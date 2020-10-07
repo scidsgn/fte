@@ -1,11 +1,12 @@
 import { BezierCurve } from "../../geometry/bezier/curve";
 import { Point } from "../../geometry/point";
-import { ArrayRemoveAction } from "../../undo/actions/array";
+import { ArrayAddAction, ArrayRemoveAction } from "../../undo/actions/array";
 import { finalizeUndoContext, redo, undo, undoContext } from "../../undo/history";
 import { lerp, unlerp } from "../../utils/lerp";
 import { BezierContext } from "../context/bezier";
 import { IContext } from "../context/context";
 import { IDrawableHandle } from "../drawable";
+import { CurveGuide } from "../guides/curve";
 import { IGuide } from "../guides/guide";
 import { HandleGuide } from "../guides/point";
 import { BezierBasePointHandle } from "../handles/bezierBasePoint";
@@ -30,6 +31,8 @@ export class HandleTool implements ITool {
 
     private moveStartPoint: Point
     private moveLastPoint: Point
+
+    private beziers: BezierCurve[] = []
 
     public subactions: ToolSubAction[][] = [
         [
@@ -128,6 +131,64 @@ export class HandleTool implements ITool {
                             if (handle) handle.selected = true
                         }
                     }
+                }
+            }
+        ],
+        [
+            {
+                name: "Union",
+                icon: "union",
+                accelerator: "",
+                handler: () => {
+                    this.performCSGOperation(
+                        (out, item) => out.unite(item, {
+                            insert: false
+                        })
+                    )
+
+                    finalizeUndoContext("Union")
+                }
+            },
+            {
+                name: "Difference",
+                icon: "difference",
+                accelerator: "",
+                handler: () => {
+                    this.performCSGOperation(
+                        (out, item) => out.subtract(item, {
+                            insert: false
+                        })
+                    )
+
+                    finalizeUndoContext("Difference")
+                }
+            },
+            {
+                name: "Intersection",
+                icon: "intersection",
+                accelerator: "",
+                handler: () => {
+                    this.performCSGOperation(
+                        (out, item) => out.intersect(item, {
+                            insert: false
+                        })
+                    )
+
+                    finalizeUndoContext("Intersection")
+                }
+            },
+            {
+                name: "Exclusion",
+                icon: "xor",
+                accelerator: "",
+                handler: () => {
+                    this.performCSGOperation(
+                        (out, item) => out.exclude(item, {
+                            insert: false
+                        })
+                    )
+
+                    finalizeUndoContext("Exclusion")
                 }
             }
         ],
@@ -276,6 +337,143 @@ export class HandleTool implements ITool {
             }
         ]
     ]
+
+    private performCSGOperation(
+        operation: (
+            out: paper.PathItem, current: paper.PathItem
+        ) => paper.PathItem
+    ) {
+        const curves = this.getSelectedCurves()
+        if (!curves.length) return
+
+        const targetWinding = curves[0].clockwise
+        console.log(this.beziers.map(b => b.clockwise))
+        console.log(curves.map(b => b.clockwise))
+
+        const paperPaths = curves.map(
+            c => c.getPaperPath()
+        )
+        let out: paper.PathItem = paperPaths[0]
+
+        let insertIdx = Math.min(
+            ...curves.map(c => this.beziers.indexOf(c))
+        )
+
+        for (let i = 1; i < paperPaths.length; i++) {
+            out = operation(out, paperPaths[i])
+        }
+
+        const newCurves = BezierCurve.fromPaperPathItem(out)
+        if (newCurves.length) {
+            const referenceWinding = newCurves[0].clockwise
+
+            console.log(targetWinding, referenceWinding)
+
+            newCurves.forEach(
+                c => {
+                    if (referenceWinding !== targetWinding)
+                        c.reverse()
+
+                    this.beziers.splice(insertIdx, 0, c)
+                    undoContext.addAction(
+                        new ArrayAddAction(
+                            this.beziers, c, insertIdx
+                        )
+                    )
+
+                    const gIdx = this.guides.length
+                    const guide = new CurveGuide(c)
+                    
+                    this.guides.push(guide)
+                    undoContext.addAction(
+                        new ArrayAddAction(
+                            this.guides, guide, gIdx
+                        )
+                    )
+
+                    c.points.forEach(
+                        p => {
+                            const index = this.handles.length
+
+                            this.handles.push(
+                                new BezierControlPointHandle(
+                                    p, p.before
+                                ),
+                                new BezierControlPointHandle(
+                                    p, p.after
+                                ),
+                                new BezierBasePointHandle(
+                                    p
+                                )
+                            )
+
+                            undoContext.addAction(
+                                new ArrayAddAction(
+                                    this.handles, this.handles[index],
+                                    index
+                                ),
+                                new ArrayAddAction(
+                                    this.handles, this.handles[index + 1],
+                                    index + 1
+                                ),
+                                new ArrayAddAction(
+                                    this.handles, this.handles[index + 2],
+                                    index + 2
+                                )
+                            )
+                        }
+                    )
+
+                    insertIdx++
+                }
+            )
+        }
+
+        curves.forEach(
+            c => {
+                const index = this.beziers.indexOf(c)
+                this.beziers.splice(index, 1)
+
+                undoContext.addAction(
+                    new ArrayRemoveAction(
+                        this.beziers, c, index
+                    )
+                )
+
+                const gIdx = this.guides.findIndex(
+                    g => g instanceof CurveGuide &&
+                         g.source === c
+                )
+                this.guides.splice(gIdx, 1)
+
+                undoContext.addAction(
+                    new ArrayRemoveAction(
+                        this.guides, this.guides[gIdx],
+                        gIdx
+                    )
+                )
+
+                this.handles.filter(
+                    h => (h instanceof BezierBasePointHandle ||
+                         h instanceof BezierControlPointHandle) &&
+                         h.point.curve === c
+                ).forEach(
+                    h => {
+                        const index = this.handles.indexOf(h)
+                        this.handles.splice(index, 1)
+
+                        undoContext.addAction(
+                            new ArrayRemoveAction(
+                                this.handles, h, index
+                            )
+                        )
+                    }
+                )
+            }
+        )
+
+        console.log(this.beziers.map(b => b.clockwise))
+    }
 
     private addHandlesToUndoContext(handles: IDrawableHandle[]) {
         handles.forEach(
@@ -477,6 +675,8 @@ export class HandleTool implements ITool {
 
     updateContext(context: IContext) {
         if (!(context instanceof BezierContext)) return
+
+        this.beziers = context.beziers
 
         this.handles = []
         context.beziers.forEach(

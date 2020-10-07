@@ -21,6 +21,12 @@ export class Glyph extends EventEmitter {
         public beziers: BezierCurve[]
     ) {
         super()
+
+        if (!name) {
+            this.name = codePoint ?
+                   `uni${codePoint.toString(16).toUpperCase().padStart(4, "0")}` :
+                   ".notdef"
+        }
         
         this.beziers.forEach(b => b.glyph = this)
         this.finalBeziers = beziers // for now

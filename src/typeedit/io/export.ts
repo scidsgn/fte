@@ -1,13 +1,12 @@
-import { Font } from "../font/font";
+import { Font } from "../font/font"
 import {
     Font as OTFont,
     Glyph as OTGlyph,
     Path as OTPath
 } from "opentype.js"
-import { BezierCurve } from "../geometry/bezier/curve";
-import { Glyph } from "../font/glyph";
-import { Point } from "../geometry/point";
-import { writeFileSync } from "fs";
+import { Glyph } from "../font/glyph"
+import { Point } from "../geometry/point"
+import { writeFileSync } from "fs"
 
 function glyphToOTPath(glyph: Glyph, targetCapHeight = 1000) {
     const path = new OTPath()
@@ -61,8 +60,8 @@ export function exportFont(font: Font, targetFile: string) {
     const scaleFactor = targetCapHeight / 512
     
     const otfont = new OTFont({
-        familyName: font.info.name,
-        styleName: "Regular",
+        familyName: font.info.fontFamily,
+        styleName: font.info.fontSubfamily,
         unitsPerEm: (font.metrics.descender - font.metrics.ascender) * scaleFactor, // TODO!!
         ascender: (512 - font.metrics.ascender) * scaleFactor,
         descender: (512 - font.metrics.descender) * scaleFactor,

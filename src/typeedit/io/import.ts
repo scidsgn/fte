@@ -4,6 +4,7 @@ import { Glyph } from "../font/glyph";
 import { BezierCurve } from "../geometry/bezier/curve";
 import { BezierPoint, BezierPointType } from "../geometry/bezier/point";
 import { Point } from "../geometry/point";
+import { lerp } from "../utils/lerp";
 
 function convertOTCoordinates(
     otfont: OTFont, x: number, y: number
@@ -74,6 +75,28 @@ export function generateCurvesFromOTGlyph(
                         new BezierPoint(
                             new Point(coords.x, coords.y),
                             new Point(c2coords.x, c2coords.y),
+                            new Point(coords.x, coords.y)
+                        )
+                    )
+
+                    break
+                }
+                case "Q": {
+                    const c1coords = conv(cmd.x1, cmd.y1)
+                    const coords = conv(cmd.x, cmd.y)
+
+                    if (!curve.points.length) return // WHO MALFORMED MY OTF
+                    const prevPoint = curve.points[curve.points.length - 1]
+                    prevPoint.after.x = lerp(1/3, c1coords.x, prevPoint.base.x)
+                    prevPoint.after.y = lerp(1/3, c1coords.y, prevPoint.base.y)
+
+                    curve.addPoint(
+                        new BezierPoint(
+                            new Point(coords.x, coords.y),
+                            new Point(
+                                lerp(1/3, c1coords.x, coords.x),
+                                lerp(1/3, c1coords.y, coords.y)
+                            ),
                             new Point(coords.x, coords.y)
                         )
                     )

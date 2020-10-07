@@ -1,0 +1,69 @@
+article.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    & > div {     
+        width: 350px;
+
+        margin: 60px;
+
+        div.buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+        }
+
+        h1 {
+            font-size: 40pt;
+            line-height: 1;
+
+            margin: 0;
+
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 14pt;
+            font-weight: 400;
+
+            margin: 0px 0px 24px 0px;
+
+            text-align: center;
+        }
+
+        h2 {
+            font-weight: 400;
+            
+            margin-bottom: 8px;
+        }
+
+        button {
+            width: 100%;
+
+            background: transparent;
+
+            font-family: "Inter";
+
+            border: none;
+            outline: none;
+            padding: 7px 8px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            margin-bottom: 2px;
+
+            &:hover {
+                background: #eee;
+            }
+
+            &:active {
+                background: #ddd;
+            }
+
+            img {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}

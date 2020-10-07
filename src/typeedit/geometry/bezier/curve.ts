@@ -2,6 +2,7 @@ import { EventEmitter } from "events"
 import { Glyph } from "../../font/glyph"
 import { BezierPoint } from "./point"
 import paper from "paper"
+import { Point } from "../point"
 
 export class BezierCurve extends EventEmitter {
     public points: BezierPoint[] = []
@@ -22,6 +23,29 @@ export class BezierCurve extends EventEmitter {
         this.points.push(point)
         this.emit("modified")
         this.emit("newPoint", point)
+    }
+
+    // see: https://www.element84.com/blog/determining-the-winding-of-a-polygon-given-as-a-set-of-ordered-points
+    get clockwise() {
+        let sum = 0
+
+        for (let i = 0; i < this.points.length; i++) {
+            const point = this.points[i].base
+            const next = this.points[
+                (i + 1) % this.points.length
+            ].base
+
+            sum += (next.x - point.x) * (next.y - point.y)
+        }
+
+        return sum < 0 // inverted Y axis!
+    }
+
+    reverse() {
+        this.points.forEach(
+            p => p.reverse()
+        )
+        this.points = this.points.reverse()
     }
 
     static getPath2D(beziers: BezierCurve[]) {
@@ -72,6 +96,43 @@ export class BezierCurve extends EventEmitter {
         path.closePath()
 
         return path
+    }
+    
+    static fromPaperPath(path: paper.Path): BezierCurve {
+        const curve = new BezierCurve()
+
+        path.segments.forEach(
+            seg => curve.addPoint(
+                new BezierPoint(
+                    new Point(seg.point.x, seg.point.y),
+                    new Point(
+                        seg.point.x + seg.handleIn.x,
+                        seg.point.y + seg.handleIn.y
+                    ),
+                    new Point(
+                        seg.point.x + seg.handleOut.x,
+                        seg.point.y + seg.handleOut.y
+                    )
+                )
+            )
+        )
+
+        return curve
+    }
+
+    static fromPaperPathItem(item: paper.PathItem): BezierCurve[] {
+        if (item instanceof paper.Path)
+            return [BezierCurve.fromPaperPath(item)]
+        else if (item instanceof paper.CompoundPath)
+            return item.children.map(
+                ch => {
+                    if (ch instanceof paper.Path)
+                        return BezierCurve.fromPaperPath(ch)
+                    return null
+                }
+            ).filter(c => c)
+        
+        return []
     }
 }
 

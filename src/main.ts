@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow, Menu } from "electron"
 import { join } from "path"
 
 app.on("window-all-closed", () => {
@@ -11,10 +11,13 @@ app.on("ready", () => {
             width: 1280,
             height: 720,
             webPreferences: {
-                nodeIntegration: true
+                nodeIntegration: true,
+                enableRemoteModule: true
             }
         }
     )
+
+    win.setMenuBarVisibility(false)
     
     console.log(__dirname)
     win.loadFile("index.html")

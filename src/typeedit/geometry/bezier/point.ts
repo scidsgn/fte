@@ -22,6 +22,12 @@ export class BezierPoint extends EventEmitter {
         })
     }
 
+    reverse() {
+        const t = this.before
+        this.before = this.after
+        this.after = t
+    }
+
     determineType() {
         const radius1 = this.after.distance(this.base)
         const radius2 = this.before.distance(this.base)

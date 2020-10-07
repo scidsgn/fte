@@ -1,5 +1,3 @@
-import "./styles/app.scss"
-
 import { Font as OTFont } from "opentype.js"
 import { BezierPenTool } from "./viewport/tools/bezierPen"
 import { HandleTool } from "./viewport/tools/handle"
@@ -39,6 +37,7 @@ const globalTools = [
 
 export default (otfont: OTFont) => {
     const font = importFont(otfont)
+    document.title = `${font.info.fontFamily} - FTE`
 
     const context = new GlyphContext(
         "ABC".split("").map(

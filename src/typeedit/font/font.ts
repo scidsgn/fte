@@ -26,7 +26,7 @@ export class Font extends EventEmitter {
         const glyphs: Glyph[] = [] // For now, don't want to import the entirety of Inter just yet
 
         const scaleFactor = 512 / otfont.tables.os2.sCapHeight
-        console.log(otfont)
+        
         return new Font(
             {
                 name: otfont.names.fullName["en"],

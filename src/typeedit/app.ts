@@ -36,6 +36,8 @@ const globalTools = [
     new BezierPenTool()
 ]
 
+let currentKeybCallback: (e: KeyboardEvent) => void = null
+
 export default (font: Font) => {
     currentFont = font
 
@@ -69,7 +71,10 @@ export default (font: Font) => {
 
     viewport.updateViewportSize()
 
-    window.addEventListener("keyup", (e) => {
+    if (currentKeybCallback)
+        window.removeEventListener("keyup", currentKeybCallback)
+
+    currentKeybCallback = (e: KeyboardEvent) => {
         if (document.activeElement !== document.body) return // for now
 
         let accelString = e.code
@@ -77,13 +82,23 @@ export default (font: Font) => {
         if (e.ctrlKey) accelString = "^" + accelString
 
         for (let action of [
+            globalTools,
             globalSubActions, ...viewport.tool.subactions
         ].flat()) {
             if (action.accelerator === accelString) {
-                action.handler()
-                viewport.render()
+                if ("handler" in action) {
+                    action.handler()
+                    viewport.render()
+                } else {
+                    viewport.setTool(action)
+                    updateSubactions(
+                        viewport,
+                        [globalSubActions, ...action.subactions]
+                    )
+                }
                 return
             }
         }
-    })
+    }
+    window.addEventListener("keyup", currentKeybCallback)
 }

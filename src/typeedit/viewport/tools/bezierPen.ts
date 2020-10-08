@@ -168,6 +168,7 @@ export class BezierPenTool implements ITool {
     updateContext(context: IContext) {
         if (!(context instanceof BezierContext)) return
 
+        this.handles = []
         this.guides = []
         
         for (let bezier of context.beziers) {

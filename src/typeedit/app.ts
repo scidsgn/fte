@@ -10,6 +10,8 @@ import { undo, redo } from "./undo/history"
 import { prepareToolbar } from "./ui/toolbar"
 import { Font } from "./font/font"
 
+export let currentFont: Font = null
+
 const globalSubActions: ToolSubAction[] = [
     {
         name: "Undo",
@@ -35,6 +37,8 @@ const globalTools = [
 ]
 
 export default (font: Font) => {
+    currentFont = font
+
     document.title = `${font.info.fontFamily} - FTE`
 
     const context = new GlyphContext(

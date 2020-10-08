@@ -14,7 +14,7 @@ import { ITool, ToolSubAction } from "./tool";
 export class RectangleTool implements ITool {
     public name = "Rectangle"
     public icon = "rectangletool"
-    public accelerator = "R"
+    public accelerator = "KeyR"
 
     public handles: IDrawableHandle[] = []
     public guides: IGuide[] = []

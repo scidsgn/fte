@@ -19,7 +19,7 @@ import { ITool, ToolSubAction } from "./tool"
 export class BezierPenTool implements ITool {
     public name = "Pen"
     public icon = "beziertool"
-    public accelerator = "P"
+    public accelerator = "KeyP"
 
     private currentBezier: BezierCurve = null
     private finalAdjustmentStage = false

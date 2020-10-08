@@ -17,7 +17,7 @@ import { ITool, ToolSubAction } from "./tool";
 export class HandleTool implements ITool {
     public name = "Curve edit"
     public icon = "handletool"
-    public accelerator = "A"
+    public accelerator = "KeyA"
 
     private selecting = false
     private selectionOrigin: Point
@@ -141,6 +141,18 @@ export class HandleTool implements ITool {
                             if (handle) handle.selected = true
                         }
                     }
+                }
+            }
+        ],
+        [
+            {
+                name: "Reverse direction",
+                icon: "union",
+                accelerator: "",
+                handler: () => {
+                    this.getSelectedCurves().forEach(
+                        c => c.reverse()
+                    )
                 }
             }
         ],

@@ -17,7 +17,7 @@ const magic = 4 * (Math.SQRT2 - 1) / 3
 
 export class EllipseTool implements ITool {
     public name = "Ellipse"
-    public icon = "rectangletool"
+    public icon = "ellipsetool"
     public accelerator = "KeyE"
 
     public handles: IDrawableHandle[] = []

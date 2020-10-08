@@ -147,7 +147,7 @@ export class HandleTool implements ITool {
         [
             {
                 name: "Reverse direction",
-                icon: "union",
+                icon: "reversecurve",
                 accelerator: "",
                 handler: () => {
                     this.getSelectedCurves().forEach(

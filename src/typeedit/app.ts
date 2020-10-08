@@ -9,6 +9,7 @@ import { ITool, ToolSubAction } from "./viewport/tools/tool"
 import { undo, redo } from "./undo/history"
 import { prepareToolbar } from "./ui/toolbar"
 import { Font } from "./font/font"
+import { RectangleTool } from "./viewport/tools/rectangle"
 
 export let currentFont: Font = null
 
@@ -33,7 +34,8 @@ const globalSubActions: ToolSubAction[] = [
 
 const globalTools = [
     new HandleTool(),
-    new BezierPenTool()
+    new BezierPenTool(),
+    new RectangleTool()
 ]
 
 let currentKeybCallback: (e: KeyboardEvent) => void = null

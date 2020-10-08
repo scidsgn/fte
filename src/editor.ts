@@ -5,12 +5,13 @@ import "./typeedit/styles/app/editor.scss"
 import "./typeedit/styles/welcome.scss"
 
 import { load } from "opentype.js"
-import app from "./typeedit/app"
+import app, { currentFont } from "./typeedit/app"
 import paper from "paper"
 import { remote } from "electron"
 import { basename } from "path"
 import { importFont } from "./typeedit/io/import"
 import { Font } from "./typeedit/font/font"
+import { exportFont } from "./typeedit/io/export"
 
 console.log(remote)
 
@@ -42,47 +43,76 @@ recentFiles.forEach(
     }
 )
 
-document.querySelector("button.newFont").addEventListener(
-    "click", () => {
-        const welcome = document.querySelector("article.welcome") as HTMLDivElement
-        welcome.style.display = "none"
+document.querySelectorAll("button.newFont").forEach(
+    btn => btn.addEventListener(
+        "click", () => {
+            const welcome = document.querySelector("article.welcome") as HTMLDivElement
+            welcome.style.display = "none"
 
-        app(Font.createBlank())
-    }
+            app(Font.createBlank())
+        }
+    )
 )
 
-document.querySelector("button.openFile").addEventListener(
-    "click", () => {
-        remote.dialog.showOpenDialog(
-            remote.getCurrentWindow(),
-            {
-                filters: [
-                    {
-                        name: "Fonts",
-                        extensions: ["otf", "ttf"]
-                    }
-                ],
-                properties: ["openFile"]
-            }
-        ).then(result => {
-            if (
-                result.canceled ||
-                result.filePaths.length !== 1
-            ) return
-
-            load(result.filePaths[0]).then(
-                font => {
-                    const welcome = document.querySelector("article.welcome") as HTMLDivElement
-                    welcome.style.display = "none"
-
-                    app(importFont(font))
-
-                    recentFiles.unshift(result.filePaths[0])
-                    localStorage.setItem("recentFiles", JSON.stringify(recentFiles))
+document.querySelectorAll("button.openFont").forEach(
+    btn => btn.addEventListener(
+        "click", () => {
+            remote.dialog.showOpenDialog(
+                remote.getCurrentWindow(),
+                {
+                    filters: [
+                        {
+                            name: "Fonts",
+                            extensions: ["otf", "ttf"]
+                        }
+                    ],
+                    properties: ["openFile"]
                 }
-            )
-        })
-    }
+            ).then(result => {
+                if (
+                    result.canceled ||
+                    result.filePaths.length !== 1
+                ) return
+
+                load(result.filePaths[0]).then(
+                    font => {
+                        const welcome = document.querySelector("article.welcome") as HTMLDivElement
+                        welcome.style.display = "none"
+
+                        app(importFont(font))
+
+                        recentFiles.unshift(result.filePaths[0])
+                        localStorage.setItem("recentFiles", JSON.stringify(recentFiles))
+                    }
+                )
+            })
+        }
+    )
+)
+
+document.querySelectorAll("button.saveFont").forEach(
+    btn => btn.addEventListener(
+        "click", () => {
+            remote.dialog.showSaveDialog(
+                remote.getCurrentWindow(),
+                {
+                    filters: [
+                        {
+                            name: "Fonts",
+                            extensions: ["otf", "ttf"]
+                        }
+                    ],
+                    defaultPath: currentFont.info.fontFamily +
+                                 "-" + currentFont.info.fontSubfamily +
+                                 ".otf"
+                }
+            ).then(result => {
+                if (result.canceled) return
+
+                exportFont(currentFont, result.filePath)
+            })
+        }
+    )
 )
 
 // load("test/Inter-Regular.otf").then(

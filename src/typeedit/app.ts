@@ -9,6 +9,10 @@ import { ITool, ToolSubAction } from "./viewport/tools/tool"
 import { undo, redo } from "./undo/history"
 import { prepareToolbar } from "./ui/toolbar"
 import { Font } from "./font/font"
+import { RectangleTool } from "./viewport/tools/rectangle"
+import { EllipseTool } from "./viewport/tools/ellipse"
+
+export let currentFont: Font = null
 
 const globalSubActions: ToolSubAction[] = [
     {
@@ -31,10 +35,16 @@ const globalSubActions: ToolSubAction[] = [
 
 const globalTools = [
     new HandleTool(),
-    new BezierPenTool()
+    new BezierPenTool(),
+    new RectangleTool(),
+    new EllipseTool()
 ]
 
+let currentKeybCallback: (e: KeyboardEvent) => void = null
+
 export default (font: Font) => {
+    currentFont = font
+
     document.title = `${font.info.fontFamily} - FTE`
 
     const context = new GlyphContext(
@@ -65,7 +75,10 @@ export default (font: Font) => {
 
     viewport.updateViewportSize()
 
-    window.addEventListener("keyup", (e) => {
+    if (currentKeybCallback)
+        window.removeEventListener("keyup", currentKeybCallback)
+
+    currentKeybCallback = (e: KeyboardEvent) => {
         if (document.activeElement !== document.body) return // for now
 
         let accelString = e.code
@@ -73,13 +86,23 @@ export default (font: Font) => {
         if (e.ctrlKey) accelString = "^" + accelString
 
         for (let action of [
+            globalTools,
             globalSubActions, ...viewport.tool.subactions
         ].flat()) {
             if (action.accelerator === accelString) {
-                action.handler()
-                viewport.render()
+                if ("handler" in action) {
+                    action.handler()
+                    viewport.render()
+                } else {
+                    viewport.setTool(action)
+                    updateSubactions(
+                        viewport,
+                        [globalSubActions, ...action.subactions]
+                    )
+                }
                 return
             }
         }
-    })
+    }
+    window.addEventListener("keyup", currentKeybCallback)
 }

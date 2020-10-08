@@ -12,29 +12,65 @@ main {
     align-items: flex-start;
 
     & > nav {
-        width: calc(100vw - 283px);
+        width: 100%;
 
-        padding: 2px 0px 0px 0px;
+        padding: 0px;
 
         box-shadow: inset 0px -2px 2px #00000005;
         display: flex;
-        justify-content: center;
 
-        button {
-            background: transparent;
+        div.actions {
+            display: flex;
 
-            font-family: "Inter";
-            font-size: 10pt;
-            font-weight: 500;
+            button {    
+                background: transparent;
+    
+                border: none;
+                outline: none;
+                padding: 7px 10px;
+                border-radius: 4px;
+                margin-bottom: 2px;
+    
+                display: flex;
+                align-items: center;
+                justify-content: center;
+    
+                &:hover {
+                    background: #ddd;
+                }
+    
+                &:active {
+                    background: #c0c0c0;
+                }
+    
+                img {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
 
-            padding: 6px 20px;
-            border: none;
-            border-bottom: none;
-            border-radius: 2px 2px 0px 0px;
-            outline: none;
+        div.tabs {
+            display: flex;
+            flex-grow: 1;
+            justify-content: center;
 
-            &.active {
-                background: #fff;
+            button {
+                background: transparent;
+    
+                font-family: "Inter";
+                font-size: 10pt;
+                font-weight: 500;
+    
+                padding: 6px 20px;
+                border: none;
+                border-bottom: none;
+                border-radius: 2px 2px 0px 0px;
+                outline: none;
+    
+                &.active {
+                    background: #fff;
+                }
             }
         }
     }

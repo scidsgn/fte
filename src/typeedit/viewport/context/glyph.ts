@@ -31,7 +31,7 @@ export class GlyphContext extends BezierContext {
         ]
 
         this.grids = [
-            new GridGuide(32)
+            new GridGuide(16)
         ]
         
         this.guides = [

@@ -19,7 +19,7 @@ import { ITool, ToolSubAction } from "./tool"
 export class BezierPenTool implements ITool {
     public name = "Pen"
     public icon = "beziertool"
-    public accelerator = "P"
+    public accelerator = "KeyP"
 
     private currentBezier: BezierCurve = null
     private finalAdjustmentStage = false
@@ -168,6 +168,7 @@ export class BezierPenTool implements ITool {
     updateContext(context: IContext) {
         if (!(context instanceof BezierContext)) return
 
+        this.handles = []
         this.guides = []
         
         for (let bezier of context.beziers) {

@@ -52,6 +52,10 @@ article.welcome {
             border-radius: 4px;
             margin-bottom: 2px;
 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
             &:hover {
                 background: #eee;
             }
@@ -63,6 +67,8 @@ article.welcome {
             img {
                 width: 16px;
                 height: 16px;
+
+                margin-right: 8px;
             }
         }
     }

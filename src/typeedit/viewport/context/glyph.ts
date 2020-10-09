@@ -72,7 +72,7 @@ export class GlyphContext extends BezierContext {
         this.setupHandlesAndGuides()
     }
 
-    renderNonEditableGlyphs(ctx: CanvasRenderingContext2D) {
+    renderNonEditableGlyphs(v: Viewport, ctx: CanvasRenderingContext2D) {
         let currentOffset = 0
 
         if (this.currentIndex < this.glyphs.length - 1) {
@@ -90,6 +90,8 @@ export class GlyphContext extends BezierContext {
                 ctx.fillStyle = "#000"
                 ctx.translate(offset, 0)
                 ctx.fill(path)
+
+                this.renderGlyphIndicator(v, ctx, glyph)
 
                 currentOffset += offset
             }
@@ -113,6 +115,8 @@ export class GlyphContext extends BezierContext {
                 ctx.translate(offset, 0)
                 ctx.fill(path)
 
+                this.renderGlyphIndicator(v, ctx, glyph)
+
                 currentOffset += offset
 
             }
@@ -120,9 +124,25 @@ export class GlyphContext extends BezierContext {
         ctx.translate(-currentOffset, 0)
         currentOffset = 0
     }
+
+    renderGlyphIndicator(
+        v: Viewport, ctx: CanvasRenderingContext2D, glyph: Glyph
+    ) {
+        const x = glyph.metrics.leftBearing
+        const w = glyph.metrics.rightBearing - x
+        const y = glyph.font.metrics.ascender - 20 / v.co.scaleFactor
+
+        ctx.fillStyle = (this.glyph === glyph) ? "#aaa" : "#eee"
+        ctx.fillRect(x, y - 8 / v.co.scaleFactor, w, 8 / v.co.scaleFactor)
+
+        ctx.font = "400 20px Inter"
+        ctx.textAlign = "center"
+        ctx.fillStyle = (this.glyph === glyph) ? "#555" : "#aaa"
+        ctx.fillText(glyph.name, x + w / 2, y - 16 / v.co.scaleFactor)
+    }
     
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
-        this.renderNonEditableGlyphs(ctx)
+        this.renderNonEditableGlyphs(v, ctx)
 
         // Glyph metric lines
         ctx.strokeStyle = "#3338"
@@ -180,5 +200,7 @@ export class GlyphContext extends BezierContext {
         ctx.strokeStyle = "#000"
         ctx.lineWidth = 1 / v.co.scaleFactor
         ctx.stroke(workingPath)
+
+        this.renderGlyphIndicator(v, ctx, this.glyph)
     }
 }

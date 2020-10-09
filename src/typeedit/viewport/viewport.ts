@@ -180,6 +180,9 @@ export class Viewport {
     }
 
     disableAllGuides() {
+        this.context.grids.forEach(
+            g => g.active = false
+        )
         this.context.guides.forEach(
             g => g.active = false
         )

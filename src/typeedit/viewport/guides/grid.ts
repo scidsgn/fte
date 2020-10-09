@@ -21,20 +21,19 @@ export class GridGuide implements IGuide {
 
         this.active = false
 
+        this.lastPoint.x = NaN
+        this.lastPoint.y = NaN
+
         if (Math.abs(pos.x - target.x) < delta) {
             pos.x = target.x
 
             this.lastPoint.x = target.x
-            this.lastPoint.y = -100000
-            
             this.active = true
         }
         if (Math.abs(pos.y - target.y) < delta) {
             pos.y = target.y
 
-            this.lastPoint.x = -100000
             this.lastPoint.y = target.y
-
             this.active = true
         }
     }
@@ -50,24 +49,38 @@ export class GridGuide implements IGuide {
         maxXY.x = Math.round(maxXY.x / this.gap) * this.gap
         maxXY.y = Math.round(maxXY.y / this.gap) * this.gap
 
-        ctx.beginPath()
+        ctx.lineWidth = 1
 
         for (let x = minXY.x; x <= maxXY.x; x += this.gap) {
             const client = v.co.worldToClient(x, 0)
 
+            ctx.beginPath()
             ctx.moveTo(Math.round(client.x) + 0.5, -9999)
             ctx.lineTo(Math.round(client.x) + 0.5, 9999)
+            ctx.strokeStyle = "#3332"
+
+            if (
+                this.active && this.lastPoint.x === x
+            )
+                ctx.strokeStyle = "#f0f"
+
+            ctx.stroke()
         }
         for (let y = minXY.y; y <= maxXY.y; y += this.gap) {
             const client = v.co.worldToClient(0, y)
 
+            ctx.beginPath()
             ctx.moveTo(-9999, Math.round(client.y) + 0.5)
             ctx.lineTo(9999, Math.round(client.y) + 0.5)
+            ctx.strokeStyle = "#3332"
+
+            if (
+                this.active && this.lastPoint.y === y
+            )
+                ctx.strokeStyle = "#f0f"
+
+            ctx.stroke()
         }
-        
-        ctx.strokeStyle = "#3332"
-        ctx.lineWidth = 1
-        ctx.stroke()
         
     }
 }

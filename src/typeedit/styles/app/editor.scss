@@ -68,6 +68,11 @@ section.edit {
                 display: flex;
                 flex-direction: column;
 
+                &.active label {
+                    background: #6d7599;
+                    color: #fff;
+                }
+
                 label {
                     background: #fafafa;
 

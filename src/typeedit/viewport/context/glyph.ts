@@ -1,5 +1,6 @@
 import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
+import { setActiveGlyph } from "../../ui/glyphList";
 import { CurveGuide } from "../guides/curve";
 import { GridGuide } from "../guides/grid";
 import { HorizontalGuide, VerticalGuide } from "../guides/line";
@@ -15,6 +16,8 @@ export class GlyphContext extends BezierContext {
         super(glyphs[currentIndex].beziers)
 
         this.setupHandlesAndGuides()
+        
+        setActiveGlyph(this.glyph)
     }
 
     get glyph() {
@@ -70,6 +73,8 @@ export class GlyphContext extends BezierContext {
         
         this.beziers = this.glyph.beziers
         this.setupHandlesAndGuides()
+        
+        setActiveGlyph(this.glyph)
     }
 
     renderNonEditableGlyphs(v: Viewport, ctx: CanvasRenderingContext2D) {

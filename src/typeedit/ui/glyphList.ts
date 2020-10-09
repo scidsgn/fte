@@ -30,6 +30,18 @@ function drawGlyphPreview(glyph: Glyph) {
     ctx.fill(path)
 }
 
+export function setActiveGlyph(glyph: Glyph) {
+    const currentActiveGlyph = glyphListContainer.querySelector(
+        "div.glyph.active"
+    )
+    if (currentActiveGlyph)
+        currentActiveGlyph.classList.remove("active")
+    
+    document.querySelector(
+        `div[data-name="${glyph.name}"]`
+    ).classList.add("active")
+}
+
 export function prepareGlyphList(font: Font) {
     glyphListContainer.innerHTML = ""
 

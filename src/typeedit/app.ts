@@ -46,6 +46,7 @@ export default (font: Font) => {
     currentFont = font
 
     document.title = `${font.info.fontFamily} - FTE`
+    prepareGlyphList(font)
 
     const context = new GlyphContext(
         "ABC".split("").map(
@@ -68,8 +69,6 @@ export default (font: Font) => {
             )
         }
     )
-
-    prepareGlyphList(font)
 
     prepareGlyphBar(viewport)
 

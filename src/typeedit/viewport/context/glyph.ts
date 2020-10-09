@@ -140,7 +140,7 @@ export class GlyphContext extends BezierContext {
         ctx.fillStyle = (this.glyph === glyph) ? "#aaa" : "#eee"
         ctx.fillRect(x, y - 8 / v.co.scaleFactor, w, 8 / v.co.scaleFactor)
 
-        ctx.font = "400 20px Inter"
+        ctx.font = `400 ${20 / v.co.scaleFactor}px Inter`
         ctx.textAlign = "center"
         ctx.fillStyle = (this.glyph === glyph) ? "#555" : "#aaa"
         ctx.fillText(glyph.name, x + w / 2, y - 16 / v.co.scaleFactor)

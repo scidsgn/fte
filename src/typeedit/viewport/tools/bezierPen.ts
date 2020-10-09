@@ -159,6 +159,10 @@ export class BezierPenTool implements ITool {
                 finalizeUndoContext("Add point")
             }
             this.finalAdjustmentStage = false
+            
+
+            if (v.context instanceof GlyphContext)
+                v.context.glyph.emit("modified")
         }
     }
 

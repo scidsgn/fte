@@ -7,10 +7,11 @@ import { prepareGlyphBar } from "./ui/glyphBar"
 import { prepareGlyphList } from "./ui/glyphList"
 import { ITool, ToolSubAction } from "./viewport/tools/tool"
 import { undo, redo } from "./undo/history"
-import { prepareToolbar } from "./ui/toolbar"
+import { prepareToolbar, setActiveTool } from "./ui/toolbar"
 import { Font } from "./font/font"
 import { RectangleTool } from "./viewport/tools/rectangle"
 import { EllipseTool } from "./viewport/tools/ellipse"
+import { view } from "paper"
 
 export let currentFont: Font = null
 
@@ -92,12 +93,15 @@ export default (font: Font) => {
                 if ("handler" in action) {
                     action.handler()
                     viewport.render()
+                    if (viewport.context instanceof GlyphContext)
+                        viewport.context.glyph.emit("modified")
                 } else {
                     viewport.setTool(action)
                     updateSubactions(
                         viewport,
                         [globalSubActions, ...action.subactions]
                     )
+                    setActiveTool(globalTools.indexOf(action))
                 }
                 return
             }

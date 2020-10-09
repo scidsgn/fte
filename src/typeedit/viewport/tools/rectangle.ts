@@ -5,6 +5,7 @@ import { ArrayAddAction } from "../../undo/actions/array";
 import { finalizeUndoContext, undoContext } from "../../undo/history";
 import { BezierContext } from "../context/bezier";
 import { IContext } from "../context/context";
+import { GlyphContext } from "../context/glyph";
 import { IDrawableHandle } from "../drawable";
 import { IGuide } from "../guides/guide";
 import { PointGuide } from "../guides/point";
@@ -14,7 +15,7 @@ import { ITool, ToolSubAction } from "./tool";
 export class RectangleTool implements ITool {
     public name = "Rectangle"
     public icon = "rectangletool"
-    public accelerator = "KeyR"
+    public accelerator = "KeyS"
 
     public handles: IDrawableHandle[] = []
     public guides: IGuide[] = []
@@ -153,6 +154,9 @@ export class RectangleTool implements ITool {
 
                 this.currentBezier = null
                 this.startPoint = null
+
+                if (v.context instanceof GlyphContext)
+                    v.context.glyph.emit("modified")
             }
         }
     }

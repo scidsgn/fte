@@ -6,6 +6,7 @@ import { finalizeUndoContext, undoContext } from "../../undo/history"
 import { lerp } from "../../utils/lerp"
 import { BezierContext } from "../context/bezier"
 import { IContext } from "../context/context"
+import { GlyphContext } from "../context/glyph"
 import { IDrawableHandle } from "../drawable"
 import { IGuide } from "../guides/guide"
 import { PointGuide } from "../guides/point"
@@ -154,6 +155,9 @@ export class EllipseTool implements ITool {
 
                 this.currentBezier = null
                 this.startPoint = null
+
+                if (v.context instanceof GlyphContext)
+                    v.context.glyph.emit("modified")
             }
         }
     }

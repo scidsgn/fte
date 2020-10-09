@@ -5,6 +5,7 @@ import { finalizeUndoContext, redo, undo, undoContext } from "../../undo/history
 import { lerp, unlerp } from "../../utils/lerp";
 import { BezierContext } from "../context/bezier";
 import { IContext } from "../context/context";
+import { GlyphContext } from "../context/glyph";
 import { IDrawableHandle } from "../drawable";
 import { CurveGuide } from "../guides/curve";
 import { IGuide } from "../guides/guide";
@@ -148,7 +149,7 @@ export class HandleTool implements ITool {
             {
                 name: "Reverse direction",
                 icon: "reversecurve",
-                accelerator: "",
+                accelerator: "KeyR",
                 handler: () => {
                     this.getSelectedCurves().forEach(
                         c => c.reverse()

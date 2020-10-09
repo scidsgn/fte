@@ -24,6 +24,10 @@ export class CurveGuide implements IGuide {
         const paperPoint = new paper.Point(pos.x, pos.y)
 
         const nearest = paperPath.getNearestPoint(paperPoint)
+        if (!nearest) {
+            this.active = false
+            return
+        }
 
         const clientPos = v.co.worldToClient(pos.x, pos.y)
         const clientTarget = v.co.worldToClient(

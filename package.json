@@ -23,7 +23,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "opentype.js": "^1.3.3",
+    "opentype.js": "github:scintilla4evr/opentype.js",
     "paper": "^0.12.8"
   }
 }

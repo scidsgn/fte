@@ -11,7 +11,6 @@ import { prepareToolbar, setActiveTool } from "./ui/toolbar"
 import { Font } from "./font/font"
 import { RectangleTool } from "./viewport/tools/rectangle"
 import { EllipseTool } from "./viewport/tools/ellipse"
-import { view } from "paper"
 
 export let currentFont: Font = null
 

@@ -4,7 +4,6 @@ import "./typeedit/styles/app/editor.scss"
 
 import "./typeedit/styles/welcome.scss"
 
-import { load } from "opentype.js"
 import app, { currentFont } from "./typeedit/app"
 import paper from "paper"
 import { remote } from "electron"
@@ -30,11 +29,11 @@ recentFiles.forEach(
         btn.textContent = basename(file)
         btn.addEventListener(
             "click", () => {
-                load(file).then(f => {
+                importFont(file).then(font => {
                     const welcome = document.querySelector("article.welcome") as HTMLDivElement
                     welcome.style.display = "none"
                     
-                    app(importFont(f))
+                    app(font)
                 })
             }
         )
@@ -74,12 +73,12 @@ document.querySelectorAll("button.openFont").forEach(
                     result.filePaths.length !== 1
                 ) return
 
-                load(result.filePaths[0]).then(
+                importFont(result.filePaths[0]).then(
                     font => {
                         const welcome = document.querySelector("article.welcome") as HTMLDivElement
                         welcome.style.display = "none"
 
-                        app(importFont(font))
+                        app(font)
 
                         recentFiles.unshift(result.filePaths[0])
                         localStorage.setItem("recentFiles", JSON.stringify(recentFiles))

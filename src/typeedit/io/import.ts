@@ -142,24 +142,20 @@ export function generateCurvesFromOTGlyph(
 }
 
 export async function importFont(filePath: string): Promise<Font> {
-    return new Promise<Font>(
-        (resolve, reject) => {
-            load(filePath, (err, otfont) => {
-                const font = Font.fromOTFont(otfont)
-            
-                const glyphs: Glyph[] = []
-                for (let i = 0; i < otfont.glyphs.length; i++) {
-                    glyphs.push(
-                        Glyph.fromOTGlyph(
-                            font, otfont,
-                            otfont.glyphs.get(i)
-                        )
-                    )
-                }
-                font.addGlyph(...glyphs)
+    const otfont = await load(filePath)
 
-                resolve(font)
-            })
-        }
-    )
+    const font = Font.fromOTFont(otfont)
+
+    const glyphs: Glyph[] = []
+    for (let i = 0; i < otfont.glyphs.length; i++) {
+        glyphs.push(
+            Glyph.fromOTGlyph(
+                font, otfont,
+                otfont.glyphs.get(i)
+            )
+        )
+    }
+    font.addGlyph(...glyphs)
+
+    return font
 }

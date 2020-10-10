@@ -90,11 +90,11 @@
 /*!*********************!*\
   !*** ./src/main.ts ***!
   \*********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function(__dirname) {/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ \"electron\");\n/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);\n\r\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on(\"window-all-closed\", function () {\r\n    electron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].quit();\r\n});\r\nelectron__WEBPACK_IMPORTED_MODULE_0__[\"app\"].on(\"ready\", function () {\r\n    var win = new electron__WEBPACK_IMPORTED_MODULE_0__[\"BrowserWindow\"]({\r\n        title: \"FTE\",\r\n        width: 1280,\r\n        height: 720,\r\n        webPreferences: {\r\n            nodeIntegration: true,\r\n            enableRemoteModule: true\r\n        }\r\n    });\r\n    win.setMenuBarVisibility(false);\r\n    console.log(__dirname);\r\n    win.loadFile(\"index.html\");\r\n});\r\n\n/* WEBPACK VAR INJECTION */}.call(this, \"/\"))\n\n//# sourceURL=webpack:///./src/main.ts?");
+eval("/* WEBPACK VAR INJECTION */(function(__dirname) {\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst electron_1 = __webpack_require__(/*! electron */ \"electron\");\r\nelectron_1.app.on(\"window-all-closed\", () => {\r\n    electron_1.app.quit();\r\n});\r\nelectron_1.app.on(\"ready\", () => {\r\n    const win = new electron_1.BrowserWindow({\r\n        title: \"FTE\",\r\n        width: 1280,\r\n        height: 720,\r\n        webPreferences: {\r\n            nodeIntegration: true,\r\n            enableRemoteModule: true\r\n        }\r\n    });\r\n    win.setMenuBarVisibility(false);\r\n    console.log(__dirname);\r\n    win.loadFile(\"index.html\");\r\n});\r\n\n/* WEBPACK VAR INJECTION */}.call(this, \"/\"))\n\n//# sourceURL=webpack:///./src/main.ts?");
 
 /***/ }),
 

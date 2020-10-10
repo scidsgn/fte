@@ -62,6 +62,7 @@ export function exportFont(font: Font, targetFile: string) {
     const otfont = new OTFont({
         familyName: font.info.fontFamily,
         styleName: font.info.fontSubfamily,
+        postScriptName: `${font.info.fontFamily}-${font.info.fontSubfamily}`,
         unitsPerEm: (font.metrics.descender - font.metrics.ascender) * scaleFactor, // TODO!!
         ascender: (512 - font.metrics.ascender) * scaleFactor,
         descender: (512 - font.metrics.descender) * scaleFactor,

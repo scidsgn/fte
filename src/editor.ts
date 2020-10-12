@@ -8,9 +8,9 @@ import app, { currentFont } from "./typeedit/app"
 import paper from "paper"
 import { remote } from "electron"
 import { basename } from "path"
-import { importFont } from "./typeedit/io/import"
+import { importFont } from "./typeedit/io/opentype.js/import"
 import { Font } from "./typeedit/font/font"
-import { exportFont } from "./typeedit/io/export"
+import { exportFont } from "./typeedit/io/opentype.js/export"
 
 console.log(remote)
 

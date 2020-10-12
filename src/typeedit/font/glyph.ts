@@ -1,8 +1,5 @@
 import { EventEmitter } from "events"
-import { Font as OTFont, Glyph as OTGlyph } from "opentype.js"
 import { BezierCurve } from "../geometry/bezier/curve"
-import { generateCurvesFromOTGlyph } from "../io/import"
-import { IDrawable } from "../viewport/drawable"
 import { Font } from "./font"
 
 export type GlyphMetrics = {
@@ -40,26 +37,6 @@ export class Glyph extends EventEmitter {
         if (this.name === ".notdef") return -2
         if (this.name === ".null") return -1
         return this.codePoint ?? Infinity
-    }
-
-    static fromOTGlyph(font: Font, otfont: OTFont, otglyph: OTGlyph) {
-        const scaleFactor = 512 / otfont.tables.os2.sCapHeight
-        const beziers = generateCurvesFromOTGlyph(otfont, otglyph)
-
-        const glyphMetrics = otglyph.getMetrics()
-
-        return new Glyph(
-            font,
-            otglyph.name,
-            otglyph.unicode,
-            {
-                leftBearing: 0,
-                rightBearing: (
-                    glyphMetrics.rightSideBearing + glyphMetrics.xMax
-                ) * scaleFactor
-            },
-            beziers
-        )
     }
 
     updateBeziers() {

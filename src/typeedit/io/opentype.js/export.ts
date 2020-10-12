@@ -1,11 +1,11 @@
-import { Font } from "../font/font"
+import { Font } from "../../font/font"
 import {
     Font as OTFont,
     Glyph as OTGlyph,
     Path as OTPath
 } from "opentype.js"
-import { Glyph } from "../font/glyph"
-import { Point } from "../geometry/point"
+import { Glyph } from "../../font/glyph"
+import { Point } from "../../geometry/point"
 import { writeFileSync } from "fs"
 
 function glyphToOTPath(glyph: Glyph, targetCapHeight = 1000) {

@@ -23,6 +23,7 @@ export class UndoContext {
     }
 
     finalize(name?: string) {
+        this.actions = this.actions.filter(a => a.valid)
         this.actions.forEach(a => a.finalize())
         if (name) this.name = name
     }

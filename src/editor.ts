@@ -13,6 +13,7 @@ import { Font } from "./typeedit/font/font"
 import { exportFont_opentype } from "./typeedit/io/opentype.js/export"
 import { existsSync } from "fs"
 import { importFontData_otfcc, setOtfccPath } from "./typeedit/io/otfcc/import"
+import { undoContext } from "./typeedit/undo/history"
 
 console.log(remote)
 
@@ -126,6 +127,9 @@ document.querySelectorAll("button.saveFont").forEach(
         }
     )
 )
+
+const w = window as any
+w.uc = undoContext
 
 // load("test/Inter-Regular.otf").then(
 //     (font) => {

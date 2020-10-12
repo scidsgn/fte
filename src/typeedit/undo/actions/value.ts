@@ -37,4 +37,8 @@ export class ValueChangeAction implements IUndoableAction {
     finalize() {
         this.captureState(this.afterState)
     }
+
+    get valid() {
+        return true
+    }
 }

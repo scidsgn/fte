@@ -16,6 +16,10 @@ export class ArrayAddAction<T> implements IUndoableAction {
     }
 
     finalize() {}
+
+    get valid() {
+        return this.index !== -1
+    }
 }
 
 export class ArrayRemoveAction<T> implements IUndoableAction {
@@ -34,4 +38,8 @@ export class ArrayRemoveAction<T> implements IUndoableAction {
     }
 
     finalize() {}
+
+    get valid() {
+        return this.index !== -1
+    }
 }

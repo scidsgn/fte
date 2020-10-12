@@ -5,4 +5,5 @@ export interface IUndoableAction {
     undo: () => void
     redo: () => void
     finalize: () => void
+    valid: boolean
 }

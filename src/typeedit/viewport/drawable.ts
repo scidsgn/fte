@@ -11,6 +11,7 @@ export interface IDrawableHandle {
     position: Point
     selected: boolean
     type: string
+    hidden?: boolean
 
     render: (v: Viewport, ctx: CanvasRenderingContext2D) => void
     move: (

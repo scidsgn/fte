@@ -9,6 +9,7 @@ export class BezierControlPointHandle implements IDrawableHandle {
     public hitRadius = 6
     public selected = false
     public type = "BezierControlPointHandle"
+    public hidden = false
     
     constructor(
         public point: BezierPoint,
@@ -50,6 +51,13 @@ export class BezierControlPointHandle implements IDrawableHandle {
             this.cpoint.x, this.cpoint.y
         )
 
+        const distance = Math.hypot(
+            basePos.x - ctrlPos.x,
+            basePos.y - ctrlPos.y
+        )
+        this.hidden = distance <= 8
+        if (this.hidden) return
+        
         ctx.strokeStyle = "#555"
         ctx.lineWidth = 1
         ctx.beginPath()

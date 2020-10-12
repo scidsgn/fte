@@ -91,7 +91,7 @@ export class Viewport {
         for (let i = handles.length - 1; i >= 0; i--) {
             const handle = handles[i]
 
-            if (type && handle.type !== type)
+            if (type && handle.type !== type || handle.hidden)
                 continue
 
             const dist = Math.hypot(

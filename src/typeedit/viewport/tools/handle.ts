@@ -1,9 +1,9 @@
+import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
 import { Point } from "../../geometry/point";
 import { ArrayAddAction, ArrayRemoveAction } from "../../undo/actions/array";
-import { finalizeUndoContext, redo, undo, undoContext } from "../../undo/history";
+import { finalizeUndoContext, undoContext } from "../../undo/history";
 import { lerp, unlerp } from "../../utils/lerp";
-import { BezierContext } from "../context/bezier";
 import { IContext } from "../context/context";
 import { GlyphContext } from "../context/glyph";
 import { IDrawableHandle } from "../drawable";
@@ -33,6 +33,7 @@ export class HandleTool implements ITool {
     private moveStartPoint: Point
     private moveLastPoint: Point
 
+    private glyph: Glyph
     private beziers: BezierCurve[] = []
 
     public subactions: ToolSubAction[][] = [
@@ -396,6 +397,8 @@ export class HandleTool implements ITool {
 
             newCurves.forEach(
                 c => {
+                    c.glyph = this.glyph
+
                     if (referenceWinding !== targetWinding)
                         c.reverse()
 
@@ -699,8 +702,9 @@ export class HandleTool implements ITool {
     }
 
     updateContext(context: IContext) {
-        if (!(context instanceof BezierContext)) return
+        if (!(context instanceof GlyphContext)) return
 
+        this.glyph = context.glyph
         this.beziers = context.beziers
 
         this.handles = []

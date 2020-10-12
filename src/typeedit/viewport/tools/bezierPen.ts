@@ -30,6 +30,8 @@ export class BezierPenTool implements ITool {
 
     public subactions: ToolSubAction[][] = []
 
+    private glyph: Glyph
+
     get currentPoint(): BezierPoint {
         if (!this.currentBezier) return null
 
@@ -47,9 +49,6 @@ export class BezierPenTool implements ITool {
         const pos = v.co.clientToWorld(
             x, y
         )
-        let glyph: Glyph = null
-        if (v.context instanceof GlyphContext)
-            glyph = v.context.glyph
 
         v.nudgePoint(pos)
 
@@ -57,7 +56,7 @@ export class BezierPenTool implements ITool {
             e.type === "mousedown" && e.buttons & 1
         ) {
             if (!this.currentBezier) {
-                this.currentBezier = new BezierCurve(glyph)
+                this.currentBezier = new BezierCurve(this.glyph)
                 const length = v.context.beziers.push(
                     this.currentBezier
                 )
@@ -160,9 +159,7 @@ export class BezierPenTool implements ITool {
             }
             this.finalAdjustmentStage = false
             
-
-            if (v.context instanceof GlyphContext)
-                v.context.glyph.emit("modified")
+            this.glyph.emit("modified")
         }
     }
 
@@ -170,7 +167,9 @@ export class BezierPenTool implements ITool {
     }
 
     updateContext(context: IContext) {
-        if (!(context instanceof BezierContext)) return
+        if (!(context instanceof GlyphContext)) return
+
+        this.glyph = context.glyph
 
         this.handles = []
         this.guides = []

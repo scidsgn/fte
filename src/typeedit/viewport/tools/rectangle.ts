@@ -1,3 +1,4 @@
+import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
 import { BezierPoint } from "../../geometry/bezier/point";
 import { Point } from "../../geometry/point";
@@ -25,10 +26,12 @@ export class RectangleTool implements ITool {
 
     private startPoint: Point
 
+    private glyph: Glyph
+
     private currentBezier: BezierCurve
 
     createRect(): BezierCurve {
-        const curve = new BezierCurve()
+        const curve = new BezierCurve(this.glyph)
 
         curve.addPoint(
             new BezierPoint(
@@ -155,8 +158,7 @@ export class RectangleTool implements ITool {
                 this.currentBezier = null
                 this.startPoint = null
 
-                if (v.context instanceof GlyphContext)
-                    v.context.glyph.emit("modified")
+                this.glyph.emit("modified")
             }
         }
     }
@@ -165,7 +167,9 @@ export class RectangleTool implements ITool {
     }
 
     updateContext(context: IContext) {
-        if (!(context instanceof BezierContext)) return
+        if (!(context instanceof GlyphContext)) return
+
+        this.glyph = context.glyph
 
         this.handles = []
         this.guides = []

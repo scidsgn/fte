@@ -9,13 +9,25 @@ export class GridGuide implements IGuide {
     )
 
     constructor(
-        private gap: number
+        private baseGap: number
     ) {}
 
+    calculateGap(v: Viewport) {
+        let clientGap = this.baseGap * v.co.scaleFactor
+
+        while (clientGap < 12) {
+            clientGap *= 2
+        }
+
+        return clientGap / v.co.scaleFactor
+    }
+
     nudge(v: Viewport, pos: Point, obj?: any) {
+        const gap = this.calculateGap(v)
+
         const target = new Point(
-            Math.round(pos.x / this.gap) * this.gap,
-            Math.round(pos.y / this.gap) * this.gap
+            Math.round(pos.x / gap) * gap,
+            Math.round(pos.y / gap) * gap
         )
         const delta = 8 / v.co.scaleFactor
 
@@ -39,19 +51,21 @@ export class GridGuide implements IGuide {
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
+        const gap = this.calculateGap(v)
+
         const minXY = v.co.clientToWorld(0, 0)
         const maxXY = v.co.clientToWorld(
             v.domCanvas.width, v.domCanvas.height
         )
 
-        minXY.x = Math.round(minXY.x / this.gap) * this.gap
-        minXY.y = Math.round(minXY.y / this.gap) * this.gap
-        maxXY.x = Math.round(maxXY.x / this.gap) * this.gap
-        maxXY.y = Math.round(maxXY.y / this.gap) * this.gap
+        minXY.x = Math.round(minXY.x / gap) * gap
+        minXY.y = Math.round(minXY.y / gap) * gap
+        maxXY.x = Math.round(maxXY.x / gap) * gap
+        maxXY.y = Math.round(maxXY.y / gap) * gap
 
         ctx.lineWidth = 1
 
-        for (let x = minXY.x; x <= maxXY.x; x += this.gap) {
+        for (let x = minXY.x; x <= maxXY.x; x += gap) {
             const client = v.co.worldToClient(x, 0)
 
             ctx.beginPath()
@@ -66,7 +80,7 @@ export class GridGuide implements IGuide {
 
             ctx.stroke()
         }
-        for (let y = minXY.y; y <= maxXY.y; y += this.gap) {
+        for (let y = minXY.y; y <= maxXY.y; y += gap) {
             const client = v.co.worldToClient(0, y)
 
             ctx.beginPath()

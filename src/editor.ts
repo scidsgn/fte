@@ -12,7 +12,7 @@ import { importFont_opentype } from "./typeedit/io/opentype.js/import"
 import { Font } from "./typeedit/font/font"
 import { exportFont_opentype } from "./typeedit/io/opentype.js/export"
 import { existsSync } from "fs"
-import { importFont_otfcc, setOtfccPath } from "./typeedit/io/otfcc/import"
+import { importFontData_otfcc, setOtfccPath } from "./typeedit/io/otfcc/import"
 
 console.log(remote)
 
@@ -37,9 +37,6 @@ recentFiles.forEach(
         btn.textContent = basename(file)
         btn.addEventListener(
             "click", () => {
-                // TESTING!!
-                importFont_otfcc(file)
-
                 importFont_opentype(file).then(font => {
                     const welcome = document.querySelector("article.welcome") as HTMLDivElement
                     welcome.style.display = "none"
@@ -84,9 +81,6 @@ document.querySelectorAll("button.openFont").forEach(
                     result.filePaths.length !== 1
                 ) return
 
-                // TESTING!!
-                importFont_otfcc(result.filePaths[0])
-
                 importFont_opentype(result.filePaths[0]).then(
                     font => {
                         const welcome = document.querySelector("article.welcome") as HTMLDivElement
@@ -95,7 +89,12 @@ document.querySelectorAll("button.openFont").forEach(
                         app(font)
 
                         recentFiles.unshift(result.filePaths[0])
-                        localStorage.setItem("recentFiles", JSON.stringify(recentFiles))
+                        localStorage.setItem(
+                            "recentFiles",
+                            JSON.stringify(
+                                recentFiles.slice(0, 8)
+                            )
+                        )
                     }
                 )
             })

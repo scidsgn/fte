@@ -38,7 +38,7 @@ type VariationItem = {
 }
 export type NumberOrVariation = number | [number, ...VariationItem[]]
 
-type GLYFPoint = {
+export type GLYFPoint = {
     on: boolean
     x: NumberOrVariation
     y: NumberOrVariation
@@ -95,6 +95,22 @@ type NAMETable = {
     nameString: string
     platformID: number
 }[]
+
+export enum NAMEEntries {
+    copyright,
+    fontFamily, fontSubfamily,
+    uniqueID,
+    fullName, version,
+    postScriptName,
+    trademark,
+    manufacturer, designer,
+    description,
+    manufacturerURL, designerURL,
+    license, licenseURL,
+    _, typoFamily, typoSubfamily,
+    compatibleFull,
+    sampleText
+}
 
 // Color Palette
 type CPALTable = {

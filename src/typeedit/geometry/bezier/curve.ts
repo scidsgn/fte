@@ -3,6 +3,7 @@ import { Glyph } from "../../font/glyph"
 import { BezierPoint } from "./point"
 import paper from "paper"
 import { Point } from "../point"
+import { lerp } from "../../utils/lerp"
 
 export class BezierCurve extends EventEmitter {
     public points: BezierPoint[] = []
@@ -23,6 +24,60 @@ export class BezierCurve extends EventEmitter {
         this.points.push(point)
         this.emit("modified")
         this.emit("newPoint", point)
+    }
+
+    lineTo(x: number, y: number) {
+        this.addPoint(
+            new BezierPoint(
+                new Point(x, y),
+                new Point(x, y),
+                new Point(x, y)
+            )
+        )
+    }
+
+    cubicCurveTo(
+        c1x: number, c1y: number,
+        c2x: number, c2y: number,
+        x: number, y: number
+    ) {
+        if (!this.points.length) return
+
+        const prev = this.points[this.points.length - 1]
+
+        prev.after.x = c1x
+        prev.after.y = c1y
+
+        this.addPoint(
+            new BezierPoint(
+                new Point(x, y),
+                new Point(c2x, c2y),
+                new Point(x, y)
+            )
+        )
+    }
+
+    quadraticCurveTo(
+        cx: number, cy: number,
+        x: number, y: number
+    ) {
+        if (!this.points.length) return
+
+        const prev = this.points[this.points.length - 1]
+
+        prev.after.x = lerp(2 / 3, prev.base.x, cx)
+        prev.after.y = lerp(2 / 3, prev.base.y, cy)
+
+        this.addPoint(
+            new BezierPoint(
+                new Point(x, y),
+                new Point(
+                    lerp(1 / 3, cx, x),
+                    lerp(1 / 3, cy, y)
+                ),
+                new Point(x, y)
+            )
+        )
     }
 
     // see: https://www.element84.com/blog/determining-the-winding-of-a-polygon-given-as-a-set-of-ordered-points

@@ -187,7 +187,7 @@ function fteFontFromOTFont(otfont: OTFont) {
     )
 }
 
-export async function importFont(filePath: string): Promise<Font> {
+export async function importFont_opentype(filePath: string): Promise<Font> {
     const otfont = await load(filePath)
 
     const font = fteFontFromOTFont(otfont)

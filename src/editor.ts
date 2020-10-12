@@ -8,9 +8,11 @@ import app, { currentFont } from "./typeedit/app"
 import paper from "paper"
 import { remote } from "electron"
 import { basename } from "path"
-import { importFont } from "./typeedit/io/opentype.js/import"
+import { importFont_opentype } from "./typeedit/io/opentype.js/import"
 import { Font } from "./typeedit/font/font"
-import { exportFont } from "./typeedit/io/opentype.js/export"
+import { exportFont_opentype } from "./typeedit/io/opentype.js/export"
+import { existsSync } from "fs"
+import { importFont_otfcc, setOtfccPath } from "./typeedit/io/otfcc/import"
 
 console.log(remote)
 
@@ -22,6 +24,12 @@ const recentFiles: string[] = JSON.parse(
     localStorage.getItem("recentFiles")
 ) ?? []
 
+if (existsSync("./otfcc_test")) {
+    // There are otfcc binaries
+    // NOTE: still testing this part, so they aren't included in the repo
+    setOtfccPath("./otfcc_test")
+}
+
 recentFiles.forEach(
     file => {
         const btn = document.createElement("button")
@@ -29,7 +37,10 @@ recentFiles.forEach(
         btn.textContent = basename(file)
         btn.addEventListener(
             "click", () => {
-                importFont(file).then(font => {
+                // TESTING!!
+                importFont_otfcc(file)
+
+                importFont_opentype(file).then(font => {
                     const welcome = document.querySelector("article.welcome") as HTMLDivElement
                     welcome.style.display = "none"
                     
@@ -73,7 +84,10 @@ document.querySelectorAll("button.openFont").forEach(
                     result.filePaths.length !== 1
                 ) return
 
-                importFont(result.filePaths[0]).then(
+                // TESTING!!
+                importFont_otfcc(result.filePaths[0])
+
+                importFont_opentype(result.filePaths[0]).then(
                     font => {
                         const welcome = document.querySelector("article.welcome") as HTMLDivElement
                         welcome.style.display = "none"
@@ -108,7 +122,7 @@ document.querySelectorAll("button.saveFont").forEach(
             ).then(result => {
                 if (result.canceled) return
 
-                exportFont(currentFont, result.filePath)
+                exportFont_opentype(currentFont, result.filePath)
             })
         }
     )

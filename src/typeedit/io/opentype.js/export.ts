@@ -48,7 +48,7 @@ function glyphToOTPath(glyph: Glyph, targetCapHeight = 1000) {
     return path
 }
 
-export function exportFont(font: Font, targetFile: string) {
+export function exportFont_opentype(font: Font, targetFile: string) {
     const notDef = new OTGlyph({
         name: ".notdef",
         unicode: 0,

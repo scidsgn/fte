@@ -1,6 +1,7 @@
 import { exec } from "child_process"
 import { join } from "path"
 import { Font } from "../../font/font"
+import { OTFCCData } from "./types"
 
 let otfccPath: string
 
@@ -8,8 +9,8 @@ export function setOtfccPath(path: string) {
     otfccPath = path
 }
 
-function otfccToFont(data: any): Font {
-    return new Font({}, {}, [])
+function otfccToFont(data: OTFCCData) {
+    // return new Font({}, {}, [])
 }
 
 export function importFont_otfcc(filePath: string) {

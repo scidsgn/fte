@@ -24,7 +24,15 @@ export type FontInfo = {
     version: string
 }
 
+export type FontColors = {
+    red: number,
+    green: number,
+    blue: number
+}
+
 export class Font extends EventEmitter {
+    public palette: FontColors[] = []
+
     constructor(
         public info: Partial<FontInfo>,
         public metrics: FontMetrics,

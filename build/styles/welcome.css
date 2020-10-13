@@ -11,7 +11,7 @@ article.welcome {
 }
 
 body[data-theme=dark] article.welcome {
-    background: url("../res/images/home_overlay.png") center center fixed,
+    background: url("../res/images/home_overlay_dark.png") center center fixed,
                 linear-gradient(#222, #222);
     background-size: cover;
 }

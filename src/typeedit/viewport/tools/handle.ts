@@ -373,8 +373,6 @@ export class HandleTool implements ITool {
         if (!curves.length) return
 
         const targetWinding = curves[0].clockwise
-        console.log(this.beziers.map(b => b.clockwise))
-        console.log(curves.map(b => b.clockwise))
 
         const paperPaths = curves.map(
             c => c.getPaperPath()
@@ -392,8 +390,6 @@ export class HandleTool implements ITool {
         const newCurves = BezierCurve.fromPaperPathItem(out)
         if (newCurves.length) {
             const referenceWinding = newCurves[0].clockwise
-
-            console.log(targetWinding, referenceWinding)
 
             newCurves.forEach(
                 c => {
@@ -500,7 +496,7 @@ export class HandleTool implements ITool {
             }
         )
 
-        console.log(this.beziers.map(b => b.clockwise))
+        this.glyph.emit("modifier")
     }
 
     private addHandlesToUndoContext(handles: IDrawableHandle[]) {

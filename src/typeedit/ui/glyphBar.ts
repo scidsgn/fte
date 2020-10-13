@@ -46,6 +46,12 @@ export function appendCharacter(glyph: Glyph) {
 }
 
 export function prepareGlyphBar(viewport: Viewport) {
+    glyphBar.addEventListener("keydown", (e) => {
+        if (e.code === "KeyZ" && e.ctrlKey) {
+            e.preventDefault()
+        }
+    })
+
     glyphBar.addEventListener("input", () => {
         if (!(viewport.context instanceof GlyphContext)) return
 

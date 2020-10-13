@@ -102,7 +102,8 @@ export default (font: Font) => {
                     )
                     setActiveTool(globalTools.indexOf(action))
                 }
-                return
+                e.preventDefault()
+                return false
             }
         }
     }

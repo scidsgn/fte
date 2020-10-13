@@ -128,8 +128,11 @@ document.querySelectorAll("button.saveFont").forEach(
     )
 )
 
-const w = window as any
-w.uc = undoContext
+document.body.addEventListener("keydown", (e) => {
+    if (e.code === "KeyZ" && e.ctrlKey) {
+        e.preventDefault()
+    }
+})
 
 // load("test/Inter-Regular.otf").then(
 //     (font) => {

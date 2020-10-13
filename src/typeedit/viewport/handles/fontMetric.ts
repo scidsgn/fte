@@ -4,6 +4,7 @@ import { UndoContext } from "../../undo/context"
 import { ValueChangeAction } from "../../undo/actions/value"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
+import { getThemeColor } from "../../ui/theme"
 
 export enum FontMetricHandleType {
     leftBearing, rightBearing,
@@ -127,8 +128,10 @@ export class FontMetricHandle implements IDrawableHandle {
         else
             ctx.lineTo(0, -20 * v.co.scaleFactor)
 
-        ctx.fillStyle = this.selected ? "#111" : "#444"
-        ctx.strokeStyle = "#111"
+        ctx.fillStyle = this.selected ?
+                        getThemeColor("handleSelected") :
+                        getThemeColor("handleMetricFill")
+        ctx.strokeStyle = getThemeColor("handleSelected")
         ctx.lineWidth = 1
         ctx.setLineDash([])
         ctx.stroke()

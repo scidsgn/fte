@@ -1,4 +1,5 @@
 import { Point } from "../../geometry/point";
+import { getThemeColor } from "../../ui/theme";
 import { Viewport } from "../viewport";
 import { IGuide } from "./guide";
 
@@ -71,12 +72,12 @@ export class GridGuide implements IGuide {
             ctx.beginPath()
             ctx.moveTo(Math.round(client.x) + 0.5, -9999)
             ctx.lineTo(Math.round(client.x) + 0.5, 9999)
-            ctx.strokeStyle = "#3332"
+            ctx.strokeStyle = getThemeColor("guideGrid")
 
             if (
                 this.active && this.lastPoint.x === x
             )
-                ctx.strokeStyle = "#f0f"
+                ctx.strokeStyle = getThemeColor("guideActive")
 
             ctx.stroke()
         }
@@ -86,12 +87,12 @@ export class GridGuide implements IGuide {
             ctx.beginPath()
             ctx.moveTo(-9999, Math.round(client.y) + 0.5)
             ctx.lineTo(9999, Math.round(client.y) + 0.5)
-            ctx.strokeStyle = "#3332"
+            ctx.strokeStyle = getThemeColor("guideGrid")
 
             if (
                 this.active && this.lastPoint.y === y
             )
-                ctx.strokeStyle = "#f0f"
+                ctx.strokeStyle = getThemeColor("guideActive")
 
             ctx.stroke()
         }

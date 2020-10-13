@@ -1,0 +1,88 @@
+aside {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    min-width: 320px;
+    width: 320px;
+    box-sizing: border-box;
+
+    border-left: 1px solid var(--var-panel-sep);
+    
+    display: flex;
+    flex-direction: column;
+
+    nav {
+        background: var(--var-panel-bg);
+
+        display: flex;
+
+        button {
+            background: transparent;
+            color: var(--var-text-fg);
+
+            font-family: "Inter";
+            font-size: 10pt;
+            font-weight: 400;
+
+            padding: 8px 20px;
+            border: none;
+            border-bottom: none;
+            outline: none;
+
+            flex-grow: 1;
+
+            &.active {
+                box-shadow: inset 0px -2px var(--var-text-fg);
+            }
+        }
+    }
+
+    div.listContainer {
+        height: 0; // WTF???
+
+        flex-grow: 1;
+        overflow-y: scroll;
+    }
+
+    div.glyphList {
+        background: var(--var-panel-bg);
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+
+        div.glyph {
+            max-width: 75px;
+
+            background: var(--var-large-bg);
+
+            display: flex;
+            flex-direction: column;
+
+            &.active label {
+                background: var(--var-glist-activeLabel);
+                color: #fff;
+            }
+
+            label {
+                background: var(--var-glist-label);
+
+                font-size: 9pt;
+                font-weight: 500;
+                text-align: center;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                
+                padding: 2px;
+
+                overflow: hidden;
+            }
+
+            canvas {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}

@@ -42,32 +42,30 @@ article.welcome {
             width: 100%;
 
             background: transparent;
+            color: var(--var-text-fg);
 
             font-family: "Inter";
 
             border: none;
             outline: none;
             padding: 7px 8px;
-            border: 1px solid #bbb;
+            border: 1px solid var(--var-button-active);
             border-radius: 4px;
             margin-bottom: 2px;
 
             display: flex;
             align-items: center;
             justify-content: center;
-
+    
             &:hover {
-                background: #eee;
+                background: var(--var-button-hover);
             }
-
+        
             &:active {
-                background: #ddd;
+                background: var(--var-button-active);
             }
 
             img {
-                width: 16px;
-                height: 16px;
-
                 margin-right: 8px;
             }
         }

@@ -4,6 +4,7 @@ import { BezierBasePointHandle } from "../handles/bezierBasePoint"
 import { Viewport } from "../viewport"
 import { IGuide } from "./guide"
 import paper from "paper"
+import { getThemeColor } from "../../ui/theme"
 
 export class CurveGuide implements IGuide {
     public active = false
@@ -50,7 +51,7 @@ export class CurveGuide implements IGuide {
         const path = BezierCurve.getPath2D([this.source])
 
         ctx.lineWidth = 1 / v.co.scaleFactor
-        ctx.strokeStyle = "#f0f"
+        ctx.strokeStyle = getThemeColor("guideActive")
         ctx.stroke(path)
     }
 }

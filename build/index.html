@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="res/fonts/inter.css">
         <link rel="stylesheet" href="styles/welcome.css">
     </head>
-    <body>
+    <body data-theme="dark">
         <main>
             <nav>
                 <div class="actions">
@@ -23,12 +23,9 @@
                     <button class="saveFont" title="Save font...">
                         <img src="res/icons/savefont.svg">
                     </button>
+
+                    <div class="subactions"></div>
                 </div>
-                <!-- <div class="tabs">
-                    <button class="active">Edit</button>
-                    <button>Refine</button>
-                    <button>Export</button>
-                </div> -->
             </nav>
             <section class="edit">
                 <div class="tools">
@@ -42,21 +39,17 @@
                             <img src="res/icons/next.svg">
                         </button>
                     </div>
-                
-                    <div class="subactionsBar">
-                        <div class="subactions"></div>
-                    </div>
                 </div>
-                <aside>
-                    <nav>
-                        <button class="active">Glyphs</button>
-                    </nav>
-                    <div class="listContainer">
-                        <div class="glyphList"></div>
-                    </div>
-                </aside>
                 <div class="glyphBar" contenteditable>ABC</div>
             </section>
+            <aside>
+                <nav>
+                    <button class="active">Glyphs</button>
+                </nav>
+                <div class="listContainer">
+                    <div class="glyphList"></div>
+                </div>
+            </aside>
         </main>
         <article class="welcome">
             <div>

@@ -4,6 +4,7 @@ import { UndoContext } from "../../undo/context"
 import { ValueChangeAction } from "../../undo/actions/value"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
+import { getThemeColor } from "../../ui/theme"
 
 export class BezierBasePointHandle implements IDrawableHandle {
     public hitRadius = 10
@@ -67,8 +68,10 @@ export class BezierBasePointHandle implements IDrawableHandle {
         }
         ctx.closePath()
 
-        ctx.fillStyle = this.selected ? "#111" : "#fff"
-        ctx.strokeStyle = "#111"
+        ctx.fillStyle = this.selected ?
+                        getThemeColor("handleSelected") :
+                        getThemeColor("handleFill")
+        ctx.strokeStyle = getThemeColor("handleSelected")
         ctx.lineWidth = 1
         ctx.fill()
         ctx.stroke()

@@ -1,4 +1,5 @@
 import { Point } from "../../geometry/point"
+import { getThemeColor } from "../../ui/theme"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
 import { IGuide } from "./guide"
@@ -49,7 +50,7 @@ export class PointGuide implements IGuide {
         clientPos.x = Math.round(clientPos.x) + 0.5
         clientPos.y = Math.round(clientPos.y) + 0.5
 
-        ctx.strokeStyle = "#f0f"
+        ctx.strokeStyle = getThemeColor("guideActive")
         ctx.lineWidth = 1
 
         ctx.beginPath()

@@ -1,6 +1,7 @@
 import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
 import { setActiveGlyph } from "../../ui/glyphList";
+import { getThemeColor } from "../../ui/theme";
 import { CurveGuide } from "../guides/curve";
 import { GridGuide } from "../guides/grid";
 import { HorizontalGuide, VerticalGuide } from "../guides/line";
@@ -92,7 +93,7 @@ export class GlyphContext extends BezierContext {
                     glyph.finalBeziers
                 )
                 
-                ctx.fillStyle = "#000"
+                ctx.fillStyle = getThemeColor("glyphOtherFill")
                 ctx.translate(offset, 0)
                 ctx.fill(path)
 
@@ -116,7 +117,7 @@ export class GlyphContext extends BezierContext {
                     glyph.finalBeziers
                 )
                 
-                ctx.fillStyle = "#000"
+                ctx.fillStyle = getThemeColor("glyphOtherFill")
                 ctx.translate(offset, 0)
                 ctx.fill(path)
 
@@ -137,12 +138,16 @@ export class GlyphContext extends BezierContext {
         const w = glyph.metrics.rightBearing - x
         const y = glyph.font.metrics.ascender - 20 / v.co.scaleFactor
 
-        ctx.fillStyle = (this.glyph === glyph) ? "#aaa" : "#eee"
+        ctx.fillStyle = (this.glyph === glyph) ?
+                        getThemeColor("gindicatorActive") :
+                        getThemeColor("gindicator")
         ctx.fillRect(x, y - 8 / v.co.scaleFactor, w, 8 / v.co.scaleFactor)
 
         ctx.font = `400 ${20 / v.co.scaleFactor}px Inter`
         ctx.textAlign = "center"
-        ctx.fillStyle = (this.glyph === glyph) ? "#555" : "#aaa"
+        ctx.fillStyle = (this.glyph === glyph) ?
+                        getThemeColor("gindicatorActiveText") :
+                        getThemeColor("gindicatorText")
         ctx.fillText(glyph.name, x + w / 2, y - 16 / v.co.scaleFactor)
     }
     
@@ -150,7 +155,7 @@ export class GlyphContext extends BezierContext {
         this.renderNonEditableGlyphs(v, ctx)
 
         // Glyph metric lines
-        ctx.strokeStyle = "#3338"
+        ctx.strokeStyle = getThemeColor("glyphMetric")
         ctx.lineWidth = 1 / v.co.scaleFactor
 
         ctx.beginPath()
@@ -195,14 +200,14 @@ export class GlyphContext extends BezierContext {
             this.glyph.finalBeziers
         )
 
-        ctx.fillStyle = "#888"
+        ctx.fillStyle = getThemeColor("glyphFill")
         ctx.fill(finalPath)
         
         ctx.setLineDash([])
-        ctx.strokeStyle = "#fff"
+        ctx.strokeStyle = getThemeColor("glyphGapOutline")
         ctx.lineWidth = 4 / v.co.scaleFactor
         ctx.stroke(workingPath)
-        ctx.strokeStyle = "#000"
+        ctx.strokeStyle = getThemeColor("glyphOutline")
         ctx.lineWidth = 1 / v.co.scaleFactor
         ctx.stroke(workingPath)
 

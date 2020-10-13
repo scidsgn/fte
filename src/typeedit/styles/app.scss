@@ -1,7 +1,51 @@
+:root {
+    --var-large-bg: #fff;
+    --var-panel-bg: #f6f6f6;
+    --var-text-fg: #000;
+
+    --var-panel-sep: #d1d1d1;
+
+    --var-button-bg: #fff;
+    --var-button-hover: #eee;
+    --var-button-hover: #c0c0c0;
+
+    --var-glist-label: #fafafa;
+    --var-glist-activeLabel: #6d7599;
+}
+
 body {
-    background: #fff;
+    background: var(--var-large-bg);
+    color: var(--var-text-fg);
 
     font-family: "Inter";
 
     user-select: none;
+}
+
+body[data-theme=dark] {
+    --var-large-bg: #222;
+    --var-panel-bg: #161616;
+    --var-text-fg: #fff;
+
+    --var-panel-sep: #000;
+
+    --var-button-bg: #111;
+    --var-button-hover: #333;
+    --var-button-active: #555;
+
+    --var-glist-label: #2b2b2b;
+    --var-glist-activeLabel: #232c53;
+
+    button > img {
+        filter: invert(1) hue-rotate(180deg);
+    }
+
+    div.glyphList canvas {
+        filter: invert(1);
+    }
+}
+ 
+button > img {
+    width: 16px;
+    height: 16px;
 }

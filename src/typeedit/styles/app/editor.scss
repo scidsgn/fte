@@ -1,7 +1,10 @@
 section.edit {
     position: relative;
+
+    border-top: 1px solid var(--var-panel-sep);
+
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     grid-template-rows: 1fr auto;
 
     div.viewport {
@@ -14,88 +17,9 @@ section.edit {
         }
     }
 
-    aside {
-        min-width: 320px;
-        width: 320px;
-
-        border-left: 1px solid #ddd;
-        
-        display: flex;
-        flex-direction: column;
-
-        nav {
-            display: flex;
-
-            button {
-                background: transparent;
-
-                font-family: "Inter";
-                font-size: 10pt;
-                font-weight: 400;
-
-                padding: 6px 20px;
-                border: none;
-                border-bottom: none;
-                outline: none;
-
-                flex-grow: 1;
-
-                &.active {
-                    box-shadow: inset 0px -2px #333;
-                }
-            }
-        }
-
-        div.listContainer {
-            height: 0; // WTF???
-
-            flex-grow: 1;
-            overflow-y: scroll;
-        }
-
-        div.glyphList {
-            background: #eee;
-
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1px;
-
-            div.glyph {
-                max-width: 75px;
-
-                background: #fff;
-
-                display: flex;
-                flex-direction: column;
-
-                &.active label {
-                    background: #6d7599;
-                    color: #fff;
-                }
-
-                label {
-                    background: #fafafa;
-
-                    font-size: 9pt;
-                    font-weight: 500;
-                    text-align: center;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    
-                    padding: 2px;
-
-                    overflow: hidden;
-                }
-
-                canvas {
-                    width: 100%;
-                    height: auto;
-                }
-            }
-        }
-    }
-
     div.glyphBar {
+        color: var(--var-text-fg);
+
         font-family: "Inter";
         font-size: 24pt;
         text-align: center;
@@ -108,7 +32,7 @@ section.edit {
             height: 1em;
             box-sizing: border-box;
 
-            background: #eee;
+            background: var(--var-button-hover);
             border-radius: 4px;
             border: 1px solid #ddd;
             margin: 0px 1px;
@@ -137,40 +61,37 @@ section.edit {
 
     button.prevGlyph,
     button.nextGlyph {
-        background: #fff;
+        background: var(--var-button-bg);
 
         font-size: 0;
 
         outline: none;
         padding: 6px 8px;
         border-radius: 4px;
-        border: 1px solid #ddd;
+        border: 1px solid var(--var-panel-sep);
         box-shadow: 0px 2px 4px #0001;
 
         pointer-events: all;
         z-index: 10;
-
+    
         &:hover {
-            background: #eee;
+            background: var(--var-button-hover);
         }
-
+    
         &:active {
-            background: #ddd;
-        }
-
-        img {
-            width: 16px;
-            height: 16px;
+            background: var(--var-button-active);
         }
     }
 
     div.tools {
-        padding: 8px 2px;
+        background: var(--var-panel-bg);
+
+        padding: 2px;
 
         display: flex;
         flex-direction: column;
 
-        border-right: 1px solid #ddd;
+        border-right: 1px solid var(--var-panel-sep);
 
         grid-row: 1 / span 2;
 
@@ -183,84 +104,27 @@ section.edit {
             outline: none;
             padding: 7px 8px;
             border-radius: 4px;
-
+    
             &:hover {
-                background: #eee;
+                background: var(--var-button-hover);
             }
-
+    
             &:active {
-                background: #ddd;
+                background: var(--var-button-active);
             }
 
             &.active {
-                background: #eee;
-                box-shadow: inset 0px 0px 0px 1px #bbb;
-            }
-
-            img {
-                width: 16px;
-                height: 16px;
+                background: var(--var-panel-sep);
             }
         }
     }
+}
 
-    div.subactionsBar {
-        position: absolute;
-        left: 8px;
-        right: 8px;
-        top: 8px;
+div.subactions {    
+    display: flex;
 
+    div {
+        border-left: 1px solid var(--var-panel-sep); 
         display: flex;
-        justify-content: flex-start;
-    }
-
-    div.subactions {
-        background: #fff;
-
-        padding: 2px;
-        border-radius: 4px;
-        border: 1px solid #bbb;
-
-        box-shadow: 0px 2px 4px #0001;
-
-        display: flex;
-        z-index: 10;
-
-        & > div:not(:last-child) {
-            border-right: 1px solid #ddd;
-            padding-right: 2px;
-        }
-
-        & > div:not(:first-child) {
-            padding-left: 2px;
-        }
-
-        button {
-            background: transparent;
-
-            font-size: 0;
-
-            border: none;
-            outline: none;
-            padding: 4px 6px;
-            border-radius: 2px;
-            
-            &:disabled img {
-                filter: grayscale(1) opacity(0.5);
-            }
-
-            &:hover {
-                background: #eee;
-            }
-
-            &:active {
-                background: #ddd;
-            }
-
-            img {
-                width: 16px;
-                height: 16px;
-            }
-        }
     }
 }

@@ -2,10 +2,10 @@ main {
     position: fixed;
     left: 0;
     top: 0;
-    right: 0;
+    right: 320px;
     bottom: 0;
 
-    background: #f6f6f6;
+    background: var(--var-panel-bg);
 
     display: flex;
     flex-direction: column;
@@ -16,7 +16,6 @@ main {
 
         padding: 0px;
 
-        box-shadow: inset 0px -2px 2px #00000005;
         display: flex;
 
         div.actions {
@@ -36,16 +35,11 @@ main {
                 justify-content: center;
     
                 &:hover {
-                    background: #ddd;
+                    background: var(--var-button-hover);
                 }
     
                 &:active {
-                    background: #c0c0c0;
-                }
-    
-                img {
-                    width: 16px;
-                    height: 16px;
+                    background: var(--var-button-active);
                 }
             }
         }
@@ -78,9 +72,9 @@ main {
     section {
         position: relative;
 
-        background: #fff;
+        background: var(--var-large-bg);
 
-        width: 100vw;
+        width: 100%;
 
         flex-grow: 1;
     }

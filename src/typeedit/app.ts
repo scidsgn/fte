@@ -72,7 +72,12 @@ export default (font: Font) => {
 
     prepareGlyphBar(viewport)
 
-    viewport.updateViewportSize()
+    viewport.updateViewportSize(false)
+    viewport.co.translate(
+        (viewport.domCanvas.width - context.glyph.metrics.rightBearing) / 2,
+        (viewport.domCanvas.height - 512) / 2
+    )
+    viewport.render()
 
     if (currentKeybCallback)
         window.removeEventListener("keyup", currentKeybCallback)

@@ -139,12 +139,18 @@ export class Viewport {
         this.handles = []
     }
 
-    updateViewportSize() {
+    updateViewportSize(autoCenter = true) {
         const parent = this.domCanvas.parentElement
         if (!parent) return
 
         const rect = parent.getBoundingClientRect()
 
+        if (autoCenter) {
+            this.co.translate(
+                (rect.width - this.domCanvas.width) / 2,
+                (rect.height - this.domCanvas.height) / 2
+            )
+        }
         this.domCanvas.width = rect.width
         this.domCanvas.height = rect.height
 

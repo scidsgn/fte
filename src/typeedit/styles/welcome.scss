@@ -41,7 +41,7 @@ article.welcome {
         button {
             width: 100%;
 
-            background: transparent;
+            background: var(--var-panel-bg);
             color: var(--var-text-fg);
 
             font-family: "Inter";
@@ -49,7 +49,7 @@ article.welcome {
             border: none;
             outline: none;
             padding: 7px 8px;
-            border: 1px solid var(--var-button-active);
+            border: 1px solid var(--var-panel-sep);
             border-radius: 4px;
             margin-bottom: 2px;
 

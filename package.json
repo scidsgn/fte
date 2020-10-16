@@ -1,8 +1,8 @@
 {
-  "name": "sci-fte",
-  "version": "1.0.0",
+  "name": "fte",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/main.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
     "start": "npm run build && electron ./build/main.js"
@@ -14,6 +14,7 @@
     "@types/opentype.js": "^1.3.1",
     "css-loader": "^4.3.0",
     "electron": "^10.1.3",
+    "electron-packager": "^15.1.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.2",
     "style-loader": "^1.2.1",

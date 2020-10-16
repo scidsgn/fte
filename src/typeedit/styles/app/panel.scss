@@ -16,6 +16,7 @@ aside {
         background: var(--var-panel-bg);
 
         display: flex;
+        justify-content: center;
 
         button {
             background: transparent;
@@ -25,14 +26,21 @@ aside {
             font-size: 10pt;
             font-weight: 400;
 
-            padding: 8px 20px;
+            padding: 7px 20px;
             border: none;
             border-bottom: none;
             outline: none;
-
-            flex-grow: 1;
+    
+            &:hover {
+                background: var(--var-button-hover);
+            }
+    
+            &:active {
+                background: var(--var-button-active);
+            }
 
             &.active {
+                background: var(--var-panel-sep);
                 box-shadow: inset 0px -2px var(--var-text-fg);
             }
         }

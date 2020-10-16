@@ -149,12 +149,14 @@ export class BezierPenTool implements ITool {
         ) {
             if (this.finalAdjustmentStage) {
                 this.handles = []
+                this.currentBezier.points[0].determineType()
                 this.currentBezier = null
 
                 finalizeUndoContext("Close curve")
             } else if (this.currentBezier.points.length === 1) {
                 finalizeUndoContext("Create curve")
             } else {
+                this.currentPoint.determineType()
                 finalizeUndoContext("Add point")
             }
             this.finalAdjustmentStage = false

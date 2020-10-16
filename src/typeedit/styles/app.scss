@@ -22,6 +22,18 @@ body {
     user-select: none;
 }
 
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--var-panel-sep);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--var-large-bg);
+}
+
 body[data-theme=dark] {
     --var-large-bg: #222;
     --var-panel-bg: #161616;

@@ -20,6 +20,5 @@ app.on("ready", () => {
 
     win.setMenuBarVisibility(false)
     
-    console.log(__dirname)
     win.loadFile("index.html")
 })

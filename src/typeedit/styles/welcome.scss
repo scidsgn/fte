@@ -56,6 +56,20 @@ article.welcome {
             display: flex;
             align-items: center;
             justify-content: center;
+
+            &.recent {
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+
+            label.name {
+                font-size: 12pt;
+                font-weight: 500;
+            }
+
+            label.path {
+                opacity: 0.6;
+            }
     
             &:hover {
                 background: var(--var-button-hover);
@@ -67,7 +81,20 @@ article.welcome {
 
             img {
                 margin-right: 8px;
+
+                &.preview {
+                    width: 332px;
+                    height: auto;
+
+                    margin: 0;
+                }
             }
         }
+    }
+
+    canvas.previewGenerator {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0;
     }
 }

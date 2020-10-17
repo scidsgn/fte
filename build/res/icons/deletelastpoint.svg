@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-144,-36)">
+        <g id="deletelastpoint" transform="matrix(0.666667,0,0,0.666667,144,36)">
+            <rect x="0" y="0" width="24" height="24" style="fill:none;"/>
+            <g transform="matrix(1.65,0,0,1.5,-120,-54.75)">
+                <path d="M75,39L85,39" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.95px;"/>
+            </g>
+            <g transform="matrix(1.875,0,0,1.5,-138,-54.75)">
+                <path d="M78,39L78,37L82,37L82,39" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.88px;"/>
+            </g>
+            <g transform="matrix(2.25,0,0,1.43478,-168,-50.6413)">
+                <path d="M77,42.091L77,49.409C77,49.964 77.14,50.495 77.391,50.888C77.641,51.28 77.98,51.5 78.333,51.5L81.667,51.5C82.02,51.5 82.359,51.28 82.609,50.888C82.86,50.495 83,49.964 83,49.409C83,46.093 83,40 83,40" style="fill:none;stroke:rgb(20,20,20);stroke-width:0.79px;"/>
+            </g>
+            <g transform="matrix(1.5,0,0,1.5,-216,-54)">
+                <path d="M152.5,47L152.5,45.5C152.5,44.174 151.973,42.902 151.036,41.964C150.098,41.027 148.826,40.5 147.5,40.5C145.884,40.5 144.5,40.5 144.5,40.5" style="fill:none;stroke:rgb(189,189,189);stroke-width:1px;"/>
+            </g>
+            <g transform="matrix(1.5,0,0,1.5,-126,-121.5)">
+                <rect x="91" y="91" width="3" height="3" style="fill:rgb(189,189,189);"/>
+                <path d="M95,91C95,90.448 94.552,90 94,90L91,90C90.448,90 90,90.448 90,91L90,94C90,94.552 90.448,95 91,95L94,95C94.552,95 95,94.552 95,94L95,91ZM94,91L91,91L91,94L94,94L94,91Z" style="fill:rgb(20,20,20);"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -13,8 +13,8 @@ import { importFont_opentype } from "./typeedit/io/opentype.js/import"
 import { Font } from "./typeedit/font/font"
 import { exportFont_opentype } from "./typeedit/io/opentype.js/export"
 import { existsSync } from "fs"
-import { importFontData_otfcc, setOtfccPath } from "./typeedit/io/otfcc/import"
-import { undoContext } from "./typeedit/undo/history"
+import { setOtfccPath } from "./typeedit/io/otfcc/import"
+import { createFontPreview } from "./typeedit/utils/preview"
 
 console.log(remote)
 
@@ -22,7 +22,13 @@ const scope = new paper.PaperScope()
 scope.install(window)
 scope.setup(new paper.Size(1000, 1000))
 
-const recentFiles: string[] = JSON.parse(
+type RecentFile = {
+    filePath: string
+    fontName: string
+    thumbnail: string
+}
+
+const recentFiles: RecentFile[] = JSON.parse(
     localStorage.getItem("recentFiles")
 ) ?? []
 
@@ -35,11 +41,26 @@ if (existsSync("./otfcc_test")) {
 recentFiles.forEach(
     file => {
         const btn = document.createElement("button")
+        btn.classList.add("recent")
 
-        btn.textContent = basename(file)
+        const fontPreview = document.createElement("img")
+        fontPreview.classList.add("preview")
+        fontPreview.src = file.thumbnail
+        btn.appendChild(fontPreview)
+
+        const fontNameLabel = document.createElement("label")
+        fontNameLabel.classList.add("name")
+        fontNameLabel.textContent = file.fontName
+        btn.appendChild(fontNameLabel)
+
+        const filePathLabel = document.createElement("label")
+        filePathLabel.classList.add("path")
+        filePathLabel.textContent = basename(file.filePath)
+        btn.appendChild(filePathLabel)
+
         btn.addEventListener(
             "click", () => {
-                importFont_opentype(file).then(font => {
+                importFont_opentype(file.filePath).then(font => {
                     const welcome = document.querySelector("article.welcome") as HTMLDivElement
                     welcome.style.display = "none"
                     
@@ -90,7 +111,14 @@ document.querySelectorAll("button.openFont").forEach(
 
                         app(font)
 
-                        recentFiles.unshift(result.filePaths[0])
+                        recentFiles.unshift(
+                            {
+                                filePath: result.filePaths[0],
+                                fontName: font.info.fontFamily + " " +
+                                          font.info.fontSubfamily,
+                                thumbnail: createFontPreview(font)
+                            }
+                        )
                         localStorage.setItem(
                             "recentFiles",
                             JSON.stringify(

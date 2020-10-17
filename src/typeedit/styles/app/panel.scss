@@ -30,6 +30,12 @@ aside {
             border: none;
             border-bottom: none;
             outline: none;
+
+            &.tool {
+                background: linear-gradient(
+                    transparent, rgb(41, 56, 68)
+                );
+            }
     
             &:hover {
                 background: var(--var-button-hover);

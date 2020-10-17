@@ -6,7 +6,7 @@ export interface IGuide {
     source?: any
     worldRender?: boolean
 
-    nudge: (v: Viewport, pos: Point, obj?: any) => void
+    nudge: (v: Viewport, pos: Point, obj?: any) => Point
     render: (v: Viewport, ctx: CanvasRenderingContext2D) => void
 }
 

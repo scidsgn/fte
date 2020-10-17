@@ -29,4 +29,9 @@ export class Point {
             this.y - last.y
         )
     }
+
+    copy(ref: Point) {
+        this.x = ref.x
+        this.y = ref.y
+    }
 }

@@ -19,7 +19,7 @@ export class CurveGuide implements IGuide {
             obj instanceof BezierBasePointHandle &&
             obj.point.curve === this.source
         )
-            return
+            return null
 
         const paperPath = this.source.getPaperPath()
         const paperPoint = new paper.Point(pos.x, pos.y)
@@ -27,7 +27,7 @@ export class CurveGuide implements IGuide {
         const nearest = paperPath.getNearestPoint(paperPoint)
         if (!nearest) {
             this.active = false
-            return
+            return null
         }
 
         const clientPos = v.co.worldToClient(pos.x, pos.y)
@@ -39,12 +39,16 @@ export class CurveGuide implements IGuide {
             clientPos.x - clientTarget.x,
             clientPos.y - clientTarget.y
         ) < 10) {
-            pos.x = nearest.x
-            pos.y = nearest.y
             this.active = true
+
+            return new Point(
+                nearest.x, nearest.y
+            )
         } else {
             this.active = false
         }
+
+        return null
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

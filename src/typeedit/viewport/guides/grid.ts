@@ -38,17 +38,22 @@ export class GridGuide implements IGuide {
         this.lastPoint.y = NaN
 
         if (Math.abs(pos.x - target.x) < delta) {
-            pos.x = target.x
-
             this.lastPoint.x = target.x
             this.active = true
         }
         if (Math.abs(pos.y - target.y) < delta) {
-            pos.y = target.y
-
             this.lastPoint.y = target.y
             this.active = true
         }
+
+        if (this.active) {
+            return new Point(
+                isNaN(this.lastPoint.x) ? pos.x : target.x,
+                isNaN(this.lastPoint.y) ? pos.y : target.y
+            )
+        }
+
+        return null
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

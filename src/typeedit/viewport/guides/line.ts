@@ -21,18 +21,20 @@ export class HorizontalGuide implements IGuide {
     nudge(v: Viewport, pos: Point, obj?: any) {
         if (obj && this.source && obj === this.source) {
             this.active = false
-            return
+            return null
         }
 
         const clientPos = v.co.worldToClient(pos.x, pos.y)
         const clientTarget = v.co.worldToClient(pos.x, this.value)
 
         if (Math.abs(clientPos.y - clientTarget.y) < 8) {
-            pos.y = this.value
             this.active = true
+            return new Point(pos.x, this.value)
         } else {
             this.active = false
         }
+
+        return null
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
@@ -69,18 +71,20 @@ export class VerticalGuide implements IGuide {
     nudge(v: Viewport, pos: Point, obj?: any) {
         if (obj && this.source && obj === this.source) {
             this.active = false
-            return
+            return null
         }
 
         const clientPos = v.co.worldToClient(pos.x, pos.y)
         const clientTarget = v.co.worldToClient(this.value, pos.y)
 
         if (Math.abs(clientPos.x - clientTarget.x) < 8) {
-            pos.x = this.value
             this.active = true
+            return new Point(this.value, pos.y)
         } else {
             this.active = false
         }
+
+        return null
     }
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

@@ -3,7 +3,11 @@ import { Point } from "../geometry/point"
 import { IContext } from "./context/context"
 import { ViewportCoordinates } from "./coordinates"
 import { IDrawable, IDrawableHandle } from "./drawable"
+import { CurveGuide } from "./guides/curve"
 import { GridGuide } from "./guides/grid"
+import { IGuide } from "./guides/guide"
+import { HorizontalGuide, VerticalGuide } from "./guides/line"
+import { PointGuide } from "./guides/point"
 import { ITool } from "./tools/tool"
 
 export class Viewport {
@@ -173,15 +177,47 @@ export class Viewport {
         }
     }
 
+    nudgeToGuides(pos: Point, obj: any, guides: IGuide[]) {
+        const nudgedPoints: Point[] = []
+        
+        guides.forEach(
+            g => {
+                const point = g.nudge(this, pos, obj)
+                if (point && pos.distance(point))
+                    nudgedPoints.push(point)
+            }
+        )
+
+        if (nudgedPoints.length) {
+            const distances = nudgedPoints.map(p => p.distance(pos))
+            const minDist = Math.min(...distances)
+            const minIndex = distances.indexOf(minDist)
+
+            pos.copy(nudgedPoints[minIndex])
+        }
+    }
+
     nudgePoint(pos: Point, obj?: any) {
-        this.context.grids.forEach(
-            g => g.nudge(this, pos, obj)
+        const guides = [
+            ...this.context.guides,
+            ...this.tool.guides
+        ]
+
+        this.nudgeToGuides(
+            pos, obj,
+            guides.filter(g => g instanceof CurveGuide)
         )
-        this.context.guides.forEach(
-            g => g.nudge(this, pos, obj)
+        this.nudgeToGuides(pos, obj, this.context.grids)
+        this.nudgeToGuides(
+            pos, obj,
+            guides.filter(
+                g => g instanceof HorizontalGuide ||
+                     g instanceof VerticalGuide
+            )
         )
-        this.tool.guides.forEach(
-            g => g.nudge(this, pos, obj)
+        this.nudgeToGuides(
+            pos, obj,
+            guides.filter(g => g instanceof PointGuide)
         )
     }
 

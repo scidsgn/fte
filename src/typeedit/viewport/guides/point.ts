@@ -35,11 +35,11 @@ export class PointGuide implements IGuide {
             clientPos.x - clientTarget.x,
             clientPos.y - clientTarget.y
         ) < 10) {
-            pos.x = this.source.x
-            pos.y = this.source.y
             this.active = true
+            return new Point(this.source.x, this.source.y)
         } else {
             this.active = false
+            return null
         }
     }
 
@@ -73,7 +73,7 @@ export class HandleGuide extends PointGuide {
         if (
             this.handle.selected ||
             this.handle === obj
-        ) return
-        super.nudge(v, pos, obj)
+        ) return null
+        return super.nudge(v, pos, obj)
     }
 }

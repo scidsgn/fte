@@ -6,7 +6,8 @@ const previewStrings = [
     "General relativity",
     "01123581321",
     "Typography",
-    "Audiovisual"
+    "Audiovisual",
+    "Another one bites the dust"
 ]
 
 export function createFontPreview(font: Font) {

@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "opentype.js": "github:scintilla4evr/opentype.js",
-    "paper": "^0.12.8"
+    "paper": "^0.12.8",
+    "smart-buffer": "^4.1.0"
   }
 }

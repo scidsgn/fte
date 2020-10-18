@@ -2,7 +2,7 @@ import { Glyph } from "../../font/glyph"
 import { BezierCurve } from "../../geometry/bezier/curve"
 import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Point } from "../../geometry/point"
-import { ArrayAddAction } from "../../undo/actions/array"
+import { ArrayAddAction, ArrayRemoveAction } from "../../undo/actions/array"
 import { ValueChangeAction } from "../../undo/actions/value"
 import { finalizeUndoContext, undoContext } from "../../undo/history"
 import { BezierContext } from "../context/bezier"
@@ -28,7 +28,47 @@ export class BezierPenTool implements ITool {
     public guides: IGuide[] = []
     public supportsForeignHandles = false
 
-    public subactions: ToolSubAction[][] = []
+    public subactions: ToolSubAction[][] = [
+        [
+            {
+                name: "Delete last point",
+                icon: "delete",
+                accelerator: "Delete",
+                handler: () => {
+                    if (!this.currentBezier) return
+
+                    const idx = this.currentBezier.points.length - 1
+                    const point = this.currentBezier.points[
+                        idx
+                    ]
+                    this.currentBezier.points.splice(idx, 1)
+                    undoContext.addAction(
+                        new ArrayRemoveAction(
+                            this.currentBezier.points, point,
+                            idx
+                        )
+                    )
+
+                    if (!this.currentBezier.points.length) {
+                        const bIdx = this.glyph.beziers.indexOf(
+                            this.currentBezier
+                        )
+                        this.glyph.beziers.splice(bIdx, 1)
+                        this.currentBezier = null
+
+                        undoContext.addAction(
+                            new ArrayRemoveAction(
+                                this.glyph.beziers, this.currentBezier,
+                                bIdx
+                            )
+                        )
+                    }
+
+                    finalizeUndoContext("Delete last point")
+                }
+            }
+        ]
+    ]
 
     private glyph: Glyph
 

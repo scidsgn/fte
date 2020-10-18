@@ -1,3 +1,5 @@
+const webpackNodeExternals = require("webpack-node-externals");
+
 module.exports = [
     {
         mode: "development",
@@ -26,6 +28,7 @@ module.exports = [
         entry: "./src/editor.ts",
         target: "electron-renderer",
         devtool: "source-map",
+        externals: [webpackNodeExternals()],
         module: {
             rules: [
                 {

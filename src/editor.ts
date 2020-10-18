@@ -8,13 +8,16 @@ import "./typeedit/styles/welcome.scss"
 import app, { currentFont } from "./typeedit/app"
 import paper from "paper"
 import { remote } from "electron"
-import { basename } from "path"
+import { basename, extname } from "path"
 import { importFont_opentype } from "./typeedit/io/opentype.js/import"
 import { Font } from "./typeedit/font/font"
 import { exportFont_opentype } from "./typeedit/io/opentype.js/export"
-import { existsSync } from "fs"
+import { existsSync, readFileSync, writeFileSync } from "fs"
 import { setOtfccPath } from "./typeedit/io/otfcc/import"
 import { createFontPreview } from "./typeedit/utils/preview"
+import { FTEX1 } from "./typeedit/io/ftex/ftex"
+import { SmartBuffer } from "smart-buffer"
+import { openFont, saveFont } from "./typeedit/io/io"
 
 console.log(remote)
 
@@ -60,12 +63,12 @@ recentFiles.forEach(
 
         btn.addEventListener(
             "click", () => {
-                importFont_opentype(file.filePath).then(font => {
-                    const welcome = document.querySelector("article.welcome") as HTMLDivElement
-                    welcome.style.display = "none"
+                const font = openFont(file.filePath)
+                
+                const welcome = document.querySelector("article.welcome") as HTMLDivElement
+                welcome.style.display = "none"
                     
-                    app(font)
-                })
+                app(font)
             }
         )
 
@@ -92,8 +95,22 @@ document.querySelectorAll("button.openFont").forEach(
                 {
                     filters: [
                         {
-                            name: "Fonts",
-                            extensions: ["otf", "ttf"]
+                            name: "Supported fonts",
+                            extensions: [
+                                "ftex", "otf", "ttf"
+                            ]
+                        },
+                        {
+                            name: "FTEX project file",
+                            extensions: ["ftex"]
+                        },
+                        {
+                            name: "OpenType fonts",
+                            extensions: ["otf"]
+                        },
+                        {
+                            name: "TrueType fonts",
+                            extensions: ["ttf"]
                         }
                     ],
                     properties: ["openFile"]
@@ -104,29 +121,32 @@ document.querySelectorAll("button.openFont").forEach(
                     result.filePaths.length !== 1
                 ) return
 
-                importFont_opentype(result.filePaths[0]).then(
-                    font => {
-                        const welcome = document.querySelector("article.welcome") as HTMLDivElement
-                        welcome.style.display = "none"
+                try {
+                    const font = openFont(result.filePaths[0])
 
-                        app(font)
+                    const welcome = document.querySelector("article.welcome") as HTMLDivElement
+                    welcome.style.display = "none"
 
-                        recentFiles.unshift(
-                            {
-                                filePath: result.filePaths[0],
-                                fontName: font.info.fontFamily + " " +
-                                          font.info.fontSubfamily,
-                                thumbnail: createFontPreview(font)
-                            }
+                    app(font)
+
+                    recentFiles.unshift(
+                        {
+                            filePath: result.filePaths[0],
+                            fontName: font.info.fontFamily + " " +
+                                      font.info.fontSubfamily,
+                            thumbnail: createFontPreview(font)
+                        }
+                    )
+                    localStorage.setItem(
+                        "recentFiles",
+                        JSON.stringify(
+                            recentFiles.slice(0, 8)
                         )
-                        localStorage.setItem(
-                            "recentFiles",
-                            JSON.stringify(
-                                recentFiles.slice(0, 8)
-                            )
-                        )
-                    }
-                )
+                    )
+                } catch(e) {
+                    // Well, error!
+                    alert("Couldn't load the font file.")
+                }
             })
         }
     )
@@ -140,18 +160,25 @@ document.querySelectorAll("button.saveFont").forEach(
                 {
                     filters: [
                         {
-                            name: "Fonts",
-                            extensions: ["otf", "ttf"]
+                            name: "FTEX project file",
+                            extensions: ["ftex"]
+                        },
+                        {
+                            name: "OpenType fonts",
+                            extensions: ["otf"]
+                        },
+                        {
+                            name: "TrueType fonts",
+                            extensions: ["ttf"]
                         }
                     ],
                     defaultPath: currentFont.info.fontFamily +
-                                 "-" + currentFont.info.fontSubfamily +
-                                 ".otf"
+                                 "-" + currentFont.info.fontSubfamily
                 }
             ).then(result => {
                 if (result.canceled) return
 
-                exportFont_opentype(currentFont, result.filePath)
+                saveFont(currentFont, result.filePath)
             })
         }
     )

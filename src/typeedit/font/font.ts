@@ -21,7 +21,9 @@ export type FontInfo = {
     manufacturerURL: string,
     postScriptName: string,
     uniqueID: string,
-    version: string
+    version: string,
+    trademark: string,
+    compatibleFullName: string
 }
 
 export type FontColors = {
@@ -55,7 +57,9 @@ export class Font extends EventEmitter {
                 manufacturerURL: "",
                 postScriptName: "",
                 uniqueID: "",
-                version: ""
+                version: "",
+                trademark: "",
+                compatibleFullName: ""
             }, this.info
         )
     }

@@ -1,4 +1,4 @@
-import { Font as OTFont, Glyph as OTGlyph, load, PathCommand } from "opentype.js";
+import { Font as OTFont, Glyph as OTGlyph, load, loadSync, PathCommand } from "opentype.js";
 import { Font, FontInfo } from "../../font/font";
 import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
@@ -187,8 +187,8 @@ function fteFontFromOTFont(otfont: OTFont) {
     )
 }
 
-export async function importFont_opentype(filePath: string): Promise<Font> {
-    const otfont = await load(filePath)
+export function importFont_opentype(filePath: string): Font {
+    const otfont = loadSync(filePath)
 
     const font = fteFontFromOTFont(otfont)
 

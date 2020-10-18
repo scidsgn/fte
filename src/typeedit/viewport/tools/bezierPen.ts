@@ -49,6 +49,39 @@ export class BezierPenTool implements ITool {
                         )
                     )
 
+                    const cpHandles = this.handles.filter(
+                        h => h instanceof BezierControlPointHandle &&
+                             h.point === point
+                    ) // length always = 2
+
+                    const hIndex = this.handles.findIndex(
+                        h => h instanceof BezierBasePointHandle &&
+                             h.point == point
+                    )
+                    this.handles.splice(hIndex, 1)
+
+                    const cpIndex0 = this.handles.indexOf(cpHandles[0])
+                    this.handles.splice(cpIndex0, 1)
+
+                    const cpIndex1 = this.handles.indexOf(cpHandles[1])
+                    this.handles.splice(cpIndex1, 1)
+
+                    
+                    undoContext.addAction(
+                        new ArrayRemoveAction(
+                            this.handles, this.handles[hIndex],
+                            hIndex
+                        ),
+                        new ArrayRemoveAction(
+                            this.handles, this.handles[cpIndex0],
+                            cpIndex0
+                        ),
+                        new ArrayRemoveAction(
+                            this.handles, this.handles[cpIndex1],
+                            cpIndex1
+                        )
+                    )
+
                     if (!this.currentBezier.points.length) {
                         const bIdx = this.glyph.beziers.indexOf(
                             this.currentBezier
@@ -89,6 +122,8 @@ export class BezierPenTool implements ITool {
         const pos = v.co.clientToWorld(
             x, y
         )
+        const rawPos = new Point()
+        rawPos.copy(pos)
 
         v.nudgePoint(pos)
 
@@ -110,9 +145,23 @@ export class BezierPenTool implements ITool {
                 )
             }
 
-            const nearHandle = v.nearHandle(
+            let nearHandle = v.nearHandle(
                 pos.x, pos.y, "BezierBasePointHandle"
             )
+            if (
+                this.currentBezier && this.currentBezier.points.length
+            ) {
+                const rawNearHandle = v.nearHandle(
+                    rawPos.x, rawPos.y, "BezierBasePointHandle"
+                )
+                if (
+                    rawNearHandle &&
+                    nearHandle instanceof BezierBasePointHandle &
+                    nearHandle.position === this.currentBezier.points[0].base
+                )
+                    nearHandle = rawNearHandle
+            }
+
             if (
                 nearHandle &&
                 nearHandle instanceof BezierBasePointHandle &&

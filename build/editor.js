@@ -3754,6 +3754,16 @@ var BezierPenTool = /** @class */ (function () {
                         var point = _this.currentBezier.points[idx];
                         _this.currentBezier.points.splice(idx, 1);
                         _undo_history__WEBPACK_IMPORTED_MODULE_5__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_3__["ArrayRemoveAction"](_this.currentBezier.points, point, idx));
+                        var cpHandles = _this.handles.filter(function (h) { return h instanceof _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_10__["BezierControlPointHandle"] &&
+                            h.point === point; }); // length always = 2
+                        var hIndex = _this.handles.findIndex(function (h) { return h instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_9__["BezierBasePointHandle"] &&
+                            h.point == point; });
+                        _this.handles.splice(hIndex, 1);
+                        var cpIndex0 = _this.handles.indexOf(cpHandles[0]);
+                        _this.handles.splice(cpIndex0, 1);
+                        var cpIndex1 = _this.handles.indexOf(cpHandles[1]);
+                        _this.handles.splice(cpIndex1, 1);
+                        _undo_history__WEBPACK_IMPORTED_MODULE_5__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_3__["ArrayRemoveAction"](_this.handles, _this.handles[hIndex], hIndex), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_3__["ArrayRemoveAction"](_this.handles, _this.handles[cpIndex0], cpIndex0), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_3__["ArrayRemoveAction"](_this.handles, _this.handles[cpIndex1], cpIndex1));
                         if (!_this.currentBezier.points.length) {
                             var bIdx = _this.glyph.beziers.indexOf(_this.currentBezier);
                             _this.glyph.beziers.splice(bIdx, 1);
@@ -3781,6 +3791,8 @@ var BezierPenTool = /** @class */ (function () {
         if (!(v.context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_6__["BezierContext"]))
             return;
         var pos = v.co.clientToWorld(x, y);
+        var rawPos = new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"]();
+        rawPos.copy(pos);
         v.nudgePoint(pos);
         if (e.type === "mousedown" && e.buttons & 1) {
             if (!this.currentBezier) {
@@ -3789,6 +3801,13 @@ var BezierPenTool = /** @class */ (function () {
                 _undo_history__WEBPACK_IMPORTED_MODULE_5__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_3__["ArrayAddAction"](v.context.beziers, this.currentBezier, length_1 - 1));
             }
             var nearHandle = v.nearHandle(pos.x, pos.y, "BezierBasePointHandle");
+            if (this.currentBezier && this.currentBezier.points.length) {
+                var rawNearHandle = v.nearHandle(rawPos.x, rawPos.y, "BezierBasePointHandle");
+                if (rawNearHandle &&
+                    nearHandle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_9__["BezierBasePointHandle"] &
+                        nearHandle.position === this.currentBezier.points[0].base)
+                    nearHandle = rawNearHandle;
+            }
             if (nearHandle &&
                 nearHandle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_9__["BezierBasePointHandle"] &&
                 nearHandle.position === this.currentBezier.points[0].base) {

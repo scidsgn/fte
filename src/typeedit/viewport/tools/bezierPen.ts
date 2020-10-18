@@ -156,7 +156,7 @@ export class BezierPenTool implements ITool {
                 )
                 if (
                     rawNearHandle &&
-                    nearHandle instanceof BezierBasePointHandle &
+                    nearHandle instanceof BezierBasePointHandle &&
                     nearHandle.position === this.currentBezier.points[0].base
                 )
                     nearHandle = rawNearHandle

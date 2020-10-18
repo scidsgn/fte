@@ -3804,8 +3804,8 @@ var BezierPenTool = /** @class */ (function () {
             if (this.currentBezier && this.currentBezier.points.length) {
                 var rawNearHandle = v.nearHandle(rawPos.x, rawPos.y, "BezierBasePointHandle");
                 if (rawNearHandle &&
-                    nearHandle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_9__["BezierBasePointHandle"] &
-                        nearHandle.position === this.currentBezier.points[0].base)
+                    nearHandle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_9__["BezierBasePointHandle"] &&
+                    nearHandle.position === this.currentBezier.points[0].base)
                     nearHandle = rawNearHandle;
             }
             if (nearHandle &&

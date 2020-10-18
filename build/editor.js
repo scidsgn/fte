@@ -708,6 +708,7 @@ document.querySelectorAll("button.openFont").forEach(function (btn) { return btn
         }
         catch (e) {
             // Well, error!
+            console.error(e);
             alert("Couldn't load the font file.");
         }
     });
@@ -1347,11 +1348,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FTEX1", function() { return FTEX1; });
 /* harmony import */ var smart_buffer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! smart-buffer */ "smart-buffer");
 /* harmony import */ var smart_buffer__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(smart_buffer__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../font/font */ "./src/typeedit/font/font.ts");
-/* harmony import */ var _font_glyph__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../font/glyph */ "./src/typeedit/font/glyph.ts");
-/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
-/* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
-/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var zlib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! zlib */ "zlib");
+/* harmony import */ var zlib__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(zlib__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _font_font__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../font/font */ "./src/typeedit/font/font.ts");
+/* harmony import */ var _font_glyph__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../font/glyph */ "./src/typeedit/font/glyph.ts");
+/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
+/* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
+/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
+var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+
 
 
 
@@ -1382,6 +1393,7 @@ var FTEX1 = /** @class */ (function () {
         this.outl = [];
         this.glph = [];
         this.fnam = [];
+        this.defl = [];
     }
     Object.defineProperty(FTEX1.prototype, "tableCount", {
         get: function () {
@@ -1413,11 +1425,11 @@ var FTEX1 = /** @class */ (function () {
         var info = {};
         this.fnam.forEach(function (name) { return info[fontInfoIndices[name.index]] = name.name; });
         var metrics = this.fmet;
-        var font = new _font_font__WEBPACK_IMPORTED_MODULE_1__["Font"](info, metrics, []);
+        var font = new _font_font__WEBPACK_IMPORTED_MODULE_2__["Font"](info, metrics, []);
         this.glph.forEach(function (g) {
             if (!g.outlines.length)
                 return;
-            font.addGlyph(new _font_glyph__WEBPACK_IMPORTED_MODULE_2__["Glyph"](font, g.name, (g.codePoint === 0) ? undefined : g.codePoint, {
+            font.addGlyph(new _font_glyph__WEBPACK_IMPORTED_MODULE_3__["Glyph"](font, g.name, (g.codePoint === 0) ? undefined : g.codePoint, {
                 leftBearing: g.leftSide,
                 rightBearing: g.rightSide
             }, _this.getCurvesFromOUTL(_this.outl[g.outlines[0]])));
@@ -1429,9 +1441,9 @@ var FTEX1 = /** @class */ (function () {
             var handles = (i === outl.startIndices.length - 1) ?
                 outl.handles.slice(index) :
                 outl.handles.slice(index, outl.startIndices[i + 1]);
-            var curve = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_3__["BezierCurve"]();
+            var curve = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_4__["BezierCurve"]();
             handles.forEach(function (h) {
-                var point = new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_4__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_5__["Point"](h.base[0], h.base[1]), new _geometry_point__WEBPACK_IMPORTED_MODULE_5__["Point"](h.before[0], h.before[1]), new _geometry_point__WEBPACK_IMPORTED_MODULE_5__["Point"](h.after[0], h.after[1]));
+                var point = new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_5__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_6__["Point"](h.base[0], h.base[1]), new _geometry_point__WEBPACK_IMPORTED_MODULE_6__["Point"](h.before[0], h.before[1]), new _geometry_point__WEBPACK_IMPORTED_MODULE_6__["Point"](h.after[0], h.after[1]));
                 point.type = h.type;
                 curve.addPoint(point);
             });
@@ -1441,17 +1453,22 @@ var FTEX1 = /** @class */ (function () {
     FTEX1.prototype.encode = function () {
         var buf = new smart_buffer__WEBPACK_IMPORTED_MODULE_0__["SmartBuffer"]();
         this.encodeFTEXHeader(buf);
+        // The OUTL table will be compressed by default
+        var outlData = new smart_buffer__WEBPACK_IMPORTED_MODULE_0__["SmartBuffer"]();
+        this.encodeOUTL(outlData);
+        this.compressTable(outlData);
+        this.encodeDEFL(buf);
         if (this.fnam.length)
             this.encodeFNAM(buf);
         if (this.fmet)
             this.encodeFMET(buf);
-        if (this.outl.length)
-            this.encodeOUTL(buf);
+        // if (this.outl.length) this.encodeOUTL(buf)
         if (this.glph.length)
             this.encodeGLPH(buf);
         return buf;
     };
     FTEX1.prototype.decode = function (buffer) {
+        var _this = this;
         if (buffer.readString(4, "ascii") !== "FTEX")
             throw new Error("Not a supported FTEX file.");
         if (buffer.readUInt8() !== this.ftexVersion)
@@ -1460,29 +1477,49 @@ var FTEX1 = /** @class */ (function () {
         var requiredTables = [
             "OUTL", "GLPH", "FMET", "FNAM"
         ];
+        var supportedTables = __spreadArrays(requiredTables, [
+            "DEFL"
+        ]);
         for (var i = 0; i < numTables; i++) {
             var tag = buffer.readString(4, "ascii");
-            var index = requiredTables.indexOf(tag);
-            if (index < 0)
+            if (!supportedTables.includes(tag))
                 throw new Error("Unsupported table: " + tag + ".");
-            requiredTables.splice(index, 1);
-            switch (tag) {
-                case "FMET":
-                    this.decodeFMET(buffer);
-                    break;
-                case "FNAM":
-                    this.decodeFNAM(buffer);
-                    break;
-                case "OUTL":
-                    this.decodeOUTL(buffer);
-                    break;
-                case "GLPH":
-                    this.decodeGLPH(buffer);
-                    break;
-            }
+            var index = requiredTables.indexOf(tag);
+            if (index >= 0)
+                requiredTables.splice(index, 1);
+            this.decodeTable(tag, buffer);
         }
+        this.defl.forEach(function (buf) {
+            var tableBuffer = _this.decompressTable(buf);
+            var tag = tableBuffer.readString(4, "ascii");
+            if (!supportedTables.includes(tag))
+                throw new Error("Unsupported table: " + tag + ".");
+            var index = requiredTables.indexOf(tag);
+            if (index >= 0)
+                requiredTables.splice(index, 1);
+            _this.decodeTable(tag, tableBuffer);
+        });
         if (requiredTables.length)
             throw new Error("The following required tables were not found: " + requiredTables.join(", ") + ".");
+    };
+    FTEX1.prototype.decodeTable = function (tag, buffer) {
+        switch (tag) {
+            case "DEFL":
+                this.decodeDEFL(buffer);
+                break;
+            case "FMET":
+                this.decodeFMET(buffer);
+                break;
+            case "FNAM":
+                this.decodeFNAM(buffer);
+                break;
+            case "OUTL":
+                this.decodeOUTL(buffer);
+                break;
+            case "GLPH":
+                this.decodeGLPH(buffer);
+                break;
+        }
     };
     FTEX1.prototype.encodeVString = function (buf, str) {
         buf.writeUInt16LE(str.length);
@@ -1497,6 +1534,29 @@ var FTEX1 = /** @class */ (function () {
         buffer.writeString("FTEX", "ascii");
         buffer.writeUInt8(this.ftexVersion);
         buffer.writeUInt16LE(this.tableCount);
+    };
+    // DEFL - Compressed Tables
+    FTEX1.prototype.compressTable = function (table) {
+        var buf = table.toBuffer();
+        this.defl.push(Object(zlib__WEBPACK_IMPORTED_MODULE_1__["deflateSync"])(buf));
+    };
+    FTEX1.prototype.decompressTable = function (defl) {
+        return smart_buffer__WEBPACK_IMPORTED_MODULE_0__["SmartBuffer"].fromBuffer(Object(zlib__WEBPACK_IMPORTED_MODULE_1__["inflateSync"])(defl));
+    };
+    FTEX1.prototype.encodeDEFL = function (buffer) {
+        buffer.writeString("DEFL", "ascii");
+        buffer.writeUInt16LE(this.defl.length);
+        this.defl.forEach(function (buf) {
+            buffer.writeUInt32LE(buf.length);
+            buffer.writeBuffer(buf);
+        });
+    };
+    FTEX1.prototype.decodeDEFL = function (buffer) {
+        var count = buffer.readUInt16LE();
+        for (var i = 0; i < count; i++) {
+            var length_1 = buffer.readUInt32LE();
+            this.defl.push(buffer.readBuffer(length_1));
+        }
     };
     // FMET - Font Vertical Metrics
     FTEX1.prototype.setFMET = function (font) {
@@ -4933,6 +4993,17 @@ module.exports = require("path");
 /***/ (function(module, exports) {
 
 module.exports = require("smart-buffer");
+
+/***/ }),
+
+/***/ "zlib":
+/*!***********************!*\
+  !*** external "zlib" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("zlib");
 
 /***/ })
 

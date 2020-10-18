@@ -145,6 +145,7 @@ document.querySelectorAll("button.openFont").forEach(
                     )
                 } catch(e) {
                     // Well, error!
+                    console.error(e)
                     alert("Couldn't load the font file.")
                 }
             })

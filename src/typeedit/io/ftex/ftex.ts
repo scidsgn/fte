@@ -1,4 +1,5 @@
 import { SmartBuffer } from "smart-buffer"
+import { deflateSync, inflateSync } from "zlib"
 import { Font } from "../../font/font"
 import { Glyph } from "../../font/glyph"
 import { BezierCurve } from "../../geometry/bezier/curve"
@@ -59,6 +60,7 @@ export class FTEX1 {
         index: number,
         name: string
     }[] = []
+    protected defl: Buffer[] = []
 
     get tableCount() {
         let count = 0
@@ -147,9 +149,16 @@ export class FTEX1 {
         const buf = new SmartBuffer()
         this.encodeFTEXHeader(buf)
 
+        // The OUTL table will be compressed by default
+        const outlData = new SmartBuffer()
+        this.encodeOUTL(outlData)
+        this.compressTable(outlData)
+
+        this.encodeDEFL(buf)
+
         if (this.fnam.length) this.encodeFNAM(buf)
         if (this.fmet) this.encodeFMET(buf)
-        if (this.outl.length) this.encodeOUTL(buf)
+        // if (this.outl.length) this.encodeOUTL(buf)
         if (this.glph.length) this.encodeGLPH(buf)
 
         return buf
@@ -169,35 +178,65 @@ export class FTEX1 {
         const requiredTables = [
             "OUTL", "GLPH", "FMET", "FNAM"
         ]
+        const supportedTables = [
+            ...requiredTables, "DEFL"
+        ]
 
         for (let i = 0; i < numTables; i++) {
             const tag = buffer.readString(4, "ascii")
             
-            const index = requiredTables.indexOf(tag)
-            if (index < 0)
+            if (!supportedTables.includes(tag))
                 throw new Error(`Unsupported table: ${tag}.`)
-            requiredTables.splice(index, 1)
+
+            const index = requiredTables.indexOf(tag)
+            if (index >= 0)
+                requiredTables.splice(index, 1)
             
-            switch (tag) {
-                case "FMET":
-                    this.decodeFMET(buffer)
-                    break
-                case "FNAM":
-                    this.decodeFNAM(buffer)
-                    break
-                case "OUTL":
-                    this.decodeOUTL(buffer)
-                    break
-                case "GLPH":
-                    this.decodeGLPH(buffer)
-                    break
-            }
+            this.decodeTable(tag, buffer)
         }
+
+        this.defl.forEach(
+            buf => {
+                const tableBuffer = this.decompressTable(buf)
+
+                const tag = tableBuffer.readString(4, "ascii")
+
+                if (!supportedTables.includes(tag))
+                    throw new Error(`Unsupported table: ${tag}.`)
+
+                const index = requiredTables.indexOf(tag)
+                
+                if (index >= 0)
+                    requiredTables.splice(index, 1)
+
+                this.decodeTable(tag, tableBuffer)
+            }
+        )
 
         if (requiredTables.length)
             throw new Error(
                 `The following required tables were not found: ${requiredTables.join(", ")}.`
             )
+    }
+
+    decodeTable(tag: string, buffer: SmartBuffer) {
+        switch (tag) {
+            case "DEFL":
+                this.decodeDEFL(buffer)
+                break
+            case "FMET":
+                this.decodeFMET(buffer)
+                break
+            case "FNAM":
+                this.decodeFNAM(buffer)
+                break
+            case "OUTL":
+                this.decodeOUTL(buffer)
+                break
+            case "GLPH":
+                this.decodeGLPH(buffer)
+                break
+        }
     }
 
     encodeVString(buf: SmartBuffer, str: string) {
@@ -215,6 +254,45 @@ export class FTEX1 {
         buffer.writeString("FTEX", "ascii")
         buffer.writeUInt8(this.ftexVersion)
         buffer.writeUInt16LE(this.tableCount)
+    }
+
+    // DEFL - Compressed Tables
+    compressTable(table: SmartBuffer) {
+        const buf = table.toBuffer()
+
+        this.defl.push(
+            deflateSync(buf)
+        )
+    }
+
+    decompressTable(defl: Buffer): SmartBuffer {
+        return SmartBuffer.fromBuffer(
+            inflateSync(defl)
+        )
+    }
+
+    encodeDEFL(buffer: SmartBuffer) {
+        buffer.writeString("DEFL", "ascii")
+        buffer.writeUInt16LE(this.defl.length)
+
+        this.defl.forEach(
+            buf => {
+                buffer.writeUInt32LE(buf.length)
+                buffer.writeBuffer(buf)
+            }
+        )
+    }
+
+    decodeDEFL(buffer: SmartBuffer) {
+        const count = buffer.readUInt16LE()
+
+        for (let i = 0; i < count; i++) {
+            const length = buffer.readUInt32LE()
+
+            this.defl.push(
+                buffer.readBuffer(length)
+            )
+        }
     }
 
     // FMET - Font Vertical Metrics

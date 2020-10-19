@@ -14,8 +14,12 @@ export class GridGuide implements IGuide {
         return currentFont.settings.gridMainGap
     }
 
+    private get gap(): number {
+        return currentFont.settings.gridMainGap / currentFont.settings.gridSubdivisions
+    }
+
     calculateGap(v: Viewport) {
-        let clientGap = this.baseGap * v.co.scaleFactor
+        let clientGap = this.gap * v.co.scaleFactor
 
         while (clientGap < 12) {
             clientGap *= 2
@@ -80,6 +84,9 @@ export class GridGuide implements IGuide {
             ctx.lineTo(Math.round(client.x) + 0.5, 9999)
             ctx.strokeStyle = getThemeColor("guideGrid")
 
+            if (Math.abs((x / this.baseGap) % 1) > 0.001)
+                ctx.strokeStyle = getThemeColor("guideGridSubdiv")
+
             if (
                 this.active && this.lastPoint.x === x
             )
@@ -94,6 +101,9 @@ export class GridGuide implements IGuide {
             ctx.moveTo(-9999, Math.round(client.y) + 0.5)
             ctx.lineTo(9999, Math.round(client.y) + 0.5)
             ctx.strokeStyle = getThemeColor("guideGrid")
+
+            if (Math.abs((y / this.baseGap) % 1) > 0.001)
+                ctx.strokeStyle = getThemeColor("guideGridSubdiv")
 
             if (
                 this.active && this.lastPoint.y === y

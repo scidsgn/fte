@@ -4,6 +4,6 @@ export const defaultAppSettings = {
 
 export const defaultPerFontSettings = {
     gridActive: true,
-    gridMainGap: 16,
+    gridMainGap: 64,
     gridSubdivisions: 4
 }

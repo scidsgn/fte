@@ -56,7 +56,7 @@ aside {
         height: 0; // WTF???
 
         flex-grow: 1;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 
     div.panelContents:not(.active) {

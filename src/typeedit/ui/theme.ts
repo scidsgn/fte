@@ -22,7 +22,8 @@ const fteThemes = [
         gindicatorText: "#aaa",
 
         guideActive: "#f0f",
-        guideGrid: "#3332"
+        guideGrid: "#3332",
+        guideGridSubdiv: "#3331"
     },
     {
         theme: "dark",
@@ -45,7 +46,8 @@ const fteThemes = [
         gindicatorText: "#555",
 
         guideActive: "#f0f",
-        guideGrid: "#9992"
+        guideGrid: "#9992",
+        guideGridSubdiv: "#9991"
     }
 ]
 

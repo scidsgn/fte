@@ -189,7 +189,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "aside {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  min-width: 320px;\n  width: 320px;\n  box-sizing: border-box;\n  border-left: 1px solid var(--var-panel-sep);\n  display: flex;\n  flex-direction: column; }\n  aside nav {\n    background: var(--var-panel-bg);\n    display: flex;\n    justify-content: center; }\n    aside nav button {\n      background: transparent;\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 400;\n      padding: 7px 20px;\n      border: none;\n      border-bottom: none;\n      outline: none; }\n      aside nav button.tool {\n        background: linear-gradient(transparent, #293844); }\n      aside nav button:hover {\n        background: var(--var-button-hover); }\n      aside nav button:active {\n        background: var(--var-button-active); }\n      aside nav button.active {\n        background: var(--var-panel-sep);\n        box-shadow: inset 0px -2px var(--var-text-fg); }\n  aside div.listContainer {\n    height: 0;\n    flex-grow: 1;\n    overflow-y: scroll; }\n  aside div.panelContents:not(.active) {\n    display: none; }\n  aside div.glyphList {\n    background: var(--var-panel-bg);\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 1px; }\n    aside div.glyphList div.glyph {\n      max-width: 75px;\n      background: var(--var-large-bg);\n      display: flex;\n      flex-direction: column; }\n      aside div.glyphList div.glyph.active label {\n        background: var(--var-glist-activeLabel);\n        color: #fff; }\n      aside div.glyphList div.glyph label {\n        background: var(--var-glist-label);\n        font-size: 9pt;\n        font-weight: 500;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        padding: 2px;\n        overflow: hidden; }\n      aside div.glyphList div.glyph canvas {\n        width: 100%;\n        height: auto; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/panel.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,MAAM;EACN,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,YAAY;EACZ,sBAAsB;EAEtB,2CAA2C;EAE3C,aAAa;EACb,sBAAsB,EAAA;EAZ1B;IAeQ,+BAA+B;IAE/B,aAAa;IACb,uBAAuB,EAAA;IAlB/B;MAqBY,uBAAuB;MACvB,yBAAyB;MAEzB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,aAAa,EAAA;MA/BzB;QAkCgB,iDAEC,EAAA;MApCjB;QAwCgB,mCAAmC,EAAA;MAxCnD;QA4CgB,oCAAoC,EAAA;MA5CpD;QAgDgB,gCAAgC;QAChC,6CAA6C,EAAA;EAjD7D;IAuDQ,SAAS;IAET,YAAY;IACZ,kBAAkB,EAAA;EA1D1B;IA8DQ,aAAa,EAAA;EA9DrB;IAkEQ,+BAA+B;IAE/B,aAAa;IACb,qCAAqC;IACrC,QAAQ,EAAA;IAtEhB;MAyEY,eAAe;MAEf,+BAA+B;MAE/B,aAAa;MACb,sBAAsB,EAAA;MA9ElC;QAiFgB,wCAAwC;QACxC,WAAW,EAAA;MAlF3B;QAsFgB,kCAAkC;QAElC,cAAc;QACd,gBAAgB;QAChB,kBAAkB;QAClB,mBAAmB;QACnB,uBAAuB;QAEvB,YAAY;QAEZ,gBAAgB,EAAA;MAhGhC;QAoGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["aside {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    min-width: 320px;\r\n    width: 320px;\r\n    box-sizing: border-box;\r\n\r\n    border-left: 1px solid var(--var-panel-sep);\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n            color: var(--var-text-fg);\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 400;\r\n\r\n            padding: 7px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            outline: none;\r\n\r\n            &.tool {\r\n                background: linear-gradient(\r\n                    transparent, rgb(41, 56, 68)\r\n                );\r\n            }\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n    \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-panel-sep);\r\n                box-shadow: inset 0px -2px var(--var-text-fg);\r\n            }\r\n        }\r\n    }\r\n\r\n    div.listContainer {\r\n        height: 0; // WTF???\r\n\r\n        flex-grow: 1;\r\n        overflow-y: scroll;\r\n    }\r\n\r\n    div.panelContents:not(.active) {\r\n        display: none;\r\n    }\r\n\r\n    div.glyphList {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: grid;\r\n        grid-template-columns: repeat(4, 1fr);\r\n        gap: 1px;\r\n\r\n        div.glyph {\r\n            max-width: 75px;\r\n\r\n            background: var(--var-large-bg);\r\n\r\n            display: flex;\r\n            flex-direction: column;\r\n\r\n            &.active label {\r\n                background: var(--var-glist-activeLabel);\r\n                color: #fff;\r\n            }\r\n\r\n            label {\r\n                background: var(--var-glist-label);\r\n\r\n                font-size: 9pt;\r\n                font-weight: 500;\r\n                text-align: center;\r\n                white-space: nowrap;\r\n                text-overflow: ellipsis;\r\n                \r\n                padding: 2px;\r\n\r\n                overflow: hidden;\r\n            }\r\n\r\n            canvas {\r\n                width: 100%;\r\n                height: auto;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "aside {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  min-width: 320px;\n  width: 320px;\n  box-sizing: border-box;\n  border-left: 1px solid var(--var-panel-sep);\n  display: flex;\n  flex-direction: column; }\n  aside nav {\n    background: var(--var-panel-bg);\n    display: flex;\n    justify-content: center; }\n    aside nav button {\n      background: transparent;\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 400;\n      padding: 7px 20px;\n      border: none;\n      border-bottom: none;\n      outline: none; }\n      aside nav button.tool {\n        background: linear-gradient(transparent, #293844); }\n      aside nav button:hover {\n        background: var(--var-button-hover); }\n      aside nav button:active {\n        background: var(--var-button-active); }\n      aside nav button.active {\n        background: var(--var-panel-sep);\n        box-shadow: inset 0px -2px var(--var-text-fg); }\n  aside div.listContainer {\n    height: 0;\n    flex-grow: 1;\n    overflow-y: auto; }\n  aside div.panelContents:not(.active) {\n    display: none; }\n  aside div.glyphList {\n    background: var(--var-panel-bg);\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 1px; }\n    aside div.glyphList div.glyph {\n      max-width: 75px;\n      background: var(--var-large-bg);\n      display: flex;\n      flex-direction: column; }\n      aside div.glyphList div.glyph.active label {\n        background: var(--var-glist-activeLabel);\n        color: #fff; }\n      aside div.glyphList div.glyph label {\n        background: var(--var-glist-label);\n        font-size: 9pt;\n        font-weight: 500;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        padding: 2px;\n        overflow: hidden; }\n      aside div.glyphList div.glyph canvas {\n        width: 100%;\n        height: auto; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/panel.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,MAAM;EACN,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,YAAY;EACZ,sBAAsB;EAEtB,2CAA2C;EAE3C,aAAa;EACb,sBAAsB,EAAA;EAZ1B;IAeQ,+BAA+B;IAE/B,aAAa;IACb,uBAAuB,EAAA;IAlB/B;MAqBY,uBAAuB;MACvB,yBAAyB;MAEzB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,aAAa,EAAA;MA/BzB;QAkCgB,iDAEC,EAAA;MApCjB;QAwCgB,mCAAmC,EAAA;MAxCnD;QA4CgB,oCAAoC,EAAA;MA5CpD;QAgDgB,gCAAgC;QAChC,6CAA6C,EAAA;EAjD7D;IAuDQ,SAAS;IAET,YAAY;IACZ,gBAAgB,EAAA;EA1DxB;IA8DQ,aAAa,EAAA;EA9DrB;IAkEQ,+BAA+B;IAE/B,aAAa;IACb,qCAAqC;IACrC,QAAQ,EAAA;IAtEhB;MAyEY,eAAe;MAEf,+BAA+B;MAE/B,aAAa;MACb,sBAAsB,EAAA;MA9ElC;QAiFgB,wCAAwC;QACxC,WAAW,EAAA;MAlF3B;QAsFgB,kCAAkC;QAElC,cAAc;QACd,gBAAgB;QAChB,kBAAkB;QAClB,mBAAmB;QACnB,uBAAuB;QAEvB,YAAY;QAEZ,gBAAgB,EAAA;MAhGhC;QAoGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["aside {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    min-width: 320px;\r\n    width: 320px;\r\n    box-sizing: border-box;\r\n\r\n    border-left: 1px solid var(--var-panel-sep);\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n            color: var(--var-text-fg);\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 400;\r\n\r\n            padding: 7px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            outline: none;\r\n\r\n            &.tool {\r\n                background: linear-gradient(\r\n                    transparent, rgb(41, 56, 68)\r\n                );\r\n            }\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n    \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-panel-sep);\r\n                box-shadow: inset 0px -2px var(--var-text-fg);\r\n            }\r\n        }\r\n    }\r\n\r\n    div.listContainer {\r\n        height: 0; // WTF???\r\n\r\n        flex-grow: 1;\r\n        overflow-y: auto;\r\n    }\r\n\r\n    div.panelContents:not(.active) {\r\n        display: none;\r\n    }\r\n\r\n    div.glyphList {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: grid;\r\n        grid-template-columns: repeat(4, 1fr);\r\n        gap: 1px;\r\n\r\n        div.glyph {\r\n            max-width: 75px;\r\n\r\n            background: var(--var-large-bg);\r\n\r\n            display: flex;\r\n            flex-direction: column;\r\n\r\n            &.active label {\r\n                background: var(--var-glist-activeLabel);\r\n                color: #fff;\r\n            }\r\n\r\n            label {\r\n                background: var(--var-glist-label);\r\n\r\n                font-size: 9pt;\r\n                font-weight: 500;\r\n                text-align: center;\r\n                white-space: nowrap;\r\n                text-overflow: ellipsis;\r\n                \r\n                padding: 2px;\r\n\r\n                overflow: hidden;\r\n            }\r\n\r\n            canvas {\r\n                width: 100%;\r\n                height: auto;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -2205,7 +2205,7 @@ var defaultAppSettings = {
 };
 var defaultPerFontSettings = {
     gridActive: true,
-    gridMainGap: 16,
+    gridMainGap: 64,
     gridSubdivisions: 4
 };
 
@@ -2718,7 +2718,8 @@ var fteThemes = [
         gindicator: "#eee",
         gindicatorText: "#aaa",
         guideActive: "#f0f",
-        guideGrid: "#3332"
+        guideGrid: "#3332",
+        guideGridSubdiv: "#3331"
     },
     {
         theme: "dark",
@@ -2737,7 +2738,8 @@ var fteThemes = [
         gindicator: "#333",
         gindicatorText: "#555",
         guideActive: "#f0f",
-        guideGrid: "#9992"
+        guideGrid: "#9992",
+        guideGridSubdiv: "#9991"
     }
 ];
 function getThemeColor(colorName) {
@@ -3488,8 +3490,15 @@ var GridGuide = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(GridGuide.prototype, "gap", {
+        get: function () {
+            return _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.gridMainGap / _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.gridSubdivisions;
+        },
+        enumerable: false,
+        configurable: true
+    });
     GridGuide.prototype.calculateGap = function (v) {
-        var clientGap = this.baseGap * v.co.scaleFactor;
+        var clientGap = this.gap * v.co.scaleFactor;
         while (clientGap < 12) {
             clientGap *= 2;
         }
@@ -3530,6 +3539,8 @@ var GridGuide = /** @class */ (function () {
             ctx.moveTo(Math.round(client.x) + 0.5, -9999);
             ctx.lineTo(Math.round(client.x) + 0.5, 9999);
             ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideGrid");
+            if (Math.abs((x / this.baseGap) % 1) > 0.001)
+                ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideGridSubdiv");
             if (this.active && this.lastPoint.x === x)
                 ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideActive");
             ctx.stroke();
@@ -3540,6 +3551,8 @@ var GridGuide = /** @class */ (function () {
             ctx.moveTo(-9999, Math.round(client.y) + 0.5);
             ctx.lineTo(9999, Math.round(client.y) + 0.5);
             ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideGrid");
+            if (Math.abs((y / this.baseGap) % 1) > 0.001)
+                ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideGridSubdiv");
             if (this.active && this.lastPoint.y === y)
                 ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideActive");
             ctx.stroke();

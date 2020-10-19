@@ -10,6 +10,12 @@ export type ToolSubAction = {
     handler: () => void
 }
 
+export type ToolSubActionSection = {
+    name: string,
+    subactions: ToolSubAction[]
+    collapse?: boolean
+}
+
 export interface ITool {
     name: string
     icon: string
@@ -19,7 +25,7 @@ export interface ITool {
     guides: IGuide[]
     supportsForeignHandles: boolean
 
-    subactions: ToolSubAction[][]
+    subactions: ToolSubActionSection[]
 
     handleMouseEvent: (
         v: Viewport, e: MouseEvent, x: number, y: number

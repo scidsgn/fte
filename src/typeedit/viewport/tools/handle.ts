@@ -13,7 +13,7 @@ import { HandleGuide } from "../guides/point";
 import { BezierBasePointHandle } from "../handles/bezierBasePoint";
 import { BezierControlPointHandle } from "../handles/bezierControlPoint";
 import { Viewport } from "../viewport";
-import { ITool, ToolSubAction } from "./tool";
+import { ITool, ToolSubAction, ToolSubActionSection } from "./tool";
 
 export class HandleTool implements ITool {
     public name = "Curve edit"
@@ -36,332 +36,348 @@ export class HandleTool implements ITool {
     private glyph: Glyph
     private beziers: BezierCurve[] = []
 
-    public subactions: ToolSubAction[][] = [
-        [
-            {
-                name: "Delete",
-                icon: "delete",
-                accelerator: "Delete",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const curves = this.getSelectedCurves()
-
-                    selected.forEach(
-                        handle => {
-                            if (!(handle instanceof BezierBasePointHandle))
-                                return
-                            
-                            const point = handle.point
-                            const index = point.curve.points.indexOf(point)
-
-                            point.curve.points.splice(index, 1)
-
-                            const cpHandles = this.handles.filter(
-                                h => h instanceof BezierControlPointHandle &&
-                                     h.point === point
-                            ) // length always = 2
-
-                            const hIndex = this.handles.indexOf(handle)
-                            this.handles.splice(hIndex, 1)
-
-                            const cpIndex0 = this.handles.indexOf(cpHandles[0])
-                            this.handles.splice(cpIndex0, 1)
-
-                            const cpIndex1 = this.handles.indexOf(cpHandles[1])
-                            this.handles.splice(cpIndex1, 1)
-
-                            
-                            undoContext.addAction(
-                                new ArrayRemoveAction(
-                                    point.curve.points, point,
-                                    index
-                                ),
-                                new ArrayRemoveAction(
-                                    this.handles, handle,
-                                    hIndex
-                                ),
-                                new ArrayRemoveAction(
-                                    this.handles, cpHandles[0],
-                                    cpIndex0
-                                ),
-                                new ArrayRemoveAction(
-                                    this.handles, cpHandles[1],
-                                    cpIndex1
+    public subactions: ToolSubActionSection[] = [
+        {
+            name: "Edit",
+            subactions: [
+                {
+                    name: "Delete",
+                    icon: "delete",
+                    accelerator: "Delete",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const curves = this.getSelectedCurves()
+    
+                        selected.forEach(
+                            handle => {
+                                if (!(handle instanceof BezierBasePointHandle))
+                                    return
+                                
+                                const point = handle.point
+                                const index = point.curve.points.indexOf(point)
+    
+                                point.curve.points.splice(index, 1)
+    
+                                const cpHandles = this.handles.filter(
+                                    h => h instanceof BezierControlPointHandle &&
+                                         h.point === point
+                                ) // length always = 2
+    
+                                const hIndex = this.handles.indexOf(handle)
+                                this.handles.splice(hIndex, 1)
+    
+                                const cpIndex0 = this.handles.indexOf(cpHandles[0])
+                                this.handles.splice(cpIndex0, 1)
+    
+                                const cpIndex1 = this.handles.indexOf(cpHandles[1])
+                                this.handles.splice(cpIndex1, 1)
+    
+                                
+                                undoContext.addAction(
+                                    new ArrayRemoveAction(
+                                        point.curve.points, point,
+                                        index
+                                    ),
+                                    new ArrayRemoveAction(
+                                        this.handles, handle,
+                                        hIndex
+                                    ),
+                                    new ArrayRemoveAction(
+                                        this.handles, cpHandles[0],
+                                        cpIndex0
+                                    ),
+                                    new ArrayRemoveAction(
+                                        this.handles, cpHandles[1],
+                                        cpIndex1
+                                    )
                                 )
-                            )
-                        }
-                    )
-
-                    finalizeUndoContext("Delete points")
+                            }
+                        )
+    
+                        finalizeUndoContext("Delete points")
+                    }
+                },
+                {
+                    name: "Reverse direction",
+                    icon: "reversecurve",
+                    accelerator: "KeyR",
+                    handler: () => {
+                        this.getSelectedCurves().forEach(
+                            c => c.reverse()
+                        )
+                    }
                 }
-            }
-        ],
-        [
-            {
-                name: "Select all",
-                icon: "allsel",
-                accelerator: "^KeyA",
-                handler: () => {
-                    this.handles.forEach(
-                        handle => handle.selected = true
-                    )
-                }
-            },
-            {
-                name: "Deselect all",
-                icon: "removesel",
-                accelerator: "^KeyD",
-                handler: () => {
-                    this.handles.forEach(
-                        handle => handle.selected = false
-                    )
-                }
-            },
-            {
-                name: "Invert selection",
-                icon: "invertsel",
-                accelerator: "^KeyI",
-                handler: () => {
-                    this.handles.forEach(
-                        handle => handle.selected = !handle.selected
-                    )
-                }
-            },
-            {
-                name: "Select connected",
-                icon: "curvesel",
-                accelerator: "^KeyL",
-                handler: () => {
-                    const curves = this.getSelectedCurves()
-
-                    for (let bezier of curves) {
-                        for (let point of bezier.points) {
-                            const handle = this.handles.find(
-                                h => h instanceof BezierBasePointHandle &&
-                                     h.point === point
-                            )
-                            if (handle) handle.selected = true
+            ]
+        },
+        {
+            name: "Select",
+            subactions: [
+                {
+                    name: "Select all",
+                    icon: "allsel",
+                    accelerator: "^KeyA",
+                    handler: () => {
+                        this.handles.forEach(
+                            handle => handle.selected = true
+                        )
+                    }
+                },
+                {
+                    name: "Deselect all",
+                    icon: "removesel",
+                    accelerator: "^KeyD",
+                    handler: () => {
+                        this.handles.forEach(
+                            handle => handle.selected = false
+                        )
+                    }
+                },
+                {
+                    name: "Invert selection",
+                    icon: "invertsel",
+                    accelerator: "^KeyI",
+                    handler: () => {
+                        this.handles.forEach(
+                            handle => handle.selected = !handle.selected
+                        )
+                    }
+                },
+                {
+                    name: "Select connected",
+                    icon: "curvesel",
+                    accelerator: "^KeyL",
+                    handler: () => {
+                        const curves = this.getSelectedCurves()
+    
+                        for (let bezier of curves) {
+                            for (let point of bezier.points) {
+                                const handle = this.handles.find(
+                                    h => h instanceof BezierBasePointHandle &&
+                                         h.point === point
+                                )
+                                if (handle) handle.selected = true
+                            }
                         }
                     }
                 }
-            }
-        ],
-        [
-            {
-                name: "Reverse direction",
-                icon: "reversecurve",
-                accelerator: "KeyR",
-                handler: () => {
-                    this.getSelectedCurves().forEach(
-                        c => c.reverse()
-                    )
-                }
-            }
-        ],
-        [
-            {
-                name: "Union",
-                icon: "union",
-                accelerator: "",
-                handler: () => {
-                    this.performCSGOperation(
-                        (out, item) => out.unite(item, {
-                            insert: false
-                        })
-                    )
-
-                    finalizeUndoContext("Union")
-                }
-            },
-            {
-                name: "Difference",
-                icon: "difference",
-                accelerator: "",
-                handler: () => {
-                    this.performCSGOperation(
-                        (out, item) => out.subtract(item, {
-                            insert: false
-                        })
-                    )
-
-                    finalizeUndoContext("Difference")
-                }
-            },
-            {
-                name: "Intersection",
-                icon: "intersection",
-                accelerator: "",
-                handler: () => {
-                    this.performCSGOperation(
-                        (out, item) => out.intersect(item, {
-                            insert: false
-                        })
-                    )
-
-                    finalizeUndoContext("Intersection")
-                }
-            },
-            {
-                name: "Exclusion",
-                icon: "xor",
-                accelerator: "",
-                handler: () => {
-                    this.performCSGOperation(
-                        (out, item) => out.exclude(item, {
-                            insert: false
-                        })
-                    )
-
-                    finalizeUndoContext("Exclusion")
-                }
-            }
-        ],
-        [
-            {
-                name: "Flip X",
-                icon: "flipx",
-                accelerator: "",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const bbox = this.getHandlesBBox(selected)
-
-                    this.addHandlesToUndoContext(selected)
-
-                    selected.forEach(handle => {
-                        handle.position.x = lerp(
-                            1 - unlerp(handle.position.x, bbox.left, bbox.right),
-                            bbox.left, bbox.right
+            ]
+        },
+        {
+            name: "Construct",
+            collapse: true,
+            subactions: [
+                {
+                    name: "Union",
+                    icon: "union",
+                    accelerator: "",
+                    handler: () => {
+                        this.performCSGOperation(
+                            (out, item) => out.unite(item, {
+                                insert: false
+                            })
                         )
-                    })
-
-                    finalizeUndoContext("Flip X")
-                }
-            },
-            {
-                name: "Flip Y",
-                icon: "flipy",
-                accelerator: "",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const bbox = this.getHandlesBBox(selected)
-
-                    this.addHandlesToUndoContext(selected)
-
-                    selected.forEach(handle => {
-                        handle.position.y = lerp(
-                            1 - unlerp(handle.position.y, bbox.top, bbox.bottom),
-                            bbox.top, bbox.bottom
+    
+                        finalizeUndoContext("Union")
+                    }
+                },
+                {
+                    name: "Difference",
+                    icon: "difference",
+                    accelerator: "",
+                    handler: () => {
+                        this.performCSGOperation(
+                            (out, item) => out.subtract(item, {
+                                insert: false
+                            })
                         )
-                    })
-
-                    finalizeUndoContext("Flip Y")
+    
+                        finalizeUndoContext("Difference")
+                    }
+                },
+                {
+                    name: "Intersection",
+                    icon: "intersection",
+                    accelerator: "",
+                    handler: () => {
+                        this.performCSGOperation(
+                            (out, item) => out.intersect(item, {
+                                insert: false
+                            })
+                        )
+    
+                        finalizeUndoContext("Intersection")
+                    }
+                },
+                {
+                    name: "Exclusion",
+                    icon: "xor",
+                    accelerator: "",
+                    handler: () => {
+                        this.performCSGOperation(
+                            (out, item) => out.exclude(item, {
+                                insert: false
+                            })
+                        )
+    
+                        finalizeUndoContext("Exclusion")
+                    }
                 }
-            }
-        ],
-        [
-            {
-                name: "Align to left",
-                icon: "alignleft",
-                accelerator: "",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const bbox = this.getHandlesBBox(selected)
-
-                    this.addHandlesToUndoContext(selected)
-
-                    selected.forEach(handle => {
-                        handle.position.x = bbox.left
-                    })
-
-                    finalizeUndoContext("Align to left")
+            ]
+        },
+        {
+            name: "Transform",
+            collapse: true,
+            subactions: [
+                {
+                    name: "Flip X",
+                    icon: "flipx",
+                    accelerator: "",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const bbox = this.getHandlesBBox(selected)
+    
+                        this.addHandlesToUndoContext(selected)
+    
+                        selected.forEach(handle => {
+                            handle.position.x = lerp(
+                                1 - unlerp(handle.position.x, bbox.left, bbox.right),
+                                bbox.left, bbox.right
+                            )
+                        })
+    
+                        finalizeUndoContext("Flip X")
+                    }
+                },
+                {
+                    name: "Flip Y",
+                    icon: "flipy",
+                    accelerator: "",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const bbox = this.getHandlesBBox(selected)
+    
+                        this.addHandlesToUndoContext(selected)
+    
+                        selected.forEach(handle => {
+                            handle.position.y = lerp(
+                                1 - unlerp(handle.position.y, bbox.top, bbox.bottom),
+                                bbox.top, bbox.bottom
+                            )
+                        })
+    
+                        finalizeUndoContext("Flip Y")
+                    }
                 }
-            },
-            {
-                name: "Align to right",
-                icon: "alignright",
-                accelerator: "",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const bbox = this.getHandlesBBox(selected)
-
-                    this.addHandlesToUndoContext(selected)
-
-                    selected.forEach(handle => {
-                        handle.position.x = bbox.right
-                    })
-
-                    finalizeUndoContext("Align to right")
+            ]
+        },
+        {
+            name: "Alignment",
+            collapse: true,
+            subactions: [
+                {
+                    name: "Align to left",
+                    icon: "alignleft",
+                    accelerator: "",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const bbox = this.getHandlesBBox(selected)
+    
+                        this.addHandlesToUndoContext(selected)
+    
+                        selected.forEach(handle => {
+                            handle.position.x = bbox.left
+                        })
+    
+                        finalizeUndoContext("Align to left")
+                    }
+                },
+                {
+                    name: "Align to right",
+                    icon: "alignright",
+                    accelerator: "",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const bbox = this.getHandlesBBox(selected)
+    
+                        this.addHandlesToUndoContext(selected)
+    
+                        selected.forEach(handle => {
+                            handle.position.x = bbox.right
+                        })
+    
+                        finalizeUndoContext("Align to right")
+                    }
+                },
+                {
+                    name: "Align to top",
+                    icon: "aligntop",
+                    accelerator: "",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const bbox = this.getHandlesBBox(selected)
+    
+                        this.addHandlesToUndoContext(selected)
+    
+                        selected.forEach(handle => {
+                            handle.position.y = bbox.top
+                        })
+    
+                        finalizeUndoContext("Align to top")
+                    }
+                },
+                {
+                    name: "Align to bottom",
+                    icon: "alignbottom",
+                    accelerator: "",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const bbox = this.getHandlesBBox(selected)
+    
+                        this.addHandlesToUndoContext(selected)
+    
+                        selected.forEach(handle => {
+                            handle.position.y = bbox.bottom
+                        })
+    
+                        finalizeUndoContext("Align to bottom")
+                    }
+                },
+                {
+                    name: "Align to center",
+                    icon: "alignhcenter",
+                    accelerator: "",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const bbox = this.getHandlesBBox(selected)
+    
+                        this.addHandlesToUndoContext(selected)
+    
+                        selected.forEach(handle => {
+                            handle.position.y = (bbox.top + bbox.bottom) / 2
+                        })
+    
+                        finalizeUndoContext("Align to center")
+                    }
+                },
+                {
+                    name: "Align to middle",
+                    icon: "alignvcenter",
+                    accelerator: "",
+                    handler: () => {
+                        const selected = this.handles.filter(h => h.selected)
+                        const bbox = this.getHandlesBBox(selected)
+    
+                        this.addHandlesToUndoContext(selected)
+    
+                        selected.forEach(handle => {
+                            handle.position.x = (bbox.left + bbox.right) / 2
+                        })
+    
+                        finalizeUndoContext("Align to middle")
+                    }
                 }
-            },
-            {
-                name: "Align to top",
-                icon: "aligntop",
-                accelerator: "",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const bbox = this.getHandlesBBox(selected)
-
-                    this.addHandlesToUndoContext(selected)
-
-                    selected.forEach(handle => {
-                        handle.position.y = bbox.top
-                    })
-
-                    finalizeUndoContext("Align to top")
-                }
-            },
-            {
-                name: "Align to bottom",
-                icon: "alignbottom",
-                accelerator: "",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const bbox = this.getHandlesBBox(selected)
-
-                    this.addHandlesToUndoContext(selected)
-
-                    selected.forEach(handle => {
-                        handle.position.y = bbox.bottom
-                    })
-
-                    finalizeUndoContext("Align to bottom")
-                }
-            },
-            {
-                name: "Align to center",
-                icon: "alignhcenter",
-                accelerator: "",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const bbox = this.getHandlesBBox(selected)
-
-                    this.addHandlesToUndoContext(selected)
-
-                    selected.forEach(handle => {
-                        handle.position.y = (bbox.top + bbox.bottom) / 2
-                    })
-
-                    finalizeUndoContext("Align to center")
-                }
-            },
-            {
-                name: "Align to middle",
-                icon: "alignvcenter",
-                accelerator: "",
-                handler: () => {
-                    const selected = this.handles.filter(h => h.selected)
-                    const bbox = this.getHandlesBBox(selected)
-
-                    this.addHandlesToUndoContext(selected)
-
-                    selected.forEach(handle => {
-                        handle.position.x = (bbox.left + bbox.right) / 2
-                    })
-
-                    finalizeUndoContext("Align to middle")
-                }
-            }
-        ]
+            ]
+        }
     ]
 
     private performCSGOperation(

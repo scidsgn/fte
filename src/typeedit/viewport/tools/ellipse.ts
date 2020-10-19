@@ -12,7 +12,7 @@ import { IDrawableHandle } from "../drawable"
 import { IGuide } from "../guides/guide"
 import { PointGuide } from "../guides/point"
 import { Viewport } from "../viewport"
-import { ITool, ToolSubAction } from "./tool"
+import { ITool, ToolSubAction, ToolSubActionSection } from "./tool"
 
 // ~ magic number ~
 const magic = 4 * (Math.SQRT2 - 1) / 3
@@ -26,7 +26,7 @@ export class EllipseTool implements ITool {
     public guides: IGuide[] = []
     public supportsForeignHandles = false
 
-    public subactions: ToolSubAction[][] = []
+    public subactions: ToolSubActionSection[] = []
 
     private startPoint: Point
 

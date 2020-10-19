@@ -56,7 +56,7 @@ export default (font: Font) => {
 
     const viewport = setupViewport(context)
     viewport.setTool(new HandleTool())
-    updateSubactions(viewport, [globalSubActions, ...viewport.tool.subactions])
+    updateSubactions(viewport, [globalSubActions, ...viewport.tool.subactions.map(s => s.subactions)])
     
     prepareToolbar(
         globalTools,
@@ -65,7 +65,7 @@ export default (font: Font) => {
             viewport.setTool(tool)
             updateSubactions(
                 viewport,
-                [globalSubActions, ...tool.subactions]
+                [globalSubActions, ...tool.subactions.map(s => s.subactions)]
             )
         }
     )
@@ -91,7 +91,7 @@ export default (font: Font) => {
 
         for (let action of [
             globalTools,
-            globalSubActions, ...viewport.tool.subactions
+            globalSubActions, ...viewport.tool.subactions.map(s => s.subactions)
         ].flat()) {
             if (action.accelerator === accelString) {
                 if ("handler" in action) {
@@ -103,7 +103,7 @@ export default (font: Font) => {
                     viewport.setTool(action)
                     updateSubactions(
                         viewport,
-                        [globalSubActions, ...action.subactions]
+                        [globalSubActions, ...action.subactions.map(s => s.subactions)]
                     )
                     setActiveTool(globalTools.indexOf(action))
                 }

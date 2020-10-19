@@ -2,13 +2,15 @@ import { throws } from "assert"
 import { Point } from "../geometry/point"
 import { IContext } from "./context/context"
 import { ViewportCoordinates } from "./coordinates"
-import { IDrawable, IDrawableHandle } from "./drawable"
+import { IDrawableHandle } from "./drawable"
 import { CurveGuide } from "./guides/curve"
 import { GridGuide } from "./guides/grid"
 import { IGuide } from "./guides/guide"
 import { HorizontalGuide, VerticalGuide } from "./guides/line"
 import { PointGuide } from "./guides/point"
 import { ITool } from "./tools/tool"
+import { MenuItem, MenuItemConstructorOptions, remote } from "electron"
+import { accelStringToElectron } from "../utils/accelerator"
 
 export class Viewport {
     public domCanvas = document.createElement("canvas")
@@ -41,6 +43,52 @@ export class Viewport {
 
         this.domCanvas.addEventListener("mousedown", (e) => {
             this.dispatchMouseEvent(e)
+        })
+
+        this.domCanvas.addEventListener("contextmenu", () => {
+            const menuItems: MenuItemConstructorOptions[] = []
+            
+            this.tool.subactions.forEach(
+                (section, i) => {
+                    if (section.collapse) {
+                        menuItems.push({
+                            type: "submenu",
+                            label: section.name,
+                            submenu: section.subactions.map(
+                                a => {
+                                    return {
+                                        label: a.name,
+                                        click: () => a.handler(),
+                                        accelerator: accelStringToElectron(a.accelerator)
+                                    }
+                                }
+                            )
+                        })
+                    } else {
+                        menuItems.push(
+                            ...section.subactions.map(
+                                a => {
+                                    return {
+                                        label: a.name,
+                                        click: () => a.handler(),
+                                        accelerator: accelStringToElectron(a.accelerator)
+                                    }
+                                }
+                            )
+                        )
+                    }
+
+                    if (i < this.tool.subactions.length - 1) {
+                        menuItems.push({
+                            type: "separator"
+                        })
+                    }
+                }
+            )
+
+            const menu = remote.Menu.buildFromTemplate(menuItems)
+
+            menu.popup()
         })
 
         this.domCanvas.addEventListener("mouseup", (e) => {

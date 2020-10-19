@@ -11,7 +11,7 @@ import { IDrawableHandle } from "../drawable";
 import { IGuide } from "../guides/guide";
 import { PointGuide } from "../guides/point";
 import { Viewport } from "../viewport";
-import { ITool, ToolSubAction } from "./tool";
+import { ITool, ToolSubAction, ToolSubActionSection } from "./tool";
 
 export class RectangleTool implements ITool {
     public name = "Rectangle"
@@ -22,7 +22,7 @@ export class RectangleTool implements ITool {
     public guides: IGuide[] = []
     public supportsForeignHandles = false
 
-    public subactions: ToolSubAction[][] = []
+    public subactions: ToolSubActionSection[] = []
 
     private startPoint: Point
 

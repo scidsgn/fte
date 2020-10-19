@@ -14,7 +14,7 @@ import { PointGuide } from "../guides/point"
 import { BezierBasePointHandle } from "../handles/bezierBasePoint"
 import { BezierControlPointHandle } from "../handles/bezierControlPoint"
 import { Viewport } from "../viewport"
-import { ITool, ToolSubAction } from "./tool"
+import { ITool, ToolSubAction, ToolSubActionSection } from "./tool"
 
 export class BezierPenTool implements ITool {
     public name = "Pen"
@@ -28,79 +28,82 @@ export class BezierPenTool implements ITool {
     public guides: IGuide[] = []
     public supportsForeignHandles = false
 
-    public subactions: ToolSubAction[][] = [
-        [
-            {
-                name: "Delete last point",
-                icon: "delete",
-                accelerator: "Delete",
-                handler: () => {
-                    if (!this.currentBezier) return
-
-                    const idx = this.currentBezier.points.length - 1
-                    const point = this.currentBezier.points[
-                        idx
-                    ]
-                    this.currentBezier.points.splice(idx, 1)
-                    undoContext.addAction(
-                        new ArrayRemoveAction(
-                            this.currentBezier.points, point,
+    public subactions: ToolSubActionSection[] = [
+        {
+            name: "Edit",
+            subactions: [
+                {
+                    name: "Delete last point",
+                    icon: "delete",
+                    accelerator: "Delete",
+                    handler: () => {
+                        if (!this.currentBezier) return
+    
+                        const idx = this.currentBezier.points.length - 1
+                        const point = this.currentBezier.points[
                             idx
-                        )
-                    )
-
-                    const cpHandles = this.handles.filter(
-                        h => h instanceof BezierControlPointHandle &&
-                             h.point === point
-                    ) // length always = 2
-
-                    const hIndex = this.handles.findIndex(
-                        h => h instanceof BezierBasePointHandle &&
-                             h.point == point
-                    )
-                    this.handles.splice(hIndex, 1)
-
-                    const cpIndex0 = this.handles.indexOf(cpHandles[0])
-                    this.handles.splice(cpIndex0, 1)
-
-                    const cpIndex1 = this.handles.indexOf(cpHandles[1])
-                    this.handles.splice(cpIndex1, 1)
-
-                    
-                    undoContext.addAction(
-                        new ArrayRemoveAction(
-                            this.handles, this.handles[hIndex],
-                            hIndex
-                        ),
-                        new ArrayRemoveAction(
-                            this.handles, this.handles[cpIndex0],
-                            cpIndex0
-                        ),
-                        new ArrayRemoveAction(
-                            this.handles, this.handles[cpIndex1],
-                            cpIndex1
-                        )
-                    )
-
-                    if (!this.currentBezier.points.length) {
-                        const bIdx = this.glyph.beziers.indexOf(
-                            this.currentBezier
-                        )
-                        this.glyph.beziers.splice(bIdx, 1)
-                        this.currentBezier = null
-
+                        ]
+                        this.currentBezier.points.splice(idx, 1)
                         undoContext.addAction(
                             new ArrayRemoveAction(
-                                this.glyph.beziers, this.currentBezier,
-                                bIdx
+                                this.currentBezier.points, point,
+                                idx
                             )
                         )
+    
+                        const cpHandles = this.handles.filter(
+                            h => h instanceof BezierControlPointHandle &&
+                                 h.point === point
+                        ) // length always = 2
+    
+                        const hIndex = this.handles.findIndex(
+                            h => h instanceof BezierBasePointHandle &&
+                                 h.point == point
+                        )
+                        this.handles.splice(hIndex, 1)
+    
+                        const cpIndex0 = this.handles.indexOf(cpHandles[0])
+                        this.handles.splice(cpIndex0, 1)
+    
+                        const cpIndex1 = this.handles.indexOf(cpHandles[1])
+                        this.handles.splice(cpIndex1, 1)
+    
+                        
+                        undoContext.addAction(
+                            new ArrayRemoveAction(
+                                this.handles, this.handles[hIndex],
+                                hIndex
+                            ),
+                            new ArrayRemoveAction(
+                                this.handles, this.handles[cpIndex0],
+                                cpIndex0
+                            ),
+                            new ArrayRemoveAction(
+                                this.handles, this.handles[cpIndex1],
+                                cpIndex1
+                            )
+                        )
+    
+                        if (!this.currentBezier.points.length) {
+                            const bIdx = this.glyph.beziers.indexOf(
+                                this.currentBezier
+                            )
+                            this.glyph.beziers.splice(bIdx, 1)
+                            this.currentBezier = null
+    
+                            undoContext.addAction(
+                                new ArrayRemoveAction(
+                                    this.glyph.beziers, this.currentBezier,
+                                    bIdx
+                                )
+                            )
+                        }
+    
+                        finalizeUndoContext("Delete last point")
                     }
-
-                    finalizeUndoContext("Delete last point")
                 }
-            }
-        ]
+            ]
+        }
     ]
 
     private glyph: Glyph

@@ -212,6 +212,53 @@ document.body.addEventListener("keydown", (e) => {
     }
 })
 
+document.addEventListener("drop", (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (!e.dataTransfer.files.length) return
+
+    try {
+        const path = e.dataTransfer.files.item(0).path
+        const font = openFont(path)
+        if (!font) return
+        
+        const welcome = document.querySelector("article.welcome") as HTMLDivElement
+        welcome.style.display = "none"
+
+        app(font)
+
+        const index = recentFiles.findIndex(
+            p => p.filePath === path
+        )
+        if (index >= 0) recentFiles.splice(index, 1)
+
+        recentFiles.unshift(
+            {
+                filePath: path,
+                fontName: font.info.fontFamily + " " +
+                          font.info.fontSubfamily,
+                thumbnail: createFontPreview(font)
+            }
+        )
+        localStorage.setItem(
+            "recentFiles",
+            JSON.stringify(
+                recentFiles.slice(0, 8)
+            )
+        )
+    } catch (e) {
+        // Well, error!
+        console.error(e)
+        alert("Couldn't load the font file.")
+    }
+})
+
+document.addEventListener("dragover", (e) => { 
+    e.preventDefault()
+    e.stopPropagation()
+}); 
+
 // load("test/Inter-Regular.otf").then(
 //     (font) => {
 //         app(font)

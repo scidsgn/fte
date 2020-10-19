@@ -752,6 +752,40 @@ document.body.addEventListener("keydown", function (e) {
         e.preventDefault();
     }
 });
+document.addEventListener("drop", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!e.dataTransfer.files.length)
+        return;
+    try {
+        var path_1 = e.dataTransfer.files.item(0).path;
+        var font = Object(_typeedit_io_io__WEBPACK_IMPORTED_MODULE_13__["openFont"])(path_1);
+        if (!font)
+            return;
+        var welcome = document.querySelector("article.welcome");
+        welcome.style.display = "none";
+        Object(_typeedit_app__WEBPACK_IMPORTED_MODULE_5__["default"])(font);
+        var index = recentFiles.findIndex(function (p) { return p.filePath === path_1; });
+        if (index >= 0)
+            recentFiles.splice(index, 1);
+        recentFiles.unshift({
+            filePath: path_1,
+            fontName: font.info.fontFamily + " " +
+                font.info.fontSubfamily,
+            thumbnail: Object(_typeedit_utils_preview__WEBPACK_IMPORTED_MODULE_12__["createFontPreview"])(font)
+        });
+        localStorage.setItem("recentFiles", JSON.stringify(recentFiles.slice(0, 8)));
+    }
+    catch (e) {
+        // Well, error!
+        console.error(e);
+        alert("Couldn't load the font file.");
+    }
+});
+document.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+});
 // load("test/Inter-Regular.otf").then(
 //     (font) => {
 //         app(font)

@@ -269,6 +269,18 @@ export class Viewport {
         )
     }
 
+    restrictAngles(start: Point, pos: Point, e: MouseEvent) {
+        const dx = Math.abs(pos.x - start.x)
+        const dy = Math.abs(pos.y - start.y)
+
+        if (e.shiftKey) {
+            if (dx > dy)
+                pos.y = start.y
+            else
+                pos.x = start.x
+        }
+    }
+
     disableAllGuides() {
         this.context.grids.forEach(
             g => g.active = false

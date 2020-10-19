@@ -128,6 +128,16 @@ export class BezierPenTool implements ITool {
         const rawPos = new Point()
         rawPos.copy(pos)
 
+        if (this.currentBezier && this.currentBezier.points.length) {
+            v.restrictAngles(
+                this.currentBezier.points[
+                    this.currentBezier.points.length - 1
+                ].base,
+                pos,
+                e
+            )
+        }
+
         v.nudgePoint(pos)
 
         if (
@@ -245,7 +255,7 @@ export class BezierPenTool implements ITool {
                 this.currentBezier = null
 
                 finalizeUndoContext("Close curve")
-            } else if (this.currentBezier.points.length === 1) {
+            } else if (this.currentBezier && this.currentBezier.points.length === 1) {
                 finalizeUndoContext("Create curve")
             } else {
                 this.currentPoint.determineType()
@@ -267,6 +277,8 @@ export class BezierPenTool implements ITool {
 
         this.handles = []
         this.guides = []
+
+        this.currentBezier = null
         
         for (let bezier of context.beziers) {
             for (let point of bezier.points) {

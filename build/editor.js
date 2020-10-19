@@ -3802,7 +3802,7 @@ var BezierPenTool = /** @class */ (function () {
         var _this = this;
         this.name = "Pen";
         this.icon = "beziertool";
-        this.accelerator = "KeyP";
+        this.accelerator = "KeyB";
         this.currentBezier = null;
         this.finalAdjustmentStage = false;
         this.handles = [];
@@ -3863,6 +3863,9 @@ var BezierPenTool = /** @class */ (function () {
         var pos = v.co.clientToWorld(x, y);
         var rawPos = new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"]();
         rawPos.copy(pos);
+        if (this.currentBezier && this.currentBezier.points.length) {
+            v.restrictAngles(this.currentBezier.points[this.currentBezier.points.length - 1].base, pos, e);
+        }
         v.nudgePoint(pos);
         if (e.type === "mousedown" && e.buttons & 1) {
             if (!this.currentBezier) {
@@ -3914,7 +3917,7 @@ var BezierPenTool = /** @class */ (function () {
                 this.currentBezier = null;
                 Object(_undo_history__WEBPACK_IMPORTED_MODULE_5__["finalizeUndoContext"])("Close curve");
             }
-            else if (this.currentBezier.points.length === 1) {
+            else if (this.currentBezier && this.currentBezier.points.length === 1) {
                 Object(_undo_history__WEBPACK_IMPORTED_MODULE_5__["finalizeUndoContext"])("Create curve");
             }
             else {
@@ -3933,6 +3936,7 @@ var BezierPenTool = /** @class */ (function () {
         this.glyph = context.glyph;
         this.handles = [];
         this.guides = [];
+        this.currentBezier = null;
         for (var _i = 0, _a = context.beziers; _i < _a.length; _i++) {
             var bezier = _a[_i];
             for (var _b = 0, _c = bezier.points; _b < _c.length; _b++) {
@@ -4483,20 +4487,10 @@ var HandleTool = /** @class */ (function () {
         }
         return curves;
     };
-    HandleTool.prototype.restrictAngles = function (pos, e) {
-        var dx = Math.abs(pos.x - this.moveStartPoint.x);
-        var dy = Math.abs(pos.y - this.moveStartPoint.y);
-        if (e.shiftKey) {
-            if (dx > dy)
-                pos.y = this.moveStartPoint.y;
-            else
-                pos.x = this.moveStartPoint.x;
-        }
-    };
     HandleTool.prototype.handleMouseEvent = function (v, e, x, y) {
         var pos = v.co.clientToWorld(x, y);
         if (this.moveStartPoint)
-            this.restrictAngles(pos, e);
+            v.restrictAngles(this.moveStartPoint, pos, e);
         if (e.type === "mousedown" && e.buttons & 1) {
             var handle = v.nearHandle(pos.x, pos.y);
             if (!handle) {
@@ -4926,6 +4920,16 @@ var Viewport = /** @class */ (function () {
         this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_3__["HorizontalGuide"] ||
             g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_3__["VerticalGuide"]; }));
         this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_point__WEBPACK_IMPORTED_MODULE_4__["PointGuide"]; }));
+    };
+    Viewport.prototype.restrictAngles = function (start, pos, e) {
+        var dx = Math.abs(pos.x - start.x);
+        var dy = Math.abs(pos.y - start.y);
+        if (e.shiftKey) {
+            if (dx > dy)
+                pos.y = start.y;
+            else
+                pos.x = start.x;
+        }
     };
     Viewport.prototype.disableAllGuides = function () {
         this.context.grids.forEach(function (g) { return g.active = false; });

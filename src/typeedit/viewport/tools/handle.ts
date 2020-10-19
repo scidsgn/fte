@@ -583,24 +583,12 @@ export class HandleTool implements ITool {
         return curves
     }
 
-    restrictAngles(pos: Point, e: MouseEvent) {
-        const dx = Math.abs(pos.x - this.moveStartPoint.x)
-        const dy = Math.abs(pos.y - this.moveStartPoint.y)
-
-        if (e.shiftKey) {
-            if (dx > dy)
-                pos.y = this.moveStartPoint.y
-            else
-                pos.x = this.moveStartPoint.x
-        }
-    }
-
     handleMouseEvent(v: Viewport, e: MouseEvent, x: number, y: number) {
         const pos = v.co.clientToWorld(
             x, y
         )
 
-        if (this.moveStartPoint) this.restrictAngles(pos, e)
+        if (this.moveStartPoint) v.restrictAngles(this.moveStartPoint, pos, e)
 
         if (
             e.type === "mousedown" && e.buttons & 1

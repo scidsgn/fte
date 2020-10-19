@@ -44,21 +44,30 @@
             </section>
             <aside>
                 <nav>
-                    <button title="Font">
+                    <button title="Font" data-tab="font">
                         <img src="res/icons/font.svg">
                     </button>
-                    <button title="Glyphs" class="active">
+                    <button title="Glyphs" class="active" data-tab="glyphs">
                         <img src="res/icons/glyphlist.svg">
                     </button>
-                    <button title="Metrics & snapping">
+                    <button title="Metrics & snapping" data-tab="metrics">
                         <img src="res/icons/metricgrid.svg">
                     </button>
-                    <button title="Modifiers">
+                    <button title="Modifiers" data-tab="modifiers">
                         <img src="res/icons/modifiers.svg">
                     </button>
                 </nav>
-                <div class="listContainer">
+                <div class="listContainer panelContents" data-tab="font">
+                    fonts
+                </div>
+                <div class="listContainer panelContents active" data-tab="glyphs">
                     <div class="glyphList"></div>
+                </div>
+                <div class="listContainer panelContents" data-tab="metrics">
+                    <input data-font-setting="gridMainGap" type="number" min="1" max="1000">
+                </div>
+                <div class="listContainer panelContents" data-tab="modifiers">
+                    modifiers
                 </div>
             </aside>
         </main>

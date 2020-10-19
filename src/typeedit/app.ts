@@ -11,6 +11,7 @@ import { prepareToolbar, setActiveTool } from "./ui/toolbar"
 import { Font } from "./font/font"
 import { RectangleTool } from "./viewport/tools/rectangle"
 import { EllipseTool } from "./viewport/tools/ellipse"
+import { addFontSettingsEvents, prepareFontSettings } from "./ui/panel"
 
 export let currentFont: Font = null
 
@@ -48,6 +49,9 @@ export default (font: Font) => {
     document.title = `${font.info.fontFamily} - FTE`
     prepareGlyphList(font)
 
+    prepareFontSettings()
+    addFontSettingsEvents()
+
     const context = new GlyphContext(
         "ABC".split("").map(
             chr => font.glyphs.find(g => g.codePoint === chr.codePointAt(0))
@@ -78,6 +82,8 @@ export default (font: Font) => {
         (viewport.domCanvas.height - 512) / 2
     )
     viewport.render()
+
+    font.on("settingChanged", () => viewport.render())
 
     if (currentKeybCallback)
         window.removeEventListener("keyup", currentKeybCallback)

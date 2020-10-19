@@ -167,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "aside {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  min-width: 320px;\n  width: 320px;\n  box-sizing: border-box;\n  border-left: 1px solid var(--var-panel-sep);\n  display: flex;\n  flex-direction: column; }\n  aside nav {\n    background: var(--var-panel-bg);\n    display: flex;\n    justify-content: center; }\n    aside nav button {\n      background: transparent;\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 400;\n      padding: 7px 20px;\n      border: none;\n      border-bottom: none;\n      outline: none; }\n      aside nav button.tool {\n        background: linear-gradient(transparent, #293844); }\n      aside nav button:hover {\n        background: var(--var-button-hover); }\n      aside nav button:active {\n        background: var(--var-button-active); }\n      aside nav button.active {\n        background: var(--var-panel-sep);\n        box-shadow: inset 0px -2px var(--var-text-fg); }\n  aside div.listContainer {\n    height: 0;\n    flex-grow: 1;\n    overflow-y: scroll; }\n  aside div.glyphList {\n    background: var(--var-panel-bg);\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 1px; }\n    aside div.glyphList div.glyph {\n      max-width: 75px;\n      background: var(--var-large-bg);\n      display: flex;\n      flex-direction: column; }\n      aside div.glyphList div.glyph.active label {\n        background: var(--var-glist-activeLabel);\n        color: #fff; }\n      aside div.glyphList div.glyph label {\n        background: var(--var-glist-label);\n        font-size: 9pt;\n        font-weight: 500;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        padding: 2px;\n        overflow: hidden; }\n      aside div.glyphList div.glyph canvas {\n        width: 100%;\n        height: auto; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/panel.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,MAAM;EACN,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,YAAY;EACZ,sBAAsB;EAEtB,2CAA2C;EAE3C,aAAa;EACb,sBAAsB,EAAA;EAZ1B;IAeQ,+BAA+B;IAE/B,aAAa;IACb,uBAAuB,EAAA;IAlB/B;MAqBY,uBAAuB;MACvB,yBAAyB;MAEzB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,aAAa,EAAA;MA/BzB;QAkCgB,iDAEC,EAAA;MApCjB;QAwCgB,mCAAmC,EAAA;MAxCnD;QA4CgB,oCAAoC,EAAA;MA5CpD;QAgDgB,gCAAgC;QAChC,6CAA6C,EAAA;EAjD7D;IAuDQ,SAAS;IAET,YAAY;IACZ,kBAAkB,EAAA;EA1D1B;IA8DQ,+BAA+B;IAE/B,aAAa;IACb,qCAAqC;IACrC,QAAQ,EAAA;IAlEhB;MAqEY,eAAe;MAEf,+BAA+B;MAE/B,aAAa;MACb,sBAAsB,EAAA;MA1ElC;QA6EgB,wCAAwC;QACxC,WAAW,EAAA;MA9E3B;QAkFgB,kCAAkC;QAElC,cAAc;QACd,gBAAgB;QAChB,kBAAkB;QAClB,mBAAmB;QACnB,uBAAuB;QAEvB,YAAY;QAEZ,gBAAgB,EAAA;MA5FhC;QAgGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["aside {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    min-width: 320px;\r\n    width: 320px;\r\n    box-sizing: border-box;\r\n\r\n    border-left: 1px solid var(--var-panel-sep);\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n            color: var(--var-text-fg);\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 400;\r\n\r\n            padding: 7px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            outline: none;\r\n\r\n            &.tool {\r\n                background: linear-gradient(\r\n                    transparent, rgb(41, 56, 68)\r\n                );\r\n            }\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n    \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-panel-sep);\r\n                box-shadow: inset 0px -2px var(--var-text-fg);\r\n            }\r\n        }\r\n    }\r\n\r\n    div.listContainer {\r\n        height: 0; // WTF???\r\n\r\n        flex-grow: 1;\r\n        overflow-y: scroll;\r\n    }\r\n\r\n    div.glyphList {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: grid;\r\n        grid-template-columns: repeat(4, 1fr);\r\n        gap: 1px;\r\n\r\n        div.glyph {\r\n            max-width: 75px;\r\n\r\n            background: var(--var-large-bg);\r\n\r\n            display: flex;\r\n            flex-direction: column;\r\n\r\n            &.active label {\r\n                background: var(--var-glist-activeLabel);\r\n                color: #fff;\r\n            }\r\n\r\n            label {\r\n                background: var(--var-glist-label);\r\n\r\n                font-size: 9pt;\r\n                font-weight: 500;\r\n                text-align: center;\r\n                white-space: nowrap;\r\n                text-overflow: ellipsis;\r\n                \r\n                padding: 2px;\r\n\r\n                overflow: hidden;\r\n            }\r\n\r\n            canvas {\r\n                width: 100%;\r\n                height: auto;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "aside {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  min-width: 320px;\n  width: 320px;\n  box-sizing: border-box;\n  border-left: 1px solid var(--var-panel-sep);\n  display: flex;\n  flex-direction: column; }\n  aside nav {\n    background: var(--var-panel-bg);\n    display: flex;\n    justify-content: center; }\n    aside nav button {\n      background: transparent;\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 400;\n      padding: 7px 20px;\n      border: none;\n      border-bottom: none;\n      outline: none; }\n      aside nav button.tool {\n        background: linear-gradient(transparent, #293844); }\n      aside nav button:hover {\n        background: var(--var-button-hover); }\n      aside nav button:active {\n        background: var(--var-button-active); }\n      aside nav button.active {\n        background: var(--var-panel-sep);\n        box-shadow: inset 0px -2px var(--var-text-fg); }\n  aside div.listContainer {\n    height: 0;\n    flex-grow: 1;\n    overflow-y: scroll; }\n  aside div.panelContents:not(.active) {\n    display: none; }\n  aside div.glyphList {\n    background: var(--var-panel-bg);\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 1px; }\n    aside div.glyphList div.glyph {\n      max-width: 75px;\n      background: var(--var-large-bg);\n      display: flex;\n      flex-direction: column; }\n      aside div.glyphList div.glyph.active label {\n        background: var(--var-glist-activeLabel);\n        color: #fff; }\n      aside div.glyphList div.glyph label {\n        background: var(--var-glist-label);\n        font-size: 9pt;\n        font-weight: 500;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        padding: 2px;\n        overflow: hidden; }\n      aside div.glyphList div.glyph canvas {\n        width: 100%;\n        height: auto; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/panel.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,MAAM;EACN,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,YAAY;EACZ,sBAAsB;EAEtB,2CAA2C;EAE3C,aAAa;EACb,sBAAsB,EAAA;EAZ1B;IAeQ,+BAA+B;IAE/B,aAAa;IACb,uBAAuB,EAAA;IAlB/B;MAqBY,uBAAuB;MACvB,yBAAyB;MAEzB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,aAAa,EAAA;MA/BzB;QAkCgB,iDAEC,EAAA;MApCjB;QAwCgB,mCAAmC,EAAA;MAxCnD;QA4CgB,oCAAoC,EAAA;MA5CpD;QAgDgB,gCAAgC;QAChC,6CAA6C,EAAA;EAjD7D;IAuDQ,SAAS;IAET,YAAY;IACZ,kBAAkB,EAAA;EA1D1B;IA8DQ,aAAa,EAAA;EA9DrB;IAkEQ,+BAA+B;IAE/B,aAAa;IACb,qCAAqC;IACrC,QAAQ,EAAA;IAtEhB;MAyEY,eAAe;MAEf,+BAA+B;MAE/B,aAAa;MACb,sBAAsB,EAAA;MA9ElC;QAiFgB,wCAAwC;QACxC,WAAW,EAAA;MAlF3B;QAsFgB,kCAAkC;QAElC,cAAc;QACd,gBAAgB;QAChB,kBAAkB;QAClB,mBAAmB;QACnB,uBAAuB;QAEvB,YAAY;QAEZ,gBAAgB,EAAA;MAhGhC;QAoGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["aside {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    min-width: 320px;\r\n    width: 320px;\r\n    box-sizing: border-box;\r\n\r\n    border-left: 1px solid var(--var-panel-sep);\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n            color: var(--var-text-fg);\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 400;\r\n\r\n            padding: 7px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            outline: none;\r\n\r\n            &.tool {\r\n                background: linear-gradient(\r\n                    transparent, rgb(41, 56, 68)\r\n                );\r\n            }\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n    \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-panel-sep);\r\n                box-shadow: inset 0px -2px var(--var-text-fg);\r\n            }\r\n        }\r\n    }\r\n\r\n    div.listContainer {\r\n        height: 0; // WTF???\r\n\r\n        flex-grow: 1;\r\n        overflow-y: scroll;\r\n    }\r\n\r\n    div.panelContents:not(.active) {\r\n        display: none;\r\n    }\r\n\r\n    div.glyphList {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: grid;\r\n        grid-template-columns: repeat(4, 1fr);\r\n        gap: 1px;\r\n\r\n        div.glyph {\r\n            max-width: 75px;\r\n\r\n            background: var(--var-large-bg);\r\n\r\n            display: flex;\r\n            flex-direction: column;\r\n\r\n            &.active label {\r\n                background: var(--var-glist-activeLabel);\r\n                color: #fff;\r\n            }\r\n\r\n            label {\r\n                background: var(--var-glist-label);\r\n\r\n                font-size: 9pt;\r\n                font-weight: 500;\r\n                text-align: center;\r\n                white-space: nowrap;\r\n                text-overflow: ellipsis;\r\n                \r\n                padding: 2px;\r\n\r\n                overflow: hidden;\r\n            }\r\n\r\n            canvas {\r\n                width: 100%;\r\n                height: auto;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -613,7 +613,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _typeedit_io_otfcc_import__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./typeedit/io/otfcc/import */ "./src/typeedit/io/otfcc/import.ts");
 /* harmony import */ var _typeedit_utils_preview__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./typeedit/utils/preview */ "./src/typeedit/utils/preview.ts");
 /* harmony import */ var _typeedit_io_io__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./typeedit/io/io */ "./src/typeedit/io/io.ts");
+/* harmony import */ var _typeedit_ui_panel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./typeedit/ui/panel */ "./src/typeedit/ui/panel.ts");
 var _a;
+
 
 
 
@@ -786,6 +788,7 @@ document.addEventListener("dragover", function (e) {
     e.preventDefault();
     e.stopPropagation();
 });
+Object(_typeedit_ui_panel__WEBPACK_IMPORTED_MODULE_14__["prepareTabbedPanel"])();
 // load("test/Inter-Regular.otf").then(
 //     (font) => {
 //         app(font)
@@ -816,6 +819,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_toolbar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ui/toolbar */ "./src/typeedit/ui/toolbar.ts");
 /* harmony import */ var _viewport_tools_rectangle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./viewport/tools/rectangle */ "./src/typeedit/viewport/tools/rectangle.ts");
 /* harmony import */ var _viewport_tools_ellipse__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./viewport/tools/ellipse */ "./src/typeedit/viewport/tools/ellipse.ts");
+/* harmony import */ var _ui_panel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ui/panel */ "./src/typeedit/ui/panel.ts");
 var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -823,6 +827,7 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
+
 
 
 
@@ -864,6 +869,8 @@ var currentKeybCallback = null;
     currentFont = font;
     document.title = font.info.fontFamily + " - FTE";
     Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_6__["prepareGlyphList"])(font);
+    Object(_ui_panel__WEBPACK_IMPORTED_MODULE_11__["prepareFontSettings"])();
+    Object(_ui_panel__WEBPACK_IMPORTED_MODULE_11__["addFontSettingsEvents"])();
     var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_2__["GlyphContext"]("ABC".split("").map(function (chr) { return font.glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 0);
     var viewport = Object(_ui_viewport__WEBPACK_IMPORTED_MODULE_4__["setupViewport"])(context);
     viewport.setTool(new _viewport_tools_handle__WEBPACK_IMPORTED_MODULE_1__["HandleTool"]());
@@ -876,6 +883,7 @@ var currentKeybCallback = null;
     viewport.updateViewportSize(false);
     viewport.co.translate((viewport.domCanvas.width - context.glyph.metrics.rightBearing) / 2, (viewport.domCanvas.height - 512) / 2);
     viewport.render();
+    font.on("settingChanged", function () { return viewport.render(); });
     if (currentKeybCallback)
         window.removeEventListener("keyup", currentKeybCallback);
     currentKeybCallback = function (e) {
@@ -927,6 +935,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _glyph__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./glyph */ "./src/typeedit/font/glyph.ts");
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! events */ "events");
 /* harmony import */ var events__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings/settings */ "./src/typeedit/settings/settings.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -949,6 +958,7 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
 };
 
 
+
 var Font = /** @class */ (function (_super) {
     __extends(Font, _super);
     function Font(info, metrics, glyphs) {
@@ -957,6 +967,8 @@ var Font = /** @class */ (function (_super) {
         _this.metrics = metrics;
         _this.glyphs = glyphs;
         _this.palette = [];
+        _this._fontSettings = {};
+        _this.settings = Object(_settings_settings__WEBPACK_IMPORTED_MODULE_2__["createFontSettings"])(_this, _this._fontSettings);
         _this.info = Object.assign({
             copyright: "",
             description: "",
@@ -2152,6 +2164,90 @@ function importFontData_otfcc(filePath) {
 
 /***/ }),
 
+/***/ "./src/typeedit/settings/defaults.ts":
+/*!*******************************************!*\
+  !*** ./src/typeedit/settings/defaults.ts ***!
+  \*******************************************/
+/*! exports provided: defaultAppSettings, defaultPerFontSettings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultAppSettings", function() { return defaultAppSettings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultPerFontSettings", function() { return defaultPerFontSettings; });
+var defaultAppSettings = {
+    theme: "dark"
+};
+var defaultPerFontSettings = {
+    gridActive: true,
+    gridMainGap: 10
+};
+
+
+/***/ }),
+
+/***/ "./src/typeedit/settings/proxy.ts":
+/*!****************************************!*\
+  !*** ./src/typeedit/settings/proxy.ts ***!
+  \****************************************/
+/*! exports provided: createSettingsProxy */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSettingsProxy", function() { return createSettingsProxy; });
+function createSettingsProxy(source, defaults, eventTarget) {
+    return new Proxy(defaults, {
+        get: function (o, key, recv) {
+            if (key in source)
+                return source[key];
+            return defaults[key];
+        },
+        set: function (o, key, value, recv) {
+            source[key] = value;
+            eventTarget.emit("settingChanged", key);
+            return true;
+        },
+        deleteProperty: function (o, key) {
+            if (key in source)
+                delete source[key];
+            return true;
+        }
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/typeedit/settings/settings.ts":
+/*!*******************************************!*\
+  !*** ./src/typeedit/settings/settings.ts ***!
+  \*******************************************/
+/*! exports provided: settingsEvent, settings, createFontSettings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settingsEvent", function() { return settingsEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFontSettings", function() { return createFontSettings; });
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! events */ "events");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _defaults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./defaults */ "./src/typeedit/settings/defaults.ts");
+/* harmony import */ var _proxy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./proxy */ "./src/typeedit/settings/proxy.ts");
+
+
+
+var appSettings = {};
+var settingsEvent = new events__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+var settings = Object(_proxy__WEBPACK_IMPORTED_MODULE_2__["createSettingsProxy"])(appSettings, _defaults__WEBPACK_IMPORTED_MODULE_1__["defaultAppSettings"], settingsEvent);
+function createFontSettings(font, settings) {
+    return Object(_proxy__WEBPACK_IMPORTED_MODULE_2__["createSettingsProxy"])(settings, _defaults__WEBPACK_IMPORTED_MODULE_1__["defaultPerFontSettings"], font);
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/styles/app.scss":
 /*!**************************************!*\
   !*** ./src/typeedit/styles/app.scss ***!
@@ -2478,6 +2574,65 @@ function prepareGlyphList(font) {
 
 /***/ }),
 
+/***/ "./src/typeedit/ui/panel.ts":
+/*!**********************************!*\
+  !*** ./src/typeedit/ui/panel.ts ***!
+  \**********************************/
+/*! exports provided: prepareTabbedPanel, prepareFontSettings, addFontSettingsEvents */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prepareTabbedPanel", function() { return prepareTabbedPanel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prepareFontSettings", function() { return prepareFontSettings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFontSettingsEvents", function() { return addFontSettingsEvents; });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./src/typeedit/app.ts");
+
+var preparedFontSettings = false;
+function prepareTabbedPanel() {
+    document.querySelectorAll("aside nav button").forEach(function (button) {
+        var tabId = button.getAttribute("data-tab");
+        button.addEventListener("click", function () {
+            var currentButton = document.querySelector("aside nav button.active");
+            var currentPanel = document.querySelector("aside div.panelContents.active");
+            if (currentButton && currentPanel) {
+                currentButton.classList.remove("active");
+                currentPanel.classList.remove("active");
+            }
+            document.querySelector("aside div.panelContents[data-tab=" + tabId + "]").classList.add("active");
+            button.classList.add("active");
+        });
+    });
+}
+function prepareFontSettings() {
+    if (preparedFontSettings)
+        return;
+    preparedFontSettings = true;
+    document.querySelectorAll("input[data-font-setting]").forEach(function (input) {
+        var key = input.getAttribute("data-font-setting");
+        if (!(key in _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings))
+            return;
+        input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
+        input.addEventListener("input", function () {
+            if (typeof _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] === "number")
+                _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = +input.value;
+            else if (typeof _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] === "string")
+                _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = input.value;
+        });
+    });
+}
+function addFontSettingsEvents() {
+    _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].on("settingChanged", function (key) {
+        var input = document.querySelector("input[data-font-setting=" + key + "]");
+        if (!input)
+            return;
+        input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
+    });
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/ui/theme.ts":
 /*!**********************************!*\
   !*** ./src/typeedit/ui/theme.ts ***!
@@ -2488,6 +2643,8 @@ function prepareGlyphList(font) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getThemeColor", function() { return getThemeColor; });
+/* harmony import */ var _settings_settings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../settings/settings */ "./src/typeedit/settings/settings.ts");
+
 var fteThemes = [
     {
         theme: "light",
@@ -2529,8 +2686,7 @@ var fteThemes = [
     }
 ];
 function getThemeColor(colorName) {
-    var _a;
-    var themeName = (_a = document.body.getAttribute("data-theme")) !== null && _a !== void 0 ? _a : "light";
+    var themeName = _settings_settings__WEBPACK_IMPORTED_MODULE_0__["settings"].theme;
     var theme = fteThemes.find(function (t) { return t.theme === themeName; });
     return theme[colorName];
 }
@@ -3001,7 +3157,7 @@ var GlyphContext = /** @class */ (function (_super) {
             new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandleType"].xHeight)
         ];
         this.grids = [
-            new _guides_grid__WEBPACK_IMPORTED_MODULE_4__["GridGuide"](16)
+            new _guides_grid__WEBPACK_IMPORTED_MODULE_4__["GridGuide"]()
         ];
         this.guides = [
             new _guides_line__WEBPACK_IMPORTED_MODULE_5__["HorizontalGuide"](0),
@@ -3259,16 +3415,24 @@ var CurveGuide = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GridGuide", function() { return GridGuide; });
-/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
-/* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/theme */ "./src/typeedit/ui/theme.ts");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./src/typeedit/app.ts");
+/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/theme */ "./src/typeedit/ui/theme.ts");
+
 
 
 var GridGuide = /** @class */ (function () {
-    function GridGuide(baseGap) {
-        this.baseGap = baseGap;
+    function GridGuide() {
         this.active = false;
-        this.lastPoint = new _geometry_point__WEBPACK_IMPORTED_MODULE_0__["Point"](-100000, -100000);
+        this.lastPoint = new _geometry_point__WEBPACK_IMPORTED_MODULE_1__["Point"](-100000, -100000);
     }
+    Object.defineProperty(GridGuide.prototype, "baseGap", {
+        get: function () {
+            return _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.gridMainGap;
+        },
+        enumerable: false,
+        configurable: true
+    });
     GridGuide.prototype.calculateGap = function (v) {
         var clientGap = this.baseGap * v.co.scaleFactor;
         while (clientGap < 12) {
@@ -3278,7 +3442,7 @@ var GridGuide = /** @class */ (function () {
     };
     GridGuide.prototype.nudge = function (v, pos, obj) {
         var gap = this.calculateGap(v);
-        var target = new _geometry_point__WEBPACK_IMPORTED_MODULE_0__["Point"](Math.round(pos.x / gap) * gap, Math.round(pos.y / gap) * gap);
+        var target = new _geometry_point__WEBPACK_IMPORTED_MODULE_1__["Point"](Math.round(pos.x / gap) * gap, Math.round(pos.y / gap) * gap);
         var delta = 8 / v.co.scaleFactor;
         this.active = false;
         this.lastPoint.x = NaN;
@@ -3292,7 +3456,7 @@ var GridGuide = /** @class */ (function () {
             this.active = true;
         }
         if (this.active) {
-            return new _geometry_point__WEBPACK_IMPORTED_MODULE_0__["Point"](isNaN(this.lastPoint.x) ? pos.x : target.x, isNaN(this.lastPoint.y) ? pos.y : target.y);
+            return new _geometry_point__WEBPACK_IMPORTED_MODULE_1__["Point"](isNaN(this.lastPoint.x) ? pos.x : target.x, isNaN(this.lastPoint.y) ? pos.y : target.y);
         }
         return null;
     };
@@ -3310,9 +3474,9 @@ var GridGuide = /** @class */ (function () {
             ctx.beginPath();
             ctx.moveTo(Math.round(client.x) + 0.5, -9999);
             ctx.lineTo(Math.round(client.x) + 0.5, 9999);
-            ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_1__["getThemeColor"])("guideGrid");
+            ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideGrid");
             if (this.active && this.lastPoint.x === x)
-                ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_1__["getThemeColor"])("guideActive");
+                ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideActive");
             ctx.stroke();
         }
         for (var y = minXY.y; y <= maxXY.y; y += gap) {
@@ -3320,9 +3484,9 @@ var GridGuide = /** @class */ (function () {
             ctx.beginPath();
             ctx.moveTo(-9999, Math.round(client.y) + 0.5);
             ctx.lineTo(9999, Math.round(client.y) + 0.5);
-            ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_1__["getThemeColor"])("guideGrid");
+            ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideGrid");
             if (this.active && this.lastPoint.y === y)
-                ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_1__["getThemeColor"])("guideActive");
+                ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideActive");
             ctx.stroke();
         }
     };

@@ -1,3 +1,4 @@
+import { currentFont } from "../../app";
 import { Point } from "../../geometry/point";
 import { getThemeColor } from "../../ui/theme";
 import { Viewport } from "../viewport";
@@ -9,9 +10,9 @@ export class GridGuide implements IGuide {
         -100000, -100000
     )
 
-    constructor(
-        private baseGap: number
-    ) {}
+    private get baseGap(): number {
+        return currentFont.settings.gridMainGap
+    }
 
     calculateGap(v: Viewport) {
         let clientGap = this.baseGap * v.co.scaleFactor

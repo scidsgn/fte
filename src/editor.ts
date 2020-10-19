@@ -18,6 +18,7 @@ import { createFontPreview } from "./typeedit/utils/preview"
 import { FTEX1 } from "./typeedit/io/ftex/ftex"
 import { SmartBuffer } from "smart-buffer"
 import { openFont, saveFont } from "./typeedit/io/io"
+import { prepareFontSettings, prepareTabbedPanel } from "./typeedit/ui/panel"
 
 console.log(remote)
 
@@ -258,6 +259,8 @@ document.addEventListener("dragover", (e) => {
     e.preventDefault()
     e.stopPropagation()
 }); 
+
+prepareTabbedPanel()
 
 // load("test/Inter-Regular.otf").then(
 //     (font) => {

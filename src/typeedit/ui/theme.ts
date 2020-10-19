@@ -1,3 +1,5 @@
+import { settings } from "../settings/settings"
+
 const fteThemes = [
     {
         theme: "light",
@@ -48,9 +50,7 @@ const fteThemes = [
 ]
 
 export function getThemeColor(colorName: string) {
-    const themeName = document.body.getAttribute(
-        "data-theme"
-    ) ?? "light"
+    const themeName = settings.theme
     const theme = fteThemes.find(
         t => t.theme === themeName
     ) as any

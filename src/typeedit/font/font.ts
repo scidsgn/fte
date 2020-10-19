@@ -1,5 +1,6 @@
 import { Glyph } from "./glyph"
 import { EventEmitter } from "events"
+import { createFontSettings, FontSettings } from "../settings/settings"
 
 export type FontMetrics = {
     ascender: number,
@@ -35,12 +36,17 @@ export type FontColors = {
 export class Font extends EventEmitter {
     public palette: FontColors[] = []
 
+    private _fontSettings: Partial<FontSettings> = {}
+    public settings: FontSettings
+
     constructor(
         public info: Partial<FontInfo>,
         public metrics: FontMetrics,
         public glyphs: Glyph[]
     ) {
         super()
+
+        this.settings = createFontSettings(this, this._fontSettings)
 
         this.info = Object.assign(
             {

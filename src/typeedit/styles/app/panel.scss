@@ -59,6 +59,10 @@ aside {
         overflow-y: scroll;
     }
 
+    div.panelContents:not(.active) {
+        display: none;
+    }
+
     div.glyphList {
         background: var(--var-panel-bg);
 

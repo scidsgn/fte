@@ -69,6 +69,22 @@ recentFiles.forEach(
                 welcome.style.display = "none"
                     
                 app(font)
+
+                const index = recentFiles.findIndex(
+                    p => p.filePath === file.filePath
+                )
+                if (index >= 0) {
+                    const item = recentFiles[index]
+                    recentFiles.splice(index, 1)
+                    recentFiles.unshift(item)
+
+                    localStorage.setItem(
+                        "recentFiles",
+                        JSON.stringify(
+                            recentFiles.slice(0, 8)
+                        )
+                    )
+                }
             }
         )
 
@@ -128,6 +144,11 @@ document.querySelectorAll("button.openFont").forEach(
                     welcome.style.display = "none"
 
                     app(font)
+
+                    const index = recentFiles.findIndex(
+                        p => p.filePath === result.filePaths[0]
+                    )
+                    if (index >= 0) recentFiles.splice(index, 1)
 
                     recentFiles.unshift(
                         {

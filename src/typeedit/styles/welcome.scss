@@ -3,10 +3,19 @@ article.welcome {
     justify-content: center;
     align-items: flex-start;
 
-    & > div {     
+    & > div {
         width: 350px;
+        height: calc(100vh - 80px);
 
         margin: 60px;
+
+        display: flex;
+        flex-direction: column;
+
+        div.recentFiles {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
 
         div.buttons {
             display: grid;

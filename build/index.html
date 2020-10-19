@@ -64,7 +64,19 @@
                     <div class="glyphList"></div>
                 </div>
                 <div class="listContainer panelContents" data-tab="metrics">
-                    <input data-font-setting="gridMainGap" type="number" min="1" max="1000">
+                    <div class="accordion">
+                        <header>Grid</header>
+                        <div class="grid g-2i">
+                            <div class="row">
+                                <label>Size:</label>
+                                <input data-font-setting="gridMainGap" type="number" min="1" max="1000">
+                            </div>
+                            <div class="row">
+                                <label>Div:</label>
+                                <input data-font-setting="gridSubdivisions" type="number" min="1" max="20">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="listContainer panelContents" data-tab="modifiers">
                     modifiers

@@ -2,6 +2,7 @@ import "./typeedit/styles/app.scss"
 import "./typeedit/styles/app/main.scss"
 import "./typeedit/styles/app/panel.scss"
 import "./typeedit/styles/app/editor.scss"
+import "./typeedit/styles/app/controls.scss"
 
 import "./typeedit/styles/welcome.scss"
 

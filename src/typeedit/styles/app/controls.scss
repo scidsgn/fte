@@ -1,0 +1,49 @@
+div.panelContents {
+    div.accordion {
+        padding: 4px 12px;
+
+        border-bottom: 1px solid var(--var-panel-sep);
+
+        & > header {
+            font-weight: 400;
+            text-transform: uppercase;
+            opacity: 0.7;
+
+            margin-bottom: 4px;
+        }
+    }
+
+    div.row {
+        display: flex;
+        align-items: center;
+
+        label {
+            margin-right: 8px;
+        }
+
+        & *:last-child {
+            flex-grow: 1;
+        }
+    }
+
+    div.grid {
+        display: grid;
+        gap: 8px;
+
+        &.g-2i {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    input[type=number] {
+        background: var(--var-panel-sep);
+        color: var(--var-text-fg);
+
+        font-family: "Inter";
+
+        outline: none;
+        border: 1px solid var(--var-text-fg);
+        border-radius: 4px;
+        padding: 4px 10px;
+    }
+}

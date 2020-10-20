@@ -1,3 +1,4 @@
+import { currentFont } from "../../app"
 import { Point } from "../../geometry/point"
 import { getThemeColor } from "../../ui/theme"
 import { IDrawableHandle } from "../drawable"
@@ -12,6 +13,9 @@ export class PointGuide implements IGuide {
     ) { }
 
     nudge(v: Viewport, pos: Point, obj?: any) {
+        if (!currentFont.settings.handleSnapEnabled)
+            return
+            
         if (
             obj && this.source &&
             (
@@ -69,7 +73,7 @@ export class HandleGuide extends PointGuide {
         super(handle.position)
     }
 
-    nudge(v: Viewport, pos: Point, obj?: any) {
+    nudge(v: Viewport, pos: Point, obj?: any) {            
         if (
             this.handle.selected ||
             this.handle === obj

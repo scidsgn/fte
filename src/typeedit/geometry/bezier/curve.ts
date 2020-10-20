@@ -14,6 +14,7 @@ export class BezierCurve extends EventEmitter {
     ) {
         super()
 
+        if (this.glyph) this.glyph.emit("modified")
         this.on("modified", () => {
             if (this.glyph) this.glyph.emit("modified")
         })

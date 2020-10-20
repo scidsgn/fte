@@ -15,6 +15,8 @@ aside {
     nav {
         background: var(--var-panel-bg);
 
+        box-shadow: inset 0px -1px var(--var-panel-sep);
+
         display: flex;
         justify-content: center;
 

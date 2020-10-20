@@ -1,18 +1,84 @@
 div.panelContents {
     div.accordion {
-        padding: 4px 12px;
-
         border-bottom: 1px solid var(--var-panel-sep);
 
         & > header {
+            background: var(--var-ctrl-header);
+            
+            font-size: 9pt;
             font-weight: 400;
             text-transform: uppercase;
-            opacity: 0.7;
+            letter-spacing: 1px;
 
-            margin-bottom: 4px;
+            padding: 4px 12px;
 
             display: flex;
+            align-items: center;
             justify-content: space-between;
+        }
+
+        & > div.content {
+            padding: 6px 12px;
+        }
+    }
+
+    input[type=checkbox] {
+        width: 20px;
+        height: 12px;
+        background: var(--var-large-bg);
+
+        border: 1px solid var(--var-panel-sep);
+        border-radius: 6px;
+        outline: none;
+
+        appearance: none;
+
+        &:checked {
+            background: var(--var-ctrl-focus);
+        }
+    }
+
+    div.buttonGroup {
+        display: flex;
+        
+        & > button {
+            background: var(--var-large-bg);
+            color: var(--var-text-fg);
+
+            border: none;
+            outline: none;
+            padding: 7px 8px;
+            border: 1px solid var(--var-panel-sep);
+            margin-bottom: 2px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+    
+            &:hover {
+                background: var(--var-button-hover);
+            }
+        
+            &:active {
+                background: var(--var-button-active);
+            }
+
+            &.active {
+                background: var(--var-ctrl-selected);
+            }
+
+            &:not(:last-child) {
+                border-right: none;
+            }
+
+            &:first-child {
+                border-radius: 4px 0px 0px 4px;
+            }
+
+            &:last-child {
+                border-radius: 0px 4px 4px 0px;
+            }
         }
     }
 
@@ -21,6 +87,8 @@ div.panelContents {
         align-items: center;
 
         label {
+            font-size: 9pt;
+            
             margin-right: 8px;
         }
 
@@ -31,7 +99,7 @@ div.panelContents {
 
     div.grid {
         display: grid;
-        gap: 8px;
+        gap: 12px;
 
         &.g-2i {
             grid-template-columns: repeat(2, 1fr);
@@ -39,13 +107,14 @@ div.panelContents {
     }
 
     input[type=number] {
-        background: var(--var-panel-sep);
+        background: var(--var-ctrl-editbg);
         color: var(--var-text-fg);
 
         font-family: "Inter";
+        font-size: 9pt;
 
         outline: none;
-        border: 1px solid var(--var-text-fg);
+        border: 1px solid var(--var-ctrl-border);
         border-radius: 4px;
         padding: 4px 10px;
     }

@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ":root {\n  --var-large-bg: #fff;\n  --var-panel-bg: #f6f6f6;\n  --var-text-fg: #000;\n  --var-panel-sep: #d1d1d1;\n  --var-button-bg: #fff;\n  --var-button-hover: #eee;\n  --var-button-active: #c0c0c0;\n  --var-glist-label: #fafafa;\n  --var-glist-activeLabel: #6d7599; }\n\nbody {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  user-select: none; }\n\n*::-webkit-scrollbar {\n  width: 12px; }\n\n*::-webkit-scrollbar-track {\n  background: var(--var-panel-sep); }\n\n*::-webkit-scrollbar-thumb {\n  background: var(--var-large-bg); }\n\nbody[data-theme=dark] {\n  --var-large-bg: #222;\n  --var-panel-bg: #161616;\n  --var-text-fg: #fff;\n  --var-panel-sep: #000;\n  --var-button-bg: #111;\n  --var-button-hover: #333;\n  --var-button-active: #555;\n  --var-glist-label: #2b2b2b;\n  --var-glist-activeLabel: #232c53; }\n  body[data-theme=dark] button > img {\n    filter: invert(1) hue-rotate(180deg); }\n  body[data-theme=dark] div.glyphList canvas {\n    filter: invert(1); }\n\nbutton > img {\n  width: 16px;\n  height: 16px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,wBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,4BAAoB;EAEpB,0BAAkB;EAClB,gCAAwB,EAAA;;AAG5B;EACI,+BAA+B;EAC/B,yBAAyB;EAEzB,oBAAoB;EAEpB,iBAAiB,EAAA;;AAGrB;EACI,WAAW,EAAA;;AAGf;EACI,gCAAgC,EAAA;;AAGpC;EACI,+BAA+B,EAAA;;AAGnC;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,qBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,yBAAoB;EAEpB,0BAAkB;EAClB,gCAAwB,EAAA;EAZ5B;IAeQ,oCAAoC,EAAA;EAf5C;IAmBQ,iBAAiB,EAAA;;AAIzB;EACI,WAAW;EACX,YAAY,EAAA","sourcesContent":[":root {\r\n    --var-large-bg: #fff;\r\n    --var-panel-bg: #f6f6f6;\r\n    --var-text-fg: #000;\r\n\r\n    --var-panel-sep: #d1d1d1;\r\n\r\n    --var-button-bg: #fff;\r\n    --var-button-hover: #eee;\r\n    --var-button-active: #c0c0c0;\r\n\r\n    --var-glist-label: #fafafa;\r\n    --var-glist-activeLabel: #6d7599;\r\n}\r\n\r\nbody {\r\n    background: var(--var-large-bg);\r\n    color: var(--var-text-fg);\r\n\r\n    font-family: \"Inter\";\r\n\r\n    user-select: none;\r\n}\r\n\r\n*::-webkit-scrollbar {\r\n    width: 12px;\r\n}\r\n\r\n*::-webkit-scrollbar-track {\r\n    background: var(--var-panel-sep);\r\n}\r\n\r\n*::-webkit-scrollbar-thumb {\r\n    background: var(--var-large-bg);\r\n}\r\n\r\nbody[data-theme=dark] {\r\n    --var-large-bg: #222;\r\n    --var-panel-bg: #161616;\r\n    --var-text-fg: #fff;\r\n\r\n    --var-panel-sep: #000;\r\n\r\n    --var-button-bg: #111;\r\n    --var-button-hover: #333;\r\n    --var-button-active: #555;\r\n\r\n    --var-glist-label: #2b2b2b;\r\n    --var-glist-activeLabel: #232c53;\r\n\r\n    button > img {\r\n        filter: invert(1) hue-rotate(180deg);\r\n    }\r\n\r\n    div.glyphList canvas {\r\n        filter: invert(1);\r\n    }\r\n}\r\n \r\nbutton > img {\r\n    width: 16px;\r\n    height: 16px;\r\n}\r\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, ":root {\n  --var-large-bg: #fff;\n  --var-panel-bg: #f6f6f6;\n  --var-text-fg: #000;\n  --var-panel-sep: #d1d1d1;\n  --var-button-bg: #fff;\n  --var-button-hover: #eee;\n  --var-button-active: #c0c0c0;\n  --var-glist-label: #fafafa;\n  --var-glist-activeLabel: #6d7599;\n  --var-ctrl-editbg: #eee;\n  --var-ctrl-border: #ccc;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #bbb;\n  --var-ctrl-header: #eee; }\n\nbody {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  user-select: none; }\n\n*::-webkit-scrollbar {\n  width: 12px; }\n\n*::-webkit-scrollbar-track {\n  background: var(--var-panel-sep); }\n\n*::-webkit-scrollbar-thumb {\n  background: var(--var-large-bg); }\n\nbody[data-theme=dark] {\n  --var-large-bg: #222;\n  --var-panel-bg: #161616;\n  --var-text-fg: #fff;\n  --var-panel-sep: #000;\n  --var-button-bg: #111;\n  --var-button-hover: #333;\n  --var-button-active: #555;\n  --var-glist-label: #2b2b2b;\n  --var-glist-activeLabel: #232c53;\n  --var-ctrl-editbg: #000;\n  --var-ctrl-border: #444;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #444;\n  --var-ctrl-header: #2b2b2b; }\n  body[data-theme=dark] button > img {\n    filter: invert(1) hue-rotate(180deg); }\n  body[data-theme=dark] div.glyphList canvas {\n    filter: invert(1); }\n\nbutton > img {\n  width: 16px;\n  height: 16px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,wBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,4BAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,uBAAkB,EAAA;;AAGtB;EACI,+BAA+B;EAC/B,yBAAyB;EAEzB,oBAAoB;EAEpB,iBAAiB,EAAA;;AAGrB;EACI,WAAW,EAAA;;AAGf;EACI,gCAAgC,EAAA;;AAGpC;EACI,+BAA+B,EAAA;;AAGnC;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,qBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,yBAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,0BAAkB,EAAA;EAlBtB;IAqBQ,oCAAoC,EAAA;EArB5C;IAyBQ,iBAAiB,EAAA;;AAIzB;EACI,WAAW;EACX,YAAY,EAAA","sourcesContent":[":root {\r\n    --var-large-bg: #fff;\r\n    --var-panel-bg: #f6f6f6;\r\n    --var-text-fg: #000;\r\n\r\n    --var-panel-sep: #d1d1d1;\r\n\r\n    --var-button-bg: #fff;\r\n    --var-button-hover: #eee;\r\n    --var-button-active: #c0c0c0;\r\n\r\n    --var-glist-label: #fafafa;\r\n    --var-glist-activeLabel: #6d7599;\r\n\r\n    --var-ctrl-editbg: #eee;\r\n    --var-ctrl-border: #ccc;\r\n    --var-ctrl-focus: #08f;\r\n    --var-ctrl-selected: #bbb;\r\n    --var-ctrl-header: #eee;\r\n}\r\n\r\nbody {\r\n    background: var(--var-large-bg);\r\n    color: var(--var-text-fg);\r\n\r\n    font-family: \"Inter\";\r\n\r\n    user-select: none;\r\n}\r\n\r\n*::-webkit-scrollbar {\r\n    width: 12px;\r\n}\r\n\r\n*::-webkit-scrollbar-track {\r\n    background: var(--var-panel-sep);\r\n}\r\n\r\n*::-webkit-scrollbar-thumb {\r\n    background: var(--var-large-bg);\r\n}\r\n\r\nbody[data-theme=dark] {\r\n    --var-large-bg: #222;\r\n    --var-panel-bg: #161616;\r\n    --var-text-fg: #fff;\r\n\r\n    --var-panel-sep: #000;\r\n\r\n    --var-button-bg: #111;\r\n    --var-button-hover: #333;\r\n    --var-button-active: #555;\r\n\r\n    --var-glist-label: #2b2b2b;\r\n    --var-glist-activeLabel: #232c53;\r\n\r\n    --var-ctrl-editbg: #000;\r\n    --var-ctrl-border: #444;\r\n    --var-ctrl-focus: #08f;\r\n    --var-ctrl-selected: #444;\r\n    --var-ctrl-header: #2b2b2b;\r\n\r\n    button > img {\r\n        filter: invert(1) hue-rotate(180deg);\r\n    }\r\n\r\n    div.glyphList canvas {\r\n        filter: invert(1);\r\n    }\r\n}\r\n \r\nbutton > img {\r\n    width: 16px;\r\n    height: 16px;\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "div.panelContents div.accordion {\n  padding: 4px 12px;\n  border-bottom: 1px solid var(--var-panel-sep); }\n  div.panelContents div.accordion > header {\n    font-weight: 400;\n    text-transform: uppercase;\n    opacity: 0.7;\n    margin-bottom: 4px;\n    display: flex;\n    justify-content: space-between; }\n\ndiv.panelContents div.row {\n  display: flex;\n  align-items: center; }\n  div.panelContents div.row label {\n    margin-right: 8px; }\n  div.panelContents div.row *:last-child {\n    flex-grow: 1; }\n\ndiv.panelContents div.grid {\n  display: grid;\n  gap: 8px; }\n  div.panelContents div.grid.g-2i {\n    grid-template-columns: repeat(2, 1fr); }\n\ndiv.panelContents input[type=number] {\n  background: var(--var-panel-sep);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  outline: none;\n  border: 1px solid var(--var-text-fg);\n  border-radius: 4px;\n  padding: 4px 10px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/controls.scss"],"names":[],"mappings":"AAAA;EAEQ,iBAAiB;EAEjB,6CAA6C,EAAA;EAJrD;IAOY,gBAAgB;IAChB,yBAAyB;IACzB,YAAY;IAEZ,kBAAkB;IAElB,aAAa;IACb,8BAA8B,EAAA;;AAd1C;EAmBQ,aAAa;EACb,mBAAmB,EAAA;EApB3B;IAuBY,iBAAiB,EAAA;EAvB7B;IA2BY,YAAY,EAAA;;AA3BxB;EAgCQ,aAAa;EACb,QAAQ,EAAA;EAjChB;IAoCY,qCAAqC,EAAA;;AApCjD;EAyCQ,gCAAgC;EAChC,yBAAyB;EAEzB,oBAAoB;EAEpB,aAAa;EACb,oCAAoC;EACpC,kBAAkB;EAClB,iBAAiB,EAAA","sourcesContent":["div.panelContents {\r\n    div.accordion {\r\n        padding: 4px 12px;\r\n\r\n        border-bottom: 1px solid var(--var-panel-sep);\r\n\r\n        & > header {\r\n            font-weight: 400;\r\n            text-transform: uppercase;\r\n            opacity: 0.7;\r\n\r\n            margin-bottom: 4px;\r\n\r\n            display: flex;\r\n            justify-content: space-between;\r\n        }\r\n    }\r\n\r\n    div.row {\r\n        display: flex;\r\n        align-items: center;\r\n\r\n        label {\r\n            margin-right: 8px;\r\n        }\r\n\r\n        & *:last-child {\r\n            flex-grow: 1;\r\n        }\r\n    }\r\n\r\n    div.grid {\r\n        display: grid;\r\n        gap: 8px;\r\n\r\n        &.g-2i {\r\n            grid-template-columns: repeat(2, 1fr);\r\n        }\r\n    }\r\n\r\n    input[type=number] {\r\n        background: var(--var-panel-sep);\r\n        color: var(--var-text-fg);\r\n\r\n        font-family: \"Inter\";\r\n\r\n        outline: none;\r\n        border: 1px solid var(--var-text-fg);\r\n        border-radius: 4px;\r\n        padding: 4px 10px;\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "div.panelContents div.accordion {\n  border-bottom: 1px solid var(--var-panel-sep); }\n  div.panelContents div.accordion > header {\n    background: var(--var-ctrl-header);\n    font-size: 9pt;\n    font-weight: 400;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    padding: 4px 12px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between; }\n  div.panelContents div.accordion > div.content {\n    padding: 6px 12px; }\n\ndiv.panelContents input[type=checkbox] {\n  width: 20px;\n  height: 12px;\n  background: var(--var-large-bg);\n  border: 1px solid var(--var-panel-sep);\n  border-radius: 6px;\n  outline: none;\n  appearance: none; }\n  div.panelContents input[type=checkbox]:checked {\n    background: var(--var-ctrl-focus); }\n\ndiv.panelContents div.buttonGroup {\n  display: flex; }\n  div.panelContents div.buttonGroup > button {\n    background: var(--var-large-bg);\n    color: var(--var-text-fg);\n    border: none;\n    outline: none;\n    padding: 7px 8px;\n    border: 1px solid var(--var-panel-sep);\n    margin-bottom: 2px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-grow: 1; }\n    div.panelContents div.buttonGroup > button:hover {\n      background: var(--var-button-hover); }\n    div.panelContents div.buttonGroup > button:active {\n      background: var(--var-button-active); }\n    div.panelContents div.buttonGroup > button.active {\n      background: var(--var-ctrl-selected); }\n    div.panelContents div.buttonGroup > button:not(:last-child) {\n      border-right: none; }\n    div.panelContents div.buttonGroup > button:first-child {\n      border-radius: 4px 0px 0px 4px; }\n    div.panelContents div.buttonGroup > button:last-child {\n      border-radius: 0px 4px 4px 0px; }\n\ndiv.panelContents div.row {\n  display: flex;\n  align-items: center; }\n  div.panelContents div.row label {\n    font-size: 9pt;\n    margin-right: 8px; }\n  div.panelContents div.row *:last-child {\n    flex-grow: 1; }\n\ndiv.panelContents div.grid {\n  display: grid;\n  gap: 12px; }\n  div.panelContents div.grid.g-2i {\n    grid-template-columns: repeat(2, 1fr); }\n\ndiv.panelContents input[type=number] {\n  background: var(--var-ctrl-editbg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  font-size: 9pt;\n  outline: none;\n  border: 1px solid var(--var-ctrl-border);\n  border-radius: 4px;\n  padding: 4px 10px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/controls.scss"],"names":[],"mappings":"AAAA;EAEQ,6CAA6C,EAAA;EAFrD;IAKY,kCAAkC;IAElC,cAAc;IACd,gBAAgB;IAChB,yBAAyB;IACzB,mBAAmB;IAEnB,iBAAiB;IAEjB,aAAa;IACb,mBAAmB;IACnB,8BAA8B,EAAA;EAhB1C;IAoBY,iBAAiB,EAAA;;AApB7B;EAyBQ,WAAW;EACX,YAAY;EACZ,+BAA+B;EAE/B,sCAAsC;EACtC,kBAAkB;EAClB,aAAa;EAEb,gBAAgB,EAAA;EAjCxB;IAoCY,iCAAiC,EAAA;;AApC7C;EAyCQ,aAAa,EAAA;EAzCrB;IA4CY,+BAA+B;IAC/B,yBAAyB;IAEzB,YAAY;IACZ,aAAa;IACb,gBAAgB;IAChB,sCAAsC;IACtC,kBAAkB;IAElB,aAAa;IACb,mBAAmB;IACnB,uBAAuB;IACvB,YAAY,EAAA;IAxDxB;MA2DgB,mCAAmC,EAAA;IA3DnD;MA+DgB,oCAAoC,EAAA;IA/DpD;MAmEgB,oCAAoC,EAAA;IAnEpD;MAuEgB,kBAAkB,EAAA;IAvElC;MA2EgB,8BAA8B,EAAA;IA3E9C;MA+EgB,8BAA8B,EAAA;;AA/E9C;EAqFQ,aAAa;EACb,mBAAmB,EAAA;EAtF3B;IAyFY,cAAc;IAEd,iBAAiB,EAAA;EA3F7B;IA+FY,YAAY,EAAA;;AA/FxB;EAoGQ,aAAa;EACb,SAAS,EAAA;EArGjB;IAwGY,qCAAqC,EAAA;;AAxGjD;EA6GQ,kCAAkC;EAClC,yBAAyB;EAEzB,oBAAoB;EACpB,cAAc;EAEd,aAAa;EACb,wCAAwC;EACxC,kBAAkB;EAClB,iBAAiB,EAAA","sourcesContent":["div.panelContents {\r\n    div.accordion {\r\n        border-bottom: 1px solid var(--var-panel-sep);\r\n\r\n        & > header {\r\n            background: var(--var-ctrl-header);\r\n            \r\n            font-size: 9pt;\r\n            font-weight: 400;\r\n            text-transform: uppercase;\r\n            letter-spacing: 1px;\r\n\r\n            padding: 4px 12px;\r\n\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & > div.content {\r\n            padding: 6px 12px;\r\n        }\r\n    }\r\n\r\n    input[type=checkbox] {\r\n        width: 20px;\r\n        height: 12px;\r\n        background: var(--var-large-bg);\r\n\r\n        border: 1px solid var(--var-panel-sep);\r\n        border-radius: 6px;\r\n        outline: none;\r\n\r\n        appearance: none;\r\n\r\n        &:checked {\r\n            background: var(--var-ctrl-focus);\r\n        }\r\n    }\r\n\r\n    div.buttonGroup {\r\n        display: flex;\r\n        \r\n        & > button {\r\n            background: var(--var-large-bg);\r\n            color: var(--var-text-fg);\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 7px 8px;\r\n            border: 1px solid var(--var-panel-sep);\r\n            margin-bottom: 2px;\r\n\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n            flex-grow: 1;\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n        \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-ctrl-selected);\r\n            }\r\n\r\n            &:not(:last-child) {\r\n                border-right: none;\r\n            }\r\n\r\n            &:first-child {\r\n                border-radius: 4px 0px 0px 4px;\r\n            }\r\n\r\n            &:last-child {\r\n                border-radius: 0px 4px 4px 0px;\r\n            }\r\n        }\r\n    }\r\n\r\n    div.row {\r\n        display: flex;\r\n        align-items: center;\r\n\r\n        label {\r\n            font-size: 9pt;\r\n            \r\n            margin-right: 8px;\r\n        }\r\n\r\n        & *:last-child {\r\n            flex-grow: 1;\r\n        }\r\n    }\r\n\r\n    div.grid {\r\n        display: grid;\r\n        gap: 12px;\r\n\r\n        &.g-2i {\r\n            grid-template-columns: repeat(2, 1fr);\r\n        }\r\n    }\r\n\r\n    input[type=number] {\r\n        background: var(--var-ctrl-editbg);\r\n        color: var(--var-text-fg);\r\n\r\n        font-family: \"Inter\";\r\n        font-size: 9pt;\r\n\r\n        outline: none;\r\n        border: 1px solid var(--var-ctrl-border);\r\n        border-radius: 4px;\r\n        padding: 4px 10px;\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -189,7 +189,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "aside {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  min-width: 320px;\n  width: 320px;\n  box-sizing: border-box;\n  border-left: 1px solid var(--var-panel-sep);\n  display: flex;\n  flex-direction: column; }\n  aside nav {\n    background: var(--var-panel-bg);\n    display: flex;\n    justify-content: center; }\n    aside nav button {\n      background: transparent;\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 400;\n      padding: 7px 20px;\n      border: none;\n      border-bottom: none;\n      outline: none; }\n      aside nav button.tool {\n        background: linear-gradient(transparent, #293844); }\n      aside nav button:hover {\n        background: var(--var-button-hover); }\n      aside nav button:active {\n        background: var(--var-button-active); }\n      aside nav button.active {\n        background: var(--var-panel-sep);\n        box-shadow: inset 0px -2px var(--var-text-fg); }\n  aside div.listContainer {\n    height: 0;\n    flex-grow: 1;\n    overflow-y: auto; }\n  aside div.panelContents:not(.active) {\n    display: none; }\n  aside div.glyphList {\n    background: var(--var-panel-bg);\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 1px; }\n    aside div.glyphList div.glyph {\n      max-width: 75px;\n      background: var(--var-large-bg);\n      display: flex;\n      flex-direction: column; }\n      aside div.glyphList div.glyph.active label {\n        background: var(--var-glist-activeLabel);\n        color: #fff; }\n      aside div.glyphList div.glyph label {\n        background: var(--var-glist-label);\n        font-size: 9pt;\n        font-weight: 500;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        padding: 2px;\n        overflow: hidden; }\n      aside div.glyphList div.glyph canvas {\n        width: 100%;\n        height: auto; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/panel.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,MAAM;EACN,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,YAAY;EACZ,sBAAsB;EAEtB,2CAA2C;EAE3C,aAAa;EACb,sBAAsB,EAAA;EAZ1B;IAeQ,+BAA+B;IAE/B,aAAa;IACb,uBAAuB,EAAA;IAlB/B;MAqBY,uBAAuB;MACvB,yBAAyB;MAEzB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,aAAa,EAAA;MA/BzB;QAkCgB,iDAEC,EAAA;MApCjB;QAwCgB,mCAAmC,EAAA;MAxCnD;QA4CgB,oCAAoC,EAAA;MA5CpD;QAgDgB,gCAAgC;QAChC,6CAA6C,EAAA;EAjD7D;IAuDQ,SAAS;IAET,YAAY;IACZ,gBAAgB,EAAA;EA1DxB;IA8DQ,aAAa,EAAA;EA9DrB;IAkEQ,+BAA+B;IAE/B,aAAa;IACb,qCAAqC;IACrC,QAAQ,EAAA;IAtEhB;MAyEY,eAAe;MAEf,+BAA+B;MAE/B,aAAa;MACb,sBAAsB,EAAA;MA9ElC;QAiFgB,wCAAwC;QACxC,WAAW,EAAA;MAlF3B;QAsFgB,kCAAkC;QAElC,cAAc;QACd,gBAAgB;QAChB,kBAAkB;QAClB,mBAAmB;QACnB,uBAAuB;QAEvB,YAAY;QAEZ,gBAAgB,EAAA;MAhGhC;QAoGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["aside {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    min-width: 320px;\r\n    width: 320px;\r\n    box-sizing: border-box;\r\n\r\n    border-left: 1px solid var(--var-panel-sep);\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n            color: var(--var-text-fg);\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 400;\r\n\r\n            padding: 7px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            outline: none;\r\n\r\n            &.tool {\r\n                background: linear-gradient(\r\n                    transparent, rgb(41, 56, 68)\r\n                );\r\n            }\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n    \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-panel-sep);\r\n                box-shadow: inset 0px -2px var(--var-text-fg);\r\n            }\r\n        }\r\n    }\r\n\r\n    div.listContainer {\r\n        height: 0; // WTF???\r\n\r\n        flex-grow: 1;\r\n        overflow-y: auto;\r\n    }\r\n\r\n    div.panelContents:not(.active) {\r\n        display: none;\r\n    }\r\n\r\n    div.glyphList {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: grid;\r\n        grid-template-columns: repeat(4, 1fr);\r\n        gap: 1px;\r\n\r\n        div.glyph {\r\n            max-width: 75px;\r\n\r\n            background: var(--var-large-bg);\r\n\r\n            display: flex;\r\n            flex-direction: column;\r\n\r\n            &.active label {\r\n                background: var(--var-glist-activeLabel);\r\n                color: #fff;\r\n            }\r\n\r\n            label {\r\n                background: var(--var-glist-label);\r\n\r\n                font-size: 9pt;\r\n                font-weight: 500;\r\n                text-align: center;\r\n                white-space: nowrap;\r\n                text-overflow: ellipsis;\r\n                \r\n                padding: 2px;\r\n\r\n                overflow: hidden;\r\n            }\r\n\r\n            canvas {\r\n                width: 100%;\r\n                height: auto;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "aside {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  min-width: 320px;\n  width: 320px;\n  box-sizing: border-box;\n  border-left: 1px solid var(--var-panel-sep);\n  display: flex;\n  flex-direction: column; }\n  aside nav {\n    background: var(--var-panel-bg);\n    box-shadow: inset 0px -1px var(--var-panel-sep);\n    display: flex;\n    justify-content: center; }\n    aside nav button {\n      background: transparent;\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 400;\n      padding: 7px 20px;\n      border: none;\n      border-bottom: none;\n      outline: none; }\n      aside nav button.tool {\n        background: linear-gradient(transparent, #293844); }\n      aside nav button:hover {\n        background: var(--var-button-hover); }\n      aside nav button:active {\n        background: var(--var-button-active); }\n      aside nav button.active {\n        background: var(--var-panel-sep);\n        box-shadow: inset 0px -2px var(--var-text-fg); }\n  aside div.listContainer {\n    height: 0;\n    flex-grow: 1;\n    overflow-y: auto; }\n  aside div.panelContents:not(.active) {\n    display: none; }\n  aside div.glyphList {\n    background: var(--var-panel-bg);\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 1px; }\n    aside div.glyphList div.glyph {\n      max-width: 75px;\n      background: var(--var-large-bg);\n      display: flex;\n      flex-direction: column; }\n      aside div.glyphList div.glyph.active label {\n        background: var(--var-glist-activeLabel);\n        color: #fff; }\n      aside div.glyphList div.glyph label {\n        background: var(--var-glist-label);\n        font-size: 9pt;\n        font-weight: 500;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        padding: 2px;\n        overflow: hidden; }\n      aside div.glyphList div.glyph canvas {\n        width: 100%;\n        height: auto; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/panel.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,MAAM;EACN,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,YAAY;EACZ,sBAAsB;EAEtB,2CAA2C;EAE3C,aAAa;EACb,sBAAsB,EAAA;EAZ1B;IAeQ,+BAA+B;IAE/B,+CAA+C;IAE/C,aAAa;IACb,uBAAuB,EAAA;IApB/B;MAuBY,uBAAuB;MACvB,yBAAyB;MAEzB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,aAAa,EAAA;MAjCzB;QAoCgB,iDAEC,EAAA;MAtCjB;QA0CgB,mCAAmC,EAAA;MA1CnD;QA8CgB,oCAAoC,EAAA;MA9CpD;QAkDgB,gCAAgC;QAChC,6CAA6C,EAAA;EAnD7D;IAyDQ,SAAS;IAET,YAAY;IACZ,gBAAgB,EAAA;EA5DxB;IAgEQ,aAAa,EAAA;EAhErB;IAoEQ,+BAA+B;IAE/B,aAAa;IACb,qCAAqC;IACrC,QAAQ,EAAA;IAxEhB;MA2EY,eAAe;MAEf,+BAA+B;MAE/B,aAAa;MACb,sBAAsB,EAAA;MAhFlC;QAmFgB,wCAAwC;QACxC,WAAW,EAAA;MApF3B;QAwFgB,kCAAkC;QAElC,cAAc;QACd,gBAAgB;QAChB,kBAAkB;QAClB,mBAAmB;QACnB,uBAAuB;QAEvB,YAAY;QAEZ,gBAAgB,EAAA;MAlGhC;QAsGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["aside {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    min-width: 320px;\r\n    width: 320px;\r\n    box-sizing: border-box;\r\n\r\n    border-left: 1px solid var(--var-panel-sep);\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: var(--var-panel-bg);\r\n\r\n        box-shadow: inset 0px -1px var(--var-panel-sep);\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n            color: var(--var-text-fg);\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 400;\r\n\r\n            padding: 7px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            outline: none;\r\n\r\n            &.tool {\r\n                background: linear-gradient(\r\n                    transparent, rgb(41, 56, 68)\r\n                );\r\n            }\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n    \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-panel-sep);\r\n                box-shadow: inset 0px -2px var(--var-text-fg);\r\n            }\r\n        }\r\n    }\r\n\r\n    div.listContainer {\r\n        height: 0; // WTF???\r\n\r\n        flex-grow: 1;\r\n        overflow-y: auto;\r\n    }\r\n\r\n    div.panelContents:not(.active) {\r\n        display: none;\r\n    }\r\n\r\n    div.glyphList {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: grid;\r\n        grid-template-columns: repeat(4, 1fr);\r\n        gap: 1px;\r\n\r\n        div.glyph {\r\n            max-width: 75px;\r\n\r\n            background: var(--var-large-bg);\r\n\r\n            display: flex;\r\n            flex-direction: column;\r\n\r\n            &.active label {\r\n                background: var(--var-glist-activeLabel);\r\n                color: #fff;\r\n            }\r\n\r\n            label {\r\n                background: var(--var-glist-label);\r\n\r\n                font-size: 9pt;\r\n                font-weight: 500;\r\n                text-align: center;\r\n                white-space: nowrap;\r\n                text-overflow: ellipsis;\r\n                \r\n                padding: 2px;\r\n\r\n                overflow: hidden;\r\n            }\r\n\r\n            canvas {\r\n                width: 100%;\r\n                height: auto;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -1109,6 +1109,7 @@ var Glyph = /** @class */ (function (_super) {
         _this.beziers.forEach(function (b) { return b.glyph = _this; });
         _this.finalBeziers = beziers; // for now
         _this.on("modified", function () {
+            console.log(43);
             _this.font.emit("glyphModified", _this);
         });
         return _this;
@@ -1179,6 +1180,8 @@ var BezierCurve = /** @class */ (function (_super) {
         _this.glyph = glyph;
         _this.points = [];
         _this.closed = true;
+        if (_this.glyph)
+            _this.glyph.emit("modified");
         _this.on("modified", function () {
             if (_this.glyph)
                 _this.glyph.emit("modified");
@@ -2206,7 +2209,10 @@ var defaultAppSettings = {
 var defaultPerFontSettings = {
     gridEnabled: true,
     gridMainGap: 64,
-    gridSubdivisions: 4
+    gridSubdivisions: 4,
+    curveSnapEnabled: true,
+    handleSnapEnabled: true,
+    metricsSnapEnabled: true
 };
 
 
@@ -2660,15 +2666,21 @@ function prepareTabbedPanel() {
     });
 }
 function prepareFontSettings() {
-    document.querySelectorAll("input[data-font-setting]").forEach(function (input) {
+    document.querySelectorAll("input[data-font-setting], button[data-font-setting]").forEach(function (input) {
         var key = input.getAttribute("data-font-setting");
         if (!(key in _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings))
             return;
-        if (input.type === "checkbox")
-            input.checked = !!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key];
-        else
-            input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
-        if (!preparedFontSettings) {
+        if (input instanceof HTMLInputElement) {
+            if (input.type === "checkbox")
+                input.checked = !!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key];
+            else
+                input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
+        }
+        else if (input instanceof HTMLButtonElement) {
+            input.classList.toggle("active", !!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key]);
+        }
+        if (!preparedFontSettings &&
+            input instanceof HTMLInputElement) {
             input.addEventListener("input", function () {
                 if (typeof _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] === "number")
                     _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = +input.value;
@@ -2678,18 +2690,28 @@ function prepareFontSettings() {
                     _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = input.checked;
             });
         }
+        else if (!preparedFontSettings &&
+            input instanceof HTMLButtonElement) {
+            input.addEventListener("click", function () {
+                _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = !input.classList.contains("active");
+            });
+        }
     });
     preparedFontSettings = true;
 }
 function addFontSettingsEvents() {
     _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].on("settingChanged", function (key) {
         var input = document.querySelector("input[data-font-setting=" + key + "]");
-        if (!input)
-            return;
-        if (input.type === "checkbox")
-            input.checked = !!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key];
-        else
-            input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
+        var button = document.querySelector("button[data-font-setting=" + key + "]");
+        if (input) {
+            if (input.type === "checkbox")
+                input.checked = !!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key];
+            else
+                input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
+        }
+        else if (button) {
+            button.classList.toggle("active", !!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key]);
+        }
     });
 }
 
@@ -3187,6 +3209,13 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 
 
 
@@ -3203,6 +3232,8 @@ var GlyphContext = /** @class */ (function (_super) {
         _this.currentIndex = currentIndex;
         _this.setupHandlesAndGuides();
         Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_1__["setActiveGlyph"])(_this.glyph);
+        _this.glyphModifiedHandler = function () { return _this.updateCurveGuides(); };
+        _this.glyph.on("modified", _this.glyphModifiedHandler);
         return _this;
     }
     Object.defineProperty(GlyphContext.prototype, "glyph", {
@@ -3233,16 +3264,14 @@ var GlyphContext = /** @class */ (function (_super) {
             new _guides_line__WEBPACK_IMPORTED_MODULE_5__["VerticalGuide"](function () { return _this.glyph.metrics.leftBearing; }, this.handles[0]),
             new _guides_line__WEBPACK_IMPORTED_MODULE_5__["VerticalGuide"](function () { return _this.glyph.metrics.rightBearing; }, this.handles[1])
         ];
-        this.beziers.forEach(function (b) { return _this.guides.push(new _guides_curve__WEBPACK_IMPORTED_MODULE_3__["CurveGuide"](b)); });
-        // for (let bezier of this.beziers) {
-        //     for (let point of bezier.points) {
-        //         this.guides.push(
-        //             new PointGuide(point.base)
-        //         )
-        //     }
-        // }
+        this.updateCurveGuides();
+    };
+    GlyphContext.prototype.updateCurveGuides = function () {
+        console.log(23);
+        this.guides = __spreadArrays(this.guides.slice(0, 6), this.beziers.map(function (b) { return new _guides_curve__WEBPACK_IMPORTED_MODULE_3__["CurveGuide"](b); }));
     };
     GlyphContext.prototype.setGlyphs = function (glyphs, currentIndex) {
+        this.glyph.off("modified", this.glyphModifiedHandler);
         if (glyphs)
             this.glyphs = glyphs;
         if (typeof currentIndex === "number")
@@ -3252,6 +3281,7 @@ var GlyphContext = /** @class */ (function (_super) {
         this.beziers = this.glyph.beziers;
         this.setupHandlesAndGuides();
         Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_1__["setActiveGlyph"])(this.glyph);
+        this.glyph.on("modified", this.glyphModifiedHandler);
     };
     GlyphContext.prototype.renderNonEditableGlyphs = function (v, ctx) {
         var currentOffset = 0;
@@ -3424,6 +3454,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! paper */ "paper");
 /* harmony import */ var paper__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(paper__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ui/theme */ "./src/typeedit/ui/theme.ts");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app */ "./src/typeedit/app.ts");
+
 
 
 
@@ -3436,6 +3468,8 @@ var CurveGuide = /** @class */ (function () {
         this.worldRender = true;
     }
     CurveGuide.prototype.nudge = function (v, pos, obj) {
+        if (!_app__WEBPACK_IMPORTED_MODULE_5__["currentFont"].settings.curveSnapEnabled)
+            return;
         if (obj instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_2__["BezierBasePointHandle"] &&
             obj.point.curve === this.source)
             return null;
@@ -3691,8 +3725,9 @@ var VerticalGuide = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointGuide", function() { return PointGuide; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HandleGuide", function() { return HandleGuide; });
-/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
-/* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/theme */ "./src/typeedit/ui/theme.ts");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./src/typeedit/app.ts");
+/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/theme */ "./src/typeedit/ui/theme.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -3708,12 +3743,15 @@ var __extends = (undefined && undefined.__extends) || (function () {
 })();
 
 
+
 var PointGuide = /** @class */ (function () {
     function PointGuide(source) {
         this.source = source;
         this.active = false;
     }
     PointGuide.prototype.nudge = function (v, pos, obj) {
+        if (!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.handleSnapEnabled)
+            return;
         if (obj && this.source &&
             (obj === this.source ||
                 ("position" in obj &&
@@ -3725,7 +3763,7 @@ var PointGuide = /** @class */ (function () {
         var clientTarget = v.co.worldToClient(this.source.x, this.source.y);
         if (Math.hypot(clientPos.x - clientTarget.x, clientPos.y - clientTarget.y) < 10) {
             this.active = true;
-            return new _geometry_point__WEBPACK_IMPORTED_MODULE_0__["Point"](this.source.x, this.source.y);
+            return new _geometry_point__WEBPACK_IMPORTED_MODULE_1__["Point"](this.source.x, this.source.y);
         }
         else {
             this.active = false;
@@ -3736,7 +3774,7 @@ var PointGuide = /** @class */ (function () {
         var clientPos = v.co.worldToClient(this.source.x, this.source.y);
         clientPos.x = Math.round(clientPos.x) + 0.5;
         clientPos.y = Math.round(clientPos.y) + 0.5;
-        ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_1__["getThemeColor"])("guideActive");
+        ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideActive");
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(clientPos.x - 16, clientPos.y);

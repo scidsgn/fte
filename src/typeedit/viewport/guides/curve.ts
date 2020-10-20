@@ -5,6 +5,7 @@ import { Viewport } from "../viewport"
 import { IGuide } from "./guide"
 import paper from "paper"
 import { getThemeColor } from "../../ui/theme"
+import { currentFont } from "../../app"
 
 export class CurveGuide implements IGuide {
     public active = false
@@ -15,6 +16,9 @@ export class CurveGuide implements IGuide {
     ) { }
 
     nudge(v: Viewport, pos: Point, obj?: any) {
+        if (!currentFont.settings.curveSnapEnabled)
+            return
+            
         if (
             obj instanceof BezierBasePointHandle &&
             obj.point.curve === this.source

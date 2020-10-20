@@ -29,20 +29,27 @@ export function prepareTabbedPanel() {
 
 export function prepareFontSettings() {    
     document.querySelectorAll(
-        "input[data-font-setting]"
+        "input[data-font-setting], button[data-font-setting]"
     ).forEach(
-        (input: HTMLInputElement) => {
+        (input: HTMLInputElement | HTMLButtonElement) => {
             const key: keyof FontSettings = input.getAttribute(
                 "data-font-setting"
             ) as (keyof FontSettings)
             if (!(key in currentFont.settings)) return
 
-            if (input.type === "checkbox")
-                input.checked = !!currentFont.settings[key]
-            else
-                input.value = currentFont.settings[key].toString()
+            if (input instanceof HTMLInputElement) {
+                if (input.type === "checkbox")
+                    input.checked = !!currentFont.settings[key]
+                else
+                    input.value = currentFont.settings[key].toString()
+            } else if (input instanceof HTMLButtonElement) {
+                input.classList.toggle("active", !!currentFont.settings[key])
+            }
 
-            if (!preparedFontSettings) {
+            if (
+                !preparedFontSettings &&
+                input instanceof HTMLInputElement
+            ) {
                 input.addEventListener("input", () => {
                     if (typeof currentFont.settings[key] === "number")
                         (currentFont.settings[key] as any) = +input.value
@@ -50,6 +57,13 @@ export function prepareFontSettings() {
                         (currentFont.settings[key] as any) = input.value
                     else if (typeof currentFont.settings[key] === "boolean")
                         (currentFont.settings[key] as any) = input.checked
+                })
+            } else if (
+                !preparedFontSettings &&
+                input instanceof HTMLButtonElement
+            ) {
+                input.addEventListener("click", () => {
+                    (currentFont.settings[key] as any) = !input.classList.contains("active")
                 })
             }
         }
@@ -63,11 +77,17 @@ export function addFontSettingsEvents() {
         const input = document.querySelector(
             `input[data-font-setting=${key}]`
         ) as HTMLInputElement
-        if (!input) return
+        const button = document.querySelector(
+            `button[data-font-setting=${key}]`
+        ) as HTMLInputElement
 
-        if (input.type === "checkbox")
-            input.checked = !!currentFont.settings[key]
-        else
-            input.value = currentFont.settings[key].toString()
+        if (input) {
+            if (input.type === "checkbox")
+                input.checked = !!currentFont.settings[key]
+            else
+                input.value = currentFont.settings[key].toString()
+        } else if (button) {
+            button.classList.toggle("active", !!currentFont.settings[key])
+        }
     })
 }

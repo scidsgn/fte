@@ -10,6 +10,8 @@ import { Viewport } from "../viewport";
 import { BezierContext } from "./bezier";
 
 export class GlyphContext extends BezierContext {
+    private glyphModifiedHandler: () => void
+
     constructor(
         public glyphs: Glyph[],
         public currentIndex: number
@@ -19,6 +21,9 @@ export class GlyphContext extends BezierContext {
         this.setupHandlesAndGuides()
         
         setActiveGlyph(this.glyph)
+
+        this.glyphModifiedHandler = () => this.updateCurveGuides()
+        this.glyph.on("modified", this.glyphModifiedHandler)
     }
 
     get glyph() {
@@ -48,22 +53,19 @@ export class GlyphContext extends BezierContext {
             new VerticalGuide(() => this.glyph.metrics.rightBearing, this.handles[1])
         ]
 
-        this.beziers.forEach(
-            b => this.guides.push(
-                new CurveGuide(b)
-            )
-        )
+        this.updateCurveGuides()
+    }
 
-        // for (let bezier of this.beziers) {
-        //     for (let point of bezier.points) {
-        //         this.guides.push(
-        //             new PointGuide(point.base)
-        //         )
-        //     }
-        // }
+    updateCurveGuides() {
+        this.guides = [
+            ...this.guides.slice(0, 6),
+            ...this.beziers.map(b => new CurveGuide(b))
+        ]
     }
 
     setGlyphs(glyphs?: Glyph[], currentIndex?: number) {
+        this.glyph.off("modified", this.glyphModifiedHandler)
+
         if (glyphs)
             this.glyphs = glyphs
         
@@ -76,6 +78,8 @@ export class GlyphContext extends BezierContext {
         this.setupHandlesAndGuides()
         
         setActiveGlyph(this.glyph)
+
+        this.glyph.on("modified", this.glyphModifiedHandler)
     }
 
     renderNonEditableGlyphs(v: Viewport, ctx: CanvasRenderingContext2D) {

@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "div.panelContents div.accordion {\n  padding: 4px 12px;\n  border-bottom: 1px solid var(--var-panel-sep); }\n  div.panelContents div.accordion > header {\n    font-weight: 400;\n    text-transform: uppercase;\n    opacity: 0.7;\n    margin-bottom: 4px; }\n\ndiv.panelContents div.row {\n  display: flex;\n  align-items: center; }\n  div.panelContents div.row label {\n    margin-right: 8px; }\n  div.panelContents div.row *:last-child {\n    flex-grow: 1; }\n\ndiv.panelContents div.grid {\n  display: grid;\n  gap: 8px; }\n  div.panelContents div.grid.g-2i {\n    grid-template-columns: repeat(2, 1fr); }\n\ndiv.panelContents input[type=number] {\n  background: var(--var-panel-sep);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  outline: none;\n  border: 1px solid var(--var-text-fg);\n  border-radius: 4px;\n  padding: 4px 10px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/controls.scss"],"names":[],"mappings":"AAAA;EAEQ,iBAAiB;EAEjB,6CAA6C,EAAA;EAJrD;IAOY,gBAAgB;IAChB,yBAAyB;IACzB,YAAY;IAEZ,kBAAkB,EAAA;;AAX9B;EAgBQ,aAAa;EACb,mBAAmB,EAAA;EAjB3B;IAoBY,iBAAiB,EAAA;EApB7B;IAwBY,YAAY,EAAA;;AAxBxB;EA6BQ,aAAa;EACb,QAAQ,EAAA;EA9BhB;IAiCY,qCAAqC,EAAA;;AAjCjD;EAsCQ,gCAAgC;EAChC,yBAAyB;EAEzB,oBAAoB;EAEpB,aAAa;EACb,oCAAoC;EACpC,kBAAkB;EAClB,iBAAiB,EAAA","sourcesContent":["div.panelContents {\r\n    div.accordion {\r\n        padding: 4px 12px;\r\n\r\n        border-bottom: 1px solid var(--var-panel-sep);\r\n\r\n        & > header {\r\n            font-weight: 400;\r\n            text-transform: uppercase;\r\n            opacity: 0.7;\r\n\r\n            margin-bottom: 4px;\r\n        }\r\n    }\r\n\r\n    div.row {\r\n        display: flex;\r\n        align-items: center;\r\n\r\n        label {\r\n            margin-right: 8px;\r\n        }\r\n\r\n        & *:last-child {\r\n            flex-grow: 1;\r\n        }\r\n    }\r\n\r\n    div.grid {\r\n        display: grid;\r\n        gap: 8px;\r\n\r\n        &.g-2i {\r\n            grid-template-columns: repeat(2, 1fr);\r\n        }\r\n    }\r\n\r\n    input[type=number] {\r\n        background: var(--var-panel-sep);\r\n        color: var(--var-text-fg);\r\n\r\n        font-family: \"Inter\";\r\n\r\n        outline: none;\r\n        border: 1px solid var(--var-text-fg);\r\n        border-radius: 4px;\r\n        padding: 4px 10px;\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "div.panelContents div.accordion {\n  padding: 4px 12px;\n  border-bottom: 1px solid var(--var-panel-sep); }\n  div.panelContents div.accordion > header {\n    font-weight: 400;\n    text-transform: uppercase;\n    opacity: 0.7;\n    margin-bottom: 4px;\n    display: flex;\n    justify-content: space-between; }\n\ndiv.panelContents div.row {\n  display: flex;\n  align-items: center; }\n  div.panelContents div.row label {\n    margin-right: 8px; }\n  div.panelContents div.row *:last-child {\n    flex-grow: 1; }\n\ndiv.panelContents div.grid {\n  display: grid;\n  gap: 8px; }\n  div.panelContents div.grid.g-2i {\n    grid-template-columns: repeat(2, 1fr); }\n\ndiv.panelContents input[type=number] {\n  background: var(--var-panel-sep);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  outline: none;\n  border: 1px solid var(--var-text-fg);\n  border-radius: 4px;\n  padding: 4px 10px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/controls.scss"],"names":[],"mappings":"AAAA;EAEQ,iBAAiB;EAEjB,6CAA6C,EAAA;EAJrD;IAOY,gBAAgB;IAChB,yBAAyB;IACzB,YAAY;IAEZ,kBAAkB;IAElB,aAAa;IACb,8BAA8B,EAAA;;AAd1C;EAmBQ,aAAa;EACb,mBAAmB,EAAA;EApB3B;IAuBY,iBAAiB,EAAA;EAvB7B;IA2BY,YAAY,EAAA;;AA3BxB;EAgCQ,aAAa;EACb,QAAQ,EAAA;EAjChB;IAoCY,qCAAqC,EAAA;;AApCjD;EAyCQ,gCAAgC;EAChC,yBAAyB;EAEzB,oBAAoB;EAEpB,aAAa;EACb,oCAAoC;EACpC,kBAAkB;EAClB,iBAAiB,EAAA","sourcesContent":["div.panelContents {\r\n    div.accordion {\r\n        padding: 4px 12px;\r\n\r\n        border-bottom: 1px solid var(--var-panel-sep);\r\n\r\n        & > header {\r\n            font-weight: 400;\r\n            text-transform: uppercase;\r\n            opacity: 0.7;\r\n\r\n            margin-bottom: 4px;\r\n\r\n            display: flex;\r\n            justify-content: space-between;\r\n        }\r\n    }\r\n\r\n    div.row {\r\n        display: flex;\r\n        align-items: center;\r\n\r\n        label {\r\n            margin-right: 8px;\r\n        }\r\n\r\n        & *:last-child {\r\n            flex-grow: 1;\r\n        }\r\n    }\r\n\r\n    div.grid {\r\n        display: grid;\r\n        gap: 8px;\r\n\r\n        &.g-2i {\r\n            grid-template-columns: repeat(2, 1fr);\r\n        }\r\n    }\r\n\r\n    input[type=number] {\r\n        background: var(--var-panel-sep);\r\n        color: var(--var-text-fg);\r\n\r\n        font-family: \"Inter\";\r\n\r\n        outline: none;\r\n        border: 1px solid var(--var-text-fg);\r\n        border-radius: 4px;\r\n        padding: 4px 10px;\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -2204,7 +2204,7 @@ var defaultAppSettings = {
     theme: "dark"
 };
 var defaultPerFontSettings = {
-    gridActive: true,
+    gridEnabled: true,
     gridMainGap: 64,
     gridSubdivisions: 4
 };
@@ -2660,28 +2660,36 @@ function prepareTabbedPanel() {
     });
 }
 function prepareFontSettings() {
-    if (preparedFontSettings)
-        return;
-    preparedFontSettings = true;
     document.querySelectorAll("input[data-font-setting]").forEach(function (input) {
         var key = input.getAttribute("data-font-setting");
         if (!(key in _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings))
             return;
-        input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
-        input.addEventListener("input", function () {
-            if (typeof _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] === "number")
-                _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = +input.value;
-            else if (typeof _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] === "string")
-                _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = input.value;
-        });
+        if (input.type === "checkbox")
+            input.checked = !!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key];
+        else
+            input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
+        if (!preparedFontSettings) {
+            input.addEventListener("input", function () {
+                if (typeof _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] === "number")
+                    _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = +input.value;
+                else if (typeof _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] === "string")
+                    _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = input.value;
+                else if (typeof _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] === "boolean")
+                    _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key] = input.checked;
+            });
+        }
     });
+    preparedFontSettings = true;
 }
 function addFontSettingsEvents() {
     _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].on("settingChanged", function (key) {
         var input = document.querySelector("input[data-font-setting=" + key + "]");
         if (!input)
             return;
-        input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
+        if (input.type === "checkbox")
+            input.checked = !!_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key];
+        else
+            input.value = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings[key].toString();
     });
 }
 
@@ -5017,6 +5025,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! electron */ "electron");
 /* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _utils_accelerator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/accelerator */ "./src/typeedit/utils/accelerator.ts");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app */ "./src/typeedit/app.ts");
 var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -5024,6 +5033,7 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
+
 
 
 
@@ -5174,15 +5184,18 @@ var Viewport = /** @class */ (function () {
             handle.render(this, this.ctx);
         }
     };
-    Viewport.prototype.nudgeToGuides = function (pos, obj, guides) {
+    Viewport.prototype.nudgeToGuides = function (pos, obj, guides, strict) {
         var _this = this;
+        if (strict === void 0) { strict = true; }
         var nudgedPoints = [];
         guides.forEach(function (g) {
             var point = g.nudge(_this, pos, obj);
-            if (point && pos.distance(point))
+            if (point && pos.distance(point) && strict)
                 nudgedPoints.push(point);
+            else if (point && !strict)
+                pos.copy(point);
         });
-        if (nudgedPoints.length) {
+        if (nudgedPoints.length && strict) {
             var distances = nudgedPoints.map(function (p) { return p.distance(pos); });
             var minDist = Math.min.apply(Math, distances);
             var minIndex = distances.indexOf(minDist);
@@ -5192,9 +5205,10 @@ var Viewport = /** @class */ (function () {
     Viewport.prototype.nudgePoint = function (pos, obj) {
         var guides = __spreadArrays(this.context.guides, this.tool.guides);
         this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_curve__WEBPACK_IMPORTED_MODULE_1__["CurveGuide"]; }));
-        this.nudgeToGuides(pos, obj, this.context.grids);
+        if (_app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.gridEnabled)
+            this.nudgeToGuides(pos, obj, this.context.grids);
         this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_3__["HorizontalGuide"] ||
-            g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_3__["VerticalGuide"]; }));
+            g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_3__["VerticalGuide"]; }), false);
         this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_point__WEBPACK_IMPORTED_MODULE_4__["PointGuide"]; }));
     };
     Viewport.prototype.restrictAngles = function (start, pos, e) {
@@ -5219,7 +5233,8 @@ var Viewport = /** @class */ (function () {
         this.co.transformCanvas(this.ctx);
         this.context.render(this, this.ctx);
         this.ctx.resetTransform();
-        this.context.grids.forEach(function (g) { return g.render(_this, _this.ctx); });
+        if (_app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.gridEnabled)
+            this.context.grids.forEach(function (g) { return g.render(_this, _this.ctx); });
         Array.apply(void 0, __spreadArrays(this.context.guides, this.tool.guides)).forEach(function (guide) {
             if (guide.active || guide instanceof _guides_grid__WEBPACK_IMPORTED_MODULE_2__["GridGuide"]) {
                 _this.ctx.resetTransform();

@@ -27,10 +27,7 @@ export function prepareTabbedPanel() {
     )
 }
 
-export function prepareFontSettings() {
-    if (preparedFontSettings) return
-    preparedFontSettings = true
-    
+export function prepareFontSettings() {    
     document.querySelectorAll(
         "input[data-font-setting]"
     ).forEach(
@@ -40,16 +37,25 @@ export function prepareFontSettings() {
             ) as (keyof FontSettings)
             if (!(key in currentFont.settings)) return
 
-            input.value = currentFont.settings[key].toString()
+            if (input.type === "checkbox")
+                input.checked = !!currentFont.settings[key]
+            else
+                input.value = currentFont.settings[key].toString()
 
-            input.addEventListener("input", () => {
-                if (typeof currentFont.settings[key] === "number")
-                    (currentFont.settings[key] as any) = +input.value
-                else if (typeof currentFont.settings[key] === "string")
-                    (currentFont.settings[key] as any) = input.value
-            })
+            if (!preparedFontSettings) {
+                input.addEventListener("input", () => {
+                    if (typeof currentFont.settings[key] === "number")
+                        (currentFont.settings[key] as any) = +input.value
+                    else if (typeof currentFont.settings[key] === "string")
+                        (currentFont.settings[key] as any) = input.value
+                    else if (typeof currentFont.settings[key] === "boolean")
+                        (currentFont.settings[key] as any) = input.checked
+                })
+            }
         }
     )
+    
+    preparedFontSettings = true
 }
 
 export function addFontSettingsEvents() {
@@ -59,6 +65,9 @@ export function addFontSettingsEvents() {
         ) as HTMLInputElement
         if (!input) return
 
-        input.value = currentFont.settings[key].toString()
+        if (input.type === "checkbox")
+            input.checked = !!currentFont.settings[key]
+        else
+            input.value = currentFont.settings[key].toString()
     })
 }

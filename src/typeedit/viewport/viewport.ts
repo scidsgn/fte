@@ -11,6 +11,7 @@ import { PointGuide } from "./guides/point"
 import { ITool } from "./tools/tool"
 import { MenuItem, MenuItemConstructorOptions, remote } from "electron"
 import { accelStringToElectron } from "../utils/accelerator"
+import { currentFont } from "../app"
 
 export class Viewport {
     public domCanvas = document.createElement("canvas")
@@ -225,18 +226,20 @@ export class Viewport {
         }
     }
 
-    nudgeToGuides(pos: Point, obj: any, guides: IGuide[]) {
+    nudgeToGuides(pos: Point, obj: any, guides: IGuide[], strict = true) {
         const nudgedPoints: Point[] = []
         
         guides.forEach(
             g => {
                 const point = g.nudge(this, pos, obj)
-                if (point && pos.distance(point))
+                if (point && pos.distance(point) && strict)
                     nudgedPoints.push(point)
+                else if (point && !strict)
+                    pos.copy(point)
             }
         )
 
-        if (nudgedPoints.length) {
+        if (nudgedPoints.length && strict) {
             const distances = nudgedPoints.map(p => p.distance(pos))
             const minDist = Math.min(...distances)
             const minIndex = distances.indexOf(minDist)
@@ -255,13 +258,17 @@ export class Viewport {
             pos, obj,
             guides.filter(g => g instanceof CurveGuide)
         )
-        this.nudgeToGuides(pos, obj, this.context.grids)
+
+        if (currentFont.settings.gridEnabled)
+            this.nudgeToGuides(pos, obj, this.context.grids)
+
         this.nudgeToGuides(
             pos, obj,
             guides.filter(
                 g => g instanceof HorizontalGuide ||
                      g instanceof VerticalGuide
-            )
+            ),
+            false
         )
         this.nudgeToGuides(
             pos, obj,
@@ -305,9 +312,11 @@ export class Viewport {
         
         this.ctx.resetTransform()
         
-        this.context.grids.forEach(
-            g => g.render(this, this.ctx)
-        )
+        
+        if (currentFont.settings.gridEnabled)
+            this.context.grids.forEach(
+                g => g.render(this, this.ctx)
+            )
 
         Array(
             ...this.context.guides,

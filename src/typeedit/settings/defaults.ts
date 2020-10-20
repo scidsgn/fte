@@ -3,7 +3,7 @@ export const defaultAppSettings = {
 }
 
 export const defaultPerFontSettings = {
-    gridActive: true,
+    gridEnabled: true,
     gridMainGap: 64,
     gridSubdivisions: 4
 }

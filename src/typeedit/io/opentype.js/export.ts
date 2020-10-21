@@ -67,7 +67,9 @@ export function exportFont_opentype(font: Font, targetFile: string) {
         ascender: (512 - font.metrics.ascender) * scaleFactor,
         descender: (512 - font.metrics.descender) * scaleFactor,
         glyphs: [
-            ...font.glyphs.map(g => new OTGlyph({
+            ...font.glyphs.filter(
+                g => g.finalBeziers.length
+            ).map(g => new OTGlyph({
                 name: g.name,
                 unicode: g.codePoint,
                 advanceWidth: Math.round((g.metrics.rightBearing - g.metrics.leftBearing) * scaleFactor),

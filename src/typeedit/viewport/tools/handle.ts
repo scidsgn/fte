@@ -588,7 +588,9 @@ export class HandleTool implements ITool {
             x, y
         )
 
-        if (this.moveStartPoint) v.restrictAngles(this.moveStartPoint, pos, e)
+        if (this.moveStartPoint) {
+            v.restrictAngles(this.moveStartPoint, pos, e)
+        }
 
         if (
             e.type === "mousedown" && e.buttons & 1
@@ -629,7 +631,8 @@ export class HandleTool implements ITool {
                 //         )
                 // }
 
-                this.moveStartPoint = pos
+                this.moveStartPoint = new Point()
+                this.moveStartPoint.copy(this.pivotHandle.position)
                 this.moveLastPoint = pos
             }
         } else if (

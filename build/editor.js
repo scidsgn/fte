@@ -1109,7 +1109,6 @@ var Glyph = /** @class */ (function (_super) {
         _this.beziers.forEach(function (b) { return b.glyph = _this; });
         _this.finalBeziers = beziers; // for now
         _this.on("modified", function () {
-            console.log(43);
             _this.font.emit("glyphModified", _this);
         });
         return _this;
@@ -1939,7 +1938,7 @@ function exportFont_opentype(font, targetFile) {
         unitsPerEm: (font.metrics.descender - font.metrics.ascender) * scaleFactor,
         ascender: (512 - font.metrics.ascender) * scaleFactor,
         descender: (512 - font.metrics.descender) * scaleFactor,
-        glyphs: __spreadArrays(font.glyphs.map(function (g) { return new opentype_js__WEBPACK_IMPORTED_MODULE_0__["Glyph"]({
+        glyphs: __spreadArrays(font.glyphs.filter(function (g) { return g.finalBeziers.length; }).map(function (g) { return new opentype_js__WEBPACK_IMPORTED_MODULE_0__["Glyph"]({
             name: g.name,
             unicode: g.codePoint,
             advanceWidth: Math.round((g.metrics.rightBearing - g.metrics.leftBearing) * scaleFactor),
@@ -3267,7 +3266,6 @@ var GlyphContext = /** @class */ (function (_super) {
         this.updateCurveGuides();
     };
     GlyphContext.prototype.updateCurveGuides = function () {
-        console.log(23);
         this.guides = __spreadArrays(this.guides.slice(0, 6), this.beziers.map(function (b) { return new _guides_curve__WEBPACK_IMPORTED_MODULE_3__["CurveGuide"](b); }));
     };
     GlyphContext.prototype.setGlyphs = function (glyphs, currentIndex) {
@@ -4417,14 +4415,16 @@ var EllipseTool = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HandleTool", function() { return HandleTool; });
 /* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
-/* harmony import */ var _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../undo/actions/array */ "./src/typeedit/undo/actions/array.ts");
-/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../undo/history */ "./src/typeedit/undo/history.ts");
-/* harmony import */ var _utils_lerp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/lerp */ "./src/typeedit/utils/lerp.ts");
-/* harmony import */ var _context_glyph__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
-/* harmony import */ var _guides_curve__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../guides/curve */ "./src/typeedit/viewport/guides/curve.ts");
-/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../guides/point */ "./src/typeedit/viewport/guides/point.ts");
-/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
-/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../undo/actions/array */ "./src/typeedit/undo/actions/array.ts");
+/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../undo/history */ "./src/typeedit/undo/history.ts");
+/* harmony import */ var _utils_lerp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/lerp */ "./src/typeedit/utils/lerp.ts");
+/* harmony import */ var _context_glyph__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
+/* harmony import */ var _guides_curve__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../guides/curve */ "./src/typeedit/viewport/guides/curve.ts");
+/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../guides/point */ "./src/typeedit/viewport/guides/point.ts");
+/* harmony import */ var _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../handles/bezierBasePoint */ "./src/typeedit/viewport/handles/bezierBasePoint.ts");
+/* harmony import */ var _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../handles/bezierControlPoint */ "./src/typeedit/viewport/handles/bezierControlPoint.ts");
+
 
 
 
@@ -4457,12 +4457,12 @@ var HandleTool = /** @class */ (function () {
                             var selected = _this.handles.filter(function (h) { return h.selected; });
                             var curves = _this.getSelectedCurves();
                             selected.forEach(function (handle) {
-                                if (!(handle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_7__["BezierBasePointHandle"]))
+                                if (!(handle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_8__["BezierBasePointHandle"]))
                                     return;
                                 var point = handle.point;
                                 var index = point.curve.points.indexOf(point);
                                 point.curve.points.splice(index, 1);
-                                var cpHandles = _this.handles.filter(function (h) { return h instanceof _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_8__["BezierControlPointHandle"] &&
+                                var cpHandles = _this.handles.filter(function (h) { return h instanceof _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_9__["BezierControlPointHandle"] &&
                                     h.point === point; }); // length always = 2
                                 var hIndex = _this.handles.indexOf(handle);
                                 _this.handles.splice(hIndex, 1);
@@ -4470,9 +4470,9 @@ var HandleTool = /** @class */ (function () {
                                 _this.handles.splice(cpIndex0, 1);
                                 var cpIndex1 = _this.handles.indexOf(cpHandles[1]);
                                 _this.handles.splice(cpIndex1, 1);
-                                _undo_history__WEBPACK_IMPORTED_MODULE_2__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayRemoveAction"](point.curve.points, point, index), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayRemoveAction"](_this.handles, handle, hIndex), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayRemoveAction"](_this.handles, cpHandles[0], cpIndex0), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayRemoveAction"](_this.handles, cpHandles[1], cpIndex1));
+                                _undo_history__WEBPACK_IMPORTED_MODULE_3__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayRemoveAction"](point.curve.points, point, index), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayRemoveAction"](_this.handles, handle, hIndex), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayRemoveAction"](_this.handles, cpHandles[0], cpIndex0), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayRemoveAction"](_this.handles, cpHandles[1], cpIndex1));
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Delete points");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Delete points");
                         }
                     },
                     {
@@ -4521,7 +4521,7 @@ var HandleTool = /** @class */ (function () {
                             for (var _i = 0, curves_1 = curves; _i < curves_1.length; _i++) {
                                 var bezier = curves_1[_i];
                                 var _loop_1 = function (point) {
-                                    var handle = _this.handles.find(function (h) { return h instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_7__["BezierBasePointHandle"] &&
+                                    var handle = _this.handles.find(function (h) { return h instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_8__["BezierBasePointHandle"] &&
                                         h.point === point; });
                                     if (handle)
                                         handle.selected = true;
@@ -4547,7 +4547,7 @@ var HandleTool = /** @class */ (function () {
                             _this.performCSGOperation(function (out, item) { return out.unite(item, {
                                 insert: false
                             }); });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Union");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Union");
                         }
                     },
                     {
@@ -4558,7 +4558,7 @@ var HandleTool = /** @class */ (function () {
                             _this.performCSGOperation(function (out, item) { return out.subtract(item, {
                                 insert: false
                             }); });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Difference");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Difference");
                         }
                     },
                     {
@@ -4569,7 +4569,7 @@ var HandleTool = /** @class */ (function () {
                             _this.performCSGOperation(function (out, item) { return out.intersect(item, {
                                 insert: false
                             }); });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Intersection");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Intersection");
                         }
                     },
                     {
@@ -4580,7 +4580,7 @@ var HandleTool = /** @class */ (function () {
                             _this.performCSGOperation(function (out, item) { return out.exclude(item, {
                                 insert: false
                             }); });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Exclusion");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Exclusion");
                         }
                     }
                 ]
@@ -4598,9 +4598,9 @@ var HandleTool = /** @class */ (function () {
                             var bbox = _this.getHandlesBBox(selected);
                             _this.addHandlesToUndoContext(selected);
                             selected.forEach(function (handle) {
-                                handle.position.x = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_3__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_3__["unlerp"])(handle.position.x, bbox.left, bbox.right), bbox.left, bbox.right);
+                                handle.position.x = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_4__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_4__["unlerp"])(handle.position.x, bbox.left, bbox.right), bbox.left, bbox.right);
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Flip X");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Flip X");
                         }
                     },
                     {
@@ -4612,9 +4612,9 @@ var HandleTool = /** @class */ (function () {
                             var bbox = _this.getHandlesBBox(selected);
                             _this.addHandlesToUndoContext(selected);
                             selected.forEach(function (handle) {
-                                handle.position.y = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_3__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_3__["unlerp"])(handle.position.y, bbox.top, bbox.bottom), bbox.top, bbox.bottom);
+                                handle.position.y = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_4__["lerp"])(1 - Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_4__["unlerp"])(handle.position.y, bbox.top, bbox.bottom), bbox.top, bbox.bottom);
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Flip Y");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Flip Y");
                         }
                     }
                 ]
@@ -4634,7 +4634,7 @@ var HandleTool = /** @class */ (function () {
                             selected.forEach(function (handle) {
                                 handle.position.x = bbox.left;
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Align to left");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Align to left");
                         }
                     },
                     {
@@ -4648,7 +4648,7 @@ var HandleTool = /** @class */ (function () {
                             selected.forEach(function (handle) {
                                 handle.position.x = bbox.right;
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Align to right");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Align to right");
                         }
                     },
                     {
@@ -4662,7 +4662,7 @@ var HandleTool = /** @class */ (function () {
                             selected.forEach(function (handle) {
                                 handle.position.y = bbox.top;
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Align to top");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Align to top");
                         }
                     },
                     {
@@ -4676,7 +4676,7 @@ var HandleTool = /** @class */ (function () {
                             selected.forEach(function (handle) {
                                 handle.position.y = bbox.bottom;
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Align to bottom");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Align to bottom");
                         }
                     },
                     {
@@ -4690,7 +4690,7 @@ var HandleTool = /** @class */ (function () {
                             selected.forEach(function (handle) {
                                 handle.position.y = (bbox.top + bbox.bottom) / 2;
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Align to center");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Align to center");
                         }
                     },
                     {
@@ -4704,7 +4704,7 @@ var HandleTool = /** @class */ (function () {
                             selected.forEach(function (handle) {
                                 handle.position.x = (bbox.left + bbox.right) / 2;
                             });
-                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Align to middle");
+                            Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Align to middle");
                         }
                     }
                 ]
@@ -4731,15 +4731,15 @@ var HandleTool = /** @class */ (function () {
                 if (referenceWinding_1 !== targetWinding)
                     c.reverse();
                 _this.beziers.splice(insertIdx, 0, c);
-                _undo_history__WEBPACK_IMPORTED_MODULE_2__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayAddAction"](_this.beziers, c, insertIdx));
+                _undo_history__WEBPACK_IMPORTED_MODULE_3__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayAddAction"](_this.beziers, c, insertIdx));
                 var gIdx = _this.guides.length;
-                var guide = new _guides_curve__WEBPACK_IMPORTED_MODULE_5__["CurveGuide"](c);
+                var guide = new _guides_curve__WEBPACK_IMPORTED_MODULE_6__["CurveGuide"](c);
                 _this.guides.push(guide);
-                _undo_history__WEBPACK_IMPORTED_MODULE_2__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayAddAction"](_this.guides, guide, gIdx));
+                _undo_history__WEBPACK_IMPORTED_MODULE_3__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayAddAction"](_this.guides, guide, gIdx));
                 c.points.forEach(function (p) {
                     var index = _this.handles.length;
-                    _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_8__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_8__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_7__["BezierBasePointHandle"](p));
-                    _undo_history__WEBPACK_IMPORTED_MODULE_2__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayAddAction"](_this.handles, _this.handles[index], index), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayAddAction"](_this.handles, _this.handles[index + 1], index + 1), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayAddAction"](_this.handles, _this.handles[index + 2], index + 2));
+                    _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_9__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_9__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_8__["BezierBasePointHandle"](p));
+                    _undo_history__WEBPACK_IMPORTED_MODULE_3__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayAddAction"](_this.handles, _this.handles[index], index), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayAddAction"](_this.handles, _this.handles[index + 1], index + 1), new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayAddAction"](_this.handles, _this.handles[index + 2], index + 2));
                 });
                 insertIdx++;
             });
@@ -4747,17 +4747,17 @@ var HandleTool = /** @class */ (function () {
         curves.forEach(function (c) {
             var index = _this.beziers.indexOf(c);
             _this.beziers.splice(index, 1);
-            _undo_history__WEBPACK_IMPORTED_MODULE_2__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayRemoveAction"](_this.beziers, c, index));
-            var gIdx = _this.guides.findIndex(function (g) { return g instanceof _guides_curve__WEBPACK_IMPORTED_MODULE_5__["CurveGuide"] &&
+            _undo_history__WEBPACK_IMPORTED_MODULE_3__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayRemoveAction"](_this.beziers, c, index));
+            var gIdx = _this.guides.findIndex(function (g) { return g instanceof _guides_curve__WEBPACK_IMPORTED_MODULE_6__["CurveGuide"] &&
                 g.source === c; });
             _this.guides.splice(gIdx, 1);
-            _undo_history__WEBPACK_IMPORTED_MODULE_2__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayRemoveAction"](_this.guides, _this.guides[gIdx], gIdx));
-            _this.handles.filter(function (h) { return (h instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_7__["BezierBasePointHandle"] ||
-                h instanceof _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_8__["BezierControlPointHandle"]) &&
+            _undo_history__WEBPACK_IMPORTED_MODULE_3__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayRemoveAction"](_this.guides, _this.guides[gIdx], gIdx));
+            _this.handles.filter(function (h) { return (h instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_8__["BezierBasePointHandle"] ||
+                h instanceof _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_9__["BezierControlPointHandle"]) &&
                 h.point.curve === c; }).forEach(function (h) {
                 var index = _this.handles.indexOf(h);
                 _this.handles.splice(index, 1);
-                _undo_history__WEBPACK_IMPORTED_MODULE_2__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_1__["ArrayRemoveAction"](_this.handles, h, index));
+                _undo_history__WEBPACK_IMPORTED_MODULE_3__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_2__["ArrayRemoveAction"](_this.handles, h, index));
             });
         });
         this.glyph.emit("modifier");
@@ -4766,7 +4766,7 @@ var HandleTool = /** @class */ (function () {
         handles.forEach(function (handle) {
             if (!("prepareUndo" in handle))
                 return;
-            handle.prepareUndo(_undo_history__WEBPACK_IMPORTED_MODULE_2__["undoContext"]);
+            handle.prepareUndo(_undo_history__WEBPACK_IMPORTED_MODULE_3__["undoContext"]);
         });
     };
     HandleTool.prototype.getHandlesBBox = function (handles) {
@@ -4802,7 +4802,7 @@ var HandleTool = /** @class */ (function () {
         for (var _i = 0, _a = this.handles; _i < _a.length; _i++) {
             var handle = _a[_i];
             if (!handle.selected ||
-                !(handle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_7__["BezierBasePointHandle"]))
+                !(handle instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_8__["BezierBasePointHandle"]))
                 continue;
             if (!curves.includes(handle.point.curve))
                 curves.push(handle.point.curve);
@@ -4811,8 +4811,9 @@ var HandleTool = /** @class */ (function () {
     };
     HandleTool.prototype.handleMouseEvent = function (v, e, x, y) {
         var pos = v.co.clientToWorld(x, y);
-        if (this.moveStartPoint)
+        if (this.moveStartPoint) {
             v.restrictAngles(this.moveStartPoint, pos, e);
+        }
         if (e.type === "mousedown" && e.buttons & 1) {
             var handle = v.nearHandle(pos.x, pos.y);
             if (!handle) {
@@ -4843,7 +4844,8 @@ var HandleTool = /** @class */ (function () {
                 //             v, pos, dPos, this.pivotHandle, e
                 //         )
                 // }
-                this.moveStartPoint = pos;
+                this.moveStartPoint = new _geometry_point__WEBPACK_IMPORTED_MODULE_1__["Point"]();
+                this.moveStartPoint.copy(this.pivotHandle.position);
                 this.moveLastPoint = pos;
             }
         }
@@ -4883,7 +4885,7 @@ var HandleTool = /** @class */ (function () {
             else {
                 v.disableAllGuides();
                 if (v.getSelectedHandles().length)
-                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_2__["finalizeUndoContext"])("Move points");
+                    Object(_undo_history__WEBPACK_IMPORTED_MODULE_3__["finalizeUndoContext"])("Move points");
             }
             this.moveStartPoint = null;
         }
@@ -4896,15 +4898,15 @@ var HandleTool = /** @class */ (function () {
     };
     HandleTool.prototype.updateContext = function (context) {
         var _this = this;
-        if (!(context instanceof _context_glyph__WEBPACK_IMPORTED_MODULE_4__["GlyphContext"]))
+        if (!(context instanceof _context_glyph__WEBPACK_IMPORTED_MODULE_5__["GlyphContext"]))
             return;
         this.glyph = context.glyph;
         this.beziers = context.beziers;
         this.handles = [];
         context.beziers.forEach(function (bezier) {
-            bezier.points.forEach(function (p) { return _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_8__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_8__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_7__["BezierBasePointHandle"](p)); });
+            bezier.points.forEach(function (p) { return _this.handles.push(new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_9__["BezierControlPointHandle"](p, p.before), new _handles_bezierControlPoint__WEBPACK_IMPORTED_MODULE_9__["BezierControlPointHandle"](p, p.after), new _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_8__["BezierBasePointHandle"](p)); });
         });
-        this.guides = this.handles.filter(function (h) { return h instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_7__["BezierBasePointHandle"]; }).map(function (h) { return new _guides_point__WEBPACK_IMPORTED_MODULE_6__["HandleGuide"](h); });
+        this.guides = this.handles.filter(function (h) { return h instanceof _handles_bezierBasePoint__WEBPACK_IMPORTED_MODULE_8__["BezierBasePointHandle"]; }).map(function (h) { return new _guides_point__WEBPACK_IMPORTED_MODULE_7__["HandleGuide"](h); });
     };
     return HandleTool;
 }());

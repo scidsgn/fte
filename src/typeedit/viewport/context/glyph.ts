@@ -58,7 +58,7 @@ export class GlyphContext extends BezierContext {
 
     updateCurveGuides() {
         this.guides = [
-            ...this.guides.slice(0, 6),
+            ...this.guides.slice(0, 7),
             ...this.beziers.map(b => new CurveGuide(b))
         ]
     }

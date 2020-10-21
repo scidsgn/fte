@@ -12,6 +12,7 @@ import { Font } from "./font/font"
 import { RectangleTool } from "./viewport/tools/rectangle"
 import { EllipseTool } from "./viewport/tools/ellipse"
 import { addFontSettingsEvents, prepareFontSettings } from "./ui/panel"
+import { prepareSnappingPanel } from "./ui/panel/snapping"
 
 export let currentFont: Font = null
 
@@ -51,6 +52,7 @@ export default (font: Font) => {
 
     prepareFontSettings()
     addFontSettingsEvents()
+    prepareSnappingPanel(font)
 
     const context = new GlyphContext(
         "ABC".split("").map(

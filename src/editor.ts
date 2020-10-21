@@ -45,6 +45,8 @@ if (existsSync("./otfcc_test")) {
 
 recentFiles.forEach(
     file => {
+        if (!file || !file.filePath) return
+        
         const btn = document.createElement("button")
         btn.classList.add("recent")
 

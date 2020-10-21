@@ -37,36 +37,42 @@ div.panelContents {
             background: var(--var-ctrl-focus);
         }
     }
+        
+    button {
+        background: var(--var-large-bg);
+        color: var(--var-text-fg);
+
+        border: none;
+        outline: none;
+        padding: 7px 8px;
+        border: 1px solid var(--var-panel-sep);
+        margin-bottom: 2px;
+        border-radius: 4px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background: var(--var-button-hover);
+        }
+    
+        &:active {
+            background: var(--var-button-active);
+        }
+
+        &.active {
+            background: var(--var-ctrl-selected);
+        }
+    }
 
     div.buttonGroup {
         display: flex;
-        
+
         & > button {
-            background: var(--var-large-bg);
-            color: var(--var-text-fg);
-
-            border: none;
-            outline: none;
-            padding: 7px 8px;
-            border: 1px solid var(--var-panel-sep);
-            margin-bottom: 2px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 0px;
+            
             flex-grow: 1;
-    
-            &:hover {
-                background: var(--var-button-hover);
-            }
-        
-            &:active {
-                background: var(--var-button-active);
-            }
-
-            &.active {
-                background: var(--var-ctrl-selected);
-            }
 
             &:not(:last-child) {
                 border-right: none;
@@ -75,7 +81,7 @@ div.panelContents {
             &:first-child {
                 border-radius: 4px 0px 0px 4px;
             }
-
+    
             &:last-child {
                 border-radius: 0px 4px 4px 0px;
             }

@@ -50,7 +50,7 @@
                     <button title="Glyphs" class="active" data-tab="glyphs">
                         <img src="res/icons/glyphlist.svg">
                     </button>
-                    <button title="Metrics & snapping" data-tab="metrics">
+                    <button title="Metrics & snapping" data-tab="snapping">
                         <img src="res/icons/metricgrid.svg">
                     </button>
                     <button title="Modifiers" data-tab="modifiers">
@@ -63,43 +63,7 @@
                 <div class="listContainer panelContents active" data-tab="glyphs">
                     <div class="glyphList"></div>
                 </div>
-                <div class="listContainer panelContents" data-tab="metrics">
-                    <div class="accordion">
-                        <header>
-                            Snapping
-                        </header>
-                        <div class="content">
-                            <div class="buttonGroup">
-                                <button class="active" data-font-setting="curveSnapEnabled">
-                                    <img src="res/icons/curvesnap.svg">
-                                </button>
-                                <button class="active" data-font-setting="handleSnapEnabled">
-                                    <img src="res/icons/handlesnap.svg">
-                                </button>
-                                <button class="active" data-font-setting="metricsSnapEnabled">
-                                    <img src="res/icons/metricsnap.svg">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion">
-                        <header>
-                            Grid
-                            <input data-font-setting="gridEnabled" type="checkbox">
-                        </header>
-                        <div class="content">
-                            <div class="grid g-2i">
-                                <div class="row">
-                                    <label>Size:</label>
-                                    <input data-font-setting="gridMainGap" type="number" min="1" max="1000">
-                                </div>
-                                <div class="row">
-                                    <label>Div:</label>
-                                    <input data-font-setting="gridSubdivisions" type="number" min="1" max="20">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="listContainer panelContents" data-tab="snapping">
                 </div>
                 <div class="listContainer panelContents" data-tab="modifiers">
                     modifiers

@@ -997,8 +997,8 @@ var Font = /** @class */ (function (_super) {
         _this.metrics = metrics;
         _this.glyphs = glyphs;
         _this.palette = [];
-        _this._fontSettings = {};
-        _this.settings = Object(_settings_settings__WEBPACK_IMPORTED_MODULE_2__["createFontSettings"])(_this, _this._fontSettings);
+        _this.ownSettings = {};
+        _this.settings = Object(_settings_settings__WEBPACK_IMPORTED_MODULE_2__["createFontSettings"])(_this, _this.ownSettings);
         _this.info = Object.assign({
             copyright: "",
             description: "",
@@ -1475,12 +1475,19 @@ var fontInfoIndices = [
     "trademark",
     "compatibleFullName"
 ];
+var FTESEntryType;
+(function (FTESEntryType) {
+    FTESEntryType[FTESEntryType["boolean"] = 1] = "boolean";
+    FTESEntryType[FTESEntryType["number"] = 2] = "number";
+    FTESEntryType[FTESEntryType["string"] = 3] = "string";
+})(FTESEntryType || (FTESEntryType = {}));
 var FTEX1 = /** @class */ (function () {
     function FTEX1() {
         this.ftexVersion = 1;
         this.outl = [];
         this.glph = [];
         this.fnam = [];
+        this.ftes = [];
         this.defl = [];
     }
     Object.defineProperty(FTEX1.prototype, "tableCount", {
@@ -1494,6 +1501,8 @@ var FTEX1 = /** @class */ (function () {
                 count++;
             if (this.glph.length)
                 count++;
+            if (this.ftes.length)
+                count++;
             return count;
         },
         enumerable: false,
@@ -1504,6 +1513,7 @@ var FTEX1 = /** @class */ (function () {
         ftex.setFMET(font);
         ftex.setGLPH(font);
         ftex.setFNAM(font);
+        ftex.setFTES(font);
         return ftex;
     };
     FTEX1.prototype.getFont = function () {
@@ -1514,6 +1524,9 @@ var FTEX1 = /** @class */ (function () {
         this.fnam.forEach(function (name) { return info[fontInfoIndices[name.index]] = name.name; });
         var metrics = this.fmet;
         var font = new _font_font__WEBPACK_IMPORTED_MODULE_2__["Font"](info, metrics, []);
+        this.ftes.forEach(function (s) {
+            font.settings[s.setting] = s.value;
+        });
         this.glph.forEach(function (g) {
             if (!g.outlines.length)
                 return;
@@ -1550,9 +1563,10 @@ var FTEX1 = /** @class */ (function () {
             this.encodeFNAM(buf);
         if (this.fmet)
             this.encodeFMET(buf);
-        // if (this.outl.length) this.encodeOUTL(buf)
         if (this.glph.length)
             this.encodeGLPH(buf);
+        if (this.ftes.length)
+            this.encodeFTES(buf);
         return buf;
     };
     FTEX1.prototype.decode = function (buffer) {
@@ -1566,7 +1580,7 @@ var FTEX1 = /** @class */ (function () {
             "OUTL", "GLPH", "FMET", "FNAM"
         ];
         var supportedTables = __spreadArrays(requiredTables, [
-            "DEFL"
+            "DEFL", "FTES"
         ]);
         for (var i = 0; i < numTables; i++) {
             var tag = buffer.readString(4, "ascii");
@@ -1606,6 +1620,9 @@ var FTEX1 = /** @class */ (function () {
                 break;
             case "GLPH":
                 this.decodeGLPH(buffer);
+                break;
+            case "FTES":
+                this.decodeFTES(buffer);
                 break;
         }
     };
@@ -1810,6 +1827,63 @@ var FTEX1 = /** @class */ (function () {
             this.fnam.push({
                 index: type,
                 name: str
+            });
+        }
+    };
+    // FTES - FTE Settings
+    FTEX1.prototype.setFTES = function (font) {
+        var _this = this;
+        Object.keys(font.ownSettings).forEach(function (key) {
+            var v = font.ownSettings[key];
+            if (typeof v === "boolean")
+                _this.ftes.push({
+                    setting: key,
+                    type: FTESEntryType.boolean,
+                    value: v
+                });
+            else if (typeof v === "number")
+                _this.ftes.push({
+                    setting: key,
+                    type: FTESEntryType.number,
+                    value: v
+                });
+            else if (typeof v === "string")
+                _this.ftes.push({
+                    setting: key,
+                    type: FTESEntryType.string,
+                    value: v
+                });
+        });
+    };
+    FTEX1.prototype.encodeFTES = function (buffer) {
+        var _this = this;
+        buffer.writeString("FTES", "ascii");
+        buffer.writeUInt16LE(this.ftes.length);
+        this.ftes.forEach(function (setting) {
+            _this.encodeVString(buffer, setting.setting);
+            buffer.writeUInt8(setting.type);
+            if (setting.type === FTESEntryType.boolean)
+                buffer.writeUInt8(setting.value ? 1 : 0);
+            else if (setting.type === FTESEntryType.number)
+                buffer.writeFloatLE(+setting.value);
+            else if (setting.type === FTESEntryType.string)
+                _this.encodeVString(buffer, setting.value.toString());
+        });
+    };
+    FTEX1.prototype.decodeFTES = function (buffer) {
+        var count = buffer.readUInt16LE();
+        for (var i = 0; i < count; i++) {
+            var setting = this.decodeVString(buffer);
+            var type = buffer.readUInt8();
+            var value = void 0;
+            if (type === FTESEntryType.boolean)
+                value = !!buffer.readUInt8();
+            else if (type === FTESEntryType.number)
+                value = buffer.readFloatLE();
+            else if (type === FTESEntryType.string)
+                value = this.decodeVString(buffer);
+            this.ftes.push({
+                setting: setting, type: type, value: value
             });
         }
     };

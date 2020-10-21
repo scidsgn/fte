@@ -36,7 +36,7 @@ export type FontColors = {
 export class Font extends EventEmitter {
     public palette: FontColors[] = []
 
-    private _fontSettings: Partial<FontSettings> = {}
+    public ownSettings: Partial<FontSettings> = {}
     public settings: FontSettings
 
     constructor(
@@ -46,7 +46,7 @@ export class Font extends EventEmitter {
     ) {
         super()
 
-        this.settings = createFontSettings(this, this._fontSettings)
+        this.settings = createFontSettings(this, this.ownSettings)
 
         this.info = Object.assign(
             {

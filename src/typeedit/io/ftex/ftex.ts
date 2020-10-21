@@ -5,6 +5,7 @@ import { Glyph } from "../../font/glyph"
 import { BezierCurve } from "../../geometry/bezier/curve"
 import { BezierPoint } from "../../geometry/bezier/point"
 import { Point } from "../../geometry/point"
+import { FontSettings } from "../../settings/settings"
 
 const fontInfoIndices = [
     "copyright",
@@ -49,6 +50,16 @@ type GLPHEntry = {
     outlines: number[]
 }
 
+enum FTESEntryType {
+    boolean = 1, number, string
+}
+
+type FTESEntry = {
+    setting: string,
+    type: FTESEntryType,
+    value: boolean | number | string
+}
+
 export class FTEX1 {
     protected ftexVersion = 1
 
@@ -60,6 +71,7 @@ export class FTEX1 {
         index: number,
         name: string
     }[] = []
+    protected ftes: FTESEntry[] = []
     protected defl: Buffer[] = []
 
     get tableCount() {
@@ -69,6 +81,7 @@ export class FTEX1 {
         if (this.fmet) count++
         if (this.outl.length) count++
         if (this.glph.length) count++
+        if (this.ftes.length) count++
 
         return count
     }
@@ -79,6 +92,7 @@ export class FTEX1 {
         ftex.setFMET(font)
         ftex.setGLPH(font)
         ftex.setFNAM(font)
+        ftex.setFTES(font)
 
         return ftex
     }
@@ -94,6 +108,12 @@ export class FTEX1 {
         const metrics = this.fmet
 
         const font = new Font(info, metrics, [])
+
+        this.ftes.forEach(
+            s => {
+                (font.settings as any)[s.setting] = s.value
+            }
+        )
 
         this.glph.forEach(
             g => {
@@ -158,8 +178,8 @@ export class FTEX1 {
 
         if (this.fnam.length) this.encodeFNAM(buf)
         if (this.fmet) this.encodeFMET(buf)
-        // if (this.outl.length) this.encodeOUTL(buf)
         if (this.glph.length) this.encodeGLPH(buf)
+        if (this.ftes.length) this.encodeFTES(buf)
 
         return buf
     }
@@ -179,7 +199,7 @@ export class FTEX1 {
             "OUTL", "GLPH", "FMET", "FNAM"
         ]
         const supportedTables = [
-            ...requiredTables, "DEFL"
+            ...requiredTables, "DEFL", "FTES"
         ]
 
         for (let i = 0; i < numTables; i++) {
@@ -235,6 +255,9 @@ export class FTEX1 {
                 break
             case "GLPH":
                 this.decodeGLPH(buffer)
+                break
+            case "FTES":
+                this.decodeFTES(buffer)
                 break
         }
     }
@@ -527,6 +550,75 @@ export class FTEX1 {
                     name: str
                 }
             )
+        }
+    }
+
+    // FTES - FTE Settings
+    setFTES(font: Font) {
+        Object.keys(font.ownSettings).forEach(
+            (key: keyof FontSettings)  => {
+                const v = font.ownSettings[key] as (boolean | number | string)
+
+                if (typeof v === "boolean")
+                    this.ftes.push({
+                        setting: key,
+                        type: FTESEntryType.boolean,
+                        value: v
+                    })
+                else if (typeof v === "number")
+                    this.ftes.push({
+                        setting: key,
+                        type: FTESEntryType.number,
+                        value: v
+                    })
+                else if (typeof v === "string")
+                    this.ftes.push({
+                        setting: key,
+                        type: FTESEntryType.string,
+                        value: v
+                    })
+            }
+        )
+    }
+
+    encodeFTES(buffer: SmartBuffer) {
+        buffer.writeString("FTES", "ascii")
+        buffer.writeUInt16LE(this.ftes.length)
+
+        this.ftes.forEach(
+            setting => {
+                this.encodeVString(buffer, setting.setting)
+                buffer.writeUInt8(setting.type)
+
+                if (setting.type === FTESEntryType.boolean)
+                    buffer.writeUInt8(setting.value ? 1 : 0)
+                else if (setting.type === FTESEntryType.number)
+                    buffer.writeFloatLE(+setting.value)
+                else if (setting.type === FTESEntryType.string)
+                    this.encodeVString(buffer, setting.value.toString())
+            }
+        )
+    }
+
+    decodeFTES(buffer: SmartBuffer) {
+        const count = buffer.readUInt16LE()
+
+        for (let i = 0; i < count; i++) {
+            const setting = this.decodeVString(buffer)
+            const type: FTESEntryType = buffer.readUInt8()
+
+            let value: (boolean | number | string)
+
+            if (type === FTESEntryType.boolean)
+                value = !!buffer.readUInt8()
+            else if (type === FTESEntryType.number)
+                value = buffer.readFloatLE()
+            else if (type === FTESEntryType.string)
+                value = this.decodeVString(buffer)
+
+            this.ftes.push({
+                setting, type, value
+            })
         }
     }
 }

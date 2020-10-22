@@ -39,8 +39,10 @@ export class Font extends EventEmitter {
     public ownSettings: Partial<FontSettings> = {}
     public settings: FontSettings
 
+    public info: FontInfo
+
     constructor(
-        public info: Partial<FontInfo>,
+        info: Partial<FontInfo>,
         public metrics: FontMetrics,
         public glyphs: Glyph[]
     ) {
@@ -66,7 +68,7 @@ export class Font extends EventEmitter {
                 version: "",
                 trademark: "",
                 compatibleFullName: ""
-            }, this.info
+            }, info
         )
     }
 

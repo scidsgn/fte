@@ -34,7 +34,7 @@ export class BezierPenTool implements ITool {
             subactions: [
                 {
                     name: "Delete last point",
-                    icon: "delete",
+                    icon: "deletelastpoint",
                     accelerator: "Delete",
                     handler: () => {
                         if (!this.currentBezier) return

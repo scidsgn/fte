@@ -1,4 +1,10 @@
 div.panelContents {
+    div.content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
     div.accordion {
         border-bottom: 1px solid var(--var-panel-sep);
 
@@ -88,13 +94,15 @@ div.panelContents {
         }
     }
 
+    label {
+        font-size: 10pt;
+    }
+
     div.row {
         display: flex;
         align-items: center;
 
         label {
-            font-size: 9pt;
-            
             margin-right: 8px;
         }
 
@@ -112,12 +120,13 @@ div.panelContents {
         }
     }
 
-    input[type=number] {
+    input[type=number],
+    input[type=text] {
         background: var(--var-ctrl-editbg);
         color: var(--var-text-fg);
 
         font-family: "Inter";
-        font-size: 9pt;
+        font-size: 10pt;
 
         outline: none;
         border: 1px solid var(--var-ctrl-border);

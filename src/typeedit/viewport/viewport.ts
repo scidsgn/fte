@@ -287,7 +287,10 @@ export class Viewport {
         const r = pos.distance(start)
         const angle = pos.angle(start)
 
-        if (e.shiftKey) {
+        if (
+            e.shiftKey &&
+            currentFont.settings.constructionEnabled
+        ) {
             let add180 = false
             let nrmAngle = angle * (180 / Math.PI)
             if (nrmAngle < 0) {

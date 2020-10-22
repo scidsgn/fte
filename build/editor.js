@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "div.panelContents div.accordion {\n  border-bottom: 1px solid var(--var-panel-sep); }\n  div.panelContents div.accordion > header {\n    background: var(--var-ctrl-header);\n    font-size: 9pt;\n    font-weight: 400;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    padding: 4px 12px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between; }\n  div.panelContents div.accordion > div.content {\n    padding: 6px 12px; }\n\ndiv.panelContents input[type=checkbox] {\n  width: 20px;\n  height: 12px;\n  background: var(--var-large-bg);\n  border: 1px solid var(--var-panel-sep);\n  border-radius: 6px;\n  outline: none;\n  appearance: none; }\n  div.panelContents input[type=checkbox]:checked {\n    background: var(--var-ctrl-focus); }\n\ndiv.panelContents button {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  border: none;\n  outline: none;\n  padding: 7px 8px;\n  border: 1px solid var(--var-panel-sep);\n  margin-bottom: 2px;\n  border-radius: 4px;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n  div.panelContents button:hover {\n    background: var(--var-button-hover); }\n  div.panelContents button:active {\n    background: var(--var-button-active); }\n  div.panelContents button.active {\n    background: var(--var-ctrl-selected); }\n\ndiv.panelContents div.buttonGroup {\n  display: flex; }\n  div.panelContents div.buttonGroup > button {\n    border-radius: 0px;\n    flex-grow: 1; }\n    div.panelContents div.buttonGroup > button:not(:last-child) {\n      border-right: none; }\n    div.panelContents div.buttonGroup > button:first-child {\n      border-radius: 4px 0px 0px 4px; }\n    div.panelContents div.buttonGroup > button:last-child {\n      border-radius: 0px 4px 4px 0px; }\n\ndiv.panelContents div.row {\n  display: flex;\n  align-items: center; }\n  div.panelContents div.row label {\n    font-size: 9pt;\n    margin-right: 8px; }\n  div.panelContents div.row *:last-child {\n    flex-grow: 1; }\n\ndiv.panelContents div.grid {\n  display: grid;\n  gap: 12px; }\n  div.panelContents div.grid.g-2i {\n    grid-template-columns: repeat(2, 1fr); }\n\ndiv.panelContents input[type=number] {\n  background: var(--var-ctrl-editbg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  font-size: 9pt;\n  outline: none;\n  border: 1px solid var(--var-ctrl-border);\n  border-radius: 4px;\n  padding: 4px 10px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/controls.scss"],"names":[],"mappings":"AAAA;EAEQ,6CAA6C,EAAA;EAFrD;IAKY,kCAAkC;IAElC,cAAc;IACd,gBAAgB;IAChB,yBAAyB;IACzB,mBAAmB;IAEnB,iBAAiB;IAEjB,aAAa;IACb,mBAAmB;IACnB,8BAA8B,EAAA;EAhB1C;IAoBY,iBAAiB,EAAA;;AApB7B;EAyBQ,WAAW;EACX,YAAY;EACZ,+BAA+B;EAE/B,sCAAsC;EACtC,kBAAkB;EAClB,aAAa;EAEb,gBAAgB,EAAA;EAjCxB;IAoCY,iCAAiC,EAAA;;AApC7C;EAyCQ,+BAA+B;EAC/B,yBAAyB;EAEzB,YAAY;EACZ,aAAa;EACb,gBAAgB;EAChB,sCAAsC;EACtC,kBAAkB;EAClB,kBAAkB;EAElB,aAAa;EACb,mBAAmB;EACnB,uBAAuB,EAAA;EArD/B;IAwDY,mCAAmC,EAAA;EAxD/C;IA4DY,oCAAoC,EAAA;EA5DhD;IAgEY,oCAAoC,EAAA;;AAhEhD;EAqEQ,aAAa,EAAA;EArErB;IAwEY,kBAAkB;IAElB,YAAY,EAAA;IA1ExB;MA6EgB,kBAAkB,EAAA;IA7ElC;MAiFgB,8BAA8B,EAAA;IAjF9C;MAqFgB,8BAA8B,EAAA;;AArF9C;EA2FQ,aAAa;EACb,mBAAmB,EAAA;EA5F3B;IA+FY,cAAc;IAEd,iBAAiB,EAAA;EAjG7B;IAqGY,YAAY,EAAA;;AArGxB;EA0GQ,aAAa;EACb,SAAS,EAAA;EA3GjB;IA8GY,qCAAqC,EAAA;;AA9GjD;EAmHQ,kCAAkC;EAClC,yBAAyB;EAEzB,oBAAoB;EACpB,cAAc;EAEd,aAAa;EACb,wCAAwC;EACxC,kBAAkB;EAClB,iBAAiB,EAAA","sourcesContent":["div.panelContents {\r\n    div.accordion {\r\n        border-bottom: 1px solid var(--var-panel-sep);\r\n\r\n        & > header {\r\n            background: var(--var-ctrl-header);\r\n            \r\n            font-size: 9pt;\r\n            font-weight: 400;\r\n            text-transform: uppercase;\r\n            letter-spacing: 1px;\r\n\r\n            padding: 4px 12px;\r\n\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & > div.content {\r\n            padding: 6px 12px;\r\n        }\r\n    }\r\n\r\n    input[type=checkbox] {\r\n        width: 20px;\r\n        height: 12px;\r\n        background: var(--var-large-bg);\r\n\r\n        border: 1px solid var(--var-panel-sep);\r\n        border-radius: 6px;\r\n        outline: none;\r\n\r\n        appearance: none;\r\n\r\n        &:checked {\r\n            background: var(--var-ctrl-focus);\r\n        }\r\n    }\r\n        \r\n    button {\r\n        background: var(--var-large-bg);\r\n        color: var(--var-text-fg);\r\n\r\n        border: none;\r\n        outline: none;\r\n        padding: 7px 8px;\r\n        border: 1px solid var(--var-panel-sep);\r\n        margin-bottom: 2px;\r\n        border-radius: 4px;\r\n\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        &:hover {\r\n            background: var(--var-button-hover);\r\n        }\r\n    \r\n        &:active {\r\n            background: var(--var-button-active);\r\n        }\r\n\r\n        &.active {\r\n            background: var(--var-ctrl-selected);\r\n        }\r\n    }\r\n\r\n    div.buttonGroup {\r\n        display: flex;\r\n\r\n        & > button {\r\n            border-radius: 0px;\r\n            \r\n            flex-grow: 1;\r\n\r\n            &:not(:last-child) {\r\n                border-right: none;\r\n            }\r\n\r\n            &:first-child {\r\n                border-radius: 4px 0px 0px 4px;\r\n            }\r\n    \r\n            &:last-child {\r\n                border-radius: 0px 4px 4px 0px;\r\n            }\r\n        }\r\n    }\r\n\r\n    div.row {\r\n        display: flex;\r\n        align-items: center;\r\n\r\n        label {\r\n            font-size: 9pt;\r\n            \r\n            margin-right: 8px;\r\n        }\r\n\r\n        & *:last-child {\r\n            flex-grow: 1;\r\n        }\r\n    }\r\n\r\n    div.grid {\r\n        display: grid;\r\n        gap: 12px;\r\n\r\n        &.g-2i {\r\n            grid-template-columns: repeat(2, 1fr);\r\n        }\r\n    }\r\n\r\n    input[type=number] {\r\n        background: var(--var-ctrl-editbg);\r\n        color: var(--var-text-fg);\r\n\r\n        font-family: \"Inter\";\r\n        font-size: 9pt;\r\n\r\n        outline: none;\r\n        border: 1px solid var(--var-ctrl-border);\r\n        border-radius: 4px;\r\n        padding: 4px 10px;\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "div.panelContents div.content {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 4px; }\n\ndiv.panelContents div.accordion {\n  border-bottom: 1px solid var(--var-panel-sep); }\n  div.panelContents div.accordion > header {\n    background: var(--var-ctrl-header);\n    font-size: 9pt;\n    font-weight: 400;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    padding: 4px 12px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between; }\n  div.panelContents div.accordion > div.content {\n    padding: 6px 12px; }\n\ndiv.panelContents input[type=checkbox] {\n  width: 20px;\n  height: 12px;\n  background: var(--var-large-bg);\n  border: 1px solid var(--var-panel-sep);\n  border-radius: 6px;\n  outline: none;\n  appearance: none; }\n  div.panelContents input[type=checkbox]:checked {\n    background: var(--var-ctrl-focus); }\n\ndiv.panelContents button {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  border: none;\n  outline: none;\n  padding: 7px 8px;\n  border: 1px solid var(--var-panel-sep);\n  margin-bottom: 2px;\n  border-radius: 4px;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n  div.panelContents button:hover {\n    background: var(--var-button-hover); }\n  div.panelContents button:active {\n    background: var(--var-button-active); }\n  div.panelContents button.active {\n    background: var(--var-ctrl-selected); }\n\ndiv.panelContents div.buttonGroup {\n  display: flex; }\n  div.panelContents div.buttonGroup > button {\n    border-radius: 0px;\n    flex-grow: 1; }\n    div.panelContents div.buttonGroup > button:not(:last-child) {\n      border-right: none; }\n    div.panelContents div.buttonGroup > button:first-child {\n      border-radius: 4px 0px 0px 4px; }\n    div.panelContents div.buttonGroup > button:last-child {\n      border-radius: 0px 4px 4px 0px; }\n\ndiv.panelContents label {\n  font-size: 10pt; }\n\ndiv.panelContents div.row {\n  display: flex;\n  align-items: center; }\n  div.panelContents div.row label {\n    margin-right: 8px; }\n  div.panelContents div.row *:last-child {\n    flex-grow: 1; }\n\ndiv.panelContents div.grid {\n  display: grid;\n  gap: 12px; }\n  div.panelContents div.grid.g-2i {\n    grid-template-columns: repeat(2, 1fr); }\n\ndiv.panelContents input[type=number],\ndiv.panelContents input[type=text] {\n  background: var(--var-ctrl-editbg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  font-size: 10pt;\n  outline: none;\n  border: 1px solid var(--var-ctrl-border);\n  border-radius: 4px;\n  padding: 4px 10px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/controls.scss"],"names":[],"mappings":"AAAA;EAEQ,aAAa;EACb,0BAA0B;EAC1B,QAAQ,EAAA;;AAJhB;EAQQ,6CAA6C,EAAA;EARrD;IAWY,kCAAkC;IAElC,cAAc;IACd,gBAAgB;IAChB,yBAAyB;IACzB,mBAAmB;IAEnB,iBAAiB;IAEjB,aAAa;IACb,mBAAmB;IACnB,8BAA8B,EAAA;EAtB1C;IA0BY,iBAAiB,EAAA;;AA1B7B;EA+BQ,WAAW;EACX,YAAY;EACZ,+BAA+B;EAE/B,sCAAsC;EACtC,kBAAkB;EAClB,aAAa;EAEb,gBAAgB,EAAA;EAvCxB;IA0CY,iCAAiC,EAAA;;AA1C7C;EA+CQ,+BAA+B;EAC/B,yBAAyB;EAEzB,YAAY;EACZ,aAAa;EACb,gBAAgB;EAChB,sCAAsC;EACtC,kBAAkB;EAClB,kBAAkB;EAElB,aAAa;EACb,mBAAmB;EACnB,uBAAuB,EAAA;EA3D/B;IA8DY,mCAAmC,EAAA;EA9D/C;IAkEY,oCAAoC,EAAA;EAlEhD;IAsEY,oCAAoC,EAAA;;AAtEhD;EA2EQ,aAAa,EAAA;EA3ErB;IA8EY,kBAAkB;IAElB,YAAY,EAAA;IAhFxB;MAmFgB,kBAAkB,EAAA;IAnFlC;MAuFgB,8BAA8B,EAAA;IAvF9C;MA2FgB,8BAA8B,EAAA;;AA3F9C;EAiGQ,eAAe,EAAA;;AAjGvB;EAqGQ,aAAa;EACb,mBAAmB,EAAA;EAtG3B;IAyGY,iBAAiB,EAAA;EAzG7B;IA6GY,YAAY,EAAA;;AA7GxB;EAkHQ,aAAa;EACb,SAAS,EAAA;EAnHjB;IAsHY,qCAAqC,EAAA;;AAtHjD;;EA4HQ,kCAAkC;EAClC,yBAAyB;EAEzB,oBAAoB;EACpB,eAAe;EAEf,aAAa;EACb,wCAAwC;EACxC,kBAAkB;EAClB,iBAAiB,EAAA","sourcesContent":["div.panelContents {\r\n    div.content {\r\n        display: grid;\r\n        grid-template-columns: 1fr;\r\n        gap: 4px;\r\n    }\r\n\r\n    div.accordion {\r\n        border-bottom: 1px solid var(--var-panel-sep);\r\n\r\n        & > header {\r\n            background: var(--var-ctrl-header);\r\n            \r\n            font-size: 9pt;\r\n            font-weight: 400;\r\n            text-transform: uppercase;\r\n            letter-spacing: 1px;\r\n\r\n            padding: 4px 12px;\r\n\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & > div.content {\r\n            padding: 6px 12px;\r\n        }\r\n    }\r\n\r\n    input[type=checkbox] {\r\n        width: 20px;\r\n        height: 12px;\r\n        background: var(--var-large-bg);\r\n\r\n        border: 1px solid var(--var-panel-sep);\r\n        border-radius: 6px;\r\n        outline: none;\r\n\r\n        appearance: none;\r\n\r\n        &:checked {\r\n            background: var(--var-ctrl-focus);\r\n        }\r\n    }\r\n        \r\n    button {\r\n        background: var(--var-large-bg);\r\n        color: var(--var-text-fg);\r\n\r\n        border: none;\r\n        outline: none;\r\n        padding: 7px 8px;\r\n        border: 1px solid var(--var-panel-sep);\r\n        margin-bottom: 2px;\r\n        border-radius: 4px;\r\n\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        &:hover {\r\n            background: var(--var-button-hover);\r\n        }\r\n    \r\n        &:active {\r\n            background: var(--var-button-active);\r\n        }\r\n\r\n        &.active {\r\n            background: var(--var-ctrl-selected);\r\n        }\r\n    }\r\n\r\n    div.buttonGroup {\r\n        display: flex;\r\n\r\n        & > button {\r\n            border-radius: 0px;\r\n            \r\n            flex-grow: 1;\r\n\r\n            &:not(:last-child) {\r\n                border-right: none;\r\n            }\r\n\r\n            &:first-child {\r\n                border-radius: 4px 0px 0px 4px;\r\n            }\r\n    \r\n            &:last-child {\r\n                border-radius: 0px 4px 4px 0px;\r\n            }\r\n        }\r\n    }\r\n\r\n    label {\r\n        font-size: 10pt;\r\n    }\r\n\r\n    div.row {\r\n        display: flex;\r\n        align-items: center;\r\n\r\n        label {\r\n            margin-right: 8px;\r\n        }\r\n\r\n        & *:last-child {\r\n            flex-grow: 1;\r\n        }\r\n    }\r\n\r\n    div.grid {\r\n        display: grid;\r\n        gap: 12px;\r\n\r\n        &.g-2i {\r\n            grid-template-columns: repeat(2, 1fr);\r\n        }\r\n    }\r\n\r\n    input[type=number],\r\n    input[type=text] {\r\n        background: var(--var-ctrl-editbg);\r\n        color: var(--var-text-fg);\r\n\r\n        font-family: \"Inter\";\r\n        font-size: 10pt;\r\n\r\n        outline: none;\r\n        border: 1px solid var(--var-ctrl-border);\r\n        border-radius: 4px;\r\n        padding: 4px 10px;\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -848,6 +848,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _viewport_tools_ellipse__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./viewport/tools/ellipse */ "./src/typeedit/viewport/tools/ellipse.ts");
 /* harmony import */ var _ui_panel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ui/panel */ "./src/typeedit/ui/panel.ts");
 /* harmony import */ var _ui_panel_snapping__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ui/panel/snapping */ "./src/typeedit/ui/panel/snapping.ts");
+/* harmony import */ var _ui_panel_fontInfo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ui/panel/fontInfo */ "./src/typeedit/ui/panel/fontInfo.ts");
 var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -855,6 +856,7 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
+
 
 
 
@@ -900,6 +902,7 @@ var currentKeybCallback = null;
     Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_6__["prepareGlyphList"])(font);
     Object(_ui_panel__WEBPACK_IMPORTED_MODULE_11__["prepareFontSettings"])();
     Object(_ui_panel__WEBPACK_IMPORTED_MODULE_11__["addFontSettingsEvents"])();
+    Object(_ui_panel_fontInfo__WEBPACK_IMPORTED_MODULE_13__["prepareFontInfoPanel"])(font);
     Object(_ui_panel_snapping__WEBPACK_IMPORTED_MODULE_12__["prepareSnappingPanel"])(font);
     var context = new _viewport_context_glyph__WEBPACK_IMPORTED_MODULE_2__["GlyphContext"]("ABC".split("").map(function (chr) { return font.glyphs.find(function (g) { return g.codePoint === chr.codePointAt(0); }); }), 0);
     var viewport = Object(_ui_viewport__WEBPACK_IMPORTED_MODULE_4__["setupViewport"])(context);
@@ -993,7 +996,6 @@ var Font = /** @class */ (function (_super) {
     __extends(Font, _super);
     function Font(info, metrics, glyphs) {
         var _this = _super.call(this) || this;
-        _this.info = info;
         _this.metrics = metrics;
         _this.glyphs = glyphs;
         _this.palette = [];
@@ -1016,7 +1018,7 @@ var Font = /** @class */ (function (_super) {
             version: "",
             trademark: "",
             compatibleFullName: ""
-        }, _this.info);
+        }, info);
         return _this;
     }
     Font.createBlank = function () {
@@ -2971,6 +2973,34 @@ function Row(content) {
 
 /***/ }),
 
+/***/ "./src/typeedit/ui/panel/controls/textInput.ts":
+/*!*****************************************************!*\
+  !*** ./src/typeedit/ui/panel/controls/textInput.ts ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TextInput; });
+function TextInput(get, set, update) {
+    var input = document.createElement("input");
+    input.type = "text";
+    input.value = get();
+    input.addEventListener("input", function () {
+        set(input.value);
+    });
+    if (update) {
+        update(function (v) {
+            input.value = v;
+        });
+    }
+    return input;
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/ui/panel/controls/toggleButton.ts":
 /*!********************************************************!*\
   !*** ./src/typeedit/ui/panel/controls/toggleButton.ts ***!
@@ -2998,6 +3028,49 @@ function ToggleButton(icon, get, toggle, update) {
         });
     }
     return button;
+}
+
+
+/***/ }),
+
+/***/ "./src/typeedit/ui/panel/fontInfo.ts":
+/*!*******************************************!*\
+  !*** ./src/typeedit/ui/panel/fontInfo.ts ***!
+  \*******************************************/
+/*! exports provided: prepareFontInfoPanel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prepareFontInfoPanel", function() { return prepareFontInfoPanel; });
+/* harmony import */ var _controls_accordion__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./controls/accordion */ "./src/typeedit/ui/panel/controls/accordion.ts");
+/* harmony import */ var _controls_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controls/label */ "./src/typeedit/ui/panel/controls/label.ts");
+/* harmony import */ var _controls_textInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controls/textInput */ "./src/typeedit/ui/panel/controls/textInput.ts");
+
+
+
+function prepareFontInfoPanel(font) {
+    var panel = document.querySelector("div.panelContents[data-tab=font]");
+    var fontInfoSection = Object(_controls_accordion__WEBPACK_IMPORTED_MODULE_0__["default"])("Font info", [], [
+        Object(_controls_label__WEBPACK_IMPORTED_MODULE_1__["default"])("Font family:"),
+        Object(_controls_textInput__WEBPACK_IMPORTED_MODULE_2__["default"])(function () { return font.info.fontFamily; }, function (v) {
+            font.info.fontFamily = v;
+            document.title = v + " - FTE";
+        }),
+        Object(_controls_label__WEBPACK_IMPORTED_MODULE_1__["default"])("Font subfamily:"),
+        Object(_controls_textInput__WEBPACK_IMPORTED_MODULE_2__["default"])(function () { return font.info.fontSubfamily; }, function (v) { return font.info.fontSubfamily = v; }),
+        Object(_controls_label__WEBPACK_IMPORTED_MODULE_1__["default"])("Version:"),
+        Object(_controls_textInput__WEBPACK_IMPORTED_MODULE_2__["default"])(function () { return font.info.version; }, function (v) { return font.info.version = v; })
+    ]);
+    var authorInfo = Object(_controls_accordion__WEBPACK_IMPORTED_MODULE_0__["default"])("Author info", [], [
+        Object(_controls_label__WEBPACK_IMPORTED_MODULE_1__["default"])("Designer:"),
+        Object(_controls_textInput__WEBPACK_IMPORTED_MODULE_2__["default"])(function () { return font.info.designer; }, function (v) { return font.info.designer = v; }),
+        Object(_controls_label__WEBPACK_IMPORTED_MODULE_1__["default"])("Manufacturer/Foundry:"),
+        Object(_controls_textInput__WEBPACK_IMPORTED_MODULE_2__["default"])(function () { return font.info.manufacturer; }, function (v) { return font.info.manufacturer = v; })
+    ]);
+    panel.innerHTML = "";
+    panel.appendChild(fontInfoSection);
+    panel.appendChild(authorInfo);
 }
 
 
@@ -4583,7 +4656,7 @@ var BezierPenTool = /** @class */ (function () {
                 subactions: [
                     {
                         name: "Delete last point",
-                        icon: "delete",
+                        icon: "deletelastpoint",
                         accelerator: "Delete",
                         handler: function () {
                             if (!_this.currentBezier)
@@ -5711,7 +5784,8 @@ var Viewport = /** @class */ (function () {
         ];
         var r = pos.distance(start);
         var angle = pos.angle(start);
-        if (e.shiftKey) {
+        if (e.shiftKey &&
+            _app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.constructionEnabled) {
             var add180 = false;
             var nrmAngle_1 = angle * (180 / Math.PI);
             if (nrmAngle_1 < 0) {

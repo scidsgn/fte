@@ -9,5 +9,11 @@ export const defaultPerFontSettings = {
 
     curveSnapEnabled: true,
     handleSnapEnabled: true,
-    metricsSnapEnabled: true
+    metricsSnapEnabled: true,
+
+    constructionEnabled: true,
+    constructionAngle0: 0,
+    constructionAngle1: 45,
+    constructionAngle2: 90,
+    constructionAngle3: 135,
 }

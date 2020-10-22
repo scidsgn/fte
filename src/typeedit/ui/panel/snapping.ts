@@ -112,7 +112,80 @@ export function prepareSnappingPanel(font: Font) {
         ]
     )
 
+    const constructionSection = Accordion(
+        "Construction angles", [
+            Checkbox(
+                () => font.settings.constructionEnabled,
+                () => {
+                    font.settings.constructionEnabled = !font.settings.constructionEnabled
+                },
+                (h) => {
+                    font.on("settingChanged", (k: string) => {
+                        if (k === "constructionEnabled")
+                            h(font.settings.constructionEnabled)
+                    })
+                }
+            )
+        ], [
+            Grid([
+                NumberInput(
+                    () => font.settings.constructionAngle0,
+                    (v: number) => {
+                        font.settings.constructionAngle0 = v
+                    },
+                    (h) => {
+                        font.on("settingChanged", (k: string) => {
+                            if (k === "constructionAngle0")
+                                h(font.settings.constructionAngle0)
+                        })
+                    },
+                    0, 180, 1
+                ),
+                NumberInput(
+                    () => font.settings.constructionAngle1,
+                    (v: number) => {
+                        font.settings.constructionAngle1 = v
+                    },
+                    (h) => {
+                        font.on("settingChanged", (k: string) => {
+                            if (k === "constructionAngle1")
+                                h(font.settings.constructionAngle1)
+                        })
+                    },
+                    0, 180, 1
+                ),
+                NumberInput(
+                    () => font.settings.constructionAngle2,
+                    (v: number) => {
+                        font.settings.constructionAngle2 = v
+                    },
+                    (h) => {
+                        font.on("settingChanged", (k: string) => {
+                            if (k === "constructionAngle2")
+                                h(font.settings.constructionAngle2)
+                        })
+                    },
+                    0, 180, 1
+                ),
+                NumberInput(
+                    () => font.settings.constructionAngle3,
+                    (v: number) => {
+                        font.settings.constructionAngle3 = v
+                    },
+                    (h) => {
+                        font.on("settingChanged", (k: string) => {
+                            if (k === "constructionAngle3")
+                                h(font.settings.constructionAngle3)
+                        })
+                    },
+                    0, 180, 1
+                )
+            ])
+        ]
+    )
+
     panel.innerHTML = ""
     panel.appendChild(snappingSection)
     panel.appendChild(gridSection)
+    panel.appendChild(constructionSection)
 }

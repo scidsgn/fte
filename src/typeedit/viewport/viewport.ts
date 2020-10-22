@@ -12,6 +12,7 @@ import { ITool } from "./tools/tool"
 import { MenuItem, MenuItemConstructorOptions, remote } from "electron"
 import { accelStringToElectron } from "../utils/accelerator"
 import { currentFont } from "../app"
+import { wrappedDist } from "../utils/wrappedDist"
 
 export class Viewport {
     public domCanvas = document.createElement("canvas")
@@ -277,14 +278,42 @@ export class Viewport {
     }
 
     restrictAngles(start: Point, pos: Point, e: MouseEvent) {
-        const dx = Math.abs(pos.x - start.x)
-        const dy = Math.abs(pos.y - start.y)
+        const angles = [
+            currentFont.settings.constructionAngle0,
+            currentFont.settings.constructionAngle1,
+            currentFont.settings.constructionAngle2,
+            currentFont.settings.constructionAngle3
+        ]
+        const r = pos.distance(start)
+        const angle = pos.angle(start)
 
         if (e.shiftKey) {
-            if (dx > dy)
-                pos.y = start.y
-            else
-                pos.x = start.x
+            let add180 = false
+            let nrmAngle = angle * (180 / Math.PI)
+            if (nrmAngle < 0) {
+                nrmAngle = 180 + nrmAngle
+                add180 = true
+            }
+
+            const angleDists = angles.map(
+                a => wrappedDist(nrmAngle, a, 180)
+            )
+            const minIndex = angleDists.indexOf(
+                Math.min(...angleDists)
+            )
+
+            let selectedAngle = angles[minIndex]
+            if (
+                Math.abs(
+                    angle * (180 / Math.PI) - selectedAngle
+                ) > 90
+            ) {
+                selectedAngle += 180
+            }
+            const finalAngle = selectedAngle * (Math.PI / 180)
+
+            pos.x = start.x + r * Math.cos(finalAngle)
+            pos.y = start.y + r * Math.sin(finalAngle)
         }
     }
 

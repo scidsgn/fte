@@ -1,4 +1,3 @@
-import { TouchBarLabel } from "electron"
 import { Font } from "../../font/font"
 import Accordion from "./controls/accordion"
 import ButtonGroup from "./controls/buttonGroup"

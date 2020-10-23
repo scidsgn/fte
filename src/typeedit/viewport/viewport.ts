@@ -14,6 +14,7 @@ import { accelStringToElectron } from "../utils/accelerator"
 import { currentFont } from "../app"
 import { wrappedDist } from "../utils/wrappedDist"
 import { getThemeColor } from "../ui/theme"
+import { updateToolSettingsPanel } from "../ui/panel/toolSettings"
 
 export class Viewport {
     public domCanvas = document.createElement("canvas")
@@ -417,5 +418,7 @@ export class Viewport {
         this.tool.updateContext(this.context)
         this.disableAllGuides()
         this.render()
+
+        updateToolSettingsPanel(tool)
     }
 }

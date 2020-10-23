@@ -24,6 +24,8 @@ export class RectangleTool implements ITool {
 
     public subactions: ToolSubActionSection[] = []
 
+    public settingsPanel: HTMLElement[] = null
+
     private startPoint: Point
 
     private glyph: Glyph

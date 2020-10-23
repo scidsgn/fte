@@ -1,4 +1,11 @@
 div.panelContents {
+    p.emptyPanel {
+        font-size: 10pt;
+        text-align: center;
+
+        margin: 8px 12px;
+    }
+
     div.content {
         display: grid;
         grid-template-columns: 1fr;

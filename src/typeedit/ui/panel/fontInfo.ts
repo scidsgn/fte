@@ -1,14 +1,7 @@
-import { TouchBarLabel } from "electron"
 import { Font } from "../../font/font"
 import Accordion from "./controls/accordion"
-import ButtonGroup from "./controls/buttonGroup"
-import Checkbox from "./controls/checkbox"
-import Grid from "./controls/grid"
 import Label from "./controls/label"
-import NumberInput from "./controls/numberInput"
-import Row from "./controls/row"
 import TextInput from "./controls/textInput"
-import ToggleButton from "./controls/toggleButton"
 
 export function prepareFontInfoPanel(font: Font) {
     const panel = document.querySelector(

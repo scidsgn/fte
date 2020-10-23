@@ -27,6 +27,8 @@ export interface ITool {
 
     subactions: ToolSubActionSection[]
 
+    settingsPanel: HTMLElement[]
+    
     handleMouseEvent: (
         v: Viewport, e: MouseEvent, x: number, y: number
     ) => void

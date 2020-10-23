@@ -16,4 +16,6 @@ export const defaultPerFontSettings = {
     constructionAngle1: 45,
     constructionAngle2: 90,
     constructionAngle3: 135,
+
+    ellipseTension: 4 * (Math.SQRT2 - 1) / 3,
 }

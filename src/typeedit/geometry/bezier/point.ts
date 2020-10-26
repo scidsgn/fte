@@ -43,7 +43,10 @@ export class BezierPoint extends EventEmitter {
         const angleDiff = Math.abs(angle1 - angle2)
         const piDiff = angleDiff / Math.PI
 
-        if (Math.abs(piDiff - Math.round(piDiff)) < 0.0001)
+        if (
+            Math.abs(angleDiff - Math.PI) < 0.0001 &&
+            Math.abs(radius1 - radius2) < 1
+        )
             this.type = BezierPointType.auto
     }
 

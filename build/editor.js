@@ -1000,6 +1000,7 @@ var Font = /** @class */ (function (_super) {
         _this.glyphs = glyphs;
         _this.palette = [];
         _this.ownSettings = {};
+        _this.setMaxListeners(1000);
         _this.settings = Object(_settings_settings__WEBPACK_IMPORTED_MODULE_2__["createFontSettings"])(_this, _this.ownSettings);
         _this.info = Object.assign({
             copyright: "",
@@ -1356,7 +1357,8 @@ var BezierPoint = /** @class */ (function (_super) {
         var angle2 = this.before.angle(this.base);
         var angleDiff = Math.abs(angle1 - angle2);
         var piDiff = angleDiff / Math.PI;
-        if (Math.abs(piDiff - Math.round(piDiff)) < 0.0001)
+        if (Math.abs(angleDiff - Math.PI) < 0.0001 &&
+            Math.abs(radius1 - radius2) < 1)
             this.type = BezierPointType.auto;
     };
     BezierPoint.prototype.movePoint = function (point, dPos) {

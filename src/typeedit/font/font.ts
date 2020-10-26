@@ -48,6 +48,8 @@ export class Font extends EventEmitter {
     ) {
         super()
 
+        this.setMaxListeners(1000)
+
         this.settings = createFontSettings(this, this.ownSettings)
 
         this.info = Object.assign(

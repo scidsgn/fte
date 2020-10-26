@@ -13,12 +13,18 @@ import { MenuItem, MenuItemConstructorOptions, remote } from "electron"
 import { accelStringToElectron } from "../utils/accelerator"
 import { currentFont } from "../app"
 import { wrappedDist } from "../utils/wrappedDist"
+import { getThemeColor } from "../ui/theme"
+import { updateToolSettingsPanel } from "../ui/panel/toolSettings"
 
 export class Viewport {
     public domCanvas = document.createElement("canvas")
     private ctx = this.domCanvas.getContext("2d")
 
     public co = new ViewportCoordinates()
+
+    private isConstructing = false
+    private constructionAngle = 0
+    private constructionReference = new Point()
 
     constructor(
         public context: IContext,
@@ -287,6 +293,8 @@ export class Viewport {
         const r = pos.distance(start)
         const angle = pos.angle(start)
 
+        this.isConstructing = false
+
         if (
             e.shiftKey &&
             currentFont.settings.constructionEnabled
@@ -317,6 +325,10 @@ export class Viewport {
 
             pos.x = start.x + r * Math.cos(finalAngle)
             pos.y = start.y + r * Math.sin(finalAngle)
+
+            this.isConstructing = true
+            this.constructionAngle = finalAngle
+            this.constructionReference.copy(start)
         }
     }
 
@@ -330,6 +342,7 @@ export class Viewport {
         this.tool.guides.forEach(
             g => g.active = false
         )
+        this.isConstructing = false
     }
 
     render() {
@@ -365,6 +378,27 @@ export class Viewport {
             }
         )
 
+        this.ctx.resetTransform()
+        if (this.isConstructing) {
+            const clientConstr = this.co.worldToClient(
+                this.constructionReference.x, this.constructionReference.y
+            )
+
+            this.ctx.strokeStyle = getThemeColor("constructionActive")
+            this.ctx.lineWidth = 1
+
+            this.ctx.beginPath()
+            this.ctx.moveTo(
+                clientConstr.x - 1000 * Math.cos(this.constructionAngle),
+                clientConstr.y - 1000 * Math.sin(this.constructionAngle)
+            )
+            this.ctx.lineTo(
+                clientConstr.x + 1000 * Math.cos(this.constructionAngle),
+                clientConstr.y + 1000 * Math.sin(this.constructionAngle)
+            )
+            this.ctx.stroke()
+        }
+
         if (this.tool && this.tool.supportsForeignHandles) {
             this.drawHandles(this.context.handles)
             this.drawHandles(this.handles)
@@ -384,5 +418,7 @@ export class Viewport {
         this.tool.updateContext(this.context)
         this.disableAllGuides()
         this.render()
+
+        updateToolSettingsPanel(tool)
     }
 }

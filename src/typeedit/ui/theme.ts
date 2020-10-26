@@ -23,7 +23,9 @@ const fteThemes = [
 
         guideActive: "#f0f",
         guideGrid: "#3332",
-        guideGridSubdiv: "#3331"
+        guideGridSubdiv: "#3331",
+
+        constructionActive: "#0f0"
     },
     {
         theme: "dark",
@@ -47,7 +49,9 @@ const fteThemes = [
 
         guideActive: "#f0f",
         guideGrid: "#9992",
-        guideGridSubdiv: "#9991"
+        guideGridSubdiv: "#9991",
+
+        constructionActive: "#0f0"
     }
 ]
 

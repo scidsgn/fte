@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ":root {\n  --var-large-bg: #fff;\n  --var-panel-bg: #f6f6f6;\n  --var-text-fg: #000;\n  --var-panel-sep: #d1d1d1;\n  --var-button-bg: #fff;\n  --var-button-hover: #eee;\n  --var-button-active: #c0c0c0;\n  --var-glist-label: #fafafa;\n  --var-glist-activeLabel: #6d7599;\n  --var-ctrl-editbg: #eee;\n  --var-ctrl-border: #ccc;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #bbb;\n  --var-ctrl-header: #eee; }\n\nbody {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  user-select: none; }\n\n*::-webkit-scrollbar {\n  width: 12px; }\n\n*::-webkit-scrollbar-track {\n  background: var(--var-panel-sep); }\n\n*::-webkit-scrollbar-thumb {\n  background: var(--var-large-bg); }\n\nbody[data-theme=dark] {\n  --var-large-bg: #222;\n  --var-panel-bg: #161616;\n  --var-text-fg: #fff;\n  --var-panel-sep: #000;\n  --var-button-bg: #111;\n  --var-button-hover: #333;\n  --var-button-active: #555;\n  --var-glist-label: #2b2b2b;\n  --var-glist-activeLabel: #232c53;\n  --var-ctrl-editbg: #000;\n  --var-ctrl-border: #444;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #444;\n  --var-ctrl-header: #2b2b2b; }\n  body[data-theme=dark] button > img {\n    filter: invert(1) hue-rotate(180deg); }\n  body[data-theme=dark] div.glyphList canvas {\n    filter: invert(1); }\n\nbutton > img {\n  width: 16px;\n  height: 16px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,wBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,4BAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,uBAAkB,EAAA;;AAGtB;EACI,+BAA+B;EAC/B,yBAAyB;EAEzB,oBAAoB;EAEpB,iBAAiB,EAAA;;AAGrB;EACI,WAAW,EAAA;;AAGf;EACI,gCAAgC,EAAA;;AAGpC;EACI,+BAA+B,EAAA;;AAGnC;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,qBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,yBAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,0BAAkB,EAAA;EAlBtB;IAqBQ,oCAAoC,EAAA;EArB5C;IAyBQ,iBAAiB,EAAA;;AAIzB;EACI,WAAW;EACX,YAAY,EAAA","sourcesContent":[":root {\r\n    --var-large-bg: #fff;\r\n    --var-panel-bg: #f6f6f6;\r\n    --var-text-fg: #000;\r\n\r\n    --var-panel-sep: #d1d1d1;\r\n\r\n    --var-button-bg: #fff;\r\n    --var-button-hover: #eee;\r\n    --var-button-active: #c0c0c0;\r\n\r\n    --var-glist-label: #fafafa;\r\n    --var-glist-activeLabel: #6d7599;\r\n\r\n    --var-ctrl-editbg: #eee;\r\n    --var-ctrl-border: #ccc;\r\n    --var-ctrl-focus: #08f;\r\n    --var-ctrl-selected: #bbb;\r\n    --var-ctrl-header: #eee;\r\n}\r\n\r\nbody {\r\n    background: var(--var-large-bg);\r\n    color: var(--var-text-fg);\r\n\r\n    font-family: \"Inter\";\r\n\r\n    user-select: none;\r\n}\r\n\r\n*::-webkit-scrollbar {\r\n    width: 12px;\r\n}\r\n\r\n*::-webkit-scrollbar-track {\r\n    background: var(--var-panel-sep);\r\n}\r\n\r\n*::-webkit-scrollbar-thumb {\r\n    background: var(--var-large-bg);\r\n}\r\n\r\nbody[data-theme=dark] {\r\n    --var-large-bg: #222;\r\n    --var-panel-bg: #161616;\r\n    --var-text-fg: #fff;\r\n\r\n    --var-panel-sep: #000;\r\n\r\n    --var-button-bg: #111;\r\n    --var-button-hover: #333;\r\n    --var-button-active: #555;\r\n\r\n    --var-glist-label: #2b2b2b;\r\n    --var-glist-activeLabel: #232c53;\r\n\r\n    --var-ctrl-editbg: #000;\r\n    --var-ctrl-border: #444;\r\n    --var-ctrl-focus: #08f;\r\n    --var-ctrl-selected: #444;\r\n    --var-ctrl-header: #2b2b2b;\r\n\r\n    button > img {\r\n        filter: invert(1) hue-rotate(180deg);\r\n    }\r\n\r\n    div.glyphList canvas {\r\n        filter: invert(1);\r\n    }\r\n}\r\n \r\nbutton > img {\r\n    width: 16px;\r\n    height: 16px;\r\n}\r\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, ":root {\n  --var-large-bg: #fff;\n  --var-panel-bg: #f6f6f6;\n  --var-text-fg: #000;\n  --var-panel-sep: #d1d1d1;\n  --var-button-bg: #fff;\n  --var-button-hover: #eee;\n  --var-button-active: #c0c0c0;\n  --var-glist-label: #fafafa;\n  --var-glist-activeLabel: #6d7599;\n  --var-ctrl-editbg: #eee;\n  --var-ctrl-border: #ccc;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #bbb;\n  --var-ctrl-header: #eee; }\n\nbody {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  user-select: none; }\n\n*::-webkit-scrollbar {\n  width: 12px; }\n\n*::-webkit-scrollbar-track {\n  background: var(--var-panel-sep); }\n\n*::-webkit-scrollbar-thumb {\n  background: var(--var-large-bg); }\n\nbody[data-theme=dark] {\n  --var-large-bg: #222;\n  --var-panel-bg: #161616;\n  --var-text-fg: #fff;\n  --var-panel-sep: #000;\n  --var-button-bg: #111;\n  --var-button-hover: #333;\n  --var-button-active: #555;\n  --var-glist-label: #2b2b2b;\n  --var-glist-activeLabel: #232c53;\n  --var-ctrl-editbg: #000;\n  --var-ctrl-border: #444;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #444;\n  --var-ctrl-header: #2b2b2b; }\n  body[data-theme=dark] button > img {\n    filter: invert(1) hue-rotate(180deg); }\n  body[data-theme=dark] div.glyphList canvas {\n    filter: invert(1); }\n\nbutton > img {\n  width: 16px;\n  height: 16px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,wBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,4BAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,uBAAkB,EAAA;;AAGtB;EACI,+BAA+B;EAC/B,yBAAyB;EAEzB,oBAAoB;EAEpB,iBAAiB,EAAA;;AAGrB;EACI,WAAW,EAAA;;AAGf;EACI,gCAAgC,EAAA;;AAGpC;EACI,+BAA+B,EAAA;;AAGnC;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,qBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,yBAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,0BAAkB,EAAA;EAlBtB;IAqBQ,oCAAoC,EAAA;EArB5C;IAyBQ,iBAAiB,EAAA;;AAIzB;EACI,WAAW;EACX,YAAY,EAAA","sourcesContent":[":root {\n    --var-large-bg: #fff;\n    --var-panel-bg: #f6f6f6;\n    --var-text-fg: #000;\n\n    --var-panel-sep: #d1d1d1;\n\n    --var-button-bg: #fff;\n    --var-button-hover: #eee;\n    --var-button-active: #c0c0c0;\n\n    --var-glist-label: #fafafa;\n    --var-glist-activeLabel: #6d7599;\n\n    --var-ctrl-editbg: #eee;\n    --var-ctrl-border: #ccc;\n    --var-ctrl-focus: #08f;\n    --var-ctrl-selected: #bbb;\n    --var-ctrl-header: #eee;\n}\n\nbody {\n    background: var(--var-large-bg);\n    color: var(--var-text-fg);\n\n    font-family: \"Inter\";\n\n    user-select: none;\n}\n\n*::-webkit-scrollbar {\n    width: 12px;\n}\n\n*::-webkit-scrollbar-track {\n    background: var(--var-panel-sep);\n}\n\n*::-webkit-scrollbar-thumb {\n    background: var(--var-large-bg);\n}\n\nbody[data-theme=dark] {\n    --var-large-bg: #222;\n    --var-panel-bg: #161616;\n    --var-text-fg: #fff;\n\n    --var-panel-sep: #000;\n\n    --var-button-bg: #111;\n    --var-button-hover: #333;\n    --var-button-active: #555;\n\n    --var-glist-label: #2b2b2b;\n    --var-glist-activeLabel: #232c53;\n\n    --var-ctrl-editbg: #000;\n    --var-ctrl-border: #444;\n    --var-ctrl-focus: #08f;\n    --var-ctrl-selected: #444;\n    --var-ctrl-header: #2b2b2b;\n\n    button > img {\n        filter: invert(1) hue-rotate(180deg);\n    }\n\n    div.glyphList canvas {\n        filter: invert(1);\n    }\n}\n \nbutton > img {\n    width: 16px;\n    height: 16px;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "div.panelContents div.content {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 4px; }\n\ndiv.panelContents div.accordion {\n  border-bottom: 1px solid var(--var-panel-sep); }\n  div.panelContents div.accordion > header {\n    background: var(--var-ctrl-header);\n    font-size: 9pt;\n    font-weight: 400;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    padding: 4px 12px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between; }\n  div.panelContents div.accordion > div.content {\n    padding: 6px 12px; }\n\ndiv.panelContents input[type=checkbox] {\n  width: 20px;\n  height: 12px;\n  background: var(--var-large-bg);\n  border: 1px solid var(--var-panel-sep);\n  border-radius: 6px;\n  outline: none;\n  appearance: none; }\n  div.panelContents input[type=checkbox]:checked {\n    background: var(--var-ctrl-focus); }\n\ndiv.panelContents button {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  border: none;\n  outline: none;\n  padding: 7px 8px;\n  border: 1px solid var(--var-panel-sep);\n  margin-bottom: 2px;\n  border-radius: 4px;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n  div.panelContents button:hover {\n    background: var(--var-button-hover); }\n  div.panelContents button:active {\n    background: var(--var-button-active); }\n  div.panelContents button.active {\n    background: var(--var-ctrl-selected); }\n\ndiv.panelContents div.buttonGroup {\n  display: flex; }\n  div.panelContents div.buttonGroup > button {\n    border-radius: 0px;\n    flex-grow: 1; }\n    div.panelContents div.buttonGroup > button:not(:last-child) {\n      border-right: none; }\n    div.panelContents div.buttonGroup > button:first-child {\n      border-radius: 4px 0px 0px 4px; }\n    div.panelContents div.buttonGroup > button:last-child {\n      border-radius: 0px 4px 4px 0px; }\n\ndiv.panelContents label {\n  font-size: 10pt; }\n\ndiv.panelContents div.row {\n  display: flex;\n  align-items: center; }\n  div.panelContents div.row label {\n    margin-right: 8px; }\n  div.panelContents div.row *:last-child {\n    flex-grow: 1; }\n\ndiv.panelContents div.grid {\n  display: grid;\n  gap: 12px; }\n  div.panelContents div.grid.g-2i {\n    grid-template-columns: repeat(2, 1fr); }\n\ndiv.panelContents input[type=number],\ndiv.panelContents input[type=text] {\n  background: var(--var-ctrl-editbg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  font-size: 10pt;\n  outline: none;\n  border: 1px solid var(--var-ctrl-border);\n  border-radius: 4px;\n  padding: 4px 10px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/controls.scss"],"names":[],"mappings":"AAAA;EAEQ,aAAa;EACb,0BAA0B;EAC1B,QAAQ,EAAA;;AAJhB;EAQQ,6CAA6C,EAAA;EARrD;IAWY,kCAAkC;IAElC,cAAc;IACd,gBAAgB;IAChB,yBAAyB;IACzB,mBAAmB;IAEnB,iBAAiB;IAEjB,aAAa;IACb,mBAAmB;IACnB,8BAA8B,EAAA;EAtB1C;IA0BY,iBAAiB,EAAA;;AA1B7B;EA+BQ,WAAW;EACX,YAAY;EACZ,+BAA+B;EAE/B,sCAAsC;EACtC,kBAAkB;EAClB,aAAa;EAEb,gBAAgB,EAAA;EAvCxB;IA0CY,iCAAiC,EAAA;;AA1C7C;EA+CQ,+BAA+B;EAC/B,yBAAyB;EAEzB,YAAY;EACZ,aAAa;EACb,gBAAgB;EAChB,sCAAsC;EACtC,kBAAkB;EAClB,kBAAkB;EAElB,aAAa;EACb,mBAAmB;EACnB,uBAAuB,EAAA;EA3D/B;IA8DY,mCAAmC,EAAA;EA9D/C;IAkEY,oCAAoC,EAAA;EAlEhD;IAsEY,oCAAoC,EAAA;;AAtEhD;EA2EQ,aAAa,EAAA;EA3ErB;IA8EY,kBAAkB;IAElB,YAAY,EAAA;IAhFxB;MAmFgB,kBAAkB,EAAA;IAnFlC;MAuFgB,8BAA8B,EAAA;IAvF9C;MA2FgB,8BAA8B,EAAA;;AA3F9C;EAiGQ,eAAe,EAAA;;AAjGvB;EAqGQ,aAAa;EACb,mBAAmB,EAAA;EAtG3B;IAyGY,iBAAiB,EAAA;EAzG7B;IA6GY,YAAY,EAAA;;AA7GxB;EAkHQ,aAAa;EACb,SAAS,EAAA;EAnHjB;IAsHY,qCAAqC,EAAA;;AAtHjD;;EA4HQ,kCAAkC;EAClC,yBAAyB;EAEzB,oBAAoB;EACpB,eAAe;EAEf,aAAa;EACb,wCAAwC;EACxC,kBAAkB;EAClB,iBAAiB,EAAA","sourcesContent":["div.panelContents {\r\n    div.content {\r\n        display: grid;\r\n        grid-template-columns: 1fr;\r\n        gap: 4px;\r\n    }\r\n\r\n    div.accordion {\r\n        border-bottom: 1px solid var(--var-panel-sep);\r\n\r\n        & > header {\r\n            background: var(--var-ctrl-header);\r\n            \r\n            font-size: 9pt;\r\n            font-weight: 400;\r\n            text-transform: uppercase;\r\n            letter-spacing: 1px;\r\n\r\n            padding: 4px 12px;\r\n\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: space-between;\r\n        }\r\n\r\n        & > div.content {\r\n            padding: 6px 12px;\r\n        }\r\n    }\r\n\r\n    input[type=checkbox] {\r\n        width: 20px;\r\n        height: 12px;\r\n        background: var(--var-large-bg);\r\n\r\n        border: 1px solid var(--var-panel-sep);\r\n        border-radius: 6px;\r\n        outline: none;\r\n\r\n        appearance: none;\r\n\r\n        &:checked {\r\n            background: var(--var-ctrl-focus);\r\n        }\r\n    }\r\n        \r\n    button {\r\n        background: var(--var-large-bg);\r\n        color: var(--var-text-fg);\r\n\r\n        border: none;\r\n        outline: none;\r\n        padding: 7px 8px;\r\n        border: 1px solid var(--var-panel-sep);\r\n        margin-bottom: 2px;\r\n        border-radius: 4px;\r\n\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n\r\n        &:hover {\r\n            background: var(--var-button-hover);\r\n        }\r\n    \r\n        &:active {\r\n            background: var(--var-button-active);\r\n        }\r\n\r\n        &.active {\r\n            background: var(--var-ctrl-selected);\r\n        }\r\n    }\r\n\r\n    div.buttonGroup {\r\n        display: flex;\r\n\r\n        & > button {\r\n            border-radius: 0px;\r\n            \r\n            flex-grow: 1;\r\n\r\n            &:not(:last-child) {\r\n                border-right: none;\r\n            }\r\n\r\n            &:first-child {\r\n                border-radius: 4px 0px 0px 4px;\r\n            }\r\n    \r\n            &:last-child {\r\n                border-radius: 0px 4px 4px 0px;\r\n            }\r\n        }\r\n    }\r\n\r\n    label {\r\n        font-size: 10pt;\r\n    }\r\n\r\n    div.row {\r\n        display: flex;\r\n        align-items: center;\r\n\r\n        label {\r\n            margin-right: 8px;\r\n        }\r\n\r\n        & *:last-child {\r\n            flex-grow: 1;\r\n        }\r\n    }\r\n\r\n    div.grid {\r\n        display: grid;\r\n        gap: 12px;\r\n\r\n        &.g-2i {\r\n            grid-template-columns: repeat(2, 1fr);\r\n        }\r\n    }\r\n\r\n    input[type=number],\r\n    input[type=text] {\r\n        background: var(--var-ctrl-editbg);\r\n        color: var(--var-text-fg);\r\n\r\n        font-family: \"Inter\";\r\n        font-size: 10pt;\r\n\r\n        outline: none;\r\n        border: 1px solid var(--var-ctrl-border);\r\n        border-radius: 4px;\r\n        padding: 4px 10px;\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "div.panelContents p.emptyPanel {\n  font-size: 10pt;\n  text-align: center;\n  margin: 8px 12px; }\n\ndiv.panelContents div.content {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 4px; }\n\ndiv.panelContents div.accordion {\n  border-bottom: 1px solid var(--var-panel-sep); }\n  div.panelContents div.accordion > header {\n    background: var(--var-ctrl-header);\n    font-size: 9pt;\n    font-weight: 400;\n    text-transform: uppercase;\n    letter-spacing: 1px;\n    padding: 4px 12px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between; }\n  div.panelContents div.accordion > div.content {\n    padding: 6px 12px; }\n\ndiv.panelContents input[type=checkbox] {\n  width: 20px;\n  height: 12px;\n  background: var(--var-large-bg);\n  border: 1px solid var(--var-panel-sep);\n  border-radius: 6px;\n  outline: none;\n  appearance: none; }\n  div.panelContents input[type=checkbox]:checked {\n    background: var(--var-ctrl-focus); }\n\ndiv.panelContents button {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  border: none;\n  outline: none;\n  padding: 7px 8px;\n  border: 1px solid var(--var-panel-sep);\n  margin-bottom: 2px;\n  border-radius: 4px;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n  div.panelContents button:hover {\n    background: var(--var-button-hover); }\n  div.panelContents button:active {\n    background: var(--var-button-active); }\n  div.panelContents button.active {\n    background: var(--var-ctrl-selected); }\n\ndiv.panelContents div.buttonGroup {\n  display: flex; }\n  div.panelContents div.buttonGroup > button {\n    border-radius: 0px;\n    flex-grow: 1; }\n    div.panelContents div.buttonGroup > button:not(:last-child) {\n      border-right: none; }\n    div.panelContents div.buttonGroup > button:first-child {\n      border-radius: 4px 0px 0px 4px; }\n    div.panelContents div.buttonGroup > button:last-child {\n      border-radius: 0px 4px 4px 0px; }\n\ndiv.panelContents label {\n  font-size: 10pt; }\n\ndiv.panelContents div.row {\n  display: flex;\n  align-items: center; }\n  div.panelContents div.row label {\n    margin-right: 8px; }\n  div.panelContents div.row *:last-child {\n    flex-grow: 1; }\n\ndiv.panelContents div.grid {\n  display: grid;\n  gap: 12px; }\n  div.panelContents div.grid.g-2i {\n    grid-template-columns: repeat(2, 1fr); }\n\ndiv.panelContents input[type=number],\ndiv.panelContents input[type=text] {\n  background: var(--var-ctrl-editbg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  font-size: 10pt;\n  outline: none;\n  border: 1px solid var(--var-ctrl-border);\n  border-radius: 4px;\n  padding: 4px 10px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/controls.scss"],"names":[],"mappings":"AAAA;EAEQ,eAAe;EACf,kBAAkB;EAElB,gBAAgB,EAAA;;AALxB;EASQ,aAAa;EACb,0BAA0B;EAC1B,QAAQ,EAAA;;AAXhB;EAeQ,6CAA6C,EAAA;EAfrD;IAkBY,kCAAkC;IAElC,cAAc;IACd,gBAAgB;IAChB,yBAAyB;IACzB,mBAAmB;IAEnB,iBAAiB;IAEjB,aAAa;IACb,mBAAmB;IACnB,8BAA8B,EAAA;EA7B1C;IAiCY,iBAAiB,EAAA;;AAjC7B;EAsCQ,WAAW;EACX,YAAY;EACZ,+BAA+B;EAE/B,sCAAsC;EACtC,kBAAkB;EAClB,aAAa;EAEb,gBAAgB,EAAA;EA9CxB;IAiDY,iCAAiC,EAAA;;AAjD7C;EAsDQ,+BAA+B;EAC/B,yBAAyB;EAEzB,YAAY;EACZ,aAAa;EACb,gBAAgB;EAChB,sCAAsC;EACtC,kBAAkB;EAClB,kBAAkB;EAElB,aAAa;EACb,mBAAmB;EACnB,uBAAuB,EAAA;EAlE/B;IAqEY,mCAAmC,EAAA;EArE/C;IAyEY,oCAAoC,EAAA;EAzEhD;IA6EY,oCAAoC,EAAA;;AA7EhD;EAkFQ,aAAa,EAAA;EAlFrB;IAqFY,kBAAkB;IAElB,YAAY,EAAA;IAvFxB;MA0FgB,kBAAkB,EAAA;IA1FlC;MA8FgB,8BAA8B,EAAA;IA9F9C;MAkGgB,8BAA8B,EAAA;;AAlG9C;EAwGQ,eAAe,EAAA;;AAxGvB;EA4GQ,aAAa;EACb,mBAAmB,EAAA;EA7G3B;IAgHY,iBAAiB,EAAA;EAhH7B;IAoHY,YAAY,EAAA;;AApHxB;EAyHQ,aAAa;EACb,SAAS,EAAA;EA1HjB;IA6HY,qCAAqC,EAAA;;AA7HjD;;EAmIQ,kCAAkC;EAClC,yBAAyB;EAEzB,oBAAoB;EACpB,eAAe;EAEf,aAAa;EACb,wCAAwC;EACxC,kBAAkB;EAClB,iBAAiB,EAAA","sourcesContent":["div.panelContents {\n    p.emptyPanel {\n        font-size: 10pt;\n        text-align: center;\n\n        margin: 8px 12px;\n    }\n\n    div.content {\n        display: grid;\n        grid-template-columns: 1fr;\n        gap: 4px;\n    }\n\n    div.accordion {\n        border-bottom: 1px solid var(--var-panel-sep);\n\n        & > header {\n            background: var(--var-ctrl-header);\n            \n            font-size: 9pt;\n            font-weight: 400;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n\n            padding: 4px 12px;\n\n            display: flex;\n            align-items: center;\n            justify-content: space-between;\n        }\n\n        & > div.content {\n            padding: 6px 12px;\n        }\n    }\n\n    input[type=checkbox] {\n        width: 20px;\n        height: 12px;\n        background: var(--var-large-bg);\n\n        border: 1px solid var(--var-panel-sep);\n        border-radius: 6px;\n        outline: none;\n\n        appearance: none;\n\n        &:checked {\n            background: var(--var-ctrl-focus);\n        }\n    }\n        \n    button {\n        background: var(--var-large-bg);\n        color: var(--var-text-fg);\n\n        border: none;\n        outline: none;\n        padding: 7px 8px;\n        border: 1px solid var(--var-panel-sep);\n        margin-bottom: 2px;\n        border-radius: 4px;\n\n        display: flex;\n        align-items: center;\n        justify-content: center;\n\n        &:hover {\n            background: var(--var-button-hover);\n        }\n    \n        &:active {\n            background: var(--var-button-active);\n        }\n\n        &.active {\n            background: var(--var-ctrl-selected);\n        }\n    }\n\n    div.buttonGroup {\n        display: flex;\n\n        & > button {\n            border-radius: 0px;\n            \n            flex-grow: 1;\n\n            &:not(:last-child) {\n                border-right: none;\n            }\n\n            &:first-child {\n                border-radius: 4px 0px 0px 4px;\n            }\n    \n            &:last-child {\n                border-radius: 0px 4px 4px 0px;\n            }\n        }\n    }\n\n    label {\n        font-size: 10pt;\n    }\n\n    div.row {\n        display: flex;\n        align-items: center;\n\n        label {\n            margin-right: 8px;\n        }\n\n        & *:last-child {\n            flex-grow: 1;\n        }\n    }\n\n    div.grid {\n        display: grid;\n        gap: 12px;\n\n        &.g-2i {\n            grid-template-columns: repeat(2, 1fr);\n        }\n    }\n\n    input[type=number],\n    input[type=text] {\n        background: var(--var-ctrl-editbg);\n        color: var(--var-text-fg);\n\n        font-family: \"Inter\";\n        font-size: 10pt;\n\n        outline: none;\n        border: 1px solid var(--var-ctrl-border);\n        border-radius: 4px;\n        padding: 4px 10px;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -145,7 +145,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "section.edit {\n  position: relative;\n  border-top: 1px solid var(--var-panel-sep);\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: 1fr auto; }\n  section.edit div.viewport {\n    position: relative; }\n    section.edit div.viewport canvas {\n      position: absolute;\n      left: 0;\n      top: 0; }\n  section.edit div.glyphBar {\n    color: var(--var-text-fg);\n    font-family: \"Inter\";\n    font-size: 24pt;\n    text-align: center;\n    border: none;\n    outline: none;\n    padding: 6px 20px; }\n    section.edit div.glyphBar div.ntglyph {\n      height: 1em;\n      box-sizing: border-box;\n      background: var(--var-button-hover);\n      border-radius: 4px;\n      border: 1px solid #ddd;\n      margin: 0px 1px;\n      display: inline-flex;\n      align-items: center; }\n      section.edit div.glyphBar div.ntglyph span {\n        font-size: 16pt; }\n  section.edit div.glyphSwitchButtons {\n    position: absolute;\n    left: 8px;\n    right: 8px;\n    top: 0;\n    bottom: 0;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    pointer-events: none; }\n  section.edit button.prevGlyph,\n  section.edit button.nextGlyph {\n    background: var(--var-button-bg);\n    font-size: 0;\n    outline: none;\n    padding: 6px 8px;\n    border-radius: 4px;\n    border: 1px solid var(--var-panel-sep);\n    box-shadow: 0px 2px 4px #0001;\n    pointer-events: all;\n    z-index: 10; }\n    section.edit button.prevGlyph:hover,\n    section.edit button.nextGlyph:hover {\n      background: var(--var-button-hover); }\n    section.edit button.prevGlyph:active,\n    section.edit button.nextGlyph:active {\n      background: var(--var-button-active); }\n  section.edit div.tools {\n    background: var(--var-panel-bg);\n    padding: 2px;\n    display: flex;\n    flex-direction: column;\n    border-right: 1px solid var(--var-panel-sep);\n    grid-row: 1 / span 2; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 7px 8px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: var(--var-button-hover); }\n      section.edit div.tools button:active {\n        background: var(--var-button-active); }\n      section.edit div.tools button.active {\n        background: var(--var-panel-sep); }\n\ndiv.subactions {\n  display: flex; }\n  div.subactions div {\n    border-left: 1px solid var(--var-panel-sep);\n    display: flex; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/editor.scss"],"names":[],"mappings":"AAAA;EACI,kBAAkB;EAElB,0CAA0C;EAE1C,aAAa;EACb,+BAA+B;EAC/B,4BAA4B,EAAA;EAPhC;IAUQ,kBAAkB,EAAA;IAV1B;MAaY,kBAAkB;MAClB,OAAO;MACP,MAAM,EAAA;EAflB;IAoBQ,yBAAyB;IAEzB,oBAAoB;IACpB,eAAe;IACf,kBAAkB;IAElB,YAAY;IACZ,aAAa;IACb,iBAAiB,EAAA;IA5BzB;MA+BY,WAAW;MACX,sBAAsB;MAEtB,mCAAmC;MACnC,kBAAkB;MAClB,sBAAsB;MACtB,eAAe;MAEf,oBAAoB;MACpB,mBAAmB,EAAA;MAxC/B;QA2CgB,eAAe,EAAA;EA3C/B;IAiDQ,kBAAkB;IAClB,SAAS;IACT,UAAU;IACV,MAAM;IACN,SAAS;IAET,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,oBAAoB,EAAA;EA1D5B;;IA+DQ,gCAAgC;IAEhC,YAAY;IAEZ,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,sCAAsC;IACtC,6BAA6B;IAE7B,mBAAmB;IACnB,WAAW,EAAA;IA1EnB;;MA6EY,mCAAmC,EAAA;IA7E/C;;MAiFY,oCAAoC,EAAA;EAjFhD;IAsFQ,+BAA+B;IAE/B,YAAY;IAEZ,aAAa;IACb,sBAAsB;IAEtB,4CAA4C;IAE5C,oBAAoB,EAAA;IA/F5B;MAkGY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,gBAAgB;MAChB,kBAAkB,EAAA;MAzG9B;QA4GgB,mCAAmC,EAAA;MA5GnD;QAgHgB,oCAAoC,EAAA;MAhHpD;QAoHgB,gCAAgC,EAAA;;AAMhD;EACI,aAAa,EAAA;EADjB;IAIQ,2CAA2C;IAC3C,aAAa,EAAA","sourcesContent":["section.edit {\r\n    position: relative;\r\n\r\n    border-top: 1px solid var(--var-panel-sep);\r\n\r\n    display: grid;\r\n    grid-template-columns: auto 1fr;\r\n    grid-template-rows: 1fr auto;\r\n\r\n    div.viewport {\r\n        position: relative;\r\n\r\n        canvas {\r\n            position: absolute;\r\n            left: 0;\r\n            top: 0;\r\n        }\r\n    }\r\n\r\n    div.glyphBar {\r\n        color: var(--var-text-fg);\r\n\r\n        font-family: \"Inter\";\r\n        font-size: 24pt;\r\n        text-align: center;\r\n\r\n        border: none;\r\n        outline: none;\r\n        padding: 6px 20px;\r\n\r\n        div.ntglyph {\r\n            height: 1em;\r\n            box-sizing: border-box;\r\n\r\n            background: var(--var-button-hover);\r\n            border-radius: 4px;\r\n            border: 1px solid #ddd;\r\n            margin: 0px 1px;\r\n\r\n            display: inline-flex;\r\n            align-items: center;\r\n\r\n            span {            \r\n                font-size: 16pt;\r\n            }\r\n        }\r\n    }\r\n\r\n    div.glyphSwitchButtons {\r\n        position: absolute;\r\n        left: 8px;\r\n        right: 8px;\r\n        top: 0;\r\n        bottom: 0;\r\n\r\n        display: flex;\r\n        justify-content: space-between;\r\n        align-items: center;\r\n        pointer-events: none;\r\n    }\r\n\r\n    button.prevGlyph,\r\n    button.nextGlyph {\r\n        background: var(--var-button-bg);\r\n\r\n        font-size: 0;\r\n\r\n        outline: none;\r\n        padding: 6px 8px;\r\n        border-radius: 4px;\r\n        border: 1px solid var(--var-panel-sep);\r\n        box-shadow: 0px 2px 4px #0001;\r\n\r\n        pointer-events: all;\r\n        z-index: 10;\r\n    \r\n        &:hover {\r\n            background: var(--var-button-hover);\r\n        }\r\n    \r\n        &:active {\r\n            background: var(--var-button-active);\r\n        }\r\n    }\r\n\r\n    div.tools {\r\n        background: var(--var-panel-bg);\r\n\r\n        padding: 2px;\r\n\r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        border-right: 1px solid var(--var-panel-sep);\r\n\r\n        grid-row: 1 / span 2;\r\n\r\n        button {\r\n            background: transparent;\r\n\r\n            font-size: 0;\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 7px 8px;\r\n            border-radius: 4px;\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n    \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-panel-sep);\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\ndiv.subactions {    \r\n    display: flex;\r\n\r\n    div {\r\n        border-left: 1px solid var(--var-panel-sep); \r\n        display: flex;\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "section.edit {\n  position: relative;\n  border-top: 1px solid var(--var-panel-sep);\n  display: grid;\n  grid-template-columns: auto 1fr;\n  grid-template-rows: 1fr auto; }\n  section.edit div.viewport {\n    position: relative; }\n    section.edit div.viewport canvas {\n      position: absolute;\n      left: 0;\n      top: 0; }\n  section.edit div.glyphBar {\n    color: var(--var-text-fg);\n    font-family: \"Inter\";\n    font-size: 24pt;\n    text-align: center;\n    border: none;\n    outline: none;\n    padding: 6px 20px; }\n    section.edit div.glyphBar div.ntglyph {\n      height: 1em;\n      box-sizing: border-box;\n      background: var(--var-button-hover);\n      border-radius: 4px;\n      border: 1px solid #ddd;\n      margin: 0px 1px;\n      display: inline-flex;\n      align-items: center; }\n      section.edit div.glyphBar div.ntglyph span {\n        font-size: 16pt; }\n  section.edit div.glyphSwitchButtons {\n    position: absolute;\n    left: 8px;\n    right: 8px;\n    top: 0;\n    bottom: 0;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    pointer-events: none; }\n  section.edit button.prevGlyph,\n  section.edit button.nextGlyph {\n    background: var(--var-button-bg);\n    font-size: 0;\n    outline: none;\n    padding: 6px 8px;\n    border-radius: 4px;\n    border: 1px solid var(--var-panel-sep);\n    box-shadow: 0px 2px 4px #0001;\n    pointer-events: all;\n    z-index: 10; }\n    section.edit button.prevGlyph:hover,\n    section.edit button.nextGlyph:hover {\n      background: var(--var-button-hover); }\n    section.edit button.prevGlyph:active,\n    section.edit button.nextGlyph:active {\n      background: var(--var-button-active); }\n  section.edit div.tools {\n    background: var(--var-panel-bg);\n    padding: 2px;\n    display: flex;\n    flex-direction: column;\n    border-right: 1px solid var(--var-panel-sep);\n    grid-row: 1 / span 2; }\n    section.edit div.tools button {\n      background: transparent;\n      font-size: 0;\n      border: none;\n      outline: none;\n      padding: 7px 8px;\n      border-radius: 4px; }\n      section.edit div.tools button:hover {\n        background: var(--var-button-hover); }\n      section.edit div.tools button:active {\n        background: var(--var-button-active); }\n      section.edit div.tools button.active {\n        background: var(--var-panel-sep); }\n\ndiv.subactions {\n  display: flex; }\n  div.subactions div {\n    border-left: 1px solid var(--var-panel-sep);\n    display: flex; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/editor.scss"],"names":[],"mappings":"AAAA;EACI,kBAAkB;EAElB,0CAA0C;EAE1C,aAAa;EACb,+BAA+B;EAC/B,4BAA4B,EAAA;EAPhC;IAUQ,kBAAkB,EAAA;IAV1B;MAaY,kBAAkB;MAClB,OAAO;MACP,MAAM,EAAA;EAflB;IAoBQ,yBAAyB;IAEzB,oBAAoB;IACpB,eAAe;IACf,kBAAkB;IAElB,YAAY;IACZ,aAAa;IACb,iBAAiB,EAAA;IA5BzB;MA+BY,WAAW;MACX,sBAAsB;MAEtB,mCAAmC;MACnC,kBAAkB;MAClB,sBAAsB;MACtB,eAAe;MAEf,oBAAoB;MACpB,mBAAmB,EAAA;MAxC/B;QA2CgB,eAAe,EAAA;EA3C/B;IAiDQ,kBAAkB;IAClB,SAAS;IACT,UAAU;IACV,MAAM;IACN,SAAS;IAET,aAAa;IACb,8BAA8B;IAC9B,mBAAmB;IACnB,oBAAoB,EAAA;EA1D5B;;IA+DQ,gCAAgC;IAEhC,YAAY;IAEZ,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,sCAAsC;IACtC,6BAA6B;IAE7B,mBAAmB;IACnB,WAAW,EAAA;IA1EnB;;MA6EY,mCAAmC,EAAA;IA7E/C;;MAiFY,oCAAoC,EAAA;EAjFhD;IAsFQ,+BAA+B;IAE/B,YAAY;IAEZ,aAAa;IACb,sBAAsB;IAEtB,4CAA4C;IAE5C,oBAAoB,EAAA;IA/F5B;MAkGY,uBAAuB;MAEvB,YAAY;MAEZ,YAAY;MACZ,aAAa;MACb,gBAAgB;MAChB,kBAAkB,EAAA;MAzG9B;QA4GgB,mCAAmC,EAAA;MA5GnD;QAgHgB,oCAAoC,EAAA;MAhHpD;QAoHgB,gCAAgC,EAAA;;AAMhD;EACI,aAAa,EAAA;EADjB;IAIQ,2CAA2C;IAC3C,aAAa,EAAA","sourcesContent":["section.edit {\n    position: relative;\n\n    border-top: 1px solid var(--var-panel-sep);\n\n    display: grid;\n    grid-template-columns: auto 1fr;\n    grid-template-rows: 1fr auto;\n\n    div.viewport {\n        position: relative;\n\n        canvas {\n            position: absolute;\n            left: 0;\n            top: 0;\n        }\n    }\n\n    div.glyphBar {\n        color: var(--var-text-fg);\n\n        font-family: \"Inter\";\n        font-size: 24pt;\n        text-align: center;\n\n        border: none;\n        outline: none;\n        padding: 6px 20px;\n\n        div.ntglyph {\n            height: 1em;\n            box-sizing: border-box;\n\n            background: var(--var-button-hover);\n            border-radius: 4px;\n            border: 1px solid #ddd;\n            margin: 0px 1px;\n\n            display: inline-flex;\n            align-items: center;\n\n            span {            \n                font-size: 16pt;\n            }\n        }\n    }\n\n    div.glyphSwitchButtons {\n        position: absolute;\n        left: 8px;\n        right: 8px;\n        top: 0;\n        bottom: 0;\n\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        pointer-events: none;\n    }\n\n    button.prevGlyph,\n    button.nextGlyph {\n        background: var(--var-button-bg);\n\n        font-size: 0;\n\n        outline: none;\n        padding: 6px 8px;\n        border-radius: 4px;\n        border: 1px solid var(--var-panel-sep);\n        box-shadow: 0px 2px 4px #0001;\n\n        pointer-events: all;\n        z-index: 10;\n    \n        &:hover {\n            background: var(--var-button-hover);\n        }\n    \n        &:active {\n            background: var(--var-button-active);\n        }\n    }\n\n    div.tools {\n        background: var(--var-panel-bg);\n\n        padding: 2px;\n\n        display: flex;\n        flex-direction: column;\n\n        border-right: 1px solid var(--var-panel-sep);\n\n        grid-row: 1 / span 2;\n\n        button {\n            background: transparent;\n\n            font-size: 0;\n\n            border: none;\n            outline: none;\n            padding: 7px 8px;\n            border-radius: 4px;\n    \n            &:hover {\n                background: var(--var-button-hover);\n            }\n    \n            &:active {\n                background: var(--var-button-active);\n            }\n\n            &.active {\n                background: var(--var-panel-sep);\n            }\n        }\n    }\n}\n\ndiv.subactions {    \n    display: flex;\n\n    div {\n        border-left: 1px solid var(--var-panel-sep); \n        display: flex;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -167,7 +167,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "main {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 320px;\n  bottom: 0;\n  background: var(--var-panel-bg);\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start; }\n  main > nav {\n    width: 100%;\n    padding: 0px;\n    display: flex; }\n    main > nav div.actions {\n      display: flex; }\n      main > nav div.actions button {\n        background: transparent;\n        border: none;\n        outline: none;\n        padding: 7px 10px;\n        border-radius: 4px;\n        margin-bottom: 2px;\n        display: flex;\n        align-items: center;\n        justify-content: center; }\n        main > nav div.actions button:hover {\n          background: var(--var-button-hover); }\n        main > nav div.actions button:active {\n          background: var(--var-button-active); }\n    main > nav div.tabs {\n      display: flex;\n      flex-grow: 1;\n      justify-content: center; }\n      main > nav div.tabs button {\n        background: transparent;\n        font-family: \"Inter\";\n        font-size: 10pt;\n        font-weight: 500;\n        padding: 6px 20px;\n        border: none;\n        border-bottom: none;\n        border-radius: 2px 2px 0px 0px;\n        outline: none; }\n        main > nav div.tabs button.active {\n          background: #fff; }\n  main section {\n    position: relative;\n    background: var(--var-large-bg);\n    width: 100%;\n    flex-grow: 1; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/main.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,YAAY;EACZ,SAAS;EAET,+BAA+B;EAE/B,aAAa;EACb,sBAAsB;EACtB,uBAAuB,EAAA;EAX3B;IAcQ,WAAW;IAEX,YAAY;IAEZ,aAAa,EAAA;IAlBrB;MAqBY,aAAa,EAAA;MArBzB;QAwBgB,uBAAuB;QAEvB,YAAY;QACZ,aAAa;QACb,iBAAiB;QACjB,kBAAkB;QAClB,kBAAkB;QAElB,aAAa;QACb,mBAAmB;QACnB,uBAAuB,EAAA;QAlCvC;UAqCoB,mCAAmC,EAAA;QArCvD;UAyCoB,oCAAoC,EAAA;IAzCxD;MA+CY,aAAa;MACb,YAAY;MACZ,uBAAuB,EAAA;MAjDnC;QAoDgB,uBAAuB;QAEvB,oBAAoB;QACpB,eAAe;QACf,gBAAgB;QAEhB,iBAAiB;QACjB,YAAY;QACZ,mBAAmB;QACnB,8BAA8B;QAC9B,aAAa,EAAA;QA9D7B;UAiEoB,gBAAgB,EAAA;EAjEpC;IAwEQ,kBAAkB;IAElB,+BAA+B;IAE/B,WAAW;IAEX,YAAY,EAAA","sourcesContent":["main {\r\n    position: fixed;\r\n    left: 0;\r\n    top: 0;\r\n    right: 320px;\r\n    bottom: 0;\r\n\r\n    background: var(--var-panel-bg);\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n\r\n    & > nav {\r\n        width: 100%;\r\n\r\n        padding: 0px;\r\n\r\n        display: flex;\r\n\r\n        div.actions {\r\n            display: flex;\r\n\r\n            button {    \r\n                background: transparent;\r\n    \r\n                border: none;\r\n                outline: none;\r\n                padding: 7px 10px;\r\n                border-radius: 4px;\r\n                margin-bottom: 2px;\r\n    \r\n                display: flex;\r\n                align-items: center;\r\n                justify-content: center;\r\n    \r\n                &:hover {\r\n                    background: var(--var-button-hover);\r\n                }\r\n    \r\n                &:active {\r\n                    background: var(--var-button-active);\r\n                }\r\n            }\r\n        }\r\n\r\n        div.tabs {\r\n            display: flex;\r\n            flex-grow: 1;\r\n            justify-content: center;\r\n\r\n            button {\r\n                background: transparent;\r\n    \r\n                font-family: \"Inter\";\r\n                font-size: 10pt;\r\n                font-weight: 500;\r\n    \r\n                padding: 6px 20px;\r\n                border: none;\r\n                border-bottom: none;\r\n                border-radius: 2px 2px 0px 0px;\r\n                outline: none;\r\n    \r\n                &.active {\r\n                    background: #fff;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    section {\r\n        position: relative;\r\n\r\n        background: var(--var-large-bg);\r\n\r\n        width: 100%;\r\n\r\n        flex-grow: 1;\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "main {\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 320px;\n  bottom: 0;\n  background: var(--var-panel-bg);\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start; }\n  main > nav {\n    width: 100%;\n    padding: 0px;\n    display: flex; }\n    main > nav div.actions {\n      display: flex; }\n      main > nav div.actions button {\n        background: transparent;\n        border: none;\n        outline: none;\n        padding: 7px 10px;\n        border-radius: 4px;\n        margin-bottom: 2px;\n        display: flex;\n        align-items: center;\n        justify-content: center; }\n        main > nav div.actions button:hover {\n          background: var(--var-button-hover); }\n        main > nav div.actions button:active {\n          background: var(--var-button-active); }\n    main > nav div.tabs {\n      display: flex;\n      flex-grow: 1;\n      justify-content: center; }\n      main > nav div.tabs button {\n        background: transparent;\n        font-family: \"Inter\";\n        font-size: 10pt;\n        font-weight: 500;\n        padding: 6px 20px;\n        border: none;\n        border-bottom: none;\n        border-radius: 2px 2px 0px 0px;\n        outline: none; }\n        main > nav div.tabs button.active {\n          background: #fff; }\n  main section {\n    position: relative;\n    background: var(--var-large-bg);\n    width: 100%;\n    flex-grow: 1; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/main.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,OAAO;EACP,MAAM;EACN,YAAY;EACZ,SAAS;EAET,+BAA+B;EAE/B,aAAa;EACb,sBAAsB;EACtB,uBAAuB,EAAA;EAX3B;IAcQ,WAAW;IAEX,YAAY;IAEZ,aAAa,EAAA;IAlBrB;MAqBY,aAAa,EAAA;MArBzB;QAwBgB,uBAAuB;QAEvB,YAAY;QACZ,aAAa;QACb,iBAAiB;QACjB,kBAAkB;QAClB,kBAAkB;QAElB,aAAa;QACb,mBAAmB;QACnB,uBAAuB,EAAA;QAlCvC;UAqCoB,mCAAmC,EAAA;QArCvD;UAyCoB,oCAAoC,EAAA;IAzCxD;MA+CY,aAAa;MACb,YAAY;MACZ,uBAAuB,EAAA;MAjDnC;QAoDgB,uBAAuB;QAEvB,oBAAoB;QACpB,eAAe;QACf,gBAAgB;QAEhB,iBAAiB;QACjB,YAAY;QACZ,mBAAmB;QACnB,8BAA8B;QAC9B,aAAa,EAAA;QA9D7B;UAiEoB,gBAAgB,EAAA;EAjEpC;IAwEQ,kBAAkB;IAElB,+BAA+B;IAE/B,WAAW;IAEX,YAAY,EAAA","sourcesContent":["main {\n    position: fixed;\n    left: 0;\n    top: 0;\n    right: 320px;\n    bottom: 0;\n\n    background: var(--var-panel-bg);\n\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n\n    & > nav {\n        width: 100%;\n\n        padding: 0px;\n\n        display: flex;\n\n        div.actions {\n            display: flex;\n\n            button {    \n                background: transparent;\n    \n                border: none;\n                outline: none;\n                padding: 7px 10px;\n                border-radius: 4px;\n                margin-bottom: 2px;\n    \n                display: flex;\n                align-items: center;\n                justify-content: center;\n    \n                &:hover {\n                    background: var(--var-button-hover);\n                }\n    \n                &:active {\n                    background: var(--var-button-active);\n                }\n            }\n        }\n\n        div.tabs {\n            display: flex;\n            flex-grow: 1;\n            justify-content: center;\n\n            button {\n                background: transparent;\n    \n                font-family: \"Inter\";\n                font-size: 10pt;\n                font-weight: 500;\n    \n                padding: 6px 20px;\n                border: none;\n                border-bottom: none;\n                border-radius: 2px 2px 0px 0px;\n                outline: none;\n    \n                &.active {\n                    background: #fff;\n                }\n            }\n        }\n    }\n\n    section {\n        position: relative;\n\n        background: var(--var-large-bg);\n\n        width: 100%;\n\n        flex-grow: 1;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -189,7 +189,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "aside {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  min-width: 320px;\n  width: 320px;\n  box-sizing: border-box;\n  border-left: 1px solid var(--var-panel-sep);\n  display: flex;\n  flex-direction: column; }\n  aside nav {\n    background: var(--var-panel-bg);\n    box-shadow: inset 0px -1px var(--var-panel-sep);\n    display: flex;\n    justify-content: center; }\n    aside nav button {\n      background: transparent;\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 400;\n      padding: 7px 20px;\n      border: none;\n      border-bottom: none;\n      outline: none; }\n      aside nav button.tool {\n        background: linear-gradient(transparent, #293844); }\n      aside nav button:hover {\n        background: var(--var-button-hover); }\n      aside nav button:active {\n        background: var(--var-button-active); }\n      aside nav button.active {\n        background: var(--var-panel-sep);\n        box-shadow: inset 0px -2px var(--var-text-fg); }\n  aside div.listContainer {\n    height: 0;\n    flex-grow: 1;\n    overflow-y: auto; }\n  aside div.panelContents:not(.active) {\n    display: none; }\n  aside div.glyphList {\n    background: var(--var-panel-bg);\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 1px; }\n    aside div.glyphList div.glyph {\n      max-width: 75px;\n      background: var(--var-large-bg);\n      display: flex;\n      flex-direction: column; }\n      aside div.glyphList div.glyph.active label {\n        background: var(--var-glist-activeLabel);\n        color: #fff; }\n      aside div.glyphList div.glyph label {\n        background: var(--var-glist-label);\n        font-size: 9pt;\n        font-weight: 500;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        padding: 2px;\n        overflow: hidden; }\n      aside div.glyphList div.glyph canvas {\n        width: 100%;\n        height: auto; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/panel.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,MAAM;EACN,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,YAAY;EACZ,sBAAsB;EAEtB,2CAA2C;EAE3C,aAAa;EACb,sBAAsB,EAAA;EAZ1B;IAeQ,+BAA+B;IAE/B,+CAA+C;IAE/C,aAAa;IACb,uBAAuB,EAAA;IApB/B;MAuBY,uBAAuB;MACvB,yBAAyB;MAEzB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,aAAa,EAAA;MAjCzB;QAoCgB,iDAEC,EAAA;MAtCjB;QA0CgB,mCAAmC,EAAA;MA1CnD;QA8CgB,oCAAoC,EAAA;MA9CpD;QAkDgB,gCAAgC;QAChC,6CAA6C,EAAA;EAnD7D;IAyDQ,SAAS;IAET,YAAY;IACZ,gBAAgB,EAAA;EA5DxB;IAgEQ,aAAa,EAAA;EAhErB;IAoEQ,+BAA+B;IAE/B,aAAa;IACb,qCAAqC;IACrC,QAAQ,EAAA;IAxEhB;MA2EY,eAAe;MAEf,+BAA+B;MAE/B,aAAa;MACb,sBAAsB,EAAA;MAhFlC;QAmFgB,wCAAwC;QACxC,WAAW,EAAA;MApF3B;QAwFgB,kCAAkC;QAElC,cAAc;QACd,gBAAgB;QAChB,kBAAkB;QAClB,mBAAmB;QACnB,uBAAuB;QAEvB,YAAY;QAEZ,gBAAgB,EAAA;MAlGhC;QAsGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["aside {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    min-width: 320px;\r\n    width: 320px;\r\n    box-sizing: border-box;\r\n\r\n    border-left: 1px solid var(--var-panel-sep);\r\n    \r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n    nav {\r\n        background: var(--var-panel-bg);\r\n\r\n        box-shadow: inset 0px -1px var(--var-panel-sep);\r\n\r\n        display: flex;\r\n        justify-content: center;\r\n\r\n        button {\r\n            background: transparent;\r\n            color: var(--var-text-fg);\r\n\r\n            font-family: \"Inter\";\r\n            font-size: 10pt;\r\n            font-weight: 400;\r\n\r\n            padding: 7px 20px;\r\n            border: none;\r\n            border-bottom: none;\r\n            outline: none;\r\n\r\n            &.tool {\r\n                background: linear-gradient(\r\n                    transparent, rgb(41, 56, 68)\r\n                );\r\n            }\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n    \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            &.active {\r\n                background: var(--var-panel-sep);\r\n                box-shadow: inset 0px -2px var(--var-text-fg);\r\n            }\r\n        }\r\n    }\r\n\r\n    div.listContainer {\r\n        height: 0; // WTF???\r\n\r\n        flex-grow: 1;\r\n        overflow-y: auto;\r\n    }\r\n\r\n    div.panelContents:not(.active) {\r\n        display: none;\r\n    }\r\n\r\n    div.glyphList {\r\n        background: var(--var-panel-bg);\r\n\r\n        display: grid;\r\n        grid-template-columns: repeat(4, 1fr);\r\n        gap: 1px;\r\n\r\n        div.glyph {\r\n            max-width: 75px;\r\n\r\n            background: var(--var-large-bg);\r\n\r\n            display: flex;\r\n            flex-direction: column;\r\n\r\n            &.active label {\r\n                background: var(--var-glist-activeLabel);\r\n                color: #fff;\r\n            }\r\n\r\n            label {\r\n                background: var(--var-glist-label);\r\n\r\n                font-size: 9pt;\r\n                font-weight: 500;\r\n                text-align: center;\r\n                white-space: nowrap;\r\n                text-overflow: ellipsis;\r\n                \r\n                padding: 2px;\r\n\r\n                overflow: hidden;\r\n            }\r\n\r\n            canvas {\r\n                width: 100%;\r\n                height: auto;\r\n            }\r\n        }\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "aside {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  min-width: 320px;\n  width: 320px;\n  box-sizing: border-box;\n  border-left: 1px solid var(--var-panel-sep);\n  display: flex;\n  flex-direction: column; }\n  aside nav {\n    background: var(--var-panel-bg);\n    box-shadow: inset 0px -1px var(--var-panel-sep);\n    display: flex;\n    justify-content: center; }\n    aside nav button {\n      background: transparent;\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      font-size: 10pt;\n      font-weight: 400;\n      padding: 7px 20px;\n      border: none;\n      border-bottom: none;\n      outline: none; }\n      aside nav button.tool {\n        background: linear-gradient(transparent, #293844); }\n      aside nav button:hover {\n        background: var(--var-button-hover); }\n      aside nav button:active {\n        background: var(--var-button-active); }\n      aside nav button.active {\n        background: var(--var-panel-sep);\n        box-shadow: inset 0px -2px var(--var-text-fg); }\n  aside div.listContainer {\n    height: 0;\n    flex-grow: 1;\n    overflow-y: auto; }\n  aside div.panelContents:not(.active) {\n    display: none; }\n  aside div.glyphList {\n    background: var(--var-panel-bg);\n    display: grid;\n    grid-template-columns: repeat(4, 1fr);\n    gap: 1px; }\n    aside div.glyphList div.glyph {\n      max-width: 75px;\n      background: var(--var-large-bg);\n      display: flex;\n      flex-direction: column; }\n      aside div.glyphList div.glyph.active label {\n        background: var(--var-glist-activeLabel);\n        color: #fff; }\n      aside div.glyphList div.glyph label {\n        background: var(--var-glist-label);\n        font-size: 9pt;\n        font-weight: 500;\n        text-align: center;\n        white-space: nowrap;\n        text-overflow: ellipsis;\n        padding: 2px;\n        overflow: hidden; }\n      aside div.glyphList div.glyph canvas {\n        width: 100%;\n        height: auto; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app/panel.scss"],"names":[],"mappings":"AAAA;EACI,eAAe;EACf,MAAM;EACN,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,YAAY;EACZ,sBAAsB;EAEtB,2CAA2C;EAE3C,aAAa;EACb,sBAAsB,EAAA;EAZ1B;IAeQ,+BAA+B;IAE/B,+CAA+C;IAE/C,aAAa;IACb,uBAAuB,EAAA;IApB/B;MAuBY,uBAAuB;MACvB,yBAAyB;MAEzB,oBAAoB;MACpB,eAAe;MACf,gBAAgB;MAEhB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB;MACnB,aAAa,EAAA;MAjCzB;QAoCgB,iDAEC,EAAA;MAtCjB;QA0CgB,mCAAmC,EAAA;MA1CnD;QA8CgB,oCAAoC,EAAA;MA9CpD;QAkDgB,gCAAgC;QAChC,6CAA6C,EAAA;EAnD7D;IAyDQ,SAAS;IAET,YAAY;IACZ,gBAAgB,EAAA;EA5DxB;IAgEQ,aAAa,EAAA;EAhErB;IAoEQ,+BAA+B;IAE/B,aAAa;IACb,qCAAqC;IACrC,QAAQ,EAAA;IAxEhB;MA2EY,eAAe;MAEf,+BAA+B;MAE/B,aAAa;MACb,sBAAsB,EAAA;MAhFlC;QAmFgB,wCAAwC;QACxC,WAAW,EAAA;MApF3B;QAwFgB,kCAAkC;QAElC,cAAc;QACd,gBAAgB;QAChB,kBAAkB;QAClB,mBAAmB;QACnB,uBAAuB;QAEvB,YAAY;QAEZ,gBAAgB,EAAA;MAlGhC;QAsGgB,WAAW;QACX,YAAY,EAAA","sourcesContent":["aside {\n    position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    min-width: 320px;\n    width: 320px;\n    box-sizing: border-box;\n\n    border-left: 1px solid var(--var-panel-sep);\n    \n    display: flex;\n    flex-direction: column;\n\n    nav {\n        background: var(--var-panel-bg);\n\n        box-shadow: inset 0px -1px var(--var-panel-sep);\n\n        display: flex;\n        justify-content: center;\n\n        button {\n            background: transparent;\n            color: var(--var-text-fg);\n\n            font-family: \"Inter\";\n            font-size: 10pt;\n            font-weight: 400;\n\n            padding: 7px 20px;\n            border: none;\n            border-bottom: none;\n            outline: none;\n\n            &.tool {\n                background: linear-gradient(\n                    transparent, rgb(41, 56, 68)\n                );\n            }\n    \n            &:hover {\n                background: var(--var-button-hover);\n            }\n    \n            &:active {\n                background: var(--var-button-active);\n            }\n\n            &.active {\n                background: var(--var-panel-sep);\n                box-shadow: inset 0px -2px var(--var-text-fg);\n            }\n        }\n    }\n\n    div.listContainer {\n        height: 0; // WTF???\n\n        flex-grow: 1;\n        overflow-y: auto;\n    }\n\n    div.panelContents:not(.active) {\n        display: none;\n    }\n\n    div.glyphList {\n        background: var(--var-panel-bg);\n\n        display: grid;\n        grid-template-columns: repeat(4, 1fr);\n        gap: 1px;\n\n        div.glyph {\n            max-width: 75px;\n\n            background: var(--var-large-bg);\n\n            display: flex;\n            flex-direction: column;\n\n            &.active label {\n                background: var(--var-glist-activeLabel);\n                color: #fff;\n            }\n\n            label {\n                background: var(--var-glist-label);\n\n                font-size: 9pt;\n                font-weight: 500;\n                text-align: center;\n                white-space: nowrap;\n                text-overflow: ellipsis;\n                \n                padding: 2px;\n\n                overflow: hidden;\n            }\n\n            canvas {\n                width: 100%;\n                height: auto;\n            }\n        }\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -211,7 +211,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "article.welcome {\n  display: flex;\n  justify-content: center;\n  align-items: flex-start; }\n  article.welcome > div {\n    width: 350px;\n    height: calc(100vh - 80px);\n    margin: 60px;\n    display: flex;\n    flex-direction: column; }\n    article.welcome > div div.recentFiles {\n      flex-grow: 1;\n      overflow-y: auto; }\n    article.welcome > div div.buttons {\n      display: grid;\n      grid-template-columns: repeat(2, 1fr);\n      gap: 2px; }\n    article.welcome > div h1 {\n      font-size: 40pt;\n      line-height: 1;\n      margin: 0;\n      text-align: center; }\n    article.welcome > div h3 {\n      font-size: 14pt;\n      font-weight: 400;\n      margin: 0px 0px 24px 0px;\n      text-align: center; }\n    article.welcome > div h2 {\n      font-weight: 400;\n      margin-bottom: 8px; }\n    article.welcome > div button {\n      width: 100%;\n      background: var(--var-panel-bg);\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      border: none;\n      outline: none;\n      padding: 7px 8px;\n      border: 1px solid var(--var-panel-sep);\n      border-radius: 4px;\n      margin-bottom: 2px;\n      display: flex;\n      align-items: center;\n      justify-content: center; }\n      article.welcome > div button.recent {\n        flex-direction: column;\n        justify-content: flex-start; }\n      article.welcome > div button label.name {\n        font-size: 12pt;\n        font-weight: 500; }\n      article.welcome > div button label.path {\n        opacity: 0.6; }\n      article.welcome > div button:hover {\n        background: var(--var-button-hover); }\n      article.welcome > div button:active {\n        background: var(--var-button-active); }\n      article.welcome > div button img {\n        margin-right: 8px; }\n        article.welcome > div button img.preview {\n          width: 332px;\n          height: auto;\n          margin: 0; }\n  article.welcome canvas.previewGenerator {\n    position: absolute;\n    pointer-events: none;\n    opacity: 0; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/welcome.scss"],"names":[],"mappings":"AAAA;EACI,aAAa;EACb,uBAAuB;EACvB,uBAAuB,EAAA;EAH3B;IAMQ,YAAY;IACZ,0BAA0B;IAE1B,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAZ9B;MAeY,YAAY;MACZ,gBAAgB,EAAA;IAhB5B;MAoBY,aAAa;MACb,qCAAqC;MACrC,QAAQ,EAAA;IAtBpB;MA0BY,eAAe;MACf,cAAc;MAEd,SAAS;MAET,kBAAkB,EAAA;IA/B9B;MAmCY,eAAe;MACf,gBAAgB;MAEhB,wBAAwB;MAExB,kBAAkB,EAAA;IAxC9B;MA4CY,gBAAgB;MAEhB,kBAAkB,EAAA;IA9C9B;MAkDY,WAAW;MAEX,+BAA+B;MAC/B,yBAAyB;MAEzB,oBAAoB;MAEpB,YAAY;MACZ,aAAa;MACb,gBAAgB;MAChB,sCAAsC;MACtC,kBAAkB;MAClB,kBAAkB;MAElB,aAAa;MACb,mBAAmB;MACnB,uBAAuB,EAAA;MAlEnC;QAqEgB,sBAAsB;QACtB,2BAA2B,EAAA;MAtE3C;QA0EgB,eAAe;QACf,gBAAgB,EAAA;MA3EhC;QA+EgB,YAAY,EAAA;MA/E5B;QAmFgB,mCAAmC,EAAA;MAnFnD;QAuFgB,oCAAoC,EAAA;MAvFpD;QA2FgB,iBAAiB,EAAA;QA3FjC;UA8FoB,YAAY;UACZ,YAAY;UAEZ,SAAS,EAAA;EAjG7B;IAwGQ,kBAAkB;IAClB,oBAAoB;IACpB,UAAU,EAAA","sourcesContent":["article.welcome {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: flex-start;\r\n\r\n    & > div {\r\n        width: 350px;\r\n        height: calc(100vh - 80px);\r\n\r\n        margin: 60px;\r\n\r\n        display: flex;\r\n        flex-direction: column;\r\n\r\n        div.recentFiles {\r\n            flex-grow: 1;\r\n            overflow-y: auto;\r\n        }\r\n\r\n        div.buttons {\r\n            display: grid;\r\n            grid-template-columns: repeat(2, 1fr);\r\n            gap: 2px;\r\n        }\r\n\r\n        h1 {\r\n            font-size: 40pt;\r\n            line-height: 1;\r\n\r\n            margin: 0;\r\n\r\n            text-align: center;\r\n        }\r\n\r\n        h3 {\r\n            font-size: 14pt;\r\n            font-weight: 400;\r\n\r\n            margin: 0px 0px 24px 0px;\r\n\r\n            text-align: center;\r\n        }\r\n\r\n        h2 {\r\n            font-weight: 400;\r\n            \r\n            margin-bottom: 8px;\r\n        }\r\n\r\n        button {\r\n            width: 100%;\r\n\r\n            background: var(--var-panel-bg);\r\n            color: var(--var-text-fg);\r\n\r\n            font-family: \"Inter\";\r\n\r\n            border: none;\r\n            outline: none;\r\n            padding: 7px 8px;\r\n            border: 1px solid var(--var-panel-sep);\r\n            border-radius: 4px;\r\n            margin-bottom: 2px;\r\n\r\n            display: flex;\r\n            align-items: center;\r\n            justify-content: center;\r\n\r\n            &.recent {\r\n                flex-direction: column;\r\n                justify-content: flex-start;\r\n            }\r\n\r\n            label.name {\r\n                font-size: 12pt;\r\n                font-weight: 500;\r\n            }\r\n\r\n            label.path {\r\n                opacity: 0.6;\r\n            }\r\n    \r\n            &:hover {\r\n                background: var(--var-button-hover);\r\n            }\r\n        \r\n            &:active {\r\n                background: var(--var-button-active);\r\n            }\r\n\r\n            img {\r\n                margin-right: 8px;\r\n\r\n                &.preview {\r\n                    width: 332px;\r\n                    height: auto;\r\n\r\n                    margin: 0;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    canvas.previewGenerator {\r\n        position: absolute;\r\n        pointer-events: none;\r\n        opacity: 0;\r\n    }\r\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "article.welcome {\n  display: flex;\n  justify-content: center;\n  align-items: flex-start; }\n  article.welcome > div {\n    width: 350px;\n    height: calc(100vh - 80px);\n    margin: 60px;\n    display: flex;\n    flex-direction: column; }\n    article.welcome > div div.recentFiles {\n      flex-grow: 1;\n      overflow-y: auto; }\n    article.welcome > div div.buttons {\n      display: grid;\n      grid-template-columns: repeat(2, 1fr);\n      gap: 2px; }\n    article.welcome > div h1 {\n      font-size: 40pt;\n      line-height: 1;\n      margin: 0;\n      text-align: center; }\n    article.welcome > div h3 {\n      font-size: 14pt;\n      font-weight: 400;\n      margin: 0px 0px 24px 0px;\n      text-align: center; }\n    article.welcome > div h2 {\n      font-weight: 400;\n      margin-bottom: 8px; }\n    article.welcome > div button {\n      width: 100%;\n      background: var(--var-panel-bg);\n      color: var(--var-text-fg);\n      font-family: \"Inter\";\n      border: none;\n      outline: none;\n      padding: 7px 8px;\n      border: 1px solid var(--var-panel-sep);\n      border-radius: 4px;\n      margin-bottom: 2px;\n      display: flex;\n      align-items: center;\n      justify-content: center; }\n      article.welcome > div button.recent {\n        flex-direction: column;\n        justify-content: flex-start; }\n      article.welcome > div button label.name {\n        font-size: 12pt;\n        font-weight: 500; }\n      article.welcome > div button label.path {\n        opacity: 0.6; }\n      article.welcome > div button:hover {\n        background: var(--var-button-hover); }\n      article.welcome > div button:active {\n        background: var(--var-button-active); }\n      article.welcome > div button img {\n        margin-right: 8px; }\n        article.welcome > div button img.preview {\n          width: 332px;\n          height: auto;\n          margin: 0; }\n  article.welcome canvas.previewGenerator {\n    position: absolute;\n    pointer-events: none;\n    opacity: 0; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/welcome.scss"],"names":[],"mappings":"AAAA;EACI,aAAa;EACb,uBAAuB;EACvB,uBAAuB,EAAA;EAH3B;IAMQ,YAAY;IACZ,0BAA0B;IAE1B,YAAY;IAEZ,aAAa;IACb,sBAAsB,EAAA;IAZ9B;MAeY,YAAY;MACZ,gBAAgB,EAAA;IAhB5B;MAoBY,aAAa;MACb,qCAAqC;MACrC,QAAQ,EAAA;IAtBpB;MA0BY,eAAe;MACf,cAAc;MAEd,SAAS;MAET,kBAAkB,EAAA;IA/B9B;MAmCY,eAAe;MACf,gBAAgB;MAEhB,wBAAwB;MAExB,kBAAkB,EAAA;IAxC9B;MA4CY,gBAAgB;MAEhB,kBAAkB,EAAA;IA9C9B;MAkDY,WAAW;MAEX,+BAA+B;MAC/B,yBAAyB;MAEzB,oBAAoB;MAEpB,YAAY;MACZ,aAAa;MACb,gBAAgB;MAChB,sCAAsC;MACtC,kBAAkB;MAClB,kBAAkB;MAElB,aAAa;MACb,mBAAmB;MACnB,uBAAuB,EAAA;MAlEnC;QAqEgB,sBAAsB;QACtB,2BAA2B,EAAA;MAtE3C;QA0EgB,eAAe;QACf,gBAAgB,EAAA;MA3EhC;QA+EgB,YAAY,EAAA;MA/E5B;QAmFgB,mCAAmC,EAAA;MAnFnD;QAuFgB,oCAAoC,EAAA;MAvFpD;QA2FgB,iBAAiB,EAAA;QA3FjC;UA8FoB,YAAY;UACZ,YAAY;UAEZ,SAAS,EAAA;EAjG7B;IAwGQ,kBAAkB;IAClB,oBAAoB;IACpB,UAAU,EAAA","sourcesContent":["article.welcome {\n    display: flex;\n    justify-content: center;\n    align-items: flex-start;\n\n    & > div {\n        width: 350px;\n        height: calc(100vh - 80px);\n\n        margin: 60px;\n\n        display: flex;\n        flex-direction: column;\n\n        div.recentFiles {\n            flex-grow: 1;\n            overflow-y: auto;\n        }\n\n        div.buttons {\n            display: grid;\n            grid-template-columns: repeat(2, 1fr);\n            gap: 2px;\n        }\n\n        h1 {\n            font-size: 40pt;\n            line-height: 1;\n\n            margin: 0;\n\n            text-align: center;\n        }\n\n        h3 {\n            font-size: 14pt;\n            font-weight: 400;\n\n            margin: 0px 0px 24px 0px;\n\n            text-align: center;\n        }\n\n        h2 {\n            font-weight: 400;\n            \n            margin-bottom: 8px;\n        }\n\n        button {\n            width: 100%;\n\n            background: var(--var-panel-bg);\n            color: var(--var-text-fg);\n\n            font-family: \"Inter\";\n\n            border: none;\n            outline: none;\n            padding: 7px 8px;\n            border: 1px solid var(--var-panel-sep);\n            border-radius: 4px;\n            margin-bottom: 2px;\n\n            display: flex;\n            align-items: center;\n            justify-content: center;\n\n            &.recent {\n                flex-direction: column;\n                justify-content: flex-start;\n            }\n\n            label.name {\n                font-size: 12pt;\n                font-weight: 500;\n            }\n\n            label.path {\n                opacity: 0.6;\n            }\n    \n            &:hover {\n                background: var(--var-button-hover);\n            }\n        \n            &:active {\n                background: var(--var-button-active);\n            }\n\n            img {\n                margin-right: 8px;\n\n                &.preview {\n                    width: 332px;\n                    height: auto;\n\n                    margin: 0;\n                }\n            }\n        }\n    }\n\n    canvas.previewGenerator {\n        position: absolute;\n        pointer-events: none;\n        opacity: 0;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -2300,6 +2300,7 @@ var defaultPerFontSettings = {
     constructionAngle1: 45,
     constructionAngle2: 90,
     constructionAngle3: 135,
+    ellipseTension: 4 * (Math.SQRT2 - 1) / 3,
 };
 
 
@@ -2975,6 +2976,40 @@ function Row(content) {
 
 /***/ }),
 
+/***/ "./src/typeedit/ui/panel/controls/sliderInput.ts":
+/*!*******************************************************!*\
+  !*** ./src/typeedit/ui/panel/controls/sliderInput.ts ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SliderInput; });
+function SliderInput(get, set, update, min, max, step) {
+    if (min === void 0) { min = 0; }
+    if (max === void 0) { max = 0; }
+    if (step === void 0) { step = 0.01; }
+    var input = document.createElement("input");
+    input.type = "range";
+    input.min = min.toString();
+    input.max = max.toString();
+    input.step = step.toString();
+    input.value = get().toString();
+    input.addEventListener("input", function () {
+        set(+input.value);
+    });
+    if (update) {
+        update(function (v) {
+            input.value = v.toString();
+        });
+    }
+    return input;
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/ui/panel/controls/textInput.ts":
 /*!*****************************************************!*\
   !*** ./src/typeedit/ui/panel/controls/textInput.ts ***!
@@ -3223,6 +3258,33 @@ function prepareSnappingPanel(font) {
 
 /***/ }),
 
+/***/ "./src/typeedit/ui/panel/toolSettings.ts":
+/*!***********************************************!*\
+  !*** ./src/typeedit/ui/panel/toolSettings.ts ***!
+  \***********************************************/
+/*! exports provided: updateToolSettingsPanel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateToolSettingsPanel", function() { return updateToolSettingsPanel; });
+function updateToolSettingsPanel(tool) {
+    var panel = document.querySelector("div.panelContents[data-tab=toolsettings]");
+    panel.innerHTML = "";
+    if (!tool.settingsPanel) {
+        var label = document.createElement("p");
+        label.className = "emptyPanel";
+        label.innerHTML = "This tool has no settings.";
+        panel.appendChild(label);
+    }
+    else {
+        tool.settingsPanel.forEach(function (i) { return panel.appendChild(i); });
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/ui/theme.ts":
 /*!**********************************!*\
   !*** ./src/typeedit/ui/theme.ts ***!
@@ -3254,7 +3316,8 @@ var fteThemes = [
         gindicatorText: "#aaa",
         guideActive: "#f0f",
         guideGrid: "#3332",
-        guideGridSubdiv: "#3331"
+        guideGridSubdiv: "#3331",
+        constructionActive: "#0f0"
     },
     {
         theme: "dark",
@@ -3274,7 +3337,8 @@ var fteThemes = [
         gindicatorText: "#555",
         guideActive: "#f0f",
         guideGrid: "#9992",
-        guideGridSubdiv: "#9991"
+        guideGridSubdiv: "#9991",
+        constructionActive: "#0f0"
     }
 ];
 function getThemeColor(colorName) {
@@ -4689,6 +4753,7 @@ var BezierPenTool = /** @class */ (function () {
                 ]
             }
         ];
+        this.settingsPanel = null;
     }
     Object.defineProperty(BezierPenTool.prototype, "currentPoint", {
         get: function () {
@@ -4806,14 +4871,18 @@ var BezierPenTool = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EllipseTool", function() { return EllipseTool; });
-/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
-/* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
-/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
-/* harmony import */ var _undo_actions_array__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../undo/actions/array */ "./src/typeedit/undo/actions/array.ts");
-/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../undo/history */ "./src/typeedit/undo/history.ts");
-/* harmony import */ var _context_bezier__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
-/* harmony import */ var _context_glyph__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
-/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../guides/point */ "./src/typeedit/viewport/guides/point.ts");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./src/typeedit/app.ts");
+/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
+/* harmony import */ var _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../geometry/bezier/point */ "./src/typeedit/geometry/bezier/point.ts");
+/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var _ui_panel_controls_accordion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ui/panel/controls/accordion */ "./src/typeedit/ui/panel/controls/accordion.ts");
+/* harmony import */ var _ui_panel_controls_label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ui/panel/controls/label */ "./src/typeedit/ui/panel/controls/label.ts");
+/* harmony import */ var _ui_panel_controls_sliderInput__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../ui/panel/controls/sliderInput */ "./src/typeedit/ui/panel/controls/sliderInput.ts");
+/* harmony import */ var _undo_actions_array__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../undo/actions/array */ "./src/typeedit/undo/actions/array.ts");
+/* harmony import */ var _undo_history__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../undo/history */ "./src/typeedit/undo/history.ts");
+/* harmony import */ var _context_bezier__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../context/bezier */ "./src/typeedit/viewport/context/bezier.ts");
+/* harmony import */ var _context_glyph__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../context/glyph */ "./src/typeedit/viewport/context/glyph.ts");
+/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../guides/point */ "./src/typeedit/viewport/guides/point.ts");
 
 
 
@@ -4822,10 +4891,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// ~ magic number ~
-var magic = 4 * (Math.SQRT2 - 1) / 3;
+
+
+
+
 var EllipseTool = /** @class */ (function () {
     function EllipseTool() {
+        var _this = this;
         this.name = "Ellipse";
         this.icon = "ellipsetool";
         this.accelerator = "KeyE";
@@ -4833,17 +4905,38 @@ var EllipseTool = /** @class */ (function () {
         this.guides = [];
         this.supportsForeignHandles = false;
         this.subactions = [];
+        this.updateSettingsCallback = function (k) {
+            if (k === "ellipseTension" && _this.configurableBezier)
+                _this.updateEllipse();
+        };
     }
+    Object.defineProperty(EllipseTool.prototype, "settingsPanel", {
+        get: function () {
+            return [
+                Object(_ui_panel_controls_accordion__WEBPACK_IMPORTED_MODULE_4__["default"])("Shape properties", [], [
+                    Object(_ui_panel_controls_label__WEBPACK_IMPORTED_MODULE_5__["default"])("Tension:"),
+                    Object(_ui_panel_controls_sliderInput__WEBPACK_IMPORTED_MODULE_6__["default"])(function () { return _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.ellipseTension; }, function (v) { return _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.ellipseTension = v; }, function (h) {
+                        _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].on("settingChanged", function (k) {
+                            if (k === "ellipseTension")
+                                h(_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.ellipseTension);
+                        });
+                    }, 0, 1, 0.0001)
+                ])
+            ];
+        },
+        enumerable: false,
+        configurable: true
+    });
     EllipseTool.prototype.createEllipse = function () {
-        var curve = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"](this.glyph);
-        curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0)));
-        curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0)));
-        curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0)));
-        curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_1__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0)));
+        var curve = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__["BezierCurve"](this.glyph);
+        curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_2__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0)));
+        curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_2__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0)));
+        curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_2__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0)));
+        curve.addPoint(new _geometry_bezier_point__WEBPACK_IMPORTED_MODULE_2__["BezierPoint"](new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0)));
         return curve;
     };
-    EllipseTool.prototype.updateEllipse = function (pos, e) {
-        var origin = new _geometry_point__WEBPACK_IMPORTED_MODULE_2__["Point"](this.startPoint.x, this.startPoint.y);
+    EllipseTool.prototype.updateEllipseFromMouse = function (pos, e) {
+        var origin = new _geometry_point__WEBPACK_IMPORTED_MODULE_3__["Point"](this.startPoint.x, this.startPoint.y);
         var radius = Math.abs(pos.y - origin.y);
         var scale = Math.abs((pos.x - origin.x) / (pos.y - origin.y));
         if (e.shiftKey) {
@@ -4855,50 +4948,61 @@ var EllipseTool = /** @class */ (function () {
             origin.x += radius * scale * Math.sign(pos.x - origin.x);
             origin.y += radius * Math.sign(pos.y - origin.y);
         }
-        this.currentBezier.points[0].base.x = origin.x;
-        this.currentBezier.points[0].base.y = origin.y - radius;
-        this.currentBezier.points[0].before.x = origin.x - magic * radius * scale;
-        this.currentBezier.points[0].before.y = origin.y - radius;
-        this.currentBezier.points[0].after.x = origin.x + magic * radius * scale;
-        this.currentBezier.points[0].after.y = origin.y - radius;
-        this.currentBezier.points[1].base.x = origin.x + radius * scale;
-        this.currentBezier.points[1].base.y = origin.y;
-        this.currentBezier.points[1].before.x = origin.x + radius * scale;
-        this.currentBezier.points[1].before.y = origin.y - magic * radius;
-        this.currentBezier.points[1].after.x = origin.x + radius * scale;
-        this.currentBezier.points[1].after.y = origin.y + magic * radius;
-        this.currentBezier.points[2].base.x = origin.x;
-        this.currentBezier.points[2].base.y = origin.y + radius;
-        this.currentBezier.points[2].before.x = origin.x + magic * radius * scale;
-        this.currentBezier.points[2].before.y = origin.y + radius;
-        this.currentBezier.points[2].after.x = origin.x - magic * radius * scale;
-        this.currentBezier.points[2].after.y = origin.y + radius;
-        this.currentBezier.points[3].base.x = origin.x - radius * scale;
-        this.currentBezier.points[3].base.y = origin.y;
-        this.currentBezier.points[3].before.x = origin.x - radius * scale;
-        this.currentBezier.points[3].before.y = origin.y + magic * radius;
-        this.currentBezier.points[3].after.x = origin.x - radius * scale;
-        this.currentBezier.points[3].after.y = origin.y - magic * radius;
+        this.currentOrigin = origin;
+        this.currentRadius = radius;
+        this.currentScale = scale;
+        this.updateEllipse();
+    };
+    EllipseTool.prototype.updateEllipse = function () {
+        var origin = this.currentOrigin;
+        var radius = this.currentRadius;
+        var scale = this.currentScale;
+        var tension = _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.ellipseTension;
+        this.configurableBezier.points[0].base.y = origin.y - radius;
+        this.configurableBezier.points[0].before.x = origin.x - tension * radius * scale;
+        this.configurableBezier.points[0].before.y = origin.y - radius;
+        this.configurableBezier.points[0].after.x = origin.x + tension * radius * scale;
+        this.configurableBezier.points[0].after.y = origin.y - radius;
+        this.configurableBezier.points[0].base.x = origin.x;
+        this.configurableBezier.points[1].base.y = origin.y;
+        this.configurableBezier.points[1].before.x = origin.x + radius * scale;
+        this.configurableBezier.points[1].before.y = origin.y - tension * radius;
+        this.configurableBezier.points[1].after.x = origin.x + radius * scale;
+        this.configurableBezier.points[1].after.y = origin.y + tension * radius;
+        this.configurableBezier.points[1].base.x = origin.x + radius * scale;
+        this.configurableBezier.points[2].base.x = origin.x;
+        this.configurableBezier.points[2].base.y = origin.y + radius;
+        this.configurableBezier.points[2].before.x = origin.x + tension * radius * scale;
+        this.configurableBezier.points[2].before.y = origin.y + radius;
+        this.configurableBezier.points[2].after.x = origin.x - tension * radius * scale;
+        this.configurableBezier.points[2].after.y = origin.y + radius;
+        this.configurableBezier.points[3].base.x = origin.x - radius * scale;
+        this.configurableBezier.points[3].base.y = origin.y;
+        this.configurableBezier.points[3].before.x = origin.x - radius * scale;
+        this.configurableBezier.points[3].before.y = origin.y + tension * radius;
+        this.configurableBezier.points[3].after.x = origin.x - radius * scale;
+        this.configurableBezier.points[3].after.y = origin.y - tension * radius;
     };
     EllipseTool.prototype.handleMouseEvent = function (v, e, x, y) {
-        if (!(v.context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_5__["BezierContext"]))
+        if (!(v.context instanceof _context_bezier__WEBPACK_IMPORTED_MODULE_9__["BezierContext"]))
             return;
         var pos = v.co.clientToWorld(x, y);
         v.nudgePoint(pos);
         if (e.type === "mousedown" && e.buttons & 1) {
             this.currentBezier = this.createEllipse();
+            this.configurableBezier = this.currentBezier;
             this.startPoint = pos;
-            this.updateEllipse(pos, e);
+            this.updateEllipseFromMouse(pos, e);
             v.context.beziers.push(this.currentBezier);
-            _undo_history__WEBPACK_IMPORTED_MODULE_4__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_3__["ArrayAddAction"](v.context.beziers, this.currentBezier, v.context.beziers.length - 1));
+            _undo_history__WEBPACK_IMPORTED_MODULE_8__["undoContext"].addAction(new _undo_actions_array__WEBPACK_IMPORTED_MODULE_7__["ArrayAddAction"](v.context.beziers, this.currentBezier, v.context.beziers.length - 1));
         }
         else if (e.type === "mousemove" && e.buttons & 1 &&
             this.startPoint) {
-            this.updateEllipse(pos, e);
+            this.updateEllipseFromMouse(pos, e);
         }
         else if (e.type === "mouseup") {
             if (this.currentBezier) {
-                Object(_undo_history__WEBPACK_IMPORTED_MODULE_4__["finalizeUndoContext"])("Ellipse");
+                Object(_undo_history__WEBPACK_IMPORTED_MODULE_8__["finalizeUndoContext"])("Ellipse");
                 this.currentBezier = null;
                 this.startPoint = null;
                 this.glyph.emit("modified");
@@ -4908,7 +5012,7 @@ var EllipseTool = /** @class */ (function () {
     EllipseTool.prototype.render = function (v, ctx) {
     };
     EllipseTool.prototype.updateContext = function (context) {
-        if (!(context instanceof _context_glyph__WEBPACK_IMPORTED_MODULE_6__["GlyphContext"]))
+        if (!(context instanceof _context_glyph__WEBPACK_IMPORTED_MODULE_10__["GlyphContext"]))
             return;
         this.glyph = context.glyph;
         this.handles = [];
@@ -4917,9 +5021,11 @@ var EllipseTool = /** @class */ (function () {
             var bezier = _a[_i];
             for (var _b = 0, _c = bezier.points; _b < _c.length; _b++) {
                 var point = _c[_b];
-                this.guides.push(new _guides_point__WEBPACK_IMPORTED_MODULE_7__["PointGuide"](point.base));
+                this.guides.push(new _guides_point__WEBPACK_IMPORTED_MODULE_11__["PointGuide"](point.base));
             }
         }
+        _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].off("settingChanged", this.updateSettingsCallback);
+        _app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].on("settingChanged", this.updateSettingsCallback);
     };
     return EllipseTool;
 }());
@@ -5234,6 +5340,7 @@ var HandleTool = /** @class */ (function () {
                 ]
             }
         ];
+        this.settingsPanel = null;
     }
     HandleTool.prototype.performCSGOperation = function (operation) {
         var _this = this;
@@ -5474,6 +5581,7 @@ var RectangleTool = /** @class */ (function () {
         this.guides = [];
         this.supportsForeignHandles = false;
         this.subactions = [];
+        this.settingsPanel = null;
     }
     RectangleTool.prototype.createRect = function () {
         var curve = new _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"](this.glyph);
@@ -5581,16 +5689,19 @@ var RectangleTool = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Viewport", function() { return Viewport; });
-/* harmony import */ var _coordinates__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./coordinates */ "./src/typeedit/viewport/coordinates.ts");
-/* harmony import */ var _guides_curve__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./guides/curve */ "./src/typeedit/viewport/guides/curve.ts");
-/* harmony import */ var _guides_grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./guides/grid */ "./src/typeedit/viewport/guides/grid.ts");
-/* harmony import */ var _guides_line__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./guides/line */ "./src/typeedit/viewport/guides/line.ts");
-/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./guides/point */ "./src/typeedit/viewport/guides/point.ts");
-/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! electron */ "electron");
-/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _utils_accelerator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/accelerator */ "./src/typeedit/utils/accelerator.ts");
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app */ "./src/typeedit/app.ts");
-/* harmony import */ var _utils_wrappedDist__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/wrappedDist */ "./src/typeedit/utils/wrappedDist.ts");
+/* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../geometry/point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var _coordinates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./coordinates */ "./src/typeedit/viewport/coordinates.ts");
+/* harmony import */ var _guides_curve__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./guides/curve */ "./src/typeedit/viewport/guides/curve.ts");
+/* harmony import */ var _guides_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./guides/grid */ "./src/typeedit/viewport/guides/grid.ts");
+/* harmony import */ var _guides_line__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./guides/line */ "./src/typeedit/viewport/guides/line.ts");
+/* harmony import */ var _guides_point__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./guides/point */ "./src/typeedit/viewport/guides/point.ts");
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! electron */ "electron");
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utils_accelerator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/accelerator */ "./src/typeedit/utils/accelerator.ts");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app */ "./src/typeedit/app.ts");
+/* harmony import */ var _utils_wrappedDist__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/wrappedDist */ "./src/typeedit/utils/wrappedDist.ts");
+/* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../ui/theme */ "./src/typeedit/ui/theme.ts");
+/* harmony import */ var _ui_panel_toolSettings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../ui/panel/toolSettings */ "./src/typeedit/ui/panel/toolSettings.ts");
 var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -5607,6 +5718,9 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
 
 
 
+
+
+
 var Viewport = /** @class */ (function () {
     function Viewport(context, handles, tool) {
         this.context = context;
@@ -5614,7 +5728,10 @@ var Viewport = /** @class */ (function () {
         this.tool = tool;
         this.domCanvas = document.createElement("canvas");
         this.ctx = this.domCanvas.getContext("2d");
-        this.co = new _coordinates__WEBPACK_IMPORTED_MODULE_0__["ViewportCoordinates"]();
+        this.co = new _coordinates__WEBPACK_IMPORTED_MODULE_1__["ViewportCoordinates"]();
+        this.isConstructing = false;
+        this.constructionAngle = 0;
+        this.constructionReference = new _geometry_point__WEBPACK_IMPORTED_MODULE_0__["Point"]();
         this.setupCanvasEvents();
     }
     Viewport.prototype.dispatchMouseEvent = function (e) {
@@ -5642,7 +5759,7 @@ var Viewport = /** @class */ (function () {
                             return {
                                 label: a.name,
                                 click: function () { return a.handler(); },
-                                accelerator: Object(_utils_accelerator__WEBPACK_IMPORTED_MODULE_6__["accelStringToElectron"])(a.accelerator)
+                                accelerator: Object(_utils_accelerator__WEBPACK_IMPORTED_MODULE_7__["accelStringToElectron"])(a.accelerator)
                             };
                         })
                     });
@@ -5652,7 +5769,7 @@ var Viewport = /** @class */ (function () {
                         return {
                             label: a.name,
                             click: function () { return a.handler(); },
-                            accelerator: Object(_utils_accelerator__WEBPACK_IMPORTED_MODULE_6__["accelStringToElectron"])(a.accelerator)
+                            accelerator: Object(_utils_accelerator__WEBPACK_IMPORTED_MODULE_7__["accelStringToElectron"])(a.accelerator)
                         };
                     }));
                 }
@@ -5662,7 +5779,7 @@ var Viewport = /** @class */ (function () {
                     });
                 }
             });
-            var menu = electron__WEBPACK_IMPORTED_MODULE_5__["remote"].Menu.buildFromTemplate(menuItems);
+            var menu = electron__WEBPACK_IMPORTED_MODULE_6__["remote"].Menu.buildFromTemplate(menuItems);
             menu.popup();
         });
         this.domCanvas.addEventListener("mouseup", function (e) {
@@ -5770,31 +5887,32 @@ var Viewport = /** @class */ (function () {
     };
     Viewport.prototype.nudgePoint = function (pos, obj) {
         var guides = __spreadArrays(this.context.guides, this.tool.guides);
-        this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_curve__WEBPACK_IMPORTED_MODULE_1__["CurveGuide"]; }));
-        if (_app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.gridEnabled)
+        this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_curve__WEBPACK_IMPORTED_MODULE_2__["CurveGuide"]; }));
+        if (_app__WEBPACK_IMPORTED_MODULE_8__["currentFont"].settings.gridEnabled)
             this.nudgeToGuides(pos, obj, this.context.grids);
-        this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_3__["HorizontalGuide"] ||
-            g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_3__["VerticalGuide"]; }), false);
-        this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_point__WEBPACK_IMPORTED_MODULE_4__["PointGuide"]; }));
+        this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_4__["HorizontalGuide"] ||
+            g instanceof _guides_line__WEBPACK_IMPORTED_MODULE_4__["VerticalGuide"]; }), false);
+        this.nudgeToGuides(pos, obj, guides.filter(function (g) { return g instanceof _guides_point__WEBPACK_IMPORTED_MODULE_5__["PointGuide"]; }));
     };
     Viewport.prototype.restrictAngles = function (start, pos, e) {
         var angles = [
-            _app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.constructionAngle0,
-            _app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.constructionAngle1,
-            _app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.constructionAngle2,
-            _app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.constructionAngle3
+            _app__WEBPACK_IMPORTED_MODULE_8__["currentFont"].settings.constructionAngle0,
+            _app__WEBPACK_IMPORTED_MODULE_8__["currentFont"].settings.constructionAngle1,
+            _app__WEBPACK_IMPORTED_MODULE_8__["currentFont"].settings.constructionAngle2,
+            _app__WEBPACK_IMPORTED_MODULE_8__["currentFont"].settings.constructionAngle3
         ];
         var r = pos.distance(start);
         var angle = pos.angle(start);
+        this.isConstructing = false;
         if (e.shiftKey &&
-            _app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.constructionEnabled) {
+            _app__WEBPACK_IMPORTED_MODULE_8__["currentFont"].settings.constructionEnabled) {
             var add180 = false;
             var nrmAngle_1 = angle * (180 / Math.PI);
             if (nrmAngle_1 < 0) {
                 nrmAngle_1 = 180 + nrmAngle_1;
                 add180 = true;
             }
-            var angleDists = angles.map(function (a) { return Object(_utils_wrappedDist__WEBPACK_IMPORTED_MODULE_8__["wrappedDist"])(nrmAngle_1, a, 180); });
+            var angleDists = angles.map(function (a) { return Object(_utils_wrappedDist__WEBPACK_IMPORTED_MODULE_9__["wrappedDist"])(nrmAngle_1, a, 180); });
             var minIndex = angleDists.indexOf(Math.min.apply(Math, angleDists));
             var selectedAngle = angles[minIndex];
             if (Math.abs(angle * (180 / Math.PI) - selectedAngle) > 90) {
@@ -5803,12 +5921,16 @@ var Viewport = /** @class */ (function () {
             var finalAngle = selectedAngle * (Math.PI / 180);
             pos.x = start.x + r * Math.cos(finalAngle);
             pos.y = start.y + r * Math.sin(finalAngle);
+            this.isConstructing = true;
+            this.constructionAngle = finalAngle;
+            this.constructionReference.copy(start);
         }
     };
     Viewport.prototype.disableAllGuides = function () {
         this.context.grids.forEach(function (g) { return g.active = false; });
         this.context.guides.forEach(function (g) { return g.active = false; });
         this.tool.guides.forEach(function (g) { return g.active = false; });
+        this.isConstructing = false;
     };
     Viewport.prototype.render = function () {
         var _this = this;
@@ -5817,16 +5939,26 @@ var Viewport = /** @class */ (function () {
         this.co.transformCanvas(this.ctx);
         this.context.render(this, this.ctx);
         this.ctx.resetTransform();
-        if (_app__WEBPACK_IMPORTED_MODULE_7__["currentFont"].settings.gridEnabled)
+        if (_app__WEBPACK_IMPORTED_MODULE_8__["currentFont"].settings.gridEnabled)
             this.context.grids.forEach(function (g) { return g.render(_this, _this.ctx); });
         Array.apply(void 0, __spreadArrays(this.context.guides, this.tool.guides)).forEach(function (guide) {
-            if (guide.active || guide instanceof _guides_grid__WEBPACK_IMPORTED_MODULE_2__["GridGuide"]) {
+            if (guide.active || guide instanceof _guides_grid__WEBPACK_IMPORTED_MODULE_3__["GridGuide"]) {
                 _this.ctx.resetTransform();
                 if (guide.worldRender)
                     _this.co.transformCanvas(_this.ctx);
                 guide.render(_this, _this.ctx);
             }
         });
+        this.ctx.resetTransform();
+        if (this.isConstructing) {
+            var clientConstr = this.co.worldToClient(this.constructionReference.x, this.constructionReference.y);
+            this.ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_10__["getThemeColor"])("constructionActive");
+            this.ctx.lineWidth = 1;
+            this.ctx.beginPath();
+            this.ctx.moveTo(clientConstr.x - 1000 * Math.cos(this.constructionAngle), clientConstr.y - 1000 * Math.sin(this.constructionAngle));
+            this.ctx.lineTo(clientConstr.x + 1000 * Math.cos(this.constructionAngle), clientConstr.y + 1000 * Math.sin(this.constructionAngle));
+            this.ctx.stroke();
+        }
         if (this.tool && this.tool.supportsForeignHandles) {
             this.drawHandles(this.context.handles);
             this.drawHandles(this.handles);
@@ -5844,6 +5976,7 @@ var Viewport = /** @class */ (function () {
         this.tool.updateContext(this.context);
         this.disableAllGuides();
         this.render();
+        Object(_ui_panel_toolSettings__WEBPACK_IMPORTED_MODULE_11__["updateToolSettingsPanel"])(tool);
     };
     return Viewport;
 }());

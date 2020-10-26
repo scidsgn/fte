@@ -106,6 +106,8 @@ export class BezierPenTool implements ITool {
         }
     ]
 
+    public settingsPanel: HTMLElement[] = null
+
     private glyph: Glyph
 
     get currentPoint(): BezierPoint {

@@ -380,6 +380,8 @@ export class HandleTool implements ITool {
         }
     ]
 
+    public settingsPanel: HTMLElement[] = null
+
     private performCSGOperation(
         operation: (
             out: paper.PathItem, current: paper.PathItem

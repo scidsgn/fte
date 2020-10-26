@@ -1,10 +1,13 @@
+import { currentFont } from "../../app"
 import { Glyph } from "../../font/glyph"
 import { BezierCurve } from "../../geometry/bezier/curve"
 import { BezierPoint } from "../../geometry/bezier/point"
 import { Point } from "../../geometry/point"
+import Accordion from "../../ui/panel/controls/accordion"
+import Label from "../../ui/panel/controls/label"
+import SliderInput from "../../ui/panel/controls/sliderInput"
 import { ArrayAddAction } from "../../undo/actions/array"
 import { finalizeUndoContext, undoContext } from "../../undo/history"
-import { lerp } from "../../utils/lerp"
 import { BezierContext } from "../context/bezier"
 import { IContext } from "../context/context"
 import { GlyphContext } from "../context/glyph"
@@ -12,10 +15,7 @@ import { IDrawableHandle } from "../drawable"
 import { IGuide } from "../guides/guide"
 import { PointGuide } from "../guides/point"
 import { Viewport } from "../viewport"
-import { ITool, ToolSubAction, ToolSubActionSection } from "./tool"
-
-// ~ magic number ~
-const magic = 4 * (Math.SQRT2 - 1) / 3
+import { ITool, ToolSubActionSection } from "./tool"
 
 export class EllipseTool implements ITool {
     public name = "Ellipse"
@@ -33,6 +33,37 @@ export class EllipseTool implements ITool {
     private glyph: Glyph
 
     private currentBezier: BezierCurve
+    private configurableBezier: BezierCurve
+
+    private currentOrigin: Point
+    private currentScale: number
+    private currentRadius: number
+
+    private updateSettingsCallback = (k: string) => {
+        if (k === "ellipseTension" && this.configurableBezier)
+            this.updateEllipse()
+    }
+
+    get settingsPanel() {
+        return [
+            Accordion(
+                "Shape properties", [], [
+                    Label("Tension:"),
+                    SliderInput(
+                        () => currentFont.settings.ellipseTension,
+                        (v: number) => currentFont.settings.ellipseTension = v,
+                        (h) => {
+                            currentFont.on("settingChanged", (k: string) => {
+                                if (k === "ellipseTension")
+                                    h(currentFont.settings.ellipseTension)
+                            })
+                        },
+                        0, 1, 0.0001
+                    )
+                ]
+            )
+        ]
+    }
 
     createEllipse(): BezierCurve {
         const curve = new BezierCurve(this.glyph)
@@ -69,7 +100,7 @@ export class EllipseTool implements ITool {
         return curve
     }
 
-    updateEllipse(pos: Point, e: MouseEvent) {
+    updateEllipseFromMouse(pos: Point, e: MouseEvent) {
         const origin = new Point(
             this.startPoint.x, this.startPoint.y
         )
@@ -90,33 +121,47 @@ export class EllipseTool implements ITool {
             origin.y += radius * Math.sign(pos.y - origin.y)
         }
 
-        this.currentBezier.points[0].base.x = origin.x
-        this.currentBezier.points[0].base.y = origin.y - radius
-        this.currentBezier.points[0].before.x = origin.x - magic * radius * scale
-        this.currentBezier.points[0].before.y = origin.y - radius
-        this.currentBezier.points[0].after.x = origin.x + magic * radius * scale
-        this.currentBezier.points[0].after.y = origin.y - radius
+        this.currentOrigin = origin
+        this.currentRadius = radius
+        this.currentScale = scale
 
-        this.currentBezier.points[1].base.x = origin.x + radius * scale
-        this.currentBezier.points[1].base.y = origin.y
-        this.currentBezier.points[1].before.x = origin.x + radius * scale
-        this.currentBezier.points[1].before.y = origin.y - magic * radius
-        this.currentBezier.points[1].after.x = origin.x + radius * scale
-        this.currentBezier.points[1].after.y = origin.y + magic * radius
+        this.updateEllipse()
+    }
 
-        this.currentBezier.points[2].base.x = origin.x
-        this.currentBezier.points[2].base.y = origin.y + radius
-        this.currentBezier.points[2].before.x = origin.x + magic * radius * scale
-        this.currentBezier.points[2].before.y = origin.y + radius
-        this.currentBezier.points[2].after.x = origin.x - magic * radius * scale
-        this.currentBezier.points[2].after.y = origin.y + radius
+    updateEllipse() {
+        const origin = this.currentOrigin
+        const radius = this.currentRadius
+        const scale = this.currentScale
 
-        this.currentBezier.points[3].base.x = origin.x - radius * scale
-        this.currentBezier.points[3].base.y = origin.y
-        this.currentBezier.points[3].before.x = origin.x - radius * scale
-        this.currentBezier.points[3].before.y = origin.y + magic * radius
-        this.currentBezier.points[3].after.x = origin.x - radius * scale
-        this.currentBezier.points[3].after.y = origin.y - magic * radius
+        const tension = currentFont.settings.ellipseTension
+
+        this.configurableBezier.points[0].base.y = origin.y - radius
+        this.configurableBezier.points[0].before.x = origin.x - tension * radius * scale
+        this.configurableBezier.points[0].before.y = origin.y - radius
+        this.configurableBezier.points[0].after.x = origin.x + tension * radius * scale
+        this.configurableBezier.points[0].after.y = origin.y - radius
+        this.configurableBezier.points[0].base.x = origin.x
+
+        this.configurableBezier.points[1].base.y = origin.y
+        this.configurableBezier.points[1].before.x = origin.x + radius * scale
+        this.configurableBezier.points[1].before.y = origin.y - tension * radius
+        this.configurableBezier.points[1].after.x = origin.x + radius * scale
+        this.configurableBezier.points[1].after.y = origin.y + tension * radius
+        this.configurableBezier.points[1].base.x = origin.x + radius * scale
+
+        this.configurableBezier.points[2].base.x = origin.x
+        this.configurableBezier.points[2].base.y = origin.y + radius
+        this.configurableBezier.points[2].before.x = origin.x + tension * radius * scale
+        this.configurableBezier.points[2].before.y = origin.y + radius
+        this.configurableBezier.points[2].after.x = origin.x - tension * radius * scale
+        this.configurableBezier.points[2].after.y = origin.y + radius
+
+        this.configurableBezier.points[3].base.x = origin.x - radius * scale
+        this.configurableBezier.points[3].base.y = origin.y
+        this.configurableBezier.points[3].before.x = origin.x - radius * scale
+        this.configurableBezier.points[3].before.y = origin.y + tension * radius
+        this.configurableBezier.points[3].after.x = origin.x - radius * scale
+        this.configurableBezier.points[3].after.y = origin.y - tension * radius
     }
     
     handleMouseEvent(
@@ -133,9 +178,10 @@ export class EllipseTool implements ITool {
             e.type === "mousedown" && e.buttons & 1
         ) {
             this.currentBezier = this.createEllipse()
+            this.configurableBezier = this.currentBezier
             this.startPoint = pos
 
-            this.updateEllipse(pos, e)
+            this.updateEllipseFromMouse(pos, e)
 
             v.context.beziers.push(this.currentBezier)
             
@@ -149,7 +195,7 @@ export class EllipseTool implements ITool {
             e.type === "mousemove" && e.buttons & 1 &&
             this.startPoint
         ) {
-            this.updateEllipse(pos, e)
+            this.updateEllipseFromMouse(pos, e)
         } else if (
             e.type === "mouseup"
         ) {
@@ -182,5 +228,8 @@ export class EllipseTool implements ITool {
                 )
             }
         }
+
+        currentFont.off("settingChanged", this.updateSettingsCallback)
+        currentFont.on("settingChanged", this.updateSettingsCallback)
     }
 }

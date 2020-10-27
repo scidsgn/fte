@@ -1456,13 +1456,39 @@ var BezierPoint = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Point", function() { return Point; });
+/* harmony import */ var _utils_lerp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/lerp */ "./src/typeedit/utils/lerp.ts");
+
 var Point = /** @class */ (function () {
-    function Point(x, y) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
-        this.x = x;
-        this.y = y;
+    function Point(_x, _y) {
+        if (_x === void 0) { _x = 0; }
+        if (_y === void 0) { _y = 0; }
+        this._x = _x;
+        this._y = _y;
     }
+    Object.defineProperty(Point.prototype, "x", {
+        get: function () {
+            if (this._x instanceof Function)
+                return this._x();
+            return this._x;
+        },
+        set: function (x) {
+            this._x = x;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Point.prototype, "y", {
+        get: function () {
+            if (this._y instanceof Function)
+                return this._y();
+            return this._y;
+        },
+        set: function (y) {
+            this._y = y;
+        },
+        enumerable: false,
+        configurable: true
+    });
     Point.prototype.move = function (dx, dy) {
         this.x += dx;
         this.y += dy;
@@ -1479,6 +1505,10 @@ var Point = /** @class */ (function () {
     Point.prototype.copy = function (ref) {
         this.x = ref.x;
         this.y = ref.y;
+    };
+    Point.prototype.lerp = function (x, target) {
+        this.x = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["lerp"])(x, this.x, target.x);
+        this.y = Object(_utils_lerp__WEBPACK_IMPORTED_MODULE_0__["lerp"])(x, this.y, target.y);
     };
     return Point;
 }());

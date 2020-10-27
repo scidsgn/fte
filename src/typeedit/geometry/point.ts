@@ -1,8 +1,30 @@
+import { lerp } from "../utils/lerp"
+
 export class Point {
     constructor(
-        public x = 0,
-        public y = 0
+        private _x: (number | (() => number)) = 0,
+        private _y: (number | (() => number)) = 0
     ) {}
+
+    get x() {
+        if (this._x instanceof Function)
+            return this._x()
+        return this._x
+    }
+
+    set x(x: number) {
+        this._x = x
+    }
+
+    get y() {
+        if (this._y instanceof Function)
+            return this._y()
+        return this._y
+    }
+
+    set y(y: number) {
+        this._y = y
+    }
 
     move(dx: number, dy: number) {
         this.x += dx
@@ -33,5 +55,10 @@ export class Point {
     copy(ref: Point) {
         this.x = ref.x
         this.y = ref.y
+    }
+
+    lerp(x: number, target: Point) {
+        this.x = lerp(x, this.x, target.x)
+        this.y = lerp(x, this.y, target.y)
     }
 }

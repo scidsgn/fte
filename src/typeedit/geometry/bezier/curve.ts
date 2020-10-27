@@ -4,10 +4,13 @@ import { BezierPoint } from "./point"
 import paper from "paper"
 import { Point } from "../point"
 import { lerp } from "../../utils/lerp"
+import { BezierSegment } from "./segment"
 
 export class BezierCurve extends EventEmitter {
     public points: BezierPoint[] = []
     public closed = true
+
+    public segments: BezierSegment[] = []
 
     constructor(
         public glyph?: Glyph
@@ -53,9 +56,26 @@ export class BezierCurve extends EventEmitter {
         this.points = out
     }
 
+    updateSegments() {
+        this.segments = []
+        if (this.points.length < 2) return
+
+        this.segments = this.points.map(
+            point => {
+                const next = point.next
+
+                return new BezierSegment([
+                    point.base, point.after,
+                    next.before, next.base
+                ])
+            }
+        )
+    }
+
     addPoint(point: BezierPoint) {
         point.curve = this
         this.points.push(point)
+        this.updateSegments()
         this.emit("modified")
         this.emit("newPoint", point)
     }

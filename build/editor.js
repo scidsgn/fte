@@ -3047,7 +3047,10 @@ function Row(content) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SliderInput; });
-function SliderInput(get, set, update, min, max, step) {
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ "electron");
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);
+
+function SliderInput(get, set, update, min, max, step, presets) {
     if (min === void 0) { min = 0; }
     if (max === void 0) { max = 0; }
     if (step === void 0) { step = 0.01; }
@@ -3060,6 +3063,17 @@ function SliderInput(get, set, update, min, max, step) {
     input.addEventListener("input", function () {
         set(+input.value);
     });
+    var openMenu = function () {
+        if (!presets || !presets.length)
+            return;
+        electron__WEBPACK_IMPORTED_MODULE_0__["remote"].Menu.buildFromTemplate(presets.map(function (preset) {
+            return {
+                label: preset.name,
+                click: function () { return set(preset.value); }
+            };
+        })).popup();
+    };
+    input.addEventListener("contextmenu", function () { return openMenu(); });
     if (update) {
         update(function (v) {
             input.value = v.toString();
@@ -5008,7 +5022,20 @@ var EllipseTool = /** @class */ (function () {
                             if (k === "ellipseTension")
                                 h(_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.ellipseTension);
                         });
-                    }, 0, 1, 0.0001)
+                    }, 0, 1, 0.0001, [
+                        {
+                            name: "Ellipse",
+                            value: 4 * (Math.SQRT2 - 1) / 3
+                        },
+                        {
+                            name: "Squircle",
+                            value: 1
+                        },
+                        {
+                            name: "Diamond",
+                            value: 0
+                        }
+                    ])
                 ])
             ];
         },

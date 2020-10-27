@@ -58,7 +58,21 @@ export class EllipseTool implements ITool {
                                     h(currentFont.settings.ellipseTension)
                             })
                         },
-                        0, 1, 0.0001
+                        0, 1, 0.0001,
+                        [
+                            {
+                                name: "Ellipse",
+                                value: 4 * (Math.SQRT2 - 1) / 3
+                            },
+                            {
+                                name: "Squircle",
+                                value: 1
+                            },
+                            {
+                                name: "Diamond",
+                                value: 0
+                            }
+                        ]
                     )
                 ]
             )

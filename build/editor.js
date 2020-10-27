@@ -1162,6 +1162,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var paper__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(paper__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../point */ "./src/typeedit/geometry/point.ts");
 /* harmony import */ var _utils_lerp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/lerp */ "./src/typeedit/utils/lerp.ts");
+/* harmony import */ var _segment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./segment */ "./src/typeedit/geometry/bezier/segment.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -1180,6 +1181,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
+
 var BezierCurve = /** @class */ (function (_super) {
     __extends(BezierCurve, _super);
     function BezierCurve(glyph) {
@@ -1187,6 +1189,7 @@ var BezierCurve = /** @class */ (function (_super) {
         _this.glyph = glyph;
         _this.points = [];
         _this.closed = true;
+        _this.segments = [];
         if (_this.glyph)
             _this.glyph.emit("modified");
         _this.on("modified", function () {
@@ -1217,10 +1220,24 @@ var BezierCurve = /** @class */ (function (_super) {
             p.determineType();
         });
         this.points = out;
+        this.updateSegments();
+    };
+    BezierCurve.prototype.updateSegments = function () {
+        this.segments = [];
+        if (this.points.length < 2)
+            return;
+        this.segments = this.points.map(function (point) {
+            var next = point.next;
+            return new _segment__WEBPACK_IMPORTED_MODULE_5__["BezierSegment"]([
+                point.base, point.after,
+                next.before, next.base
+            ]);
+        });
     };
     BezierCurve.prototype.addPoint = function (point) {
         point.curve = this;
         this.points.push(point);
+        this.updateSegments();
         this.emit("modified");
         this.emit("newPoint", point);
     };
@@ -1441,6 +1458,101 @@ var BezierPoint = /** @class */ (function (_super) {
     };
     return BezierPoint;
 }(events__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]));
+
+
+
+/***/ }),
+
+/***/ "./src/typeedit/geometry/bezier/segment.ts":
+/*!*************************************************!*\
+  !*** ./src/typeedit/geometry/bezier/segment.ts ***!
+  \*************************************************/
+/*! exports provided: BezierSegment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BezierSegment", function() { return BezierSegment; });
+/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../point */ "./src/typeedit/geometry/point.ts");
+
+var BezierSegment = /** @class */ (function () {
+    function BezierSegment(points) {
+        this.points = points;
+    }
+    Object.defineProperty(BezierSegment.prototype, "d", {
+        get: function () {
+            if (this._d)
+                return this._d;
+            this._d = this.derivative;
+            return this._d;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(BezierSegment.prototype, "dd", {
+        get: function () {
+            if (this._dd)
+                return this._dd;
+            this._dd = this.d.d;
+            return this._dd;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(BezierSegment.prototype, "n", {
+        get: function () {
+            return this.points.length;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(BezierSegment.prototype, "derivative", {
+        get: function () {
+            var _this = this;
+            var points = [];
+            var _loop_1 = function (i) {
+                var point = this_1.points[i];
+                var next = this_1.points[i + 1];
+                points.push(new _point__WEBPACK_IMPORTED_MODULE_0__["Point"](function () { return _this.n * (next.x - point.x); }, function () { return _this.n * (next.y - point.y); }));
+            };
+            var this_1 = this;
+            for (var i = 0; i < this.n - 1; i++) {
+                _loop_1(i);
+            }
+            return new BezierSegment(points);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    BezierSegment.prototype.deCasteljau = function (t, points) {
+        var out = [];
+        for (var i = 0; i < points.length - 1; i++) {
+            var point = new _point__WEBPACK_IMPORTED_MODULE_0__["Point"]();
+            point.copy(points[i]);
+            point.lerp(t, points[i + 1]);
+            out.push(point);
+        }
+        return out;
+    };
+    BezierSegment.prototype.at = function (t) {
+        if (!this.n)
+            return null;
+        var points = this.points;
+        while (points.length > 1) {
+            points = this.deCasteljau(t, points);
+        }
+        return points[0];
+    };
+    BezierSegment.prototype.curvature = function (t) {
+        var dPoint = this.d.at(t);
+        var ddPoint = this.dd.at(t);
+        var denom = Math.pow((dPoint.x * dPoint.x + dPoint.y * dPoint.y), (3 / 2));
+        if (denom === 0)
+            return NaN;
+        return (dPoint.x * ddPoint.y - ddPoint.x * dPoint.y) / denom;
+    };
+    return BezierSegment;
+}());
 
 
 
@@ -4062,8 +4174,29 @@ var GlyphContext = /** @class */ (function (_super) {
         // Glyph
         var workingPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.beziers);
         var finalPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.finalBeziers);
+        // Glyph fill
         ctx.fillStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("glyphFill");
         ctx.fill(finalPath);
+        // Glyph curvature
+        this.glyph.beziers.forEach(function (bezier) { return bezier.segments.forEach(function (seg) {
+            ctx.beginPath();
+            ctx.moveTo(seg.points[3].x, seg.points[3].y);
+            ctx.bezierCurveTo(seg.points[2].x, seg.points[2].y, seg.points[1].x, seg.points[1].y, seg.points[0].x, seg.points[0].y);
+            for (var t = 0; t <= 1; t += 0.05) {
+                var point = seg.at(t);
+                var dPoint = seg.d.at(t);
+                var angle = Math.atan2(dPoint.y, dPoint.x);
+                var curvature = seg.curvature(t);
+                var r = Math.atan(curvature * 200) * 10;
+                if (curvature !== 0) {
+                    r += Math.sign(curvature) * 10;
+                }
+                ctx.lineTo(point.x - r * Math.cos(angle), point.y - r * Math.sin(angle));
+            }
+            ctx.fillStyle = "blue";
+            ctx.fill();
+        }); });
+        // Glyph outline        
         ctx.setLineDash([]);
         ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("glyphGapOutline");
         ctx.lineWidth = 4 / v.co.scaleFactor;

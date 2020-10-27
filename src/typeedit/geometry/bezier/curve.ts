@@ -54,6 +54,7 @@ export class BezierCurve extends EventEmitter {
             p.determineType()
         })
         this.points = out
+        this.updateSegments()
     }
 
     updateSegments() {

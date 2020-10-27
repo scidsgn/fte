@@ -1,14 +1,26 @@
 import { Point } from "../point"
 
 export class BezierSegment {
-    public d: BezierSegment
-    public dd: BezierSegment
+    private _d: BezierSegment
+    private _dd: BezierSegment
 
     constructor(
         public points: Point[]
     ) {
-        this.d = this.derivative
-        this.dd = this.d.derivative
+    }
+
+    get d() {
+        if (this._d) return this._d
+
+        this._d = this.derivative
+        return this._d
+    }
+
+    get dd() {
+        if (this._dd) return this._dd
+
+        this._dd = this.d.d
+        return this._dd
     }
 
     get n() {
@@ -33,17 +45,30 @@ export class BezierSegment {
         return new BezierSegment(points)
     }
 
-    at(t: number): Point {
-        if (!this.n) return null
+    private deCasteljau(t: number, points: Point[]): Point[] {
+        const out: Point[] = []
         
-        const point = new Point()
-        point.copy(this.points[0])
+        for (let i = 0; i < points.length - 1; i++) {
+            const point = new Point()
+            point.copy(points[i])
+            point.lerp(t, points[i + 1])
 
-        for (let i = 1; i < this.n; i++) {
-            point.lerp(t, this.points[i])
+            out.push(point)
         }
 
-        return point
+        return out
+    }
+
+    at(t: number): Point {
+        if (!this.n) return null
+
+        let points: Point[] = this.points
+
+        while (points.length > 1) {
+            points = this.deCasteljau(t, points)
+        }
+        
+        return points[0]
     }
 
     curvature(t: number): number {

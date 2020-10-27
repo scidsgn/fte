@@ -3,7 +3,7 @@ import { Point } from "../point"
 import { BezierCurve } from "./curve"
 
 export enum BezierPointType {
-    free, auto, sharp
+    free, auto, sharp, forward, backward
 }
 
 export class BezierPoint extends EventEmitter {
@@ -13,13 +13,33 @@ export class BezierPoint extends EventEmitter {
         public base: Point,
         public before: Point,
         public after: Point,
-        public type: BezierPointType = BezierPointType.auto
+        public type: BezierPointType = BezierPointType.free
     ) {
         super()
         
         this.on("modified", () => {
             if (this.curve) this.curve.emit("modified")
         })
+    }
+
+    get previous(): BezierPoint {
+        if (!this.curve) return
+
+        const index = this.curve.points.indexOf(this)
+        if (index === 0) return this.curve.points[
+            this.curve.points.length - 1
+        ]
+
+        return this.curve.points[index - 1]
+    }
+
+    get next(): BezierPoint {
+        if (!this.curve) return
+
+        const index = this.curve.points.indexOf(this)
+        return this.curve.points[
+            (index + 1) % this.curve.points.length
+        ]
     }
 
     reverse() {
@@ -32,20 +52,39 @@ export class BezierPoint extends EventEmitter {
         const radius1 = this.after.distance(this.base)
         const radius2 = this.before.distance(this.base)
 
-        if (radius1 < 0.0001 && radius2 < 0.0001) {
-            this.type = BezierPointType.sharp
-            return
-        }
-
         const angle1 = this.after.angle(this.base)
         const angle2 = this.before.angle(this.base)
 
+        const prev = this.previous
+        const next = this.next
+    
+        if (radius1 < 0.001 && radius2 < 0.001) {
+            this.type = BezierPointType.sharp
+            return
+        } else if (
+            radius1 < 0.001 && radius2 > 0.001 &&
+            next.before.distance(next.base) < 0.001 &&
+            Math.abs(
+                angle2 - this.base.angle(next.base)
+            ) < 0.001
+        ) {
+            this.type = BezierPointType.backward
+            return
+        } else if (
+            radius1 > 0.001 && radius2 < 0.001 &&
+            prev.after.distance(prev.base) < 0.001 &&
+            Math.abs(
+                angle1 - this.base.angle(prev.base)
+            ) < 0.001
+        ) {
+            this.type = BezierPointType.forward
+            return
+        }
+
         const angleDiff = Math.abs(angle1 - angle2)
-        const piDiff = angleDiff / Math.PI
 
         if (
-            Math.abs(angleDiff - Math.PI) < 0.0001 &&
-            Math.abs(radius1 - radius2) < 1
+            Math.abs(angleDiff - Math.PI) < 0.001
         )
             this.type = BezierPointType.auto
     }

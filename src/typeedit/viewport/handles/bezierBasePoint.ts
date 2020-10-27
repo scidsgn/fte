@@ -39,25 +39,56 @@ export class BezierBasePointHandle implements IDrawableHandle {
         const angle = this.point.after.angle(
             this.point.base
         )
+        const angle2 = this.point.before.angle(
+            this.point.base
+        )
 
         ctx.beginPath()
         switch (this.point.type) {
             case BezierPointType.auto:
                 ctx.moveTo(
-                    5 * Math.cos(angle),
-                    5 * Math.sin(angle)
+                    6 * Math.cos(angle),
+                    6 * Math.sin(angle)
                 )
                 ctx.lineTo(
-                    5 * Math.cos(angle + Math.PI / 2),
-                    5 * Math.sin(angle + Math.PI / 2)
+                    6 * Math.cos(angle + Math.PI / 2),
+                    6 * Math.sin(angle + Math.PI / 2)
                 )
                 ctx.lineTo(
-                    5 * Math.cos(angle + Math.PI),
-                    5 * Math.sin(angle + Math.PI)
+                    6 * Math.cos(angle + Math.PI),
+                    6 * Math.sin(angle + Math.PI)
                 )
                 ctx.lineTo(
-                    5 * Math.cos(angle + 3 * Math.PI / 2),
-                    5 * Math.sin(angle + 3 * Math.PI / 2)
+                    6 * Math.cos(angle + 3 * Math.PI / 2),
+                    6 * Math.sin(angle + 3 * Math.PI / 2)
+                )
+                break
+            case BezierPointType.forward:
+                ctx.moveTo(
+                    7 * Math.cos(angle),
+                    7 * Math.sin(angle)
+                )
+                ctx.lineTo(
+                    7 * Math.cos(angle + Math.PI / 2),
+                    7 * Math.sin(angle + Math.PI / 2)
+                )
+                ctx.lineTo(
+                    7 * Math.cos(angle + 3 * Math.PI / 2),
+                    7 * Math.sin(angle + 3 * Math.PI / 2)
+                )
+                break
+            case BezierPointType.backward:
+                ctx.moveTo(
+                    7 * Math.cos(angle2),
+                    7 * Math.sin(angle2)
+                )
+                ctx.lineTo(
+                    7 * Math.cos(angle2 + Math.PI / 2),
+                    7 * Math.sin(angle2 + Math.PI / 2)
+                )
+                ctx.lineTo(
+                    7 * Math.cos(angle2 + 3 * Math.PI / 2),
+                    7 * Math.sin(angle2 + 3 * Math.PI / 2)
                 )
                 break
             case BezierPointType.sharp:
@@ -68,12 +99,25 @@ export class BezierBasePointHandle implements IDrawableHandle {
         }
         ctx.closePath()
 
+        let fillColor = getThemeColor("handleFreeFill")
+
+        if (this.point.type === BezierPointType.auto)
+            fillColor = getThemeColor("handleAutoFill")
+        else if (this.point.type === BezierPointType.sharp)
+            fillColor = getThemeColor("handleSharpFill")
+        else if (
+            this.point.type === BezierPointType.forward ||
+            this.point.type === BezierPointType.backward
+        )
+            fillColor = getThemeColor("handleDirFill")
+
         ctx.fillStyle = this.selected ?
                         getThemeColor("handleSelected") :
-                        getThemeColor("handleFill")
+                        fillColor
+                        
         ctx.strokeStyle = getThemeColor("handleSelected")
         ctx.lineWidth = 1
         ctx.fill()
-        ctx.stroke()
+        // ctx.stroke()
     }
 }

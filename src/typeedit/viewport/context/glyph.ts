@@ -145,14 +145,14 @@ export class GlyphContext extends BezierContext {
         ctx.fillStyle = (this.glyph === glyph) ?
                         getThemeColor("gindicatorActive") :
                         getThemeColor("gindicator")
-        ctx.fillRect(x, y - 8 / v.co.scaleFactor, w, 8 / v.co.scaleFactor)
+        ctx.fillRect(x, y - 8 / v.co.scaleFactor, w, 4 / v.co.scaleFactor)
 
-        ctx.font = `400 ${20 / v.co.scaleFactor}px Inter`
+        ctx.font = `400 ${14 / v.co.scaleFactor}px Inter`
         ctx.textAlign = "center"
         ctx.fillStyle = (this.glyph === glyph) ?
                         getThemeColor("gindicatorActiveText") :
                         getThemeColor("gindicatorText")
-        ctx.fillText(glyph.name, x + w / 2, y - 16 / v.co.scaleFactor)
+        ctx.fillText(glyph.name, x + w / 2, y - 10 / v.co.scaleFactor)
     }
     
     render(v: Viewport, ctx: CanvasRenderingContext2D) {

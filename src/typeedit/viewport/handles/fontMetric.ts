@@ -101,7 +101,7 @@ export class FontMetricHandle implements IDrawableHandle {
 
     get position() {
         if (this.dir === FontMetricHandleDir.horz)
-            return new Point(-20, this.value)
+            return new Point(this.glyph.metrics.leftBearing - 20, this.value)
         
         return new Point(this.value, 532)
     }

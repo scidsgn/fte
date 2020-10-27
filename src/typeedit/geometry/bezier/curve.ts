@@ -20,6 +20,39 @@ export class BezierCurve extends EventEmitter {
         })
     }
 
+    simplify() {
+        const out: BezierPoint[] = []
+
+        for (let i = 0; i < this.points.length; i++) {
+            const point = this.points[i]
+            const next = this.points[(i + 1) % this.points.length]
+
+            if (point.base.distance(next.base) < 0.001) {
+                if (
+                    point.after.distance(point.base) < 0.001 &&
+                    next.before.distance(next.base) < 0.001
+                ) {
+                    out.push(
+                        new BezierPoint(
+                            point.base,
+                            point.before,
+                            next.after
+                        )
+                    )
+                    i++
+                }
+            } else {
+                out.push(point)
+            }
+        }
+
+        out.forEach(p => {
+            p.curve = this
+            p.determineType()
+        })
+        this.points = out
+    }
+
     addPoint(point: BezierPoint) {
         point.curve = this
         this.points.push(point)

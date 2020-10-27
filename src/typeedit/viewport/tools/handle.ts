@@ -412,6 +412,7 @@ export class HandleTool implements ITool {
             newCurves.forEach(
                 c => {
                     c.glyph = this.glyph
+                    c.simplify()
 
                     if (referenceWinding !== targetWinding)
                         c.reverse()

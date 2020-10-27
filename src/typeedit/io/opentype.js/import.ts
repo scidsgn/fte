@@ -32,8 +32,10 @@ function generateCurvesFromOTGlyph(
         (cmd: PathCommand) => {
             switch (cmd.type) {
                 case "M": {
-                    if (curve.points.length)
+                    if (curve.points.length) {
+                        curve.simplify()
                         curves.push(curve)
+                    }
                     
                     curve = new BezierCurve()
                     
@@ -121,7 +123,7 @@ function generateCurvesFromOTGlyph(
                             }
                         }
 
-                        curve.points.forEach(p => p.determineType())
+                        curve.simplify()
                         curves.push(curve)
                     }
                     
@@ -134,7 +136,7 @@ function generateCurvesFromOTGlyph(
     )
 
     if (curve.points.length) {
-        curve.points.forEach(p => p.determineType())
+        curve.simplify()
         curves.push(curve)
     }
 

@@ -10,6 +10,11 @@ const fteThemes = [
         handleControlArm: "#555",
         handleControlFill: "#555",
 
+        handleAutoFill: "#00DE44",
+        handleFreeFill: "#E78500",
+        handleSharpFill: "#417BFF",
+        handleDirFill: "#FF416E",
+
         glyphOutline: "#000",
         glyphGapOutline: "#fff",
         glyphFill: "#888",
@@ -30,15 +35,20 @@ const fteThemes = [
     {
         theme: "dark",
 
-        handleSelected: "#eee",
+        handleSelected: "#fff",
         handleFill: "#000",
         handleMetricFill: "#888",
-        handleControlArm: "#999",
-        handleControlFill: "#999",
+        handleControlArm: "#aaa",
+        handleControlFill: "#aaa",
 
-        glyphOutline: "#fff",
+        handleAutoFill: "#00DE44",
+        handleFreeFill: "#E78500",
+        handleSharpFill: "#417BFF",
+        handleDirFill: "#FF416E",
+
+        glyphOutline: "#969696",
         glyphGapOutline: "#222",
-        glyphFill: "#333",
+        glyphFill: "#2f2f2f",
         glyphOtherFill: "#fff",
         glyphMetric: "#aaa8",
 

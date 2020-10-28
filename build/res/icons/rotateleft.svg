@@ -5,8 +5,8 @@
         <g id="rotateleft" transform="matrix(0.666667,0,0,0.666667,54,18)">
             <rect x="0" y="0" width="24" height="24" style="fill:none;"/>
             <g transform="matrix(-1.5,0,0,1.5,96,-39)">
-                <rect x="49" y="33" width="6" height="6" style="fill:rgb(138,146,217);"/>
-                <path d="M55,32C55.552,32 56,32.448 56,33L56,39C56,39.552 55.552,40 55,40L49,40C48.448,40 48,39.552 48,39L48,33C48,32.448 48.448,32 49,32L55,32ZM55,33L49,33L49,39L55,39L55,33Z" style="fill:rgb(53,41,214);"/>
+                <rect x="49" y="33" width="6" height="6" style="fill:rgb(170,163,219);"/>
+                <path d="M55,32C55.552,32 56,32.448 56,33L56,39C56,39.552 55.552,40 55,40L49,40C48.448,40 48,39.552 48,39L48,33C48,32.448 48.448,32 49,32L55,32ZM55,33L49,33L49,39L55,39L55,33Z" style="fill:rgb(48,24,160);"/>
             </g>
             <g transform="matrix(-1.5,0,0,1.5,96,-37.5)">
                 <path d="M57.5,33.5L60.5,36.5L63.5,33.5" style="fill:none;stroke:rgb(20,20,20);stroke-width:1px;"/>

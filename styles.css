@@ -1,0 +1,127 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:regular,500,700);
+
+body {
+    font-family: "Inter", sans-serif;
+
+    margin: 0;
+}
+
+header {
+    width: 100%;
+
+    padding: 32px 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header img {
+    max-width: 1280px;
+    width: calc(100% - 64px);
+    height: auto;
+
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px #0004;
+}
+
+h1 {
+    font-size: 5rem;
+    text-align: center;
+}
+
+section {
+    background: #f4f4f4;
+    
+    padding: 64px 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    font-size: 3rem;
+    text-align: center;
+    
+    margin: 0px 0px 1.4rem 0px;
+}
+
+section > p {
+    max-width: 600px;
+
+    font-size: 1.2rem;
+    text-align: center;
+
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+div.features {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+div.feature {
+    max-width: 300px;
+
+    background: #fff;
+
+    padding: 24px 40px;
+    margin: 8px;
+    border-radius: 8px;
+    box-shadow: 0px 8px 12px #0002,
+                0px 1px 2px #0002;
+}
+
+div.feature img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+}
+
+div.feature h3 {
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    margin: 6px 0px 6px 0px;
+}
+
+div.feature p {
+    margin: 0;
+    grid-column: 2;
+}
+
+footer {    
+    padding: 64px 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a.download {
+    background: rgb(52, 124, 206);
+    color: #fff;
+
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+
+    padding: 16px 32px;
+    border-radius: 32px;
+    box-shadow: 0px 8px 12px #0002,
+                0px 1px 2px #0002;
+}
+
+a.download:hover {
+    background: rgb(65, 144, 233);
+}
+
+footer a:not(.download) {
+    color: rgb(36, 87, 145);
+
+    text-decoration: underline;
+}

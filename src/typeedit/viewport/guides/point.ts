@@ -49,7 +49,7 @@ export class PointGuide implements IGuide {
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
         const clientPos = v.co.worldToClient(
-            this.source.x, this.source.y
+            this.source.x, this.source.y, false
         )
         clientPos.x = Math.round(clientPos.x) + 0.5
         clientPos.y = Math.round(clientPos.y) + 0.5

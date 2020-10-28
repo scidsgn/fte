@@ -64,9 +64,10 @@ export class GridGuide implements IGuide {
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
         const gap = this.calculateGap(v)
 
-        const minXY = v.co.clientToWorld(0, 0)
+        const minXY = v.co.clientToWorld(0, 0, false)
         const maxXY = v.co.clientToWorld(
-            v.domCanvas.width, v.domCanvas.height
+            v.domCanvas.width, v.domCanvas.height,
+            false
         )
 
         minXY.x = Math.round(minXY.x / gap) * gap
@@ -77,7 +78,7 @@ export class GridGuide implements IGuide {
         ctx.lineWidth = 1
 
         for (let x = minXY.x; x <= maxXY.x; x += gap) {
-            const client = v.co.worldToClient(x, 0)
+            const client = v.co.worldToClient(x, 0, false)
 
             ctx.beginPath()
             ctx.moveTo(Math.round(client.x) + 0.5, -9999)
@@ -95,7 +96,7 @@ export class GridGuide implements IGuide {
             ctx.stroke()
         }
         for (let y = minXY.y; y <= maxXY.y; y += gap) {
-            const client = v.co.worldToClient(0, y)
+            const client = v.co.worldToClient(0, y, false)
 
             ctx.beginPath()
             ctx.moveTo(-9999, Math.round(client.y) + 0.5)

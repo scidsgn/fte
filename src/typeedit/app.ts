@@ -83,8 +83,8 @@ export default (font: Font) => {
 
     viewport.updateViewportSize(false)
     viewport.co.translate(
-        (viewport.domCanvas.width - context.glyph.metrics.rightBearing) / 2,
-        (viewport.domCanvas.height - 512) / 2
+        (viewport.domCanvas.baseWidth - context.glyph.metrics.rightBearing) / 2,
+        (viewport.domCanvas.baseHeight - 512) / 2
     )
     viewport.render()
 

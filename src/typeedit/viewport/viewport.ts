@@ -15,9 +15,12 @@ import { currentFont } from "../app"
 import { wrappedDist } from "../utils/wrappedDist"
 import { getThemeColor } from "../ui/theme"
 import { updateToolSettingsPanel } from "../ui/panel/toolSettings"
+import { createCanvas, fixMouseEvent, resetTransform, resizeCanvas } from "../utils/canvas"
 
 export class Viewport {
-    public domCanvas = document.createElement("canvas")
+    public domCanvas = createCanvas(
+        () => this.updateViewportSize()
+    )
     private ctx = this.domCanvas.getContext("2d")
 
     public co = new ViewportCoordinates()
@@ -38,9 +41,11 @@ export class Viewport {
         const box = this.domCanvas.getBoundingClientRect()
         if (!this.tool) return
 
+        const fixedE = fixMouseEvent(e)
+
         this.tool.handleMouseEvent(
             this, e,
-            e.clientX - box.left, e.clientY - box.top
+            fixedE.clientX - box.left, fixedE.clientY - box.top
         )
         this.render()
     }
@@ -211,8 +216,11 @@ export class Viewport {
                 (rect.height - this.domCanvas.height) / 2
             )
         }
-        this.domCanvas.width = rect.width
-        this.domCanvas.height = rect.height
+
+        resizeCanvas(
+            this.domCanvas,
+            rect.width, rect.height
+        )
 
         this.render()
     }
@@ -345,8 +353,8 @@ export class Viewport {
         this.isConstructing = false
     }
 
-    render() {
-        this.ctx.resetTransform()
+    render() {        
+        resetTransform(this.ctx)
         this.ctx.clearRect(
             0, 0, this.domCanvas.width, this.domCanvas.height
         )
@@ -355,8 +363,7 @@ export class Viewport {
 
         this.context.render(this, this.ctx)
         
-        this.ctx.resetTransform()
-        
+        resetTransform(this.ctx)
         
         if (currentFont.settings.gridEnabled)
             this.context.grids.forEach(
@@ -369,7 +376,7 @@ export class Viewport {
         ).forEach(
             guide => {
                 if (guide.active || guide instanceof GridGuide) {
-                    this.ctx.resetTransform()
+                    resetTransform(this.ctx)
                     if (guide.worldRender)
                         this.co.transformCanvas(this.ctx)
                         
@@ -378,10 +385,11 @@ export class Viewport {
             }
         )
 
-        this.ctx.resetTransform()
+        resetTransform(this.ctx)
         if (this.isConstructing) {
             const clientConstr = this.co.worldToClient(
-                this.constructionReference.x, this.constructionReference.y
+                this.constructionReference.x, this.constructionReference.y,
+                false
             )
 
             this.ctx.strokeStyle = getThemeColor("constructionActive")
@@ -407,7 +415,7 @@ export class Viewport {
             this.drawHandles(this.tool.handles)
         }
 
-        this.ctx.resetTransform()
+        resetTransform(this.ctx)
         this.co.transformCanvas(this.ctx)
         if (this.tool)
             this.tool.render(this, this.ctx)

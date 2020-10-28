@@ -39,7 +39,7 @@ export class HorizontalGuide implements IGuide {
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
         const clientPos = v.co.worldToClient(
-            0, this.value
+            0, this.value, false
         )
         clientPos.y = Math.round(clientPos.y) + 0.5
 
@@ -89,7 +89,7 @@ export class VerticalGuide implements IGuide {
 
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
         const clientPos = v.co.worldToClient(
-            this.value, 0
+            this.value, 0, false
         )
         clientPos.x = Math.round(clientPos.x) + 0.5
 

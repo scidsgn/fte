@@ -1,4 +1,5 @@
 import { Point } from "../geometry/point"
+import { displayScalingFactor } from "../utils/canvas"
 
 export class ViewportCoordinates {
     public dx = 0
@@ -25,17 +26,20 @@ export class ViewportCoordinates {
         ctx.scale(this.scaleFactor, this.scaleFactor)
     }
 
-    clientToWorld(x: number, y: number): Point {
+    clientToWorld(x: number, y: number, scaleHiDPI = true): Point {
+        let dpiFactor = scaleHiDPI ? displayScalingFactor : 1
         return new Point(
-            (x - this.dx) / this.scaleFactor,
-            (y - this.dy) / this.scaleFactor
+            (x / dpiFactor - this.dx) / this.scaleFactor,
+            (y / dpiFactor - this.dy) / this.scaleFactor
         )
     }
 
-    worldToClient(x: number, y: number) {
+    worldToClient(x: number, y: number, scaleHiDPI = true) {
+        let dpiFactor = scaleHiDPI ? displayScalingFactor : 1
+
         return {
-            x: x * this.scaleFactor + this.dx,
-            y: y * this.scaleFactor + this.dy
+            x: (x * this.scaleFactor + this.dx) * dpiFactor,
+            y: (y * this.scaleFactor + this.dy) * dpiFactor
         }
     }
 

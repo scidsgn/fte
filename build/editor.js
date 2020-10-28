@@ -101,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(true);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ":root {\n  --var-large-bg: #fff;\n  --var-panel-bg: #f6f6f6;\n  --var-text-fg: #000;\n  --var-panel-sep: #d1d1d1;\n  --var-button-bg: #fff;\n  --var-button-hover: #eee;\n  --var-button-active: #c0c0c0;\n  --var-glist-label: #fafafa;\n  --var-glist-activeLabel: #6d7599;\n  --var-ctrl-editbg: #eee;\n  --var-ctrl-border: #ccc;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #bbb;\n  --var-ctrl-header: #eee; }\n\nbody {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  user-select: none; }\n\n*::-webkit-scrollbar {\n  width: 12px; }\n\n*::-webkit-scrollbar-track {\n  background: var(--var-panel-sep); }\n\n*::-webkit-scrollbar-thumb {\n  background: var(--var-large-bg); }\n\nbody[data-theme=dark] {\n  --var-large-bg: #222;\n  --var-panel-bg: #161616;\n  --var-text-fg: #fff;\n  --var-panel-sep: #000;\n  --var-button-bg: #111;\n  --var-button-hover: #333;\n  --var-button-active: #555;\n  --var-glist-label: #2b2b2b;\n  --var-glist-activeLabel: #232c53;\n  --var-ctrl-editbg: #000;\n  --var-ctrl-border: #444;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #444;\n  --var-ctrl-header: #2b2b2b; }\n  body[data-theme=dark] button > img {\n    filter: invert(1) hue-rotate(180deg); }\n  body[data-theme=dark] div.glyphList canvas {\n    filter: invert(1); }\n\nbutton > img {\n  width: 16px;\n  height: 16px; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,wBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,4BAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,uBAAkB,EAAA;;AAGtB;EACI,+BAA+B;EAC/B,yBAAyB;EAEzB,oBAAoB;EAEpB,iBAAiB,EAAA;;AAGrB;EACI,WAAW,EAAA;;AAGf;EACI,gCAAgC,EAAA;;AAGpC;EACI,+BAA+B,EAAA;;AAGnC;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,qBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,yBAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,0BAAkB,EAAA;EAlBtB;IAqBQ,oCAAoC,EAAA;EArB5C;IAyBQ,iBAAiB,EAAA;;AAIzB;EACI,WAAW;EACX,YAAY,EAAA","sourcesContent":[":root {\r\n    --var-large-bg: #fff;\r\n    --var-panel-bg: #f6f6f6;\r\n    --var-text-fg: #000;\r\n\r\n    --var-panel-sep: #d1d1d1;\r\n\r\n    --var-button-bg: #fff;\r\n    --var-button-hover: #eee;\r\n    --var-button-active: #c0c0c0;\r\n\r\n    --var-glist-label: #fafafa;\r\n    --var-glist-activeLabel: #6d7599;\r\n\r\n    --var-ctrl-editbg: #eee;\r\n    --var-ctrl-border: #ccc;\r\n    --var-ctrl-focus: #08f;\r\n    --var-ctrl-selected: #bbb;\r\n    --var-ctrl-header: #eee;\r\n}\r\n\r\nbody {\r\n    background: var(--var-large-bg);\r\n    color: var(--var-text-fg);\r\n\r\n    font-family: \"Inter\";\r\n\r\n    user-select: none;\r\n}\r\n\r\n*::-webkit-scrollbar {\r\n    width: 12px;\r\n}\r\n\r\n*::-webkit-scrollbar-track {\r\n    background: var(--var-panel-sep);\r\n}\r\n\r\n*::-webkit-scrollbar-thumb {\r\n    background: var(--var-large-bg);\r\n}\r\n\r\nbody[data-theme=dark] {\r\n    --var-large-bg: #222;\r\n    --var-panel-bg: #161616;\r\n    --var-text-fg: #fff;\r\n\r\n    --var-panel-sep: #000;\r\n\r\n    --var-button-bg: #111;\r\n    --var-button-hover: #333;\r\n    --var-button-active: #555;\r\n\r\n    --var-glist-label: #2b2b2b;\r\n    --var-glist-activeLabel: #232c53;\r\n\r\n    --var-ctrl-editbg: #000;\r\n    --var-ctrl-border: #444;\r\n    --var-ctrl-focus: #08f;\r\n    --var-ctrl-selected: #444;\r\n    --var-ctrl-header: #2b2b2b;\r\n\r\n    button > img {\r\n        filter: invert(1) hue-rotate(180deg);\r\n    }\r\n\r\n    div.glyphList canvas {\r\n        filter: invert(1);\r\n    }\r\n}\r\n \r\nbutton > img {\r\n    width: 16px;\r\n    height: 16px;\r\n}\r\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, ":root {\n  --var-large-bg: #fff;\n  --var-panel-bg: #f6f6f6;\n  --var-text-fg: #000;\n  --var-panel-sep: #d1d1d1;\n  --var-button-bg: #fff;\n  --var-button-hover: #eee;\n  --var-button-active: #c0c0c0;\n  --var-glist-label: #fafafa;\n  --var-glist-activeLabel: #6d7599;\n  --var-ctrl-editbg: #eee;\n  --var-ctrl-border: #ccc;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #bbb;\n  --var-ctrl-header: #eee; }\n\nbody {\n  background: var(--var-large-bg);\n  color: var(--var-text-fg);\n  font-family: \"Inter\";\n  user-select: none; }\n\n*::-webkit-scrollbar {\n  width: 12px; }\n\n*::-webkit-scrollbar-track {\n  background: var(--var-panel-sep); }\n\n*::-webkit-scrollbar-thumb {\n  background: var(--var-large-bg); }\n\nbody[data-theme=dark] {\n  --var-large-bg: #222;\n  --var-panel-bg: #161616;\n  --var-text-fg: #fff;\n  --var-panel-sep: #000;\n  --var-button-bg: #111;\n  --var-button-hover: #333;\n  --var-button-active: #555;\n  --var-glist-label: #2b2b2b;\n  --var-glist-activeLabel: #232c53;\n  --var-ctrl-editbg: #000;\n  --var-ctrl-border: #444;\n  --var-ctrl-focus: #08f;\n  --var-ctrl-selected: #444;\n  --var-ctrl-header: #2b2b2b; }\n  body[data-theme=dark] button > img {\n    filter: invert(1) hue-rotate(180deg); }\n  body[data-theme=dark] div.glyphList canvas {\n    filter: invert(1); }\n\nbutton > img {\n  width: 16px;\n  height: 16px; }\n\ncanvas {\n  transform-origin: left top; }\n", "",{"version":3,"sources":["webpack://src/typeedit/styles/app.scss"],"names":[],"mappings":"AAAA;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,wBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,4BAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,uBAAkB,EAAA;;AAGtB;EACI,+BAA+B;EAC/B,yBAAyB;EAEzB,oBAAoB;EAEpB,iBAAiB,EAAA;;AAGrB;EACI,WAAW,EAAA;;AAGf;EACI,gCAAgC,EAAA;;AAGpC;EACI,+BAA+B,EAAA;;AAGnC;EACI,oBAAe;EACf,uBAAe;EACf,mBAAc;EAEd,qBAAgB;EAEhB,qBAAgB;EAChB,wBAAmB;EACnB,yBAAoB;EAEpB,0BAAkB;EAClB,gCAAwB;EAExB,uBAAkB;EAClB,uBAAkB;EAClB,sBAAiB;EACjB,yBAAoB;EACpB,0BAAkB,EAAA;EAlBtB;IAqBQ,oCAAoC,EAAA;EArB5C;IAyBQ,iBAAiB,EAAA;;AAIzB;EACI,WAAW;EACX,YAAY,EAAA;;AAGhB;EACI,0BAA0B,EAAA","sourcesContent":[":root {\r\n    --var-large-bg: #fff;\r\n    --var-panel-bg: #f6f6f6;\r\n    --var-text-fg: #000;\r\n\r\n    --var-panel-sep: #d1d1d1;\r\n\r\n    --var-button-bg: #fff;\r\n    --var-button-hover: #eee;\r\n    --var-button-active: #c0c0c0;\r\n\r\n    --var-glist-label: #fafafa;\r\n    --var-glist-activeLabel: #6d7599;\r\n\r\n    --var-ctrl-editbg: #eee;\r\n    --var-ctrl-border: #ccc;\r\n    --var-ctrl-focus: #08f;\r\n    --var-ctrl-selected: #bbb;\r\n    --var-ctrl-header: #eee;\r\n}\r\n\r\nbody {\r\n    background: var(--var-large-bg);\r\n    color: var(--var-text-fg);\r\n\r\n    font-family: \"Inter\";\r\n\r\n    user-select: none;\r\n}\r\n\r\n*::-webkit-scrollbar {\r\n    width: 12px;\r\n}\r\n\r\n*::-webkit-scrollbar-track {\r\n    background: var(--var-panel-sep);\r\n}\r\n\r\n*::-webkit-scrollbar-thumb {\r\n    background: var(--var-large-bg);\r\n}\r\n\r\nbody[data-theme=dark] {\r\n    --var-large-bg: #222;\r\n    --var-panel-bg: #161616;\r\n    --var-text-fg: #fff;\r\n\r\n    --var-panel-sep: #000;\r\n\r\n    --var-button-bg: #111;\r\n    --var-button-hover: #333;\r\n    --var-button-active: #555;\r\n\r\n    --var-glist-label: #2b2b2b;\r\n    --var-glist-activeLabel: #232c53;\r\n\r\n    --var-ctrl-editbg: #000;\r\n    --var-ctrl-border: #444;\r\n    --var-ctrl-focus: #08f;\r\n    --var-ctrl-selected: #444;\r\n    --var-ctrl-header: #2b2b2b;\r\n\r\n    button > img {\r\n        filter: invert(1) hue-rotate(180deg);\r\n    }\r\n\r\n    div.glyphList canvas {\r\n        filter: invert(1);\r\n    }\r\n}\r\n \r\nbutton > img {\r\n    width: 16px;\r\n    height: 16px;\r\n}\r\n\r\ncanvas {\r\n    transform-origin: left top;\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -914,7 +914,7 @@ var currentKeybCallback = null;
     });
     Object(_ui_glyphBar__WEBPACK_IMPORTED_MODULE_5__["prepareGlyphBar"])(viewport);
     viewport.updateViewportSize(false);
-    viewport.co.translate((viewport.domCanvas.width - context.glyph.metrics.rightBearing) / 2, (viewport.domCanvas.height - 512) / 2);
+    viewport.co.translate((viewport.domCanvas.baseWidth - context.glyph.metrics.rightBearing) / 2, (viewport.domCanvas.baseHeight - 512) / 2);
     viewport.render();
     font.on("settingChanged", function () { return viewport.render(); });
     if (currentKeybCallback)
@@ -3883,6 +3883,68 @@ function accelStringToElectron(str) {
 
 /***/ }),
 
+/***/ "./src/typeedit/utils/canvas.ts":
+/*!**************************************!*\
+  !*** ./src/typeedit/utils/canvas.ts ***!
+  \**************************************/
+/*! exports provided: displayScalingFactor, createCanvas, resizeCanvas, fixMouseEvent, resetTransform */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayScalingFactor", function() { return displayScalingFactor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createCanvas", function() { return createCanvas; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resizeCanvas", function() { return resizeCanvas; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fixMouseEvent", function() { return fixMouseEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetTransform", function() { return resetTransform; });
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! electron */ "electron");
+/* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_0__);
+
+var displayScalingFactor = 1;
+updateScalingFactor();
+electron__WEBPACK_IMPORTED_MODULE_0__["remote"].screen.on("display-metrics-changed", function () {
+    updateScalingFactor();
+});
+function updateScalingFactor() {
+    var display = electron__WEBPACK_IMPORTED_MODULE_0__["remote"].screen.getPrimaryDisplay();
+    displayScalingFactor = display.scaleFactor;
+}
+function createCanvas(onResize) {
+    var canvas = document.createElement("canvas");
+    canvas.baseWidth = 0;
+    canvas.baseHeight = 0;
+    electron__WEBPACK_IMPORTED_MODULE_0__["remote"].screen.on("display-metrics-changed", function () {
+        if (!canvas.parentElement)
+            return;
+        resizeCanvas(canvas, canvas.baseWidth, canvas.baseHeight);
+        if (onResize)
+            onResize(canvas);
+    });
+    return canvas;
+}
+function resizeCanvas(canvas, w, h) {
+    canvas.baseWidth = w;
+    canvas.baseHeight = h;
+    canvas.width = w * displayScalingFactor;
+    canvas.height = h * displayScalingFactor;
+    canvas.style.transform = "scale(" + 1 / displayScalingFactor + ", " + 1 / displayScalingFactor + ")";
+}
+function fixMouseEvent(e) {
+    var rect = e.target.getBoundingClientRect();
+    return Object.assign({
+        clientX: (e.clientX - rect.x) * displayScalingFactor + rect.x,
+        clientY: (e.clientY - rect.y) * displayScalingFactor + rect.y
+    }, e);
+}
+function resetTransform(ctx) {
+    var canvas = ctx.canvas;
+    ctx.resetTransform();
+    ctx.scale(displayScalingFactor, displayScalingFactor);
+}
+
+
+/***/ }),
+
 /***/ "./src/typeedit/utils/lerp.ts":
 /*!************************************!*\
   !*** ./src/typeedit/utils/lerp.ts ***!
@@ -4229,6 +4291,8 @@ var GlyphContext = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewportCoordinates", function() { return ViewportCoordinates; });
 /* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../geometry/point */ "./src/typeedit/geometry/point.ts");
+/* harmony import */ var _utils_canvas__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/canvas */ "./src/typeedit/utils/canvas.ts");
+
 
 var ViewportCoordinates = /** @class */ (function () {
     function ViewportCoordinates() {
@@ -4251,13 +4315,17 @@ var ViewportCoordinates = /** @class */ (function () {
         ctx.translate(this.dx, this.dy);
         ctx.scale(this.scaleFactor, this.scaleFactor);
     };
-    ViewportCoordinates.prototype.clientToWorld = function (x, y) {
-        return new _geometry_point__WEBPACK_IMPORTED_MODULE_0__["Point"]((x - this.dx) / this.scaleFactor, (y - this.dy) / this.scaleFactor);
+    ViewportCoordinates.prototype.clientToWorld = function (x, y, scaleHiDPI) {
+        if (scaleHiDPI === void 0) { scaleHiDPI = true; }
+        var dpiFactor = scaleHiDPI ? _utils_canvas__WEBPACK_IMPORTED_MODULE_1__["displayScalingFactor"] : 1;
+        return new _geometry_point__WEBPACK_IMPORTED_MODULE_0__["Point"]((x / dpiFactor - this.dx) / this.scaleFactor, (y / dpiFactor - this.dy) / this.scaleFactor);
     };
-    ViewportCoordinates.prototype.worldToClient = function (x, y) {
+    ViewportCoordinates.prototype.worldToClient = function (x, y, scaleHiDPI) {
+        if (scaleHiDPI === void 0) { scaleHiDPI = true; }
+        var dpiFactor = scaleHiDPI ? _utils_canvas__WEBPACK_IMPORTED_MODULE_1__["displayScalingFactor"] : 1;
         return {
-            x: x * this.scaleFactor + this.dx,
-            y: y * this.scaleFactor + this.dy
+            x: (x * this.scaleFactor + this.dx) * dpiFactor,
+            y: (y * this.scaleFactor + this.dy) * dpiFactor
         };
     };
     ViewportCoordinates.prototype.moveInClientDx = function (point, dx, dy) {
@@ -4405,15 +4473,15 @@ var GridGuide = /** @class */ (function () {
     };
     GridGuide.prototype.render = function (v, ctx) {
         var gap = this.calculateGap(v);
-        var minXY = v.co.clientToWorld(0, 0);
-        var maxXY = v.co.clientToWorld(v.domCanvas.width, v.domCanvas.height);
+        var minXY = v.co.clientToWorld(0, 0, false);
+        var maxXY = v.co.clientToWorld(v.domCanvas.width, v.domCanvas.height, false);
         minXY.x = Math.round(minXY.x / gap) * gap;
         minXY.y = Math.round(minXY.y / gap) * gap;
         maxXY.x = Math.round(maxXY.x / gap) * gap;
         maxXY.y = Math.round(maxXY.y / gap) * gap;
         ctx.lineWidth = 1;
         for (var x = minXY.x; x <= maxXY.x; x += gap) {
-            var client = v.co.worldToClient(x, 0);
+            var client = v.co.worldToClient(x, 0, false);
             ctx.beginPath();
             ctx.moveTo(Math.round(client.x) + 0.5, -9999);
             ctx.lineTo(Math.round(client.x) + 0.5, 9999);
@@ -4425,7 +4493,7 @@ var GridGuide = /** @class */ (function () {
             ctx.stroke();
         }
         for (var y = minXY.y; y <= maxXY.y; y += gap) {
-            var client = v.co.worldToClient(0, y);
+            var client = v.co.worldToClient(0, y, false);
             ctx.beginPath();
             ctx.moveTo(-9999, Math.round(client.y) + 0.5);
             ctx.lineTo(9999, Math.round(client.y) + 0.5);
@@ -4491,7 +4559,7 @@ var HorizontalGuide = /** @class */ (function () {
         return null;
     };
     HorizontalGuide.prototype.render = function (v, ctx) {
-        var clientPos = v.co.worldToClient(0, this.value);
+        var clientPos = v.co.worldToClient(0, this.value, false);
         clientPos.y = Math.round(clientPos.y) + 0.5;
         ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_1__["getThemeColor"])("guideActive");
         ctx.lineWidth = 1;
@@ -4535,7 +4603,7 @@ var VerticalGuide = /** @class */ (function () {
         return null;
     };
     VerticalGuide.prototype.render = function (v, ctx) {
-        var clientPos = v.co.worldToClient(this.value, 0);
+        var clientPos = v.co.worldToClient(this.value, 0, false);
         clientPos.x = Math.round(clientPos.x) + 0.5;
         ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_1__["getThemeColor"])("guideActive");
         ctx.lineWidth = 1;
@@ -4608,7 +4676,7 @@ var PointGuide = /** @class */ (function () {
         }
     };
     PointGuide.prototype.render = function (v, ctx) {
-        var clientPos = v.co.worldToClient(this.source.x, this.source.y);
+        var clientPos = v.co.worldToClient(this.source.x, this.source.y, false);
         clientPos.x = Math.round(clientPos.x) + 0.5;
         clientPos.y = Math.round(clientPos.y) + 0.5;
         ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("guideActive");
@@ -5986,6 +6054,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_wrappedDist__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/wrappedDist */ "./src/typeedit/utils/wrappedDist.ts");
 /* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../ui/theme */ "./src/typeedit/ui/theme.ts");
 /* harmony import */ var _ui_panel_toolSettings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../ui/panel/toolSettings */ "./src/typeedit/ui/panel/toolSettings.ts");
+/* harmony import */ var _utils_canvas__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils/canvas */ "./src/typeedit/utils/canvas.ts");
 var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -6005,12 +6074,14 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
 
 
 
+
 var Viewport = /** @class */ (function () {
     function Viewport(context, handles, tool) {
+        var _this = this;
         this.context = context;
         this.handles = handles;
         this.tool = tool;
-        this.domCanvas = document.createElement("canvas");
+        this.domCanvas = Object(_utils_canvas__WEBPACK_IMPORTED_MODULE_12__["createCanvas"])(function () { return _this.updateViewportSize(); });
         this.ctx = this.domCanvas.getContext("2d");
         this.co = new _coordinates__WEBPACK_IMPORTED_MODULE_1__["ViewportCoordinates"]();
         this.isConstructing = false;
@@ -6022,7 +6093,8 @@ var Viewport = /** @class */ (function () {
         var box = this.domCanvas.getBoundingClientRect();
         if (!this.tool)
             return;
-        this.tool.handleMouseEvent(this, e, e.clientX - box.left, e.clientY - box.top);
+        var fixedE = Object(_utils_canvas__WEBPACK_IMPORTED_MODULE_12__["fixMouseEvent"])(e);
+        this.tool.handleMouseEvent(this, e, fixedE.clientX - box.left, fixedE.clientY - box.top);
         this.render();
     };
     Viewport.prototype.setupCanvasEvents = function () {
@@ -6138,8 +6210,7 @@ var Viewport = /** @class */ (function () {
         if (autoCenter) {
             this.co.translate((rect.width - this.domCanvas.width) / 2, (rect.height - this.domCanvas.height) / 2);
         }
-        this.domCanvas.width = rect.width;
-        this.domCanvas.height = rect.height;
+        Object(_utils_canvas__WEBPACK_IMPORTED_MODULE_12__["resizeCanvas"])(this.domCanvas, rect.width, rect.height);
         this.render();
     };
     Viewport.prototype.drawHandles = function (handles) {
@@ -6218,24 +6289,24 @@ var Viewport = /** @class */ (function () {
     };
     Viewport.prototype.render = function () {
         var _this = this;
-        this.ctx.resetTransform();
+        Object(_utils_canvas__WEBPACK_IMPORTED_MODULE_12__["resetTransform"])(this.ctx);
         this.ctx.clearRect(0, 0, this.domCanvas.width, this.domCanvas.height);
         this.co.transformCanvas(this.ctx);
         this.context.render(this, this.ctx);
-        this.ctx.resetTransform();
+        Object(_utils_canvas__WEBPACK_IMPORTED_MODULE_12__["resetTransform"])(this.ctx);
         if (_app__WEBPACK_IMPORTED_MODULE_8__["currentFont"].settings.gridEnabled)
             this.context.grids.forEach(function (g) { return g.render(_this, _this.ctx); });
         Array.apply(void 0, __spreadArrays(this.context.guides, this.tool.guides)).forEach(function (guide) {
             if (guide.active || guide instanceof _guides_grid__WEBPACK_IMPORTED_MODULE_3__["GridGuide"]) {
-                _this.ctx.resetTransform();
+                Object(_utils_canvas__WEBPACK_IMPORTED_MODULE_12__["resetTransform"])(_this.ctx);
                 if (guide.worldRender)
                     _this.co.transformCanvas(_this.ctx);
                 guide.render(_this, _this.ctx);
             }
         });
-        this.ctx.resetTransform();
+        Object(_utils_canvas__WEBPACK_IMPORTED_MODULE_12__["resetTransform"])(this.ctx);
         if (this.isConstructing) {
-            var clientConstr = this.co.worldToClient(this.constructionReference.x, this.constructionReference.y);
+            var clientConstr = this.co.worldToClient(this.constructionReference.x, this.constructionReference.y, false);
             this.ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_10__["getThemeColor"])("constructionActive");
             this.ctx.lineWidth = 1;
             this.ctx.beginPath();
@@ -6250,7 +6321,7 @@ var Viewport = /** @class */ (function () {
         if (this.tool) {
             this.drawHandles(this.tool.handles);
         }
-        this.ctx.resetTransform();
+        Object(_utils_canvas__WEBPACK_IMPORTED_MODULE_12__["resetTransform"])(this.ctx);
         this.co.transformCanvas(this.ctx);
         if (this.tool)
             this.tool.render(this, this.ctx);

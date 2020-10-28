@@ -2492,6 +2492,7 @@ var defaultAppSettings = {
     theme: "dark"
 };
 var defaultPerFontSettings = {
+    curvatureEnabled: false,
     gridEnabled: true,
     gridMainGap: 64,
     gridSubdivisions: 4,
@@ -4000,14 +4001,15 @@ var BezierContext = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlyphContext", function() { return GlyphContext; });
-/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
-/* harmony import */ var _ui_glyphList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/glyphList */ "./src/typeedit/ui/glyphList.ts");
-/* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/theme */ "./src/typeedit/ui/theme.ts");
-/* harmony import */ var _guides_curve__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../guides/curve */ "./src/typeedit/viewport/guides/curve.ts");
-/* harmony import */ var _guides_grid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../guides/grid */ "./src/typeedit/viewport/guides/grid.ts");
-/* harmony import */ var _guides_line__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../guides/line */ "./src/typeedit/viewport/guides/line.ts");
-/* harmony import */ var _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../handles/fontMetric */ "./src/typeedit/viewport/handles/fontMetric.ts");
-/* harmony import */ var _bezier__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./bezier */ "./src/typeedit/viewport/context/bezier.ts");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./src/typeedit/app.ts");
+/* harmony import */ var _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../geometry/bezier/curve */ "./src/typeedit/geometry/bezier/curve.ts");
+/* harmony import */ var _ui_glyphList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/glyphList */ "./src/typeedit/ui/glyphList.ts");
+/* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ui/theme */ "./src/typeedit/ui/theme.ts");
+/* harmony import */ var _guides_curve__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../guides/curve */ "./src/typeedit/viewport/guides/curve.ts");
+/* harmony import */ var _guides_grid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../guides/grid */ "./src/typeedit/viewport/guides/grid.ts");
+/* harmony import */ var _guides_line__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../guides/line */ "./src/typeedit/viewport/guides/line.ts");
+/* harmony import */ var _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../handles/fontMetric */ "./src/typeedit/viewport/handles/fontMetric.ts");
+/* harmony import */ var _bezier__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./bezier */ "./src/typeedit/viewport/context/bezier.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -4036,6 +4038,7 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
 
 
 
+
 var GlyphContext = /** @class */ (function (_super) {
     __extends(GlyphContext, _super);
     function GlyphContext(glyphs, currentIndex) {
@@ -4043,7 +4046,7 @@ var GlyphContext = /** @class */ (function (_super) {
         _this.glyphs = glyphs;
         _this.currentIndex = currentIndex;
         _this.setupHandlesAndGuides();
-        Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_1__["setActiveGlyph"])(_this.glyph);
+        Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_2__["setActiveGlyph"])(_this.glyph);
         _this.glyphModifiedHandler = function () { return _this.updateCurveGuides(); };
         _this.glyph.on("modified", _this.glyphModifiedHandler);
         return _this;
@@ -4058,28 +4061,28 @@ var GlyphContext = /** @class */ (function (_super) {
     GlyphContext.prototype.setupHandlesAndGuides = function () {
         var _this = this;
         this.handles = [
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandleType"].leftBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandleType"].rightBearing),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandleType"].ascender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandleType"].descender),
-            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_6__["FontMetricHandleType"].xHeight)
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandleType"].leftBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandleType"].rightBearing),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandleType"].ascender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandleType"].descender),
+            new _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandle"](this.glyph, _handles_fontMetric__WEBPACK_IMPORTED_MODULE_7__["FontMetricHandleType"].xHeight)
         ];
         this.grids = [
-            new _guides_grid__WEBPACK_IMPORTED_MODULE_4__["GridGuide"]()
+            new _guides_grid__WEBPACK_IMPORTED_MODULE_5__["GridGuide"]()
         ];
         this.guides = [
-            new _guides_line__WEBPACK_IMPORTED_MODULE_5__["HorizontalGuide"](0),
-            new _guides_line__WEBPACK_IMPORTED_MODULE_5__["HorizontalGuide"](512),
-            new _guides_line__WEBPACK_IMPORTED_MODULE_5__["HorizontalGuide"](function () { return _this.glyph.font.metrics.ascender; }, this.handles[2]),
-            new _guides_line__WEBPACK_IMPORTED_MODULE_5__["HorizontalGuide"](function () { return _this.glyph.font.metrics.descender; }, this.handles[3]),
-            new _guides_line__WEBPACK_IMPORTED_MODULE_5__["HorizontalGuide"](function () { return _this.glyph.font.metrics.xHeight; }, this.handles[4]),
-            new _guides_line__WEBPACK_IMPORTED_MODULE_5__["VerticalGuide"](function () { return _this.glyph.metrics.leftBearing; }, this.handles[0]),
-            new _guides_line__WEBPACK_IMPORTED_MODULE_5__["VerticalGuide"](function () { return _this.glyph.metrics.rightBearing; }, this.handles[1])
+            new _guides_line__WEBPACK_IMPORTED_MODULE_6__["HorizontalGuide"](0),
+            new _guides_line__WEBPACK_IMPORTED_MODULE_6__["HorizontalGuide"](512),
+            new _guides_line__WEBPACK_IMPORTED_MODULE_6__["HorizontalGuide"](function () { return _this.glyph.font.metrics.ascender; }, this.handles[2]),
+            new _guides_line__WEBPACK_IMPORTED_MODULE_6__["HorizontalGuide"](function () { return _this.glyph.font.metrics.descender; }, this.handles[3]),
+            new _guides_line__WEBPACK_IMPORTED_MODULE_6__["HorizontalGuide"](function () { return _this.glyph.font.metrics.xHeight; }, this.handles[4]),
+            new _guides_line__WEBPACK_IMPORTED_MODULE_6__["VerticalGuide"](function () { return _this.glyph.metrics.leftBearing; }, this.handles[0]),
+            new _guides_line__WEBPACK_IMPORTED_MODULE_6__["VerticalGuide"](function () { return _this.glyph.metrics.rightBearing; }, this.handles[1])
         ];
         this.updateCurveGuides();
     };
     GlyphContext.prototype.updateCurveGuides = function () {
-        this.guides = __spreadArrays(this.guides.slice(0, 7), this.beziers.map(function (b) { return new _guides_curve__WEBPACK_IMPORTED_MODULE_3__["CurveGuide"](b); }));
+        this.guides = __spreadArrays(this.guides.slice(0, 7), this.beziers.map(function (b) { return new _guides_curve__WEBPACK_IMPORTED_MODULE_4__["CurveGuide"](b); }));
     };
     GlyphContext.prototype.setGlyphs = function (glyphs, currentIndex) {
         this.glyph.off("modified", this.glyphModifiedHandler);
@@ -4091,7 +4094,7 @@ var GlyphContext = /** @class */ (function (_super) {
             this.currentIndex = this.glyphs.length - 1;
         this.beziers = this.glyph.beziers;
         this.setupHandlesAndGuides();
-        Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_1__["setActiveGlyph"])(this.glyph);
+        Object(_ui_glyphList__WEBPACK_IMPORTED_MODULE_2__["setActiveGlyph"])(this.glyph);
         this.glyph.on("modified", this.glyphModifiedHandler);
     };
     GlyphContext.prototype.renderNonEditableGlyphs = function (v, ctx) {
@@ -4102,8 +4105,8 @@ var GlyphContext = /** @class */ (function (_super) {
                 var glyph = this.glyphs[i];
                 var offset = prevGlyph.metrics.rightBearing -
                     glyph.metrics.leftBearing;
-                var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(glyph.finalBeziers);
-                ctx.fillStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("glyphOtherFill");
+                var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__["BezierCurve"].getPath2D(glyph.finalBeziers);
+                ctx.fillStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("glyphOtherFill");
                 ctx.translate(offset, 0);
                 ctx.fill(path);
                 this.renderGlyphIndicator(v, ctx, glyph);
@@ -4118,8 +4121,8 @@ var GlyphContext = /** @class */ (function (_super) {
                 var glyph = this.glyphs[i];
                 var offset = nextGlyph.metrics.leftBearing -
                     glyph.metrics.rightBearing;
-                var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(glyph.finalBeziers);
-                ctx.fillStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("glyphOtherFill");
+                var path = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__["BezierCurve"].getPath2D(glyph.finalBeziers);
+                ctx.fillStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("glyphOtherFill");
                 ctx.translate(offset, 0);
                 ctx.fill(path);
                 this.renderGlyphIndicator(v, ctx, glyph);
@@ -4134,20 +4137,20 @@ var GlyphContext = /** @class */ (function (_super) {
         var w = glyph.metrics.rightBearing - x;
         var y = glyph.font.metrics.ascender - 20 / v.co.scaleFactor;
         ctx.fillStyle = (this.glyph === glyph) ?
-            Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("gindicatorActive") :
-            Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("gindicator");
+            Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("gindicatorActive") :
+            Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("gindicator");
         ctx.fillRect(x, y - 8 / v.co.scaleFactor, w, 4 / v.co.scaleFactor);
         ctx.font = "400 " + 14 / v.co.scaleFactor + "px Inter";
         ctx.textAlign = "center";
         ctx.fillStyle = (this.glyph === glyph) ?
-            Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("gindicatorActiveText") :
-            Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("gindicatorText");
+            Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("gindicatorActiveText") :
+            Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("gindicatorText");
         ctx.fillText(glyph.name, x + w / 2, y - 10 / v.co.scaleFactor);
     };
     GlyphContext.prototype.render = function (v, ctx) {
         this.renderNonEditableGlyphs(v, ctx);
         // Glyph metric lines
-        ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("glyphMetric");
+        ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("glyphMetric");
         ctx.lineWidth = 1 / v.co.scaleFactor;
         ctx.beginPath();
         ctx.moveTo(-9999, 512); // 512 is the bottom - baseline
@@ -4172,42 +4175,44 @@ var GlyphContext = /** @class */ (function (_super) {
         ctx.lineTo(this.glyph.metrics.rightBearing, 9999);
         ctx.stroke();
         // Glyph
-        var workingPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.beziers);
-        var finalPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_0__["BezierCurve"].getPath2D(this.glyph.finalBeziers);
+        var workingPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__["BezierCurve"].getPath2D(this.glyph.beziers);
+        var finalPath = _geometry_bezier_curve__WEBPACK_IMPORTED_MODULE_1__["BezierCurve"].getPath2D(this.glyph.finalBeziers);
         // Glyph fill
-        ctx.fillStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("glyphFill");
+        ctx.fillStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("glyphFill");
         ctx.fill(finalPath);
         // Glyph curvature
-        this.glyph.beziers.forEach(function (bezier) { return bezier.segments.forEach(function (seg) {
-            ctx.beginPath();
-            ctx.moveTo(seg.points[3].x, seg.points[3].y);
-            ctx.bezierCurveTo(seg.points[2].x, seg.points[2].y, seg.points[1].x, seg.points[1].y, seg.points[0].x, seg.points[0].y);
-            for (var t = 0; t <= 1; t += 0.05) {
-                var point = seg.at(t);
-                var dPoint = seg.d.at(t);
-                var angle = Math.atan2(dPoint.y, dPoint.x);
-                var curvature = seg.curvature(t);
-                var r = Math.atan(curvature * 200) * 10;
-                if (curvature !== 0) {
-                    r += Math.sign(curvature) * 10;
+        if (_app__WEBPACK_IMPORTED_MODULE_0__["currentFont"].settings.curvatureEnabled) {
+            this.glyph.beziers.forEach(function (bezier) { return bezier.segments.forEach(function (seg) {
+                ctx.beginPath();
+                ctx.moveTo(seg.points[3].x, seg.points[3].y);
+                ctx.bezierCurveTo(seg.points[2].x, seg.points[2].y, seg.points[1].x, seg.points[1].y, seg.points[0].x, seg.points[0].y);
+                for (var t = 0; t <= 1; t += 0.05) {
+                    var point = seg.at(t);
+                    var dPoint = seg.d.at(t);
+                    var angle = Math.atan2(dPoint.y, dPoint.x);
+                    var curvature = seg.curvature(t);
+                    var r = Math.atan(curvature * 200) * 10;
+                    if (curvature !== 0) {
+                        r += Math.sign(curvature) * 20;
+                    }
+                    ctx.lineTo(point.x - r * Math.cos(angle), point.y - r * Math.sin(angle));
                 }
-                ctx.lineTo(point.x - r * Math.cos(angle), point.y - r * Math.sin(angle));
-            }
-            ctx.fillStyle = "blue";
-            ctx.fill();
-        }); });
+                ctx.fillStyle = "blue";
+                ctx.fill();
+            }); });
+        }
         // Glyph outline        
         ctx.setLineDash([]);
-        ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("glyphGapOutline");
+        ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("glyphGapOutline");
         ctx.lineWidth = 4 / v.co.scaleFactor;
         ctx.stroke(workingPath);
-        ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("glyphOutline");
+        ctx.strokeStyle = Object(_ui_theme__WEBPACK_IMPORTED_MODULE_3__["getThemeColor"])("glyphOutline");
         ctx.lineWidth = 1 / v.co.scaleFactor;
         ctx.stroke(workingPath);
         this.renderGlyphIndicator(v, ctx, this.glyph);
     };
     return GlyphContext;
-}(_bezier__WEBPACK_IMPORTED_MODULE_7__["BezierContext"]));
+}(_bezier__WEBPACK_IMPORTED_MODULE_8__["BezierContext"]));
 
 
 

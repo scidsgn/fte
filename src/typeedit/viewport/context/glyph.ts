@@ -1,3 +1,4 @@
+import { currentFont } from "../../app";
 import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
 import { setActiveGlyph } from "../../ui/glyphList";
@@ -209,46 +210,48 @@ export class GlyphContext extends BezierContext {
         ctx.fill(finalPath) 
 
         // Glyph curvature
-        this.glyph.beziers.forEach(
-            bezier => bezier.segments.forEach(
-                seg => {
-                    ctx.beginPath()
+        if (currentFont.settings.curvatureEnabled) {
+            this.glyph.beziers.forEach(
+                bezier => bezier.segments.forEach(
+                    seg => {
+                        ctx.beginPath()
 
-                    ctx.moveTo(
-                        seg.points[3].x, seg.points[3].y
-                    )
-                    ctx.bezierCurveTo(
-                        seg.points[2].x, seg.points[2].y,
-                        seg.points[1].x, seg.points[1].y,
-                        seg.points[0].x, seg.points[0].y
-                    )
-
-                    for (let t = 0; t <= 1; t += 0.05) {
-                        const point = seg.at(t)
-
-                        const dPoint = seg.d.at(t)
-                        const angle = Math.atan2(
-                            dPoint.y, dPoint.x
+                        ctx.moveTo(
+                            seg.points[3].x, seg.points[3].y
                         )
-                        const curvature = seg.curvature(t)
-                        let r = Math.atan(
-                            curvature * 200
-                        ) * 10
-                        if (curvature !== 0) {
-                            r += Math.sign(curvature) * 10
+                        ctx.bezierCurveTo(
+                            seg.points[2].x, seg.points[2].y,
+                            seg.points[1].x, seg.points[1].y,
+                            seg.points[0].x, seg.points[0].y
+                        )
+
+                        for (let t = 0; t <= 1; t += 0.05) {
+                            const point = seg.at(t)
+
+                            const dPoint = seg.d.at(t)
+                            const angle = Math.atan2(
+                                dPoint.y, dPoint.x
+                            )
+                            const curvature = seg.curvature(t)
+                            let r = Math.atan(
+                                curvature * 200
+                            ) * 10
+                            if (curvature !== 0) {
+                                r += Math.sign(curvature) * 20
+                            }
+
+                            ctx.lineTo(
+                                point.x - r * Math.cos(angle),
+                                point.y - r * Math.sin(angle)
+                            )
                         }
 
-                        ctx.lineTo(
-                            point.x - r * Math.cos(angle),
-                            point.y - r * Math.sin(angle)
-                        )
+                        ctx.fillStyle = "blue"
+                        ctx.fill()
                     }
-
-                    ctx.fillStyle = "blue"
-                    ctx.fill()
-                }
+                )
             )
-        )
+        }
 
         // Glyph outline        
         ctx.setLineDash([])

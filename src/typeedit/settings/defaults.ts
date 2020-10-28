@@ -3,6 +3,8 @@ export const defaultAppSettings = {
 }
 
 export const defaultPerFontSettings = {
+    curvatureEnabled: false, // let's keep that false for now
+
     gridEnabled: true,
     gridMainGap: 64,
     gridSubdivisions: 4,

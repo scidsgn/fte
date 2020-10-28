@@ -5,6 +5,7 @@ import { ValueChangeAction } from "../../undo/actions/value"
 import { IDrawableHandle } from "../drawable"
 import { Viewport } from "../viewport"
 import { getThemeColor } from "../../ui/theme"
+import { displayScalingFactor } from "../../utils/canvas"
 
 export enum FontMetricHandleType {
     leftBearing, rightBearing,
@@ -124,9 +125,9 @@ export class FontMetricHandle implements IDrawableHandle {
         ctx.moveTo(0, 0)
 
         if (this.dir === FontMetricHandleDir.horz)
-            ctx.lineTo(20 * v.co.scaleFactor, 0)
+            ctx.lineTo(20 * v.co.scaleFactor * displayScalingFactor, 0)
         else
-            ctx.lineTo(0, -20 * v.co.scaleFactor)
+            ctx.lineTo(0, -20 * v.co.scaleFactor * displayScalingFactor)
 
         ctx.fillStyle = this.selected ?
                         getThemeColor("handleSelected") :

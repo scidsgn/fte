@@ -4881,6 +4881,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _geometry_point__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../geometry/point */ "./src/typeedit/geometry/point.ts");
 /* harmony import */ var _undo_actions_value__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../undo/actions/value */ "./src/typeedit/undo/actions/value.ts");
 /* harmony import */ var _ui_theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/theme */ "./src/typeedit/ui/theme.ts");
+/* harmony import */ var _utils_canvas__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/canvas */ "./src/typeedit/utils/canvas.ts");
+
 
 
 
@@ -4992,9 +4994,9 @@ var FontMetricHandle = /** @class */ (function () {
         ctx.arc(0, 0, 5, 0, 2 * Math.PI);
         ctx.moveTo(0, 0);
         if (this.dir === FontMetricHandleDir.horz)
-            ctx.lineTo(20 * v.co.scaleFactor, 0);
+            ctx.lineTo(20 * v.co.scaleFactor * _utils_canvas__WEBPACK_IMPORTED_MODULE_3__["displayScalingFactor"], 0);
         else
-            ctx.lineTo(0, -20 * v.co.scaleFactor);
+            ctx.lineTo(0, -20 * v.co.scaleFactor * _utils_canvas__WEBPACK_IMPORTED_MODULE_3__["displayScalingFactor"]);
         ctx.fillStyle = this.selected ?
             Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("handleSelected") :
             Object(_ui_theme__WEBPACK_IMPORTED_MODULE_2__["getThemeColor"])("handleMetricFill");

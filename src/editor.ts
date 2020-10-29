@@ -7,7 +7,7 @@ import "./typeedit/styles/app/controls.scss"
 import "./typeedit/styles/welcome.scss"
 
 import app, { currentFont } from "./typeedit/app"
-import paper from "paper"
+import paper, { tool } from "paper"
 import { remote } from "electron"
 import { basename, extname } from "path"
 import { importFont_opentype } from "./typeedit/io/opentype.js/import"
@@ -20,6 +20,7 @@ import { FTEX1 } from "./typeedit/io/ftex/ftex"
 import { SmartBuffer } from "smart-buffer"
 import { openFont, saveFont } from "./typeedit/io/io"
 import { prepareFontSettings, prepareTabbedPanel } from "./typeedit/ui/panel"
+import { setIdleTimeout } from "./typeedit/utils/idle"
 
 console.log(remote)
 
@@ -270,3 +271,35 @@ prepareTabbedPanel()
 //         app(font)
 //     }
 // )
+
+setIdleTimeout(
+    (e: MouseEvent) => {
+        let element = e.target as HTMLElement
+        while (
+            element &&
+            !(element instanceof HTMLButtonElement)
+        ) {
+            element = element.parentElement
+        }
+
+        if (!element) return
+
+        const title = element.getAttribute("data-title")
+        if (!title) return
+
+        const tooltip: HTMLDivElement = document.querySelector(
+            "div.tooltip"
+        )
+
+        tooltip.style.display = "block"
+
+        tooltip.style.left = `${e.clientX + 16}px`
+        tooltip.style.top = `${e.clientY + 16}px`
+        tooltip.textContent = title
+    }, () => {
+        const tooltip: HTMLDivElement = document.querySelector(
+            "div.tooltip"
+        )
+        tooltip.style.display = "none"
+    }, 250
+)

@@ -1,5 +1,6 @@
 export default function ToggleButton(
     icon: string,
+    tooltip: string,
     get: () => boolean,
     toggle: () => void,
     update?: (
@@ -7,6 +8,8 @@ export default function ToggleButton(
     ) => void
 ): HTMLButtonElement {
     const button = document.createElement("button")
+
+    button.setAttribute("data-title", tooltip)
 
     if (icon) {
         const img = new Image()

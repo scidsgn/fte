@@ -14,13 +14,13 @@
         <main>
             <nav>
                 <div class="actions">
-                    <button class="newFont" title="New font">
+                    <button class="newFont" data-title="New font">
                         <img src="res/icons/newfont.svg">
                     </button>
-                    <button class="openFont" title="Open font...">
+                    <button class="openFont" data-title="Open font...">
                         <img src="res/icons/openfont.svg">
                     </button>
-                    <button class="saveFont" title="Save font...">
+                    <button class="saveFont" data-title="Save font...">
                         <img src="res/icons/savefont.svg">
                     </button>
 
@@ -44,19 +44,19 @@
             </section>
             <aside>
                 <nav>
-                    <button title="Font" data-tab="toolsettings">
+                    <button data-title="Tool" data-tab="toolsettings">
                         <img src="res/icons/toolsettings.svg">
                     </button>
-                    <button title="Font" data-tab="font">
+                    <button data-title="Font" data-tab="font">
                         <img src="res/icons/font.svg">
                     </button>
-                    <button title="Glyphs" class="active" data-tab="glyphs">
+                    <button data-title="Glyphs" class="active" data-tab="glyphs">
                         <img src="res/icons/glyphlist.svg">
                     </button>
-                    <button title="Metrics & snapping" data-tab="snapping">
+                    <button data-title="Snapping" data-tab="snapping">
                         <img src="res/icons/metricgrid.svg">
                     </button>
-                    <button title="Modifiers" data-tab="modifiers">
+                    <button data-title="Modifiers" data-tab="modifiers">
                         <img src="res/icons/modifiers.svg">
                     </button>
                 </nav>
@@ -102,6 +102,7 @@
             <!-- Secret canvas! -->
             <canvas class="previewGenerator" width="332" height="50"></canvas>
         </article>
+        <div class="tooltip">Tooltip!</div>
 
         <script src="editor.js"></script>
     </body>

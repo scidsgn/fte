@@ -18,6 +18,7 @@ export function prepareSnappingPanel(font: Font) {
             ButtonGroup([
                 ToggleButton(
                     "curvesnap",
+                    "Snap to curve",
                     () => font.settings.curveSnapEnabled,
                     () => {
                         font.settings.curveSnapEnabled = !font.settings.curveSnapEnabled
@@ -31,6 +32,7 @@ export function prepareSnappingPanel(font: Font) {
                 ),
                 ToggleButton(
                     "handlesnap",
+                    "Snap to points",
                     () => font.settings.handleSnapEnabled,
                     () => {
                         font.settings.handleSnapEnabled = !font.settings.handleSnapEnabled
@@ -44,6 +46,7 @@ export function prepareSnappingPanel(font: Font) {
                 ),
                 ToggleButton(
                     "metricsnap",
+                    "Snap to metrics",
                     () => font.settings.metricsSnapEnabled,
                     () => {
                         font.settings.metricsSnapEnabled = !font.settings.metricsSnapEnabled

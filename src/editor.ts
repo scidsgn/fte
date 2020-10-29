@@ -284,6 +284,10 @@ setIdleTimeout(
 
         if (!element) return
 
+        element.dispatchEvent(
+            new CustomEvent("fteTooltip")
+        )
+
         const title = element.getAttribute("data-title")
         if (!title) return
 

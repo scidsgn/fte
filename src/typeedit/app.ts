@@ -6,7 +6,7 @@ import { setupViewport } from "./ui/viewport"
 import { prepareGlyphBar } from "./ui/glyphBar"
 import { prepareGlyphList } from "./ui/glyphList"
 import { ITool, ToolSubAction } from "./viewport/tools/tool"
-import { undo, redo } from "./undo/history"
+import { undo, redo, getUndoActionName, getRedoActionName } from "./undo/history"
 import { prepareToolbar, setActiveTool } from "./ui/toolbar"
 import { Font } from "./font/font"
 import { RectangleTool } from "./viewport/tools/rectangle"
@@ -19,7 +19,11 @@ export let currentFont: Font = null
 
 const globalSubActions: ToolSubAction[] = [
     {
-        name: "Undo",
+        name: () => {
+            const undoName = getUndoActionName()
+
+            return undoName ? `Undo ${undoName}` : "Undo"
+        },
         icon: "undo",
         accelerator: "^KeyZ",
         handler: () => {
@@ -27,7 +31,11 @@ const globalSubActions: ToolSubAction[] = [
         }
     },
     {
-        name: "Redo",
+        name: () => {
+            const redoName = getRedoActionName()
+
+            return redoName ? `Redo ${redoName}` : "Redo"
+        },
         icon: "redo",
         accelerator: "^+KeyZ",
         handler: () => {

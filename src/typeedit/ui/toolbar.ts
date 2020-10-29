@@ -22,9 +22,12 @@ export function prepareToolbar(
         tool => {
             const button = document.createElement("button")
 
-            button.title = `${tool.name} (${
-                accelStringToUserFriendly(tool.accelerator)
-            })`
+            button.setAttribute(
+                "data-title", `${tool.name} (${
+                    accelStringToUserFriendly(tool.accelerator)
+                })`
+            )
+
             button.innerHTML = `
                 <img src="res/icons/${tool.icon}.svg">
             `

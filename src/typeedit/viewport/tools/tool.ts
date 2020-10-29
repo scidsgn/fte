@@ -4,7 +4,7 @@ import { IGuide } from "../guides/guide"
 import { Viewport } from "../viewport"
 
 export type ToolSubAction = {
-    name: string,
+    name: string | (() => string),
     icon: string,
     accelerator: string,
     handler: () => void

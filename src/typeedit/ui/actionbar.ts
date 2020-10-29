@@ -12,13 +12,19 @@ export function updateSubactions(viewport: Viewport, subactionGroups: ToolSubAct
 
         for (const subaction of group) {
             const button = document.createElement("button")
-            button.setAttribute(
-                "data-title", `${subaction.name}${
-                    subaction.accelerator ? ` (${
-                        accelStringToUserFriendly(subaction.accelerator)
-                    })` : ""
-                }`
-            )
+
+            button.addEventListener("fteTooltip", () => {
+                const name = (typeof subaction.name === "string") ?
+                             subaction.name : subaction.name()
+                
+                button.setAttribute(
+                    "data-title", `${name}${
+                        subaction.accelerator ? ` (${
+                            accelStringToUserFriendly(subaction.accelerator)
+                        })` : ""
+                    }`
+                )
+            })
 
             button.addEventListener("click", () => {
                 subaction.handler()

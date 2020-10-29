@@ -70,7 +70,7 @@ export class Viewport {
                             submenu: section.subactions.map(
                                 a => {
                                     return {
-                                        label: a.name,
+                                        label: (typeof a.name === "string") ? a.name : a.name(),
                                         click: () => a.handler(),
                                         accelerator: accelStringToElectron(a.accelerator)
                                     }
@@ -82,7 +82,7 @@ export class Viewport {
                             ...section.subactions.map(
                                 a => {
                                     return {
-                                        label: a.name,
+                                        label: (typeof a.name === "string") ? a.name : a.name(),
                                         click: () => a.handler(),
                                         accelerator: accelStringToElectron(a.accelerator)
                                     }

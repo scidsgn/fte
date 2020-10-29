@@ -16,6 +16,18 @@ export function finalizeUndoContext(name?: string) {
     undoContext = new UndoContext()
 }
 
+export function getUndoActionName() {
+    if (!undoContexts.length) return null
+
+    return undoContexts[undoContexts.length - 1].name
+}
+
+export function getRedoActionName() {
+    if (!redoContexts.length) return null
+
+    return redoContexts[redoContexts.length - 1].name
+}
+
 export function canUndo() {
     return undoContexts.length > 0
 }

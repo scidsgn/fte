@@ -61,4 +61,11 @@ export class Point {
         this.x = lerp(x, this.x, target.x)
         this.y = lerp(x, this.y, target.y)
     }
+
+    lerpNew(x: number, target: Point): Point {
+        return new Point(
+            lerp(x, this.x, target.x),
+            lerp(x, this.y, target.y)
+        )
+    }
 }

@@ -377,6 +377,37 @@ export class HandleTool implements ITool {
                     }
                 }
             ]
+        },
+        {
+            name: "DEV",
+            subactions: [
+                {
+                    name: "Quadraticize",
+                    icon: "code",
+                    accelerator: "",
+                    handler: () => {
+                        this.beziers.forEach(
+                            b => b.segments.forEach(
+                                seg => seg.splitToQuadratic()
+                            )
+                        )
+                        // const splitBeziers = this.beziers.map(
+                        //     b => BezierCurve.fromSegments(
+                        //         b.segments.map(
+                        //             seg => seg.split(0.5)
+                        //         ).flat(),
+                        //         b.glyph
+                        //     )
+                        // )
+
+                        // console.log(splitBeziers)
+
+                        // this.glyph.beziers = splitBeziers
+                        // this.glyph.updateBeziers()
+                        // this.beziers = this.glyph.beziers
+                    }
+                }
+            ]
         }
     ]
 

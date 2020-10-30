@@ -244,5 +244,29 @@ export class BezierCurve extends EventEmitter {
         
         return []
     }
+
+    static fromSegments(
+        segments: BezierSegment[], glyph?: Glyph
+    ): BezierCurve {
+        const curve = new BezierCurve(glyph)
+
+        for (let i = 0; i < segments.length; i++) {
+            const seg = segments[i]
+            const next = segments[
+                (i + 1) % segments.length
+            ]
+            if (seg.n !== 4 || seg.n !== 4) return null
+
+            curve.addPoint(
+                new BezierPoint(
+                    next.points[0],
+                    seg.points[2],
+                    next.points[1]
+                )
+            )
+        }
+        
+        return curve
+    }
 }
 

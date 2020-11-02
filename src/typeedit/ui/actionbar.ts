@@ -8,6 +8,7 @@ export function updateSubactions(viewport: Viewport, subactionGroups: ToolSubAct
     subactionContainer.innerHTML = ""
 
     for (const group of subactionGroups) {
+        
         const subactionGroup = document.createElement("div")
 
         for (const subaction of group) {

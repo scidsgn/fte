@@ -1,5 +1,6 @@
 import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
+import { BezierPointType } from "../../geometry/bezier/point";
 import { Point } from "../../geometry/point";
 import { ArrayAddAction, ArrayRemoveAction } from "../../undo/actions/array";
 import { finalizeUndoContext, undoContext } from "../../undo/history";
@@ -104,6 +105,43 @@ export class HandleTool implements ITool {
                     handler: () => {
                         this.getSelectedCurves().forEach(
                             c => c.reverse()
+                        )
+                    }
+                }
+            ]
+        },
+        {
+            name: "Point type",
+            collapse: true,
+            hiddenInActionBar: true,
+            subactions: [
+                {
+                    name: "Free",
+                    icon: "",
+                    accelerator: "",
+                    handler: () => {
+                        this.performPointTypeChange(
+                            BezierPointType.free
+                        )
+                    }
+                },
+                {
+                    name: "Sharp",
+                    icon: "",
+                    accelerator: "",
+                    handler: () => {
+                        this.performPointTypeChange(
+                            BezierPointType.sharp
+                        )
+                    }
+                },
+                {
+                    name: "Auto",
+                    icon: "",
+                    accelerator: "",
+                    handler: () => {
+                        this.performPointTypeChange(
+                            BezierPointType.auto
                         )
                     }
                 }
@@ -412,6 +450,22 @@ export class HandleTool implements ITool {
     ]
 
     public settingsPanel: HTMLElement[] = null
+
+    private performPointTypeChange(
+        type: BezierPointType
+    ) {
+        const selected = this.handles.filter(h => h.selected)
+
+        selected.forEach(
+            s => {
+                if (!(s instanceof BezierBasePointHandle)) return
+
+                s.point.convertType(type)
+            }
+        )
+
+        finalizeUndoContext("Set point type")
+    }
 
     private performCSGOperation(
         operation: (

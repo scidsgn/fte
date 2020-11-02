@@ -12,8 +12,9 @@ export type ToolSubAction = {
 
 export type ToolSubActionSection = {
     name: string,
-    subactions: ToolSubAction[]
-    collapse?: boolean
+    subactions: ToolSubAction[],
+    collapse?: boolean,
+    hiddenInActionBar?: boolean
 }
 
 export interface ITool {

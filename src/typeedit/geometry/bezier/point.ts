@@ -1,4 +1,6 @@
 import { EventEmitter } from "events"
+import { ValueChangeAction } from "../../undo/actions/value"
+import { undoContext } from "../../undo/history"
 import { Point } from "../point"
 import { BezierCurve } from "./curve"
 
@@ -110,5 +112,38 @@ export class BezierPoint extends EventEmitter {
         }
 
         this.curve.emit("modified")
+    }
+
+    convertType(type: BezierPointType) {
+        undoContext.addAction(
+            new ValueChangeAction(this.base, ["x", "y"]),
+            new ValueChangeAction(this.before, ["x", "y"]),
+            new ValueChangeAction(this.after, ["x", "y"]),
+            new ValueChangeAction(this, ["type"])
+        )
+
+        if (type === BezierPointType.sharp) {
+            this.before.copy(this.base)
+            this.after.copy(this.base)
+        } else if (type === BezierPointType.auto) {
+            const r = Math.max(
+                24,
+                (
+                    this.after.distance(this.base),
+                    this.before.distance(this.base)
+                ) / 2
+            )
+            const angle = (
+                this.base.angle(this.previous.after) +
+                this.next.before.angle(this.base)
+            ) / 2
+
+            this.after.x = this.base.x + r * Math.cos(angle)
+            this.after.y = this.base.y + r * Math.sin(angle)
+            this.before.x = this.base.x + r * Math.cos(angle + Math.PI)
+            this.before.y = this.base.y + r * Math.sin(angle + Math.PI)
+        }
+
+        this.type = type
     }
 }

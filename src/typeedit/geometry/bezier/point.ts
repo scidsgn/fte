@@ -59,6 +59,8 @@ export class BezierPoint extends EventEmitter {
 
         const prev = this.previous
         const next = this.next
+
+        if (!prev || !next) return
     
         if (radius1 < 0.001 && radius2 < 0.001) {
             this.type = BezierPointType.sharp

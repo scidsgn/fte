@@ -1,7 +1,7 @@
 import { currentFont } from "../../app"
 import { Glyph } from "../../font/glyph"
 import { BezierCurve } from "../../geometry/bezier/curve"
-import { BezierPoint } from "../../geometry/bezier/point"
+import { BezierPoint, BezierPointType } from "../../geometry/bezier/point"
 import { Point } from "../../geometry/point"
 import Accordion from "../../ui/panel/controls/accordion"
 import Label from "../../ui/panel/controls/label"
@@ -86,28 +86,32 @@ export class EllipseTool implements ITool {
             new BezierPoint(
                 new Point(0, 0),
                 new Point(0, 0),
-                new Point(0, 0)
+                new Point(0, 0),
+                BezierPointType.auto
             )
         )
         curve.addPoint(
             new BezierPoint(
                 new Point(0, 0),
                 new Point(0, 0),
-                new Point(0, 0)
+                new Point(0, 0),
+                BezierPointType.auto
             )
         )
         curve.addPoint(
             new BezierPoint(
                 new Point(0, 0),
                 new Point(0, 0),
-                new Point(0, 0)
+                new Point(0, 0),
+                BezierPointType.auto
             )
         )
         curve.addPoint(
             new BezierPoint(
                 new Point(0, 0),
                 new Point(0, 0),
-                new Point(0, 0)
+                new Point(0, 0),
+                BezierPointType.auto
             )
         )
 

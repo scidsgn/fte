@@ -46,6 +46,14 @@ div.panelContents {
 
         appearance: none;
 
+        &:hover {
+            background: var(--var-button-hover);
+        }
+    
+        &:active {
+            background: var(--var-button-active);
+        }
+
         &:checked {
             background: var(--var-ctrl-focus);
         }
@@ -139,5 +147,9 @@ div.panelContents {
         border: 1px solid var(--var-ctrl-border);
         border-radius: 4px;
         padding: 4px 10px;
+
+        &:focus {
+            border: 1px solid var(--var-ctrl-focus);
+        }
     }
 }

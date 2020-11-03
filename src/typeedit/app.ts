@@ -14,6 +14,7 @@ import { EllipseTool } from "./viewport/tools/ellipse"
 import { addFontSettingsEvents, prepareFontSettings } from "./ui/panel"
 import { prepareSnappingPanel } from "./ui/panel/snapping"
 import { prepareFontInfoPanel } from "./ui/panel/fontInfo"
+import { view } from "paper/dist/paper-core"
 
 export let currentFont: Font = null
 
@@ -51,7 +52,8 @@ const globalTools = [
     new EllipseTool()
 ]
 
-let currentKeybCallback: (e: KeyboardEvent) => void = null
+let currentKeyDownCallback: (e: KeyboardEvent) => void = null
+let currentKeyUpCallback: (e: KeyboardEvent) => void = null
 
 export default (font: Font) => {
     currentFont = font
@@ -104,15 +106,37 @@ export default (font: Font) => {
 
     font.on("settingChanged", () => viewport.render())
 
-    if (currentKeybCallback)
-        window.removeEventListener("keyup", currentKeybCallback)
-
-    currentKeybCallback = (e: KeyboardEvent) => {
+    if (currentKeyUpCallback || currentKeyDownCallback) {
+        window.removeEventListener("keyup", currentKeyUpCallback)
+        window.removeEventListener("keydown", currentKeyDownCallback)
+    }
+    
+    currentKeyDownCallback = (e: KeyboardEvent) => {
         if (document.activeElement !== document.body) return // for now
 
         let accelString = e.code
         if (e.shiftKey) accelString = "+" + accelString
         if (e.ctrlKey) accelString = "^" + accelString
+
+        if (accelString === "Space") {
+            viewport.peekMode = true
+            viewport.render()
+            return
+        }
+    }
+
+    currentKeyUpCallback = (e: KeyboardEvent) => {
+        if (document.activeElement !== document.body) return // for now
+
+        let accelString = e.code
+        if (e.shiftKey) accelString = "+" + accelString
+        if (e.ctrlKey) accelString = "^" + accelString
+
+        if (accelString === "Space") {
+            viewport.peekMode = false
+            viewport.render()
+            return
+        }
 
         for (let action of [
             globalTools,
@@ -140,5 +164,6 @@ export default (font: Font) => {
             }
         }
     }
-    window.addEventListener("keyup", currentKeybCallback)
+    window.addEventListener("keyup", currentKeyUpCallback)
+    window.addEventListener("keydown", currentKeyDownCallback)
 }

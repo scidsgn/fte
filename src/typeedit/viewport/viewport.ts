@@ -29,6 +29,8 @@ export class Viewport {
     private constructionAngle = 0
     private constructionReference = new Point()
 
+    public peekMode = false
+
     constructor(
         public context: IContext,
         public handles: IDrawableHandle[],
@@ -365,54 +367,56 @@ export class Viewport {
         
         resetTransform(this.ctx)
         
-        if (currentFont.settings.gridEnabled)
+        if (currentFont.settings.gridEnabled && !this.peekMode)
             this.context.grids.forEach(
                 g => g.render(this, this.ctx)
             )
 
-        Array(
-            ...this.context.guides,
-            ...this.tool.guides
-        ).forEach(
-            guide => {
-                if (guide.active || guide instanceof GridGuide) {
-                    resetTransform(this.ctx)
-                    if (guide.worldRender)
-                        this.co.transformCanvas(this.ctx)
-                        
-                    guide.render(this, this.ctx)
+        if (!this.peekMode) {
+            Array(
+                ...this.context.guides,
+                ...this.tool.guides
+            ).forEach(
+                guide => {
+                    if (guide.active || guide instanceof GridGuide) {
+                        resetTransform(this.ctx)
+                        if (guide.worldRender)
+                            this.co.transformCanvas(this.ctx)
+                            
+                        guide.render(this, this.ctx)
+                    }
                 }
+            )
+
+            resetTransform(this.ctx)
+            if (this.isConstructing) {
+                const clientConstr = this.co.worldToClient(
+                    this.constructionReference.x, this.constructionReference.y,
+                    false
+                )
+
+                this.ctx.strokeStyle = getThemeColor("constructionActive")
+                this.ctx.lineWidth = 1
+
+                this.ctx.beginPath()
+                this.ctx.moveTo(
+                    clientConstr.x - 1000 * Math.cos(this.constructionAngle),
+                    clientConstr.y - 1000 * Math.sin(this.constructionAngle)
+                )
+                this.ctx.lineTo(
+                    clientConstr.x + 1000 * Math.cos(this.constructionAngle),
+                    clientConstr.y + 1000 * Math.sin(this.constructionAngle)
+                )
+                this.ctx.stroke()
             }
-        )
 
-        resetTransform(this.ctx)
-        if (this.isConstructing) {
-            const clientConstr = this.co.worldToClient(
-                this.constructionReference.x, this.constructionReference.y,
-                false
-            )
-
-            this.ctx.strokeStyle = getThemeColor("constructionActive")
-            this.ctx.lineWidth = 1
-
-            this.ctx.beginPath()
-            this.ctx.moveTo(
-                clientConstr.x - 1000 * Math.cos(this.constructionAngle),
-                clientConstr.y - 1000 * Math.sin(this.constructionAngle)
-            )
-            this.ctx.lineTo(
-                clientConstr.x + 1000 * Math.cos(this.constructionAngle),
-                clientConstr.y + 1000 * Math.sin(this.constructionAngle)
-            )
-            this.ctx.stroke()
-        }
-
-        if (this.tool && this.tool.supportsForeignHandles) {
-            this.drawHandles(this.context.handles)
-            this.drawHandles(this.handles)
-        }
-        if (this.tool) {
-            this.drawHandles(this.tool.handles)
+            if (this.tool && this.tool.supportsForeignHandles) {
+                this.drawHandles(this.context.handles)
+                this.drawHandles(this.handles)
+            }
+            if (this.tool) {
+                this.drawHandles(this.tool.handles)
+            }
         }
 
         resetTransform(this.ctx)

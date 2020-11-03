@@ -123,7 +123,8 @@ export class GlyphContext extends BezierContext {
                 ctx.translate(offset, 0)
                 ctx.fill(path)
 
-                this.renderGlyphIndicator(v, ctx, glyph)
+                if (!v.peekMode)
+                    this.renderGlyphIndicator(v, ctx, glyph)
 
                 currentOffset += offset
             }
@@ -147,7 +148,8 @@ export class GlyphContext extends BezierContext {
                 ctx.translate(offset, 0)
                 ctx.fill(path)
 
-                this.renderGlyphIndicator(v, ctx, glyph)
+                if (!v.peekMode)
+                    this.renderGlyphIndicator(v, ctx, glyph)
 
                 currentOffset += offset
 
@@ -180,43 +182,45 @@ export class GlyphContext extends BezierContext {
     render(v: Viewport, ctx: CanvasRenderingContext2D) {
         this.renderNonEditableGlyphs(v, ctx)
 
-        // Glyph metric lines
-        ctx.strokeStyle = getThemeColor("glyphMetric")
-        ctx.lineWidth = 1 / v.co.scaleFactor
+        if (!v.peekMode) {
+            // Glyph metric lines
+            ctx.strokeStyle = getThemeColor("glyphMetric")
+            ctx.lineWidth = 1 / v.co.scaleFactor
 
-        ctx.beginPath()
+            ctx.beginPath()
 
-        ctx.moveTo(-9999, 512) // 512 is the bottom - baseline
-        ctx.lineTo(9999, 512)
-        
-        ctx.moveTo(-9999, 0) // 0 is the top - cap height
-        ctx.lineTo(9999, 0)
-        ctx.stroke()
+            ctx.moveTo(-9999, 512) // 512 is the bottom - baseline
+            ctx.lineTo(9999, 512)
+            
+            ctx.moveTo(-9999, 0) // 0 is the top - cap height
+            ctx.lineTo(9999, 0)
+            ctx.stroke()
 
-        ctx.setLineDash(
-            [10 / v.co.scaleFactor, 10 / v.co.scaleFactor]
-        )
+            ctx.setLineDash(
+                [10 / v.co.scaleFactor, 10 / v.co.scaleFactor]
+            )
 
-        // x-height
-        ctx.beginPath()
-        ctx.moveTo(-9999, this.glyph.font.metrics.xHeight)
-        ctx.lineTo(9999, this.glyph.font.metrics.xHeight)
+            // x-height
+            ctx.beginPath()
+            ctx.moveTo(-9999, this.glyph.font.metrics.xHeight)
+            ctx.lineTo(9999, this.glyph.font.metrics.xHeight)
 
-        // Ascender
-        ctx.moveTo(-9999, this.glyph.font.metrics.ascender)
-        ctx.lineTo(9999, this.glyph.font.metrics.ascender)
+            // Ascender
+            ctx.moveTo(-9999, this.glyph.font.metrics.ascender)
+            ctx.lineTo(9999, this.glyph.font.metrics.ascender)
 
-        // Descender
-        ctx.moveTo(-9999, this.glyph.font.metrics.descender)
-        ctx.lineTo(9999, this.glyph.font.metrics.descender)
+            // Descender
+            ctx.moveTo(-9999, this.glyph.font.metrics.descender)
+            ctx.lineTo(9999, this.glyph.font.metrics.descender)
 
-        ctx.moveTo(this.glyph.metrics.leftBearing, -9999)
-        ctx.lineTo(this.glyph.metrics.leftBearing, 9999)
+            ctx.moveTo(this.glyph.metrics.leftBearing, -9999)
+            ctx.lineTo(this.glyph.metrics.leftBearing, 9999)
 
-        ctx.moveTo(this.glyph.metrics.rightBearing, -9999)
-        ctx.lineTo(this.glyph.metrics.rightBearing, 9999)
+            ctx.moveTo(this.glyph.metrics.rightBearing, -9999)
+            ctx.lineTo(this.glyph.metrics.rightBearing, 9999)
 
-        ctx.stroke()
+            ctx.stroke()
+        }
 
         // Glyph
         const workingPath = BezierCurve.getPath2D(
@@ -227,62 +231,66 @@ export class GlyphContext extends BezierContext {
         )
 
         // Glyph fill
-        ctx.fillStyle = getThemeColor("glyphFill")
+        ctx.fillStyle = v.peekMode ?
+                        getThemeColor("glyphOtherFill") :
+                        getThemeColor("glyphFill")
         ctx.fill(finalPath) 
 
-        // Glyph curvature
-        if (currentFont.settings.curvatureEnabled) {
-            this.glyph.beziers.forEach(
-                bezier => bezier.segments.forEach(
-                    seg => {
-                        ctx.beginPath()
+        if (!v.peekMode) {
+            // Glyph curvature
+            if (currentFont.settings.curvatureEnabled) {
+                this.glyph.beziers.forEach(
+                    bezier => bezier.segments.forEach(
+                        seg => {
+                            ctx.beginPath()
 
-                        ctx.moveTo(
-                            seg.points[3].x, seg.points[3].y
-                        )
-                        ctx.bezierCurveTo(
-                            seg.points[2].x, seg.points[2].y,
-                            seg.points[1].x, seg.points[1].y,
-                            seg.points[0].x, seg.points[0].y
-                        )
-
-                        for (let t = 0; t <= 1; t += 0.05) {
-                            const point = seg.at(t)
-
-                            const dPoint = seg.d.at(t)
-                            const angle = Math.atan2(
-                                dPoint.y, dPoint.x
+                            ctx.moveTo(
+                                seg.points[3].x, seg.points[3].y
                             )
-                            const curvature = seg.curvature(t)
-                            let r = Math.atan(
-                                curvature * 200
-                            ) * 10
-                            if (curvature !== 0) {
-                                r += Math.sign(curvature) * 20
+                            ctx.bezierCurveTo(
+                                seg.points[2].x, seg.points[2].y,
+                                seg.points[1].x, seg.points[1].y,
+                                seg.points[0].x, seg.points[0].y
+                            )
+
+                            for (let t = 0; t <= 1; t += 0.05) {
+                                const point = seg.at(t)
+
+                                const dPoint = seg.d.at(t)
+                                const angle = Math.atan2(
+                                    dPoint.y, dPoint.x
+                                )
+                                const curvature = seg.curvature(t)
+                                let r = Math.atan(
+                                    curvature * 200
+                                ) * 10
+                                if (curvature !== 0) {
+                                    r += Math.sign(curvature) * 20
+                                }
+
+                                ctx.lineTo(
+                                    point.x - r * Math.cos(angle),
+                                    point.y - r * Math.sin(angle)
+                                )
                             }
 
-                            ctx.lineTo(
-                                point.x - r * Math.cos(angle),
-                                point.y - r * Math.sin(angle)
-                            )
+                            ctx.fillStyle = "blue"
+                            ctx.fill()
                         }
-
-                        ctx.fillStyle = "blue"
-                        ctx.fill()
-                    }
+                    )
                 )
-            )
+            }
+
+            // Glyph outline        
+            ctx.setLineDash([])
+            ctx.strokeStyle = getThemeColor("glyphGapOutline")
+            ctx.lineWidth = 4 / v.co.scaleFactor
+            ctx.stroke(workingPath)
+            ctx.strokeStyle = getThemeColor("glyphOutline")
+            ctx.lineWidth = 1 / v.co.scaleFactor
+            ctx.stroke(workingPath)
+
+            this.renderGlyphIndicator(v, ctx, this.glyph)
         }
-
-        // Glyph outline        
-        ctx.setLineDash([])
-        ctx.strokeStyle = getThemeColor("glyphGapOutline")
-        ctx.lineWidth = 4 / v.co.scaleFactor
-        ctx.stroke(workingPath)
-        ctx.strokeStyle = getThemeColor("glyphOutline")
-        ctx.lineWidth = 1 / v.co.scaleFactor
-        ctx.stroke(workingPath)
-
-        this.renderGlyphIndicator(v, ctx, this.glyph)
     }
 }

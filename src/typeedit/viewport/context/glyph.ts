@@ -45,13 +45,34 @@ export class GlyphContext extends BezierContext {
         ]
         
         this.guides = [
-            new HorizontalGuide(0),
-            new HorizontalGuide(512),
-            new HorizontalGuide(() => this.glyph.font.metrics.ascender, this.handles[2]),
-            new HorizontalGuide(() => this.glyph.font.metrics.descender, this.handles[3]),
-            new HorizontalGuide(() => this.glyph.font.metrics.xHeight, this.handles[4]),
-            new VerticalGuide(() => this.glyph.metrics.leftBearing, this.handles[0]),
-            new VerticalGuide(() => this.glyph.metrics.rightBearing, this.handles[1])
+            new HorizontalGuide(
+                0, null,
+                () => this.glyph.font.settings.metricsSnapEnabled
+            ),
+            new HorizontalGuide(
+                512, null,
+                () => this.glyph.font.settings.metricsSnapEnabled
+            ),
+            new HorizontalGuide(
+                () => this.glyph.font.metrics.ascender, this.handles[2],
+                () => this.glyph.font.settings.metricsSnapEnabled
+            ),
+            new HorizontalGuide(
+                () => this.glyph.font.metrics.descender, this.handles[3],
+                () => this.glyph.font.settings.metricsSnapEnabled
+            ),
+            new HorizontalGuide(
+                () => this.glyph.font.metrics.xHeight, this.handles[4],
+                () => this.glyph.font.settings.metricsSnapEnabled
+            ),
+            new VerticalGuide(
+                () => this.glyph.metrics.leftBearing, this.handles[0],
+                () => this.glyph.font.settings.metricsSnapEnabled
+            ),
+            new VerticalGuide(
+                () => this.glyph.metrics.rightBearing, this.handles[1],
+                () => this.glyph.font.settings.metricsSnapEnabled
+            )
         ]
 
         this.updateCurveGuides()

@@ -101,7 +101,7 @@ export class Font extends EventEmitter {
             {
                 ascender: -96,
                 descender: 512 + 96,
-                xHeight: 196
+                xHeight: 192
             },
             []
         )

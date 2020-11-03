@@ -8,7 +8,8 @@ export class HorizontalGuide implements IGuide {
 
     constructor(
         private valueHandler: number | (() => number),
-        public source?: any
+        public source?: any,
+        private willSnapHandler?: () => boolean
     ) { }
 
     get value() {
@@ -20,6 +21,11 @@ export class HorizontalGuide implements IGuide {
 
     nudge(v: Viewport, pos: Point, obj?: any) {
         if (obj && this.source && obj === this.source) {
+            this.active = false
+            return null
+        }
+
+        if (this.willSnapHandler && !this.willSnapHandler()) {
             this.active = false
             return null
         }
@@ -58,7 +64,8 @@ export class VerticalGuide implements IGuide {
 
     constructor(
         private valueHandler: number | (() => number),
-        public source?: any
+        public source?: any,
+        private willSnapHandler?: () => boolean
     ) { }
 
     get value() {
@@ -70,6 +77,11 @@ export class VerticalGuide implements IGuide {
 
     nudge(v: Viewport, pos: Point, obj?: any) {
         if (obj && this.source && obj === this.source) {
+            this.active = false
+            return null
+        }
+
+        if (this.willSnapHandler && !this.willSnapHandler()) {
             this.active = false
             return null
         }

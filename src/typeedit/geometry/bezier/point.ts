@@ -102,14 +102,32 @@ export class BezierPoint extends EventEmitter {
             const otherPoint = point === this.before ?
                                this.after : this.before
             
-            point.move(dPos.x, dPos.y)
+            if (this.type === BezierPointType.forward) {
+                const angle = this.after.angle(this.base)
 
-            if (this.type === BezierPointType.auto) {
+                point.move(dPos.x, dPos.y)
+                const radius = this.after.distance(this.base)
+
+                point.x = this.base.x + radius * Math.cos(angle)
+                point.y = this.base.y + radius * Math.sin(angle)
+            } else if (this.type === BezierPointType.backward) {
+                const angle = this.before.angle(this.base)
+
+                point.move(dPos.x, dPos.y)
+                const radius = this.before.distance(this.base)
+
+                point.x = this.base.x + radius * Math.cos(angle)
+                point.y = this.base.y + radius * Math.sin(angle)
+            } else if (this.type === BezierPointType.auto) {
+                point.move(dPos.x, dPos.y)
+
                 const otherRadius = otherPoint.distance(this.base)
                 const angle = point.angle(this.base)
 
                 otherPoint.x = otherRadius * Math.cos(angle + Math.PI) + this.base.x
                 otherPoint.y = otherRadius * Math.sin(angle + Math.PI) + this.base.y
+            } else {
+                point.move(dPos.x, dPos.y)
             }
         }
 

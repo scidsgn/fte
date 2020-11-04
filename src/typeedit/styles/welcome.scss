@@ -3,8 +3,22 @@ article.welcome {
     justify-content: center;
     align-items: flex-start;
 
+    *::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background: var(--var-panel-sep);
+
+        box-shadow: inset 2px 0px var(--var-large-bg);
+    }
+
     & > div {
-        width: 350px;
+        width: 366px;
         height: calc(100vh - 80px);
 
         margin: 60px;
@@ -13,11 +27,15 @@ article.welcome {
         flex-direction: column;
 
         div.recentFiles {
+            margin-left: 8px;
+
             flex-grow: 1;
             overflow-y: auto;
         }
 
         div.buttons {
+            margin: 0px 8px;
+
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2px;
@@ -27,7 +45,7 @@ article.welcome {
             font-size: 40pt;
             line-height: 1;
 
-            margin: 0;
+            margin: 0px 8px;
 
             text-align: center;
         }
@@ -36,7 +54,7 @@ article.welcome {
             font-size: 14pt;
             font-weight: 400;
 
-            margin: 0px 0px 24px 0px;
+            margin: 0px 8px 24px 8px;
 
             text-align: center;
         }
@@ -44,6 +62,8 @@ article.welcome {
         h2 {
             font-weight: 400;
             
+            margin-left: 8px;
+            margin-right: 8px;
             margin-bottom: 8px;
         }
 

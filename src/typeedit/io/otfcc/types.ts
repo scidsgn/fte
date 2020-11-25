@@ -1,5 +1,5 @@
 // Horizontal Header
-type HHEATable = {
+export type HHEATable = {
     advanceWidthMax: number
     ascender: number
     caretOffset: number
@@ -14,7 +14,7 @@ type HHEATable = {
 }
 
 // Font Header
-type HEADTable = {
+export type HEADTable = {
     created: number
     flags: any // todo
     fontDirectoryHInt: number
@@ -45,7 +45,7 @@ export type GLYFPoint = {
 }
 
 // Glyph Data
-type GLYFTable = {
+export type GLYFTable = {
     [name: string]: {
         advanceWidth: NumberOrVariation
         contours: GLYFPoint[][]
@@ -54,12 +54,12 @@ type GLYFTable = {
 }
 
 // Character to Glyph Index Mapping
-type CMAPTable = {
+export type CMAPTable = {
     [codepoint: number]: string
 }
 
 // Font Variations
-type FVARTable = {
+export type FVARTable = {
     axes: {
         [axis: string]: {
             minValue: number
@@ -88,7 +88,7 @@ type FVARTable = {
 }
 
 // Naming
-type NAMETable = {
+export type NAMETable = {
     encodingID: number
     languageID: number
     nameID: number
@@ -113,7 +113,7 @@ export enum NAMEEntries {
 }
 
 // Color Palette
-type CPALTable = {
+export type CPALTable = {
     palettes: {
         colors: {
             red: number
@@ -124,7 +124,7 @@ type CPALTable = {
 }
 
 // Color
-type COLRTable = {
+export type COLRTable = {
     from: string
     to: {
         layer: string
@@ -185,11 +185,52 @@ type OS2v5Body = OS2v4Body & {
 
 export type OS2Table =  { version: 4 } & OS2v4Body
 
+// CFF
+export type CFFTable = {
+    copyright: string
+    familyName: string
+    fontBBoxBottom: number
+    fontBBoxLeft: number
+    fontBBoxRight: number
+    fontBBoxTop: number
+    fontMatrix: {
+        a: number, b: number,
+        c: number, d: number,
+        x: number, y: number
+    }
+    fontName: string
+    fullName: string
+    notice: string
+    privates: {
+        defaultWidthX: number
+        nominalWidthX: number
+    }
+    underlinePosition: number
+    underlineThickness: number
+    version: string
+}
+
+// PostScript
+export type POSTTable = {
+    isFixedPitch: boolean
+    italicAngle: number
+    maxMemType1: number
+    maxMemType42: number
+    minMemType1: number
+    minMemType42: number
+    underlinePosition: number
+    underlineThickness: number
+    version: 3
+}
+
 export type OTFCCData = {
     hhea: HHEATable
     head: HEADTable
     name: NAMETable
     OS_2: OS2Table
+    post: POSTTable
+
+    CFF_: CFFTable
 
     glyph_order: string[]
     glyf: GLYFTable

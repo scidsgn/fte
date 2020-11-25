@@ -4,6 +4,7 @@ import { OTFCCData } from "./types";
 
 function createOTFCCData(font: Font): OTFCCData {
     return {
-        cmap: generateCMAP(font)
+        cmap: generateCMAP(font),
+        glyph_order: font.glyphs.map(g => g.name)
     }
 }

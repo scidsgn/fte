@@ -1,3 +1,4 @@
+import { lineLineIntersection } from "../../utils/lineline"
 import { Point } from "../point"
 
 export class BezierSegment {
@@ -195,18 +196,48 @@ export class BezierSegment {
             ...this.d.d.extremes()
         ].filter(
             (x) => x > 0 && x < 1
-        ).filter((x, i, a) => a.indexOf(x) === i)
+        ).filter(
+            (x, i, a) => a.indexOf(x) === i
+        ).sort(
+            (e1, e2) => e1 - e2
+        )
     }
 
-    splitToQuadratic(): BezierSegment[] {
+    splitByExtremes(): BezierSegment[] {
         if (this.n !== 4) return null
 
         const segments: BezierSegment[] = []
-
         const extremes = this.findAllCubicExtremes()
 
-        console.log(this, this.d.extremes(), this.dd.extremes())
+        let current: BezierSegment = this
+
+        extremes.forEach(
+            extreme => {
+                const split = current.split(extreme)
+                segments.push(split[0])
+
+                current = split[1]
+            }
+        )
+
+        if (current) segments.push(current)
 
         return segments
+    }
+
+    get quadratic(): BezierSegment {
+        if (this.n !== 4) return null
+
+        const intersection = lineLineIntersection(
+            this.points[0], this.points[1], this.points[2], this.points[3]
+        )
+        if (!intersection) 
+            return new BezierSegment(
+                [this.points[0], this.points[3]]
+            )
+        
+        return new BezierSegment(
+            [this.points[0], intersection, this.points[1]]
+        )
     }
 }

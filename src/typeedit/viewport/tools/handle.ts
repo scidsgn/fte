@@ -424,25 +424,20 @@ export class HandleTool implements ITool {
                     icon: "code",
                     accelerator: "",
                     handler: () => {
-                        this.beziers.forEach(
-                            b => b.segments.forEach(
-                                seg => seg.splitToQuadratic()
+                        const splitBeziers = this.beziers.map(
+                            b => BezierCurve.fromSegments(
+                                b.segments.map(
+                                    seg => seg.splitByExtremes()
+                                ).flat(),
+                                b.glyph
                             )
                         )
-                        // const splitBeziers = this.beziers.map(
-                        //     b => BezierCurve.fromSegments(
-                        //         b.segments.map(
-                        //             seg => seg.split(0.5)
-                        //         ).flat(),
-                        //         b.glyph
-                        //     )
-                        // )
 
-                        // console.log(splitBeziers)
+                        console.log(splitBeziers)
 
-                        // this.glyph.beziers = splitBeziers
-                        // this.glyph.updateBeziers()
-                        // this.beziers = this.glyph.beziers
+                        this.glyph.beziers = splitBeziers
+                        this.glyph.updateBeziers()
+                        this.beziers = this.glyph.beziers
                     }
                 }
             ]

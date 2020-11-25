@@ -138,10 +138,10 @@ export class BezierSegment {
     }
     
     extremes(): number[] {
-        if (this.n < 3) return []
-        if (this.n > 4) return null
+        if (this.n < 2) return []
+        if (this.n > 3) return null
 
-        if (this.n === 3) {
+        if (this.n === 2) {
             const xExtremes = this.findLinRoots(
                 [
                     this.points[0].x,

@@ -296,9 +296,14 @@ export class GlyphContext extends BezierContext {
                 this.glyph.beziers.forEach(
                     bezier => bezier.segments.forEach(
                         seg => {
-                            const extremes = seg.extremes()
+                            const extremes = [
+                                ...seg.d.extremes(),
+                                ...seg.d.d.extremes()
+                            ].filter(
+                                (x) => x > 0 && x < 1
+                            ).filter((x, i, a) => a.indexOf(x) === i)
 
-                            extremes.filter(e => e > 0 && e < 1).forEach(
+                            extremes.forEach(
                                 extreme => {
                                     const point = seg.at(extreme)
 

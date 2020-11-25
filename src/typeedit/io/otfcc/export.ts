@@ -5,5 +5,5 @@ import { OTFCCData } from "./types";
 function createOTFCCData(font: Font): OTFCCData {
     return {
         cmap: generateCMAP(font)
-    }
+    } as OTFCCData // Still work in progress
 }

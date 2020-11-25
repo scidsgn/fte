@@ -188,17 +188,22 @@ export class BezierSegment {
         }
     }
 
-    splitToQuadratic(): BezierSegment[] {
+    findAllCubicExtremes() {
         if (this.n !== 4) return null
-
-        const segments: BezierSegment[] = []
-
-        const extremes = [
+        return [
             ...this.d.extremes(),
             ...this.d.d.extremes()
         ].filter(
             (x) => x > 0 && x < 1
         ).filter((x, i, a) => a.indexOf(x) === i)
+    }
+
+    splitToQuadratic(): BezierSegment[] {
+        if (this.n !== 4) return null
+
+        const segments: BezierSegment[] = []
+
+        const extremes = this.findAllCubicExtremes()
 
         console.log(this, this.d.extremes(), this.dd.extremes())
 

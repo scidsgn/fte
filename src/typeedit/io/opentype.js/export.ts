@@ -60,9 +60,9 @@ export function exportFont_opentype(font: Font, targetFile: string) {
     const scaleFactor = targetCapHeight / 512
     
     const otfont = new OTFont({
-        familyName: font.info.fontFamily,
-        styleName: font.info.fontSubfamily,
-        postScriptName: `${font.info.fontFamily}-${font.info.fontSubfamily}`,
+        familyName: font.names.fontFamily,
+        styleName: font.names.fontSubfamily,
+        postScriptName: `${font.names.fontFamily}-${font.names.fontSubfamily}`,
         unitsPerEm: (font.metrics.descender - font.metrics.ascender) * scaleFactor, // TODO!!
         ascender: (512 - font.metrics.ascender) * scaleFactor,
         descender: (512 - font.metrics.descender) * scaleFactor,

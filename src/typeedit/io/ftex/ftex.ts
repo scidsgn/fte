@@ -60,10 +60,15 @@ type FTESEntry = {
     value: boolean | number | string
 }
 
+type FINF = {
+    vendorID: string
+}
+
 export class FTEX1 {
     protected ftexVersion = 1
 
     protected fmet: FMET
+    protected finf: FINF
     
     protected outl: OUTLEntry[] = []
     protected glph: GLPHEntry[] = []
@@ -93,6 +98,7 @@ export class FTEX1 {
         ftex.setGLPH(font)
         ftex.setFNAM(font)
         ftex.setFTES(font)
+        ftex.setFINF(font)
 
         return ftex
     }
@@ -107,7 +113,7 @@ export class FTEX1 {
 
         const metrics = this.fmet
 
-        const font = new Font(info, metrics, [])
+        const font = new Font(info, metrics, [], this.finf)
 
         this.ftes.forEach(
             s => {
@@ -176,6 +182,7 @@ export class FTEX1 {
 
         this.encodeDEFL(buf)
 
+        if (this.finf) this.encodeFINF(buf)
         if (this.fnam.length) this.encodeFNAM(buf)
         if (this.fmet) this.encodeFMET(buf)
         if (this.glph.length) this.encodeGLPH(buf)
@@ -196,7 +203,7 @@ export class FTEX1 {
     
         const numTables = buffer.readUInt16LE()
         const requiredTables = [
-            "OUTL", "GLPH", "FMET", "FNAM"
+            "OUTL", "GLPH", "FMET", "FNAM", "FINF"
         ]
         const supportedTables = [
             ...requiredTables, "DEFL", "FTES"
@@ -259,6 +266,9 @@ export class FTEX1 {
             case "FTES":
                 this.decodeFTES(buffer)
                 break
+            case "FINF":
+                this.decodeFINF(buffer)
+                break
         }
     }
 
@@ -315,6 +325,22 @@ export class FTEX1 {
             this.defl.push(
                 buffer.readBuffer(length)
             )
+        }
+    }
+
+    // FINF - Font Info
+    setFINF(font: Font) {
+        this.finf = font.info
+    }
+
+    encodeFINF(buffer: SmartBuffer) {
+        buffer.writeString("FINF", "ascii")
+        buffer.writeString(this.finf.vendorID, "ascii")
+    }
+
+    decodeFINF(buffer: SmartBuffer) {
+        this.finf = {
+            vendorID: buffer.readString(4, "ascii")
         }
     }
 
@@ -510,7 +536,7 @@ export class FTEX1 {
 
     // FNAM - Font Names
     setFNAM(font: Font) {
-        Object.keys(font.info).forEach(
+        Object.keys(font.names).forEach(
             key => {
                 const index = fontInfoIndices.indexOf(key)
                 if (index < 0) return
@@ -518,7 +544,7 @@ export class FTEX1 {
                 this.fnam.push(
                     {
                         index,
-                        name: (font.info as any)[key]
+                        name: (font.names as any)[key]
                     }
                 )
             }

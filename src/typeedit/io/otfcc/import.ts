@@ -30,7 +30,7 @@ function convertOTFCCCoordinates(
     }
 }
 
-export async function importFontData_otfcc(filePath: string): Promise<OTFCCData> {
+export function importFontData_otfcc(filePath: string): OTFCCData {
     if (!otfccPath) return
 
     const stdout = execSync(

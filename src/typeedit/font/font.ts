@@ -8,7 +8,7 @@ export type FontMetrics = {
     xHeight: number
 }
 
-export type FontInfo = {
+export type FontNames = {
     copyright: string,
     description: string,
     designer: string,
@@ -33,18 +33,23 @@ export type FontColors = {
     blue: number
 }
 
+export type FontInfo = {
+    vendorID: string
+}
+
 export class Font extends EventEmitter {
     public palette: FontColors[] = []
 
     public ownSettings: Partial<FontSettings> = {}
     public settings: FontSettings
 
-    public info: FontInfo
+    public names: FontNames
 
     constructor(
-        info: Partial<FontInfo>,
+        names: Partial<FontNames>,
         public metrics: FontMetrics,
-        public glyphs: Glyph[]
+        public glyphs: Glyph[],
+        public info: FontInfo
     ) {
         super()
 
@@ -52,7 +57,7 @@ export class Font extends EventEmitter {
 
         this.settings = createFontSettings(this, this.ownSettings)
 
-        this.info = Object.assign(
+        this.names = Object.assign(
             {
                 copyright: "",
                 description: "",
@@ -70,7 +75,7 @@ export class Font extends EventEmitter {
                 version: "",
                 trademark: "",
                 compatibleFullName: ""
-            }, info
+            }, names
         )
     }
 
@@ -103,7 +108,10 @@ export class Font extends EventEmitter {
                 descender: 512 + 96,
                 xHeight: 192
             },
-            []
+            [],
+            {
+                vendorID: "FTEX"
+            }
         )
         font.addGlyph(
             new Glyph(

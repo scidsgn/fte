@@ -1,6 +1,7 @@
 import { Font } from "../../font/font"
 import Accordion from "./controls/accordion"
 import Label from "./controls/label"
+import Row from "./controls/row"
 import TextInput from "./controls/textInput"
 
 export function prepareFontInfoPanel(font: Font) {
@@ -12,21 +13,21 @@ export function prepareFontInfoPanel(font: Font) {
         "Font info", [], [
             Label("Font family:"),
             TextInput(
-                () => font.info.fontFamily,
+                () => font.names.fontFamily,
                 (v) => {
-                    font.info.fontFamily = v
+                    font.names.fontFamily = v
                     document.title = `${v} - FTE`
                 }
             ),
             Label("Font subfamily:"),
             TextInput(
-                () => font.info.fontSubfamily,
-                (v) => font.info.fontSubfamily = v
+                () => font.names.fontSubfamily,
+                (v) => font.names.fontSubfamily = v
             ),
             Label("Version:"),
             TextInput(
-                () => font.info.version,
-                (v) => font.info.version = v
+                () => font.names.version,
+                (v) => font.names.version = v
             )
         ]
     )
@@ -34,14 +35,23 @@ export function prepareFontInfoPanel(font: Font) {
         "Author info", [], [
             Label("Designer:"),
             TextInput(
-                () => font.info.designer,
-                (v) => font.info.designer = v
+                () => font.names.designer,
+                (v) => font.names.designer = v
             ),
             Label("Manufacturer/Foundry:"),
             TextInput(
-                () => font.info.manufacturer,
-                (v) => font.info.manufacturer = v
-            )
+                () => font.names.manufacturer,
+                (v) => font.names.manufacturer = v
+            ),
+            Row([
+                Label("Vendor ID:"),
+                TextInput(
+                    () => font.info.vendorID,
+                    (v) => font.info.vendorID = v,
+                    null,
+                    4
+                )
+            ])
         ]
     )
 

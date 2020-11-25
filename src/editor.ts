@@ -158,8 +158,8 @@ document.querySelectorAll("button.openFont").forEach(
                     recentFiles.unshift(
                         {
                             filePath: result.filePaths[0],
-                            fontName: font.info.fontFamily + " " +
-                                      font.info.fontSubfamily,
+                            fontName: font.names.fontFamily + " " +
+                                      font.names.fontSubfamily,
                             thumbnail: createFontPreview(font)
                         }
                     )
@@ -199,8 +199,8 @@ document.querySelectorAll("button.saveFont").forEach(
                             extensions: ["ttf"]
                         }
                     ],
-                    defaultPath: currentFont.info.fontFamily +
-                                 "-" + currentFont.info.fontSubfamily
+                    defaultPath: currentFont.names.fontFamily +
+                                 "-" + currentFont.names.fontSubfamily
                 }
             ).then(result => {
                 if (result.canceled) return
@@ -241,8 +241,8 @@ document.addEventListener("drop", (e) => {
         recentFiles.unshift(
             {
                 filePath: path,
-                fontName: font.info.fontFamily + " " +
-                          font.info.fontSubfamily,
+                fontName: font.names.fontFamily + " " +
+                          font.names.fontSubfamily,
                 thumbnail: createFontPreview(font)
             }
         )

@@ -1,5 +1,5 @@
 import { Font as OTFont, Glyph as OTGlyph, load, loadSync, PathCommand } from "opentype.js";
-import { Font, FontInfo } from "../../font/font";
+import { Font, FontNames } from "../../font/font";
 import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
 import { BezierPoint, BezierPointType } from "../../geometry/bezier/point";
@@ -179,18 +179,22 @@ function fteFontFromOTFont(otfont: OTFont) {
     )
         
     return new Font(
-        info as FontInfo,
+        info as FontNames,
         {
             descender: -otfont.descender * scaleFactor + 512,
             ascender: -(otfont.ascender - otfont.tables.os2.sCapHeight) * scaleFactor,
             xHeight: (otfont.tables.os2.sCapHeight - otfont.tables.os2.sxHeight) * scaleFactor
         },
-        glyphs
+        glyphs,
+        {
+            vendorID: otfont.tables.os2.achVendID
+        }
     )
 }
 
 export function importFont_opentype(filePath: string): Font {
     const otfont = loadSync(filePath)
+    console.log(otfont)
 
     const font = fteFontFromOTFont(otfont)
 

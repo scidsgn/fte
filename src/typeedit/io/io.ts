@@ -5,6 +5,7 @@ import { Font } from "../font/font";
 import { FTEX1 } from "./ftex/ftex";
 import { exportFont_opentype } from "./opentype.js/export";
 import { importFont_opentype } from "./opentype.js/import";
+import { importFontData_otfcc } from "./otfcc/import";
 
 export function openFont(filePath: string): Font {
     const ext = extname(filePath.toLowerCase())
@@ -19,6 +20,9 @@ export function openFont(filePath: string): Font {
         return ftex.getFont()
     } else {
         // Opentype.js, take over
+
+        console.log(importFontData_otfcc(filePath)) // I NEED TO SEE!
+
         return importFont_opentype(filePath)
     }
 }

@@ -58,7 +58,7 @@ let currentKeyUpCallback: (e: KeyboardEvent) => void = null
 export default (font: Font) => {
     currentFont = font
 
-    document.title = `${font.info.fontFamily} - FTE`
+    document.title = `${font.names.fontFamily} - FTE`
     prepareGlyphList(font)
 
     prepareFontSettings()

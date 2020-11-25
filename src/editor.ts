@@ -7,20 +7,17 @@ import "./typeedit/styles/app/controls.scss"
 import "./typeedit/styles/welcome.scss"
 
 import app, { currentFont } from "./typeedit/app"
-import paper, { tool } from "paper"
+import paper from "paper"
 import { remote } from "electron"
-import { basename, extname } from "path"
-import { importFont_opentype } from "./typeedit/io/opentype.js/import"
+import { basename } from "path"
 import { Font } from "./typeedit/font/font"
-import { exportFont_opentype } from "./typeedit/io/opentype.js/export"
-import { existsSync, readFileSync, writeFileSync } from "fs"
+import { existsSync } from "fs"
 import { setOtfccPath } from "./typeedit/io/otfcc/import"
 import { createFontPreview } from "./typeedit/utils/preview"
-import { FTEX1 } from "./typeedit/io/ftex/ftex"
-import { SmartBuffer } from "smart-buffer"
 import { openFont, saveFont } from "./typeedit/io/io"
-import { prepareFontSettings, prepareTabbedPanel } from "./typeedit/ui/panel"
+import { prepareTabbedPanel } from "./typeedit/ui/panel"
 import { setIdleTimeout } from "./typeedit/utils/idle"
+import { createOTFCCData } from "./typeedit/io/otfcc/export"
 
 console.log(remote)
 
@@ -209,6 +206,14 @@ document.querySelectorAll("button.saveFont").forEach(
             })
         }
     )
+)
+
+document.querySelector("button.printOTFCC").addEventListener(
+    "click", () => {
+        console.log(
+            createOTFCCData(currentFont)
+        )
+    }
 )
 
 document.body.addEventListener("keydown", (e) => {

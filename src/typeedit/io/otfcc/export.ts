@@ -2,9 +2,9 @@ import { Font } from "../../font/font";
 import { generateCMAP } from "./tables/cmap";
 import { OTFCCData } from "./types";
 
-function createOTFCCData(font: Font): OTFCCData {
+export function createOTFCCData(font: Font): OTFCCData {
     return {
         cmap: generateCMAP(font),
         glyph_order: font.glyphs.map(g => g.name)
-    }
+    } as OTFCCData // Still work in progress
 }

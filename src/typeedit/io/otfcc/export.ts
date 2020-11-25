@@ -2,7 +2,7 @@ import { Font } from "../../font/font";
 import { generateCMAP } from "./tables/cmap";
 import { OTFCCData } from "./types";
 
-function createOTFCCData(font: Font): OTFCCData {
+export function createOTFCCData(font: Font): OTFCCData {
     return {
         cmap: generateCMAP(font)
     } as OTFCCData // Still work in progress

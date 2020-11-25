@@ -145,7 +145,10 @@ export class BezierPenTool implements ITool {
         if (
             e.type === "mousedown" && e.buttons & 1
         ) {
-            if (!this.currentBezier) {
+            if (
+                !this.currentBezier ||
+                !this.glyph.beziers.includes(this.currentBezier)
+            ) {
                 this.currentBezier = new BezierCurve(this.glyph)
                 const length = v.context.beziers.push(
                     this.currentBezier

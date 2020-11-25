@@ -1,6 +1,7 @@
 import { currentFont } from "../../app";
 import { Glyph } from "../../font/glyph";
 import { BezierCurve } from "../../geometry/bezier/curve";
+import { settings } from "../../settings/settings";
 import { setActiveGlyph } from "../../ui/glyphList";
 import { getThemeColor } from "../../ui/theme";
 import { CurveGuide } from "../guides/curve";
@@ -289,6 +290,31 @@ export class GlyphContext extends BezierContext {
             ctx.strokeStyle = getThemeColor("glyphOutline")
             ctx.lineWidth = 1 / v.co.scaleFactor
             ctx.stroke(workingPath)
+
+            // Bezier extreme points (dev)
+            if (settings.devBezierExtremesVisible) {
+                this.glyph.beziers.forEach(
+                    bezier => bezier.segments.forEach(
+                        seg => {
+                            const extremes = seg.extremes()
+
+                            extremes.filter(e => e > 0 && e < 1).forEach(
+                                extreme => {
+                                    const point = seg.at(extreme)
+
+                                    ctx.fillStyle = "red"
+                                    ctx.fillRect(
+                                        point.x - 2 / v.co.scaleFactor,
+                                        point.y - 2 / v.co.scaleFactor,
+                                        5 / v.co.scaleFactor,
+                                        5 / v.co.scaleFactor
+                                    )
+                                }
+                            )
+                        }
+                    )
+                )
+            }
 
             this.renderGlyphIndicator(v, ctx, this.glyph)
         }

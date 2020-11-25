@@ -1,5 +1,7 @@
 export const defaultAppSettings = {
-    theme: "dark"
+    theme: "dark",
+
+    devBezierExtremesVisible: true
 }
 
 export const defaultPerFontSettings = {

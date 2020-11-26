@@ -87,6 +87,7 @@ export class FTEX1 {
         if (this.outl.length) count++
         if (this.glph.length) count++
         if (this.ftes.length) count++
+        if (this.finf) count++
 
         return count
     }
@@ -182,11 +183,13 @@ export class FTEX1 {
 
         this.encodeDEFL(buf)
 
-        if (this.finf) this.encodeFINF(buf)
+        console.log(this)
+
         if (this.fnam.length) this.encodeFNAM(buf)
         if (this.fmet) this.encodeFMET(buf)
         if (this.glph.length) this.encodeGLPH(buf)
         if (this.ftes.length) this.encodeFTES(buf)
+        if (this.finf) this.encodeFINF(buf)
 
         return buf
     }
